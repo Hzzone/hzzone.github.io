@@ -97,7 +97,8 @@ var dirs = fs.readdirSync(resource_dir);
 dirs.forEach(function (dir_name) {
     var dir_path = path.join(resource_dir, dir_name);
     let stat = fs.statSync(dir_path);
-    if (stat.isFile()) return;
+    console.log(dir_name);
+    if (stat.isFile() || dir_name==".git") return;
     var build_class_dir = path.join(build_dir, dir_name);
     fs.mkdirSync(build_class_dir);
     path_dict[dir_name] = new Array();

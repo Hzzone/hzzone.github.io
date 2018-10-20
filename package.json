@@ -1,39 +1,25 @@
 {
-	"name": "Hzzone's Blog",
-	"version": "0.0.1",
-	"author": "Hzzone",
-	"description": "Hzzone's Blog",
-	"keywords": [
-		"node.js",
-		"javascript"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://path/to/url"
-	},
-	"license": "MIT",
-	"engines": {
-		"node": "0.10.x"
-	},
-	"bugs": {
-		"url": "https://hzzone.io",
-		"email": "zhizhonghwang@gmail.com"
-	},
-	"contributors": [
-		{
-			"name": "Hzzone",
-			"email": "zhizhonghwang@gmail.com"
-		}
-	],
-	"scripts": {
-		"start": "node index.js"
-	},
-	"dependencies": {
-		"entities": "^1.1.1",
-		"marked": "^0.5.1",
-		"mathjax-node": "^2.1.1",
-		"mathjax-node-page": "^3.0.1",
-		"nunjucks": "^3.1.3"
-	},
-	"devDependencies": {}
+  "name": "hzzone.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hzzone/hzzone.github.io.git"
+  },
+  "author": "Hzzone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hzzone/hzzone.github.io/issues"
+  },
+  "homepage": "https://github.com/Hzzone/hzzone.github.io#readme",
+  "dependencies": {
+    "entities": "^1.1.1",
+    "marked": "^0.5.1",
+    "mathjax-node-page": "^3.0.1",
+    "nunjucks": "^3.1.3"
+  }
 }
