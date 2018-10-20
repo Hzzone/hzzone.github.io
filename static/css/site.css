@@ -1,0 +1,31 @@
+.MathJax_Display {
+    width: auto !important;
+    display: inline !important;
+}
+
+pre {
+	border: 1px solid white;
+}
+
+.homepage {
+    font-size: 20px;
+    margin: 0 20px;
+    padding-top: 10px;
+}
+
+img {
+    max-width: 600px;
+}
+#content {
+    padding: 20px;
+}
+
+html, body{
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    background-color: white;
+    max-width: 700px;
+}

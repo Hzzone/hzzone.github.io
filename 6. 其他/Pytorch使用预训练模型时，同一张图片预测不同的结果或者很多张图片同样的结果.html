@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>Pytorch使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+    }
+  });
+</script>
+    <div class="container">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+        <div class="markdown-body " id="content">
+            <pre><code class="python">from torchvision import datasets, models, transforms
+
+alexnet_model = models.alexnet(pretrained=True)
+alexnet_model.eval()
+
+transform = transforms.Compose([
+    transforms.ToPILImage(),
+    transforms.CenterCrop(224),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225])
+])
+
+img = io.imread("cat.jpg")
+img = transform(img)
+img = img.unsqueeze(0)
+
+prob = F.softmax(alexnet_model(image), dim=1)
+pred = torch.argmax(prob, dim=1)</code></pre>
+<p>以上代码使用pytorch预训练的alexnet进行预测一张猫的图片，如果不加上<code>alexnet_model.eval()</code>则会导致每次运行预测的结果都不一样。
+具体原因在<a href="https://discuss.pytorch.org/t/pretrained-resnet-constant-output/2760">Pretrained resnet constant output</a>有解释：</p>
+<p>因为<code>BatchNorm</code>和<code>Dropout</code>是随机的，会导致每次运行都不一致，所以在传递输入之前，需要切换至<code>model.eval()</code>进行预测。或者使用<code>model.train()</code>来进行训练。</p>
+
+        </div>
+    </div>
+
+</body></html>
