@@ -1,31 +1,31 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
     <title>GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
     <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-</head>
-
-<body>
-<script type="text/x-mathjax-config">
+    <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/PreviewHTML"],
     }
   });
 </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body >
     <div class="container">
         <div class="homepage">
             <a href="/">主页</a>
         </div>
         <div class="markdown-body " id="content">
-            <h2 id="github-支持-latex-的几种方案">GitHub 支持 LaTex 的几种方案</h2>
+            <h2 id=github-支持-latex-的几种方案>GitHub 支持 LaTex 的几种方案</h2>
 <ol>
 <li><a href="http://www.codecogs.com/latex/eqneditor.php">codecogs</a> 生成外部链接</li>
 </ol>
@@ -68,16 +68,19 @@
 \end{preview}
 \end{document}</code></pre>
 <p>缺点是会产生很多中间文件，需要安装 <code>LaTex</code> 环境，大到 3~4 G。</p>
-<h2 id="如何选择">如何选择</h2>
+<h2 id=如何选择>如何选择</h2>
 <p>目前我认为最好的方法是通过 <a href="http://www.codecogs.com/latex/eqneditor.php">codecogs</a> 下载 gif 图片，然后上传到图床或者本地的仓库，可以解决服务不稳定的问题，至少可以保证自己的服务器或域名是可以访问的。</p>
 <p>另外一种方法，自己搭建一个服务器，随便采用什么框架，然后通过上面介绍的 <a href="#LaTeX-生成-svg">LaTeX 生成 svg</a> 提供一个类似于 codecogs 的服务，返回 svg 图片。而且目前也有类似功能的，例如 <a href="https://github.com/DMOJ/texoid">texoid</a>。</p>
 <p>实现起来很简单，但我嫌麻烦，可以考虑上一种方法，我认为是在 GitHub 不支持 LaTeX 时的最优解。</p>
-<h2 id="实现">实现</h2>
+<h2 id=实现>实现</h2>
 <p>我最后还是实现了一个类似于 codecogs 的网站，因为不擅长前端，做的比较粗糙，具体原理和功能见 <a href="https://github.com/Hzzone/online-latex-mathmatical-fomula">online-latex-mathmatical-fomula</a></p>
 <p>在线 <a href="https://hzzone.io/api/latex">demo</a></p>
 <p><img src="https://raw.githubusercontent.com/Hzzone/online-latex-mathmatical-fomula/master/demo.gif" alt=""></p>
 
         </div>
     </div>
-
-</body></html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

@@ -1,36 +1,36 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
     <title>scikit-learn 实用机器学习方法</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
     <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-</head>
-
-<body>
-<script type="text/x-mathjax-config">
+    <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/PreviewHTML"],
     }
   });
 </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body >
     <div class="container">
         <div class="homepage">
             <a href="/">主页</a>
         </div>
         <div class="markdown-body " id="content">
             <p>scikit-learn 实用机器学习方法</p>
-<h2 id="大纲">大纲</h2>
+<h2 id=大纲>大纲</h2>
 <ul>
 <li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E4%B8%BA%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86">数据集分为训练集和测试集</a></li>
 </ul>
-<h2 id="数据集分为训练集和测试集">数据集分为训练集和测试集</h2>
+<h2 id=数据集分为训练集和测试集>数据集分为训练集和测试集</h2>
 <p>参考链接：<a href="https://blog.csdn.net/sinat_29957455/article/details/79477940">使用sklearn将数据集分为训练集和测试集</a></p>
 <pre><code class="python">from sklearn.model_selection import train_test_split
 #测试集为30%，训练集为70%
@@ -38,5 +38,8 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3,random_s
 
         </div>
     </div>
-
-</body></html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

@@ -1,25 +1,25 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
     <title>百度云深度学习实例情况介绍</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
     <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-</head>
-
-<body>
-<script type="text/x-mathjax-config">
+    <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/PreviewHTML"],
     }
   });
 </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body >
     <div class="container">
         <div class="homepage">
             <a href="/">主页</a>
@@ -28,7 +28,7 @@
             <p>百度云深度学习不能保存镜像，但胜在价格便宜。
 相对来说腾讯云最便宜的<del>14 RMB ，阿里云最低</del>9 RMB (且需要最低余额100 RMB )，AWS p2.xlarge最低大概RMB 6~7，需要申请实例限制和国外信用卡，但是胜在有很多配好环境的实例。
 百度云深度学习每次都要配置环境，而我需要使用pytorch，为了简化步骤，特此记录。</p>
-<h3 id="简介">简介</h3>
+<h3 id=简介>简介</h3>
 <ul>
 <li>最低余额20元</li>
 <li>tensorflow 1.2.0</li>
@@ -36,7 +36,7 @@
 <li>GPU Total memory: 11.17GiB</li>
 <li>￥5.16/小时</li>
 </ul>
-<h3 id="环境">环境</h3>
+<h3 id=环境>环境</h3>
 <ul>
 <li>Ubuntu 14.04.5 LTS</li>
 <li>CUDA Version 8.0.61</li>
@@ -50,13 +50,13 @@ python -V
 Python 3.6.5 :: Anaconda, Inc.
 pip -V
 pip 10.0.1 from /root/miniconda3/lib/python3.6/site-packages/pip (python 3.6)</code></pre>
-<h3 id="之后就是使用rsync来同步文件-如果数据比较大-可以使用百度的bos-推荐rsync教程-">之后就是使用rsync来同步文件，如果数据比较大，可以使用百度的BOS。<a href="https://www.cnblogs.com/kidsitcn/p/4645372.html">推荐rsync教程</a>。</h3>
-<h3 id="最后安装依赖-">最后安装依赖。</h3>
-<h3 id="使用tensorboard可视化-">使用tensorboard可视化：</h3>
+<h3 id=之后就是使用rsync来同步文件-如果数据比较大-可以使用百度的bos-推荐rsync教程->之后就是使用rsync来同步文件，如果数据比较大，可以使用百度的BOS。<a href="https://www.cnblogs.com/kidsitcn/p/4645372.html">推荐rsync教程</a>。</h3>
+<h3 id=最后安装依赖->最后安装依赖。</h3>
+<h3 id=使用tensorboard可视化->使用tensorboard可视化：</h3>
 <pre><code>### 服务器启动tensorboard：
 tensorboard --logdir runs
 ssh -L 16006:127.0.0.1:6006 account@ip</code></pre><p>本地访问<a href="http://127.0.0.1:16006/%E6%9F%A5%E7%9C%8B%E3%80%82">http://127.0.0.1:16006/查看。</a></p>
-<h3 id="python-3-4-3预装的package">Python 3.4.3预装的Package</h3>
+<h3 id=python-3-4-3预装的package>Python 3.4.3预装的Package</h3>
 <ul>
 <li><code>pip3 list</code></li>
 </ul>
@@ -99,5 +99,8 @@ wheel                   0.29.0
 xkit                    0.0.0</code></pre>
         </div>
     </div>
-
-</body></html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

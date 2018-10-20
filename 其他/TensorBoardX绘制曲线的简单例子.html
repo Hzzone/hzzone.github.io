@@ -1,37 +1,37 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
     <title>TensorBoardX绘制曲线的简单例子</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
     <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-</head>
-
-<body>
-<script type="text/x-mathjax-config">
+    <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/PreviewHTML"],
     }
   });
 </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body >
     <div class="container">
         <div class="homepage">
             <a href="/">主页</a>
         </div>
         <div class="markdown-body " id="content">
             <p><a href="https://github.com/lanpa/tensorboardX">tensorboardX</a>是pytorch集成tensorboard可视化训练过程的工具。</p>
-<h3 id="绘制loss曲线的方法如下">绘制loss曲线的方法如下</h3>
+<h3 id=绘制loss曲线的方法如下>绘制loss曲线的方法如下</h3>
 <ol>
 <li>单条曲线使用<code>writer.add_scalar</code>，一条曲线对应一个name</li>
 <li>多条曲线使用<code>writer.add_scalars</code>，每个表格对应一个name，其中每条曲线也对应一个name</li>
 </ol>
-<h3 id="example">Example</h3>
+<h3 id=example>Example</h3>
 <pre><code class="python">from tensorboardX import SummaryWriter
 import random
 import time
@@ -39,11 +39,11 @@ import time
 writer = SummaryWriter()
 
 for i in range(1000):
-    for x in ['train', 'val']:
-        writer.add_scalars("loss", {
+    for x in [&#39;train&#39;, &#39;val&#39;]:
+        writer.add_scalars(&quot;loss&quot;, {
             x: random.random()
         }, i)
-    writer.add_scalar("acc", random.random(), i)
+    writer.add_scalar(&quot;acc&quot;, random.random(), i)
     time.sleep(1)
 
 writer.close()</code></pre>
@@ -56,5 +56,8 @@ writer.close()</code></pre>
 
         </div>
     </div>
-
-</body></html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>
