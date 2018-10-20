@@ -12,7 +12,7 @@ KNN (K-Nearest-Neighbor Classifier)，K最邻近算法
 ### KNN
 [CIFAR-10](http://www.cs.toronto.edu/~kriz/cifar.html) 由 60K 张 32x32 的图片构成，分为 10 类，每类 6K，训练集 50K，测试集 10K。
 <div align=center>
-   <img src="https://hzzone.io/images/Screen%20Shot%202018-10-07%20at%207.54.41%20PM.png" />
+   <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-20-131318.png" />
 </div>
 
 * Nearest Neighbor
@@ -23,6 +23,6 @@ KNN (K-Nearest-Neighbor Classifier)，K最邻近算法
 
 图片的相似程度则使用 L1 或 L2 距离来衡量，具体方法是像素间的距离。例如计算 L1 距离，矩阵对应位置相减求绝对值再相加:
 <div align=center>
-   <img src="https://hzzone.io/images/kajsnckxasajsdha.jpeg" />
+   <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-20-Screen%20Shot%202018-10-20%20at%209.13.53%20PM.png" />
 </div>
 
