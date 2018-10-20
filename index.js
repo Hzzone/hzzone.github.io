@@ -5,7 +5,6 @@ var path = require("path");
 var util = require('util');
 var child_process = require('child_process');
 var entities = require("entities");
-const mjpage = require('mathjax-node-page').mjpage;
 
 var resource = 'resource';
 
@@ -115,10 +114,10 @@ dirs.forEach(function (dir_name) {
             data = replace(data, /\$([\s\S]*?)\$/gm);
             data = marked(data);
             var html_data = entities.decodeHTML(nunjucks.render('markdown.html', {title: title, markdownbody: data}));
-            mjpage(html_data, {format: ["TeX"]}, {html: true, css: true}, function (output) {
-                fs.writeFileSync(build_file_path, output, {encoding: 'utf8'});
-            });
-            // fs.writeFileSync(build_file_path, html_data, { encoding: 'utf8' });
+            // mjpage(html_data, {format: ["TeX"]}, {html: true, css: true}, function (output) {
+            //     fs.writeFileSync(build_file_path, output, {encoding: 'utf8'});
+            // });
+            fs.writeFileSync(build_file_path, html_data, { encoding: 'utf8' });
         }
     });
 });
