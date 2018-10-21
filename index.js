@@ -85,10 +85,27 @@ function replace(content, regx) {
             expression = expression.replace(/\\&/g, '\\\\&');
             expression = expression.replace(/\\\$/g, '\\\\$');
             expression = expression.replace(/\\\^/g, '\\\\^');
+            expression = expression.replace(/\\\|/g, '\\\\|');
+            expression = expression.replace(/\_/g, '\\_');
             return expression;
         });
     return content;
 }
+
+function generate(raw_data, title) {
+    var data = replace(raw_data, /\$\$([\s\S]*?)\$\$/gm);
+    data = replace(data, /\$([\s\S]*?)\$/gm);
+    // var data = raw_data;
+    data = marked(data);
+    var html_data = nunjucks.render('markdown.html', {title: title, markdownbody: data});
+    html_data = entities.decodeHTML(html_data);
+    // mjpage(html_data, {format: ["TeX"]}, {html: true, css: true}, function (output) {
+    //     fs.writeFileSync(build_file_path, output, {encoding: 'utf8'});
+    // });
+    return html_data
+}
+
+// console.log(generate('$$\\mathcal{L}_C=\\frac{1}{2} \\sum_{i=1}^{m} \\| x_i-c_{y_i} \\|_2^2$$', 'test'));
 
 var path_dict = {};
 
@@ -110,13 +127,9 @@ dirs.forEach(function (dir_name) {
             path_dict[dir_name].push(title);
             var build_file_path = path.join(build_class_dir, title + '.html');
             var raw_data = fs.readFileSync(file_path, {encoding: 'utf8'});
-            var data = replace(raw_data, /\$\$([\s\S]*?)\$\$/gm);
-            data = replace(data, /\$([\s\S]*?)\$/gm);
-            data = marked(data);
-            var html_data = entities.decodeHTML(nunjucks.render('markdown.html', {title: title, markdownbody: data}));
-            // mjpage(html_data, {format: ["TeX"]}, {html: true, css: true}, function (output) {
-            //     fs.writeFileSync(build_file_path, output, {encoding: 'utf8'});
-            // });
+
+            var html_data = generate(raw_data);
+
             fs.writeFileSync(build_file_path, html_data, { encoding: 'utf8' });
         }
     });
