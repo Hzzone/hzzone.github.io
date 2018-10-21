@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>百度云深度学习实例情况介绍</title>
+    <title></title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
@@ -28,14 +28,14 @@
             <a href="/">主页</a>
         </div>
         <div class="markdown-body " id="content">
-            <p>百度云深度学习不能保存镜像，但胜在价格便宜。
-相对来说腾讯云最便宜的<del>14 RMB ，阿里云最低</del>9 RMB (且需要最低余额100 RMB )，AWS p2.xlarge最低大概RMB 6~7，需要申请实例限制和国外信用卡，但是胜在有很多配好环境的实例。
-百度云深度学习每次都要配置环境，而我需要使用pytorch，为了简化步骤，特此记录。</p>
+            <p>百度云深度学习不能保存镜像，但胜在价格便宜。</p>
+<p>相对来说腾讯云最便宜的 14￥ ，阿里云最低 9￥ (且需要最低余额 100￥)，AWS p2.xlarge 最低大概 6-7￥，需要申请实例限制和国外信用卡，但是胜在有很多配好环境的实例。</p>
+<p>百度云深度学习每次都要配置环境，而我需要使用 pytorch，为了简化步骤，特此记录。</p>
 <h3 id=简介>简介</h3>
 <ul>
-<li>最低余额20元</li>
+<li>最低余额 20 元</li>
 <li>tensorflow 1.2.0</li>
-<li>GPU计算K1型（ CPU:6核、 GPU:1 Nvidia K40、 内存:40GB、 硬盘:200GB ）</li>
+<li>GPU 计算K1型（ CPU: 6核、 GPU:1 Nvidia K40、 内存: 40GB、 硬盘: 200GB ）</li>
 <li>GPU Total memory: 11.17GiB</li>
 <li>￥5.16/小时</li>
 </ul>
@@ -45,7 +45,7 @@
 <li>CUDA Version 8.0.61</li>
 <li>Python 3.4.3/Python 2.7.6</li>
 </ul>
-<p>不幸的是，pytorch只支持Python2.7/3.5/3.6，所以需要安装&gt;3.5的版本，我们安装<code>mini conda</code>配置python 3.6：</p>
+<p>不幸的是，pytorch 只支持 Python 2.7/3.5/3.6，所以需要安装 &gt;3.5 的版本，我安装 <code>mini conda</code> 配置 python 3.6：</p>
 <pre><code class="shell">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sudo sh Miniconda3-latest-Linux-x86_64.sh
 source ~/.bashrc
@@ -53,17 +53,18 @@ python -V
 Python 3.6.5 :: Anaconda, Inc.
 pip -V
 pip 10.0.1 from /root/miniconda3/lib/python3.6/site-packages/pip (python 3.6)</code></pre>
-<h3 id=之后就是使用rsync来同步文件-如果数据比较大-可以使用百度的bos-推荐rsync教程->之后就是使用rsync来同步文件，如果数据比较大，可以使用百度的BOS。<a href="https://www.cnblogs.com/kidsitcn/p/4645372.html">推荐rsync教程</a>。</h3>
-<h3 id=最后安装依赖->最后安装依赖。</h3>
-<h3 id=使用tensorboard可视化->使用tensorboard可视化：</h3>
-<pre><code>### 服务器启动tensorboard：
+<p>之后就是使用 rsync 来同步文件，如果数据比较大，可以使用百度的 BOS，推荐 <a href="https://www.cnblogs.com/kidsitcn/p/4645372.html">rsync教程</a>。</p>
+<p>最后安装依赖。</p>
+<h3 id=使用tensorboard可视化>使用tensorboard可视化</h3>
+<pre><code class="shell">### 服务器启动tensorboard：
 tensorboard --logdir runs
-ssh -L 16006:127.0.0.1:6006 account@ip</code></pre><p>本地访问<a href="http://127.0.0.1:16006/%E6%9F%A5%E7%9C%8B%E3%80%82">http://127.0.0.1:16006/查看。</a></p>
+ssh -L 16006:127.0.0.1:6006 account@ip</code></pre>
+<p>本地访问 <a href="http://127.0.0.1:16006/">http://127.0.0.1:16006/</a> 查看。</p>
 <h3 id=python-3-4-3预装的package>Python 3.4.3预装的Package</h3>
 <ul>
 <li><code>pip3 list</code></li>
 </ul>
-<pre><code>Package                 Version
+<pre><code class="shell">Package                 Version
 ----------------------- ----------------
 backports.weakref       1.0rc1
 bleach                  1.5.0
@@ -100,6 +101,7 @@ urllib3                 1.7.1
 Werkzeug                0.12.2
 wheel                   0.29.0
 xkit                    0.0.0</code></pre>
+
         </div>
     </div>
 </body>

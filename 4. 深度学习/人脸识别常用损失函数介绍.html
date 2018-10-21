@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>人脸识别常用损失函数介绍</title>
+    <title></title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
@@ -104,9 +104,9 @@ $$</p>
 </blockquote>
 <p>通过缩小类间距同时保持不同类分离。后文中提及算法的核心思想，不贴出来，但简短总结如下:</p>
 <p>作者提出的 center loss function:
-$$\mathcal{L}<em>C=\frac{1}{2} \sum</em>{i=1}^{m} | x_i-c_{y_i} |_2^2$$</p>
+$$\mathcal{L}_C=\frac{1}{2} \sum_{i=1}^{m} \| x_i-c_{y_i} \|_2^2$$</p>
 <p>结合 Softmax Loss 做 Multi-Task Learning，结合起来的 Loss Function 就是:</p>
-<p>$$\mathcal{L}=\mathcal{L}<em>S+\lambda \mathcal{L}</em>C$$</p>
+<p>$$\mathcal{L}=\mathcal{L}_S+\lambda \mathcal{L}_C$$</p>
 <p>$c_{y_i}$ 代表了 $y_i$ 类数据的特征的中心，当 $x_i$ 改变时 $c_{y_i}$ 也应该改变，因为 $x_i$ 就是 CNN 提取到的特征。</p>
 <p>但是在训练中每一次迭代对整个数据集的特征求中心是不现实的，所以文章的中心思想:</p>
 <blockquote>
@@ -122,7 +122,7 @@ Second, to avoid large perturbations caused by few mislabelled samples, we use a
 <p>$$\frac{\partial L_C}{\partial x_i}=x_i-c_{y_i}$$</p>
 <p>因为 $$L_S=-\sum_{j=1}^N y_j \log{S_j} $$</p>
 <p>$S$ 为 softmax 函数，$y_j$ 为 N 类的向量，只有一个位置为 1:</p>
-<p>$$S=\frac{e^{x_i}}{\sum_{j=1}^N x_j}$$</p>
+<p>$$S=\frac{e^{x_i}}{\sum_{j=1}^N e^{x_j}}$$</p>
 <p>在此 $x_j$ 为 $ W^T_{y_i} x_i+b_{y_i}$，是最后一层提取到的特征向量，所以 $L_C$ 对 $x_i$ 求偏导为 0，对权重没有影响。</p>
 <p>$$\frac{\partial L_C}{\partial x_i}=0$$</p>
 <p>对 $c_j$ 更新如下:</p>
@@ -134,13 +134,13 @@ Second, to avoid large perturbations caused by few mislabelled samples, we use a
 <p>用我的语言描述:
 初始化卷积层参数 $\theta_C$，参数 $W$ 和类中心 $c_j$，选择合适的超参 $\lambda$ 、 $\alpha$ 和学习率 $\mu^t$。</p>
 <ul>
-<li><p>计算 $\mathcal{L}=\mathcal{L}<em>S+\lambda \mathcal{L}</em>C$    </p>
+<li><p>计算 $\mathcal{L}=\mathcal{L}_S+\lambda \mathcal{L}_C$    </p>
 </li>
 <li><p>计算反向传播的误差，$\frac{\partial L}{\partial x_i}=\frac{\partial L_S}{\partial x_i}+\lambda \frac{\partial L_C}{\partial x_i}$</p>
 </li>
 <li><p>更新 $W$，$W^{t+1}=W^t - \mu^t \frac{\partial L^t}{\partial W^t}=W^t - \mu^t \frac{\partial L_S^t}{\partial W^t}$</p>
 </li>
-<li><p>更新 $c_j$，$c^{t+1}<em>j=c^t</em>j-\alpha \Delta c^t_j$</p>
+<li><p>更新 $c_j$，$c^{t+1}_j=c^t_j-\alpha \Delta c^t_j$</p>
 </li>
 <li><p>更新卷积层参数 $\theta_C$</p>
 </li>
@@ -150,6 +150,7 @@ Second, to avoid large perturbations caused by few mislabelled samples, we use a
 <p>$\alpha$ 和 $\lambda$ 作者做过很多实验，固定其中之一然后改变另外一个超参:</p>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-21-Screen%20Shot%202018-10-21%20at%203.01.30%20PM.png" alt=""></p>
 <p>最后选择 $\lambda=0.003, \alpha=0.5$ 作为后文各个数据集的 performace 对比。</p>
+<p>$$\mathcal{L}_C=\frac{1}{2} \sum_{i=1}^{m} \| x_i-c_{y_i} \|_2^2$$</p>
 
         </div>
     </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0</title>
+    <title></title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
@@ -46,17 +46,17 @@ sudo apt-get install -y python-dev
 sudo apt-get install -y python-numpy python-scipy
 
 sudo apt-get install -y libopencv-dev</code></pre>
-<p>下载 <a href="https://developer.nvidia.com/rdp/cudnn-download">cudnn</a>，选择:
-<img src="https://hzzone.io/images/1538271042141.jpg" alt=""></p>
-<p>下载 <a href="https://developer.nvidia.com/cuda-90-download-archive">CUDA 9.0</a>，选择:
-<img src="https://hzzone.io/images/1538275475225.jpg" alt=""></p>
+<p>下载 <a href="https://developer.nvidia.com/rdp/cudnn-download">cudnn</a>，选择:</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-21-085609.png" alt=""></p>
+<p>下载 <a href="https://developer.nvidia.com/cuda-90-download-archive">CUDA 9.0</a>，选择:</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-21-085351.png" alt=""></p>
 <p>安装 CUDA 9.0:</p>
 <pre><code class="shell">sudo sh cuda_9.0.176_384.81_linux.run</code></pre>
 <p><img src="https://hzzone.io/images/563A2032-2DD5-46C3-AE6D-49BF4C068FE3.png" alt=""></p>
 <p>显卡驱动可以在官网下载最新版本的进行安装，老版本在 Ubuntu 上我经常遇到问题，在登录界面一直重复，就是显卡驱动的问题。</p>
 <p>然后添加环境变量，在 <code>zshrc</code> 或 <code>bashrc</code> 中添加:</p>
 <pre><code class="shell">export PATH=/usr/local/cuda-9.0/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:$LD_LIBRARY_PATH</code></pre>
+export LD\_LIBRARY\_PATH=/usr/local/cuda-9.0/lib64:$LD_LIBRARY_PATH</code></pre>
 <p>然后:</p>
 <pre><code class="shell">source ~/.zshrc</code></pre>
 <p>然后安装 cudnn:</p>
