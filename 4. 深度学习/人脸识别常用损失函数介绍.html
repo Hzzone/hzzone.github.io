@@ -97,7 +97,59 @@ $$</p>
 <p>$\alpha$ 的取值很重要，$\alpha$ 过小时，提取到的特征向量区分不明显，很快就收敛了；$\alpha$ 过大时，很难收敛。</p>
 <p>caffe 没有实现 Triplet Loss，但是可以参考 <a href="https://blog.csdn.net/tangwei2014/article/details/46812153">如何在caffe中增加layer以及caffe中triplet loss layer的实现</a>。</p>
 <h2 id=center-loss>Center Loss</h2>
-<p><a href="https://ydwen.github.io/papers/WenECCV16.pdf">A Discriminative Feature Learning Approach for Deep Face Recognition</a></p>
+<p>文章 PDF：<a href="https://ydwen.github.io/papers/WenECCV16.pdf">A Discriminative Feature Learning Approach for Deep Face Recognition</a></p>
+<p>有很多博客介绍 Center Loss，但其实具体的核心思路很多都没有提及，不如去看原文，文章的核心思想在 3.2 The Center Loss 节:</p>
+<blockquote>
+<p>So, how to develop an effective loss function to improve the discriminative power of the deeply learned features? Intuitively, <strong>minimizing the intra-class variations while keeping the features of different classes separable is the key.</strong></p>
+</blockquote>
+<p>通过缩小类间距同时保持不同类分离。后文中提及算法的核心思想，不贴出来，但简短总结如下:</p>
+<p>作者提出的 center loss function:
+$$\mathcal{L}<em>C=\frac{1}{2} \sum</em>{i=1}^{m} | x_i-c_{y_i} |_2^2$$</p>
+<p>结合 Softmax Loss 做 Multi-Task Learning，结合起来的 Loss Function 就是:</p>
+<p>$$\mathcal{L}=\mathcal{L}<em>S+\lambda \mathcal{L}</em>C$$</p>
+<p>$c_{y_i}$ 代表了 $y_i$ 类数据的特征的中心，当 $x_i$ 改变时 $c_{y_i}$ 也应该改变，因为 $x_i$ 就是 CNN 提取到的特征。</p>
+<p>但是在训练中每一次迭代对整个数据集的特征求中心是不现实的，所以文章的中心思想:</p>
+<blockquote>
+<p>To address this problem, we make two necessary modifications. First, instead of updating the centers with respect to the entire training set, we perform the update based on mini-batch. In each iteration, the centers are computed by averaging the features of the corresponding classes (In this case, some of the centers may not update).
+Second, to avoid large perturbations caused by few mislabelled samples, we use a scalar α to control the learning rate of the centers.</p>
+</blockquote>
+<ul>
+<li>每个 mini-batch 计算 class center，也就是 $c_{y_i}$</li>
+<li>为了避免非 Ground Truth 的样本影响，引入一个 $\alpha$ 超参控制 center 的学习率</li>
+</ul>
+<p>因此，Center Loss 总共有两个超参需要手动设置: Center Loss Function 的权重 $\lambda$ 和 上面提及的 $\alpha$。</p>
+<p>首先对各项求偏导:</p>
+<p>$$\frac{\partial L_C}{\partial x_i}=x_i-c_{y_i}$$</p>
+<p>因为 $$L_S=-\sum_{j=1}^N y_j \log{S_j} $$</p>
+<p>$S$ 为 softmax 函数，$y_j$ 为 N 类的向量，只有一个位置为 1:</p>
+<p>$$S=\frac{e^{x_i}}{\sum_{j=1}^N x_j}$$</p>
+<p>在此 $x_j$ 为 $ W^T_{y_i} x_i+b_{y_i}$，是最后一层提取到的特征向量，所以 $L_C$ 对 $x_i$ 求偏导为 0，对权重没有影响。</p>
+<p>$$\frac{\partial L_C}{\partial x_i}=0$$</p>
+<p>对 $c_j$ 更新如下:</p>
+<p>$$\Delta c_j=\frac{\sum_{i=1}^m\delta(y_i=j)\cdot(c_{y_i}=x_i)}{1+\sum_{i=1}^m\delta(y_i=j)}$$</p>
+<p>$\delta(y_i=j)$ 判断条件，如果为真则为 1，否则为 0。</p>
+<p>总结起来就是更新 $c_j$ 的方法是对一个 batch 大小为 m 的 mini-batch ，对指定类的所有样本与类中心的距离求和，再除以类的样本数求平均，特意加 1 是做的拉普拉斯平滑，为了防止分母为 0。</p>
+<p>文章算法如下:
+<img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-21-064529.png" alt=""></p>
+<p>用我的语言描述:
+初始化卷积层参数 $\theta_C$，参数 $W$ 和类中心 $c_j$，选择合适的超参 $\lambda$ 、 $\alpha$ 和学习率 $\mu^t$。</p>
+<ul>
+<li><p>计算 $\mathcal{L}=\mathcal{L}<em>S+\lambda \mathcal{L}</em>C$    </p>
+</li>
+<li><p>计算反向传播的误差，$\frac{\partial L}{\partial x_i}=\frac{\partial L_S}{\partial x_i}+\lambda \frac{\partial L_C}{\partial x_i}$</p>
+</li>
+<li><p>更新 $W$，$W^{t+1}=W^t - \mu^t \frac{\partial L^t}{\partial W^t}=W^t - \mu^t \frac{\partial L_S^t}{\partial W^t}$</p>
+</li>
+<li><p>更新 $c_j$，$c^{t+1}<em>j=c^t</em>j-\alpha \Delta c^t_j$</p>
+</li>
+<li><p>更新卷积层参数 $\theta_C$</p>
+</li>
+</ul>
+<p>$$\theta_C^{t+1}=\theta_C^t-\mu^t\sum_i^m\frac{\partial L^t}{\partial x_i^t}\cdot\frac{\partial x_i^t}{\partial \theta_C^t}$$</p>
+<p>以上可以知道，$\alpha$ 主要还是用来更新 $c_j$，<strong>Center Loss 主要影响的还是卷积层的参数，然后才间接影响全连接层等的参数</strong>。</p>
+<p>$\alpha$ 和 $\lambda$ 作者做过很多实验，固定其中之一然后改变另外一个超参:</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-21-Screen%20Shot%202018-10-21%20at%203.01.30%20PM.png" alt=""></p>
+<p>最后选择 $\lambda=0.003, \alpha=0.5$ 作为后文各个数据集的 performace 对比。</p>
 
         </div>
     </div>
