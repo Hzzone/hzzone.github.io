@@ -28,11 +28,11 @@
             <a href="/">主页</a>
         </div>
         <div class="markdown-body " id="content">
-            <p><a href="https://github.com/lanpa/tensorboardX">tensorboardX</a>是pytorch集成tensorboard可视化训练过程的工具。</p>
+            <p><a href="https://github.com/lanpa/tensorboardX">tensorboardX</a> 是 pytorch 集成 tensorboard 可视化训练过程的工具。</p>
 <h3 id=绘制loss曲线的方法如下>绘制loss曲线的方法如下</h3>
 <ol>
-<li>单条曲线使用<code>writer.add_scalar</code>，一条曲线对应一个name</li>
-<li>多条曲线使用<code>writer.add_scalars</code>，每个表格对应一个name，其中每条曲线也对应一个name</li>
+<li>单条曲线使用 <code>writer.add_scalar</code>，一条曲线对应一个 name</li>
+<li>多条曲线使用 <code>writer.add_scalars</code>，每个表格对应一个 name，其中每条曲线也对应一个 name</li>
 </ol>
 <h3 id=example>Example</h3>
 <pre><code class="python">from tensorboardX import SummaryWriter
@@ -51,11 +51,13 @@ for i in range(1000):
 
 writer.close()</code></pre>
 <ol>
-<li>单条曲线
-<img src="http://tuchuang-1252747889.cosgz.myqcloud.com/2018-08-31-FireShot%20Capture%201%20-%20TensorBoard%20-%20http___127.0.0.1_6006_-scalars%26_showDownloadLinks-true.png" alt=""></li>
-<li>多条曲线
-<img src="http://tuchuang-1252747889.cosgz.myqcloud.com/2018-08-31-FireShot%20Capture%202%20-%20TensorBoard%20-%20http___127.0.0.1_6006_-scalars%26_showDownloadLinks-true.png" alt=""></li>
+<li>单条曲线</li>
 </ol>
+<p><img src="http://tuchuang-1252747889.cosgz.myqcloud.com/2018-08-31-FireShot%20Capture%201%20-%20TensorBoard%20-%20http___127.0.0.1_6006_-scalars%26_showDownloadLinks-true.png" alt=""></p>
+<ol start="2">
+<li>多条曲线</li>
+</ol>
+<p><img src="http://tuchuang-1252747889.cosgz.myqcloud.com/2018-08-31-FireShot%20Capture%202%20-%20TensorBoard%20-%20http___127.0.0.1_6006_-scalars%26_showDownloadLinks-true.png" alt=""></p>
 
         </div>
     </div>
