@@ -139,6 +139,7 @@ var readme_data = fs.readFileSync(path.join(resource_dir, 'README.md'), { encodi
 var data = marked(readme_data);
 var title = "黄智忠的个人笔记";
 for (var class_name in path_dict) {
+    if (path_dict[class_name].length==0) continue;
     data += util.format("<h2>%s</h2>\n<ul>", class_name);
     path_dict[class_name].forEach(function (article_title) {
         data += util.format('<li><a class="link" href="%s.html">%s</a></li>\n', util.format("%s/%s", class_name, article_title), article_title);
