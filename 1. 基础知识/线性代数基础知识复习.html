@@ -214,17 +214,15 @@ $$</p>
 </ul>
 <h4 id=2-2-一些特殊矩阵及其运算>2.2 一些特殊矩阵及其运算</h4>
 <ul>
-<li><p>矩阵的逆</p>
-</li>
-<li><p>矩阵的三种初等变换可以通过左乘一系列初等矩阵获得化简单位矩阵 $E$ :</p>
-<p>  初等矩阵是对单位矩阵做换行、数乘、倍加三中操作得到。</p>
-<p>  $$(P_kP_{k-1}\cdots P_1)A=E$$
-  $$P_kP_{k-1}\cdots P_1=A^{-1}$$</p>
-</li>
+<li>矩阵的逆</li>
+<li>矩阵的三种初等变换可以通过左乘一系列初等矩阵获得化简单位矩阵 $E$ :</li>
 </ul>
-<pre><code>具体求法为: 初等行变换，$(A|E)\to (E|A^{-1})$；初等列变换，$\left[ \begin{array}{ccc}A\\\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\\\A^{-1} \end{array} \right ]$。
-
-如果是求解线性方程组 $\left[ \begin{array}{ccc}A\\\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\\\A^{-1} \end{array} \right ]$</code></pre><ul>
+<p>初等矩阵是对单位矩阵做换行、数乘、倍加三中操作得到。</p>
+<p>$$(P_kP_{k-1}\cdots P_1)A=E$$
+$$P_kP_{k-1}\cdots P_1=A^{-1}$$</p>
+<p>具体求法为: 初等行变换，$(A|E)\to (E|A^{-1})$；初等列变换，$\left[ \begin{array}{ccc}A\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\A^{-1} \end{array} \right ]$。</p>
+<p>如果是求解线性方程组 $\left[ \begin{array}{ccc}A\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\A^{-1} \end{array} \right ]$</p>
+<ul>
 <li><p>矩阵的转置: 矩阵的行变为矩阵的列。$A$ 的转置矩阵，记为 $A^T$。满足的性质包括:</p>
 </li>
 <li><p>对称矩阵，$a_{ij}=a_{ji}$，即 $A^T=A$，按对角线对称。</p>
