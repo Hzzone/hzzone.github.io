@@ -72,8 +72,8 @@ copyDir(path.join(root, 'templates', 'static'), build_dir);
 function replace(content, regx) {
     content = content.replace(regx,
         function(expression) {
-            var max_formula_length = 200;
-            if (expression.length > max_formula_length || has_chinese(expression)) return result;
+            var max_formula_length = 1000;
+            if (expression.length > max_formula_length || has_chinese(expression)) return expression;
             expression = expression.replace(/\\\\/g, '\\\\\\\\');
             expression = expression.replace(/\\ /g, '\\\\ ');
             expression = expression.replace(/\\%/g, '\\\\%');
