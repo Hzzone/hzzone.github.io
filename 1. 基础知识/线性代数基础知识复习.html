@@ -214,27 +214,27 @@ $$</p>
 </ul>
 <h4 id=2-2-一些特殊矩阵及其运算>2.2 一些特殊矩阵及其运算</h4>
 <ul>
-<li>矩阵的逆</li>
-<li>矩阵的三种初等变换可以通过左乘一系列初等矩阵获得化简单位矩阵 $E$ :</li>
+<li><p>矩阵的逆</p>
+</li>
+<li><p>矩阵的三种初等变换可以通过左乘一系列初等矩阵获得化简单位矩阵 $E$ :</p>
+<p>  初等矩阵是对单位矩阵做换行、数乘、倍加三中操作得到。</p>
+<p>  $$(P_kP_{k-1}\cdots P_1)A=E$$
+  $$P_kP_{k-1}\cdots P_1=A^{-1}$$</p>
+</li>
 </ul>
-<p>初等矩阵是对单位矩阵做换行、数乘、倍加三中操作得到。</p>
-<p>$$(P_kP_{k-1}\cdots P_1)A=E$$
-$$P_kP_{k-1}\cdots P_1=A^{-1}$$</p>
-<p>具体求法为: 初等行变换，$(A|E)\to (E|A^{-1})$；初等列变换，$\left[ \begin{array}{ccc}A\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\A^{-1} \end{array} \right ]$。</p>
-<p>如果是求解线性方程组 $\left[ \begin{array}{ccc}A\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\A^{-1} \end{array} \right ]$</p>
-<ul>
+<pre><code>具体求法为: 初等行变换，$(A|E)\to (E|A^{-1})$；初等列变换，$\left[ \begin{array}{ccc}A\\\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\\\A^{-1} \end{array} \right ]$。
+
+如果是求解线性方程组 $\left[ \begin{array}{ccc}A\\\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\\\A^{-1} \end{array} \right ]$</code></pre><ul>
 <li><p>矩阵的转置: 矩阵的行变为矩阵的列。$A$ 的转置矩阵，记为 $A^T$。满足的性质包括:</p>
 </li>
 <li><p>对称矩阵，$a_{ij}=a_{ji}$，即 $A^T=A$，按对角线对称。</p>
 </li>
 <li><p>反对称矩阵，主对角线为 0，主对角线两侧反号，即 $A^T=-A$。</p>
+<p>  两个对称阵之和为对称阵，两个反对称阵之和为反对称阵。</p>
+<p>  $BB^T,A=B+B^T$ 为对称阵，$A=B-B^T$ 为反对称阵。</p>
+<p>  比较重要的性质是任意矩阵都可以表示为两个对称阵和反对称阵之和:</p>
+<p>  例如矩阵 $C$，有矩阵 $A=C+C^T,B=C-C^T$，则$C=\frac{A+B}{2}$。</p>
 </li>
-</ul>
-<p>两个对称阵之和为对称阵，两个反对称阵之和为反对称阵。</p>
-<p>$BB^T,A=B+B^T$ 为对称阵，$A=B-B^T$ 为反对称阵。</p>
-<p>比较重要的性质是任意矩阵都可以表示为两个对称阵和反对称阵之和:</p>
-<p>例如矩阵 $C$，有矩阵 $A=C+C^T, B=C-C^T$，则$C=\frac{A+B}{2}$。</p>
-<ul>
 <li><p>正交矩阵: $A^T=A_{-1}$，满足每一行(列)的平方和为 1，任意两个不同行(列)的数量积(内积)为 0。$A,B$ 为正交阵，则 $AB(BA)$ 也为正交阵，但 $A+B$ 不一定为正交阵。</p>
 </li>
 <li><p>分块矩阵则是按照行和列对矩阵分块，运算和矩阵类似，但是需要同型矩阵。例如 $A$ 按列分块为 $[A_1, A_2, \cdots A_n]$。</p>
