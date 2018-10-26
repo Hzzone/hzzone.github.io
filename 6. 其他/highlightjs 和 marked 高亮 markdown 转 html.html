@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/PreviewHTML"],
+    }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body >
+    <div class="container">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+        <div class="markdown-body " id="content">
+            <h3 id=参考>参考</h3>
+<ul>
+<li><a href="https://marked.js.org/#/USING_ADVANCED.md#highlight">Marked.js Documentation</a></li>
+<li><a href="https://highlightjs.readthedocs.io/en/latest/api.html">highlight.js Library API</a></li>
+<li><a href="https://cdnjs.com/libraries/highlight.js">highlight.js cdnjs</a></li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/marked/0.5.1/marked.min.js&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css&quot;&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;div id=&quot;code&quot;&gt;
+\`\`\`C++
+for (int i = 0; i &lt; bottom[0]-&gt;num(); ++i) {
+    dist_sq_.mutable_cpu_data()[i] = caffe_cpu_dot(channels,
+        diff_.cpu_data() + (i*channels), diff_.cpu_data() + (i*channels));
+    if (static_cast&lt;int&gt;(bottom[2]-&gt;cpu_data()[i])) {  // similar pairs
+        loss += dist_sq_.cpu_data()[i];
+    } else {  // dissimilar pairs
+        if (legacy_version) {
+            loss += std::max(margin - dist_sq_.cpu_data()[i], Dtype(0.0));
+        } else {
+            Dtype dist = std::max&lt;Dtype&gt;(margin - sqrt(dist_sq_.cpu_data()[i]),
+              Dtype(0.0));
+            loss += dist*dist;
+        }
+    }
+}
+\`\`\`
+&lt;/div&gt;
+&lt;div id=&quot;content&quot; &gt;
+
+&lt;/div&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+$(&quot;#content&quot;).html(marked($(&quot;#code&quot;).html(), {gfm: true, highlight: function(code, lang, callback) {
+    return hljs.highlight(lang, code).value;
+}}));
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>代码高亮风格只需要修改 css 文件，传入 <code>marked</code> 的各项参数（markdown 代买需删除反斜杠）。</p>
+
+        </div>
+    </div>
+</body>
+</html>

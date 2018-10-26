@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/PreviewHTML"],
+    }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body >
+    <div class="container">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+        <div class="markdown-body " id="content">
+            <h2 id=github-支持-latex-的几种方案>GitHub 支持 LaTex 的几种方案</h2>
+<ol>
+<li><a href="http://www.codecogs.com/latex/eqneditor.php">codecogs</a> 生成外部链接</li>
+</ol>
+<p>优点：方便快捷，可以生成 gif、svg、png 等格式的图片，支持下载和直接外部链接引用。</p>
+<p>缺点：收费，具体见 <a href="https://www.oschina.net/question/589241_133621">名为开源，实际上每年都要收钱，这种策略好吗？</a>，<a href="https://blog.csdn.net/hdg34jk/article/details/78858067">CODECOGS在线LaTeX公式编辑器收费陷阱！</a>。服务不可靠，如果提供服务的公司突然倒闭，那么以前写的博客都没用了。而且只能联网访问。</p>
+<p>类似的还有 Google Chart，但是会面临被墙的风险。</p>
+<ol start="2">
+<li><a href="https://www.mathjax.org/">MathJax</a></li>
+</ol>
+<p>GitHub 因为安全问题不支持引入 js、css 文件，也不支持 <code>&lt;script&gt;、&lt;style&gt;</code> 等标签，所以不可行。</p>
+<ol start="3">
+<li><a href="https://github.com/apps/texify">GitHub App Texify</a></li>
+</ol>
+<p>优点: 不需要太多配置，直接像 LaTeX 一样使用，直接保存图片，可以本地预览。</p>
+<p>缺点: 生成 <code>*.tex.md</code> 并保存 svg。图片文件，然后直接提交到整个仓库，非常愚蠢的一种做法，而且并不支持 GitHub Issue。</p>
+<ol start="4">
+<li><a href="https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima?utm_source=chrome-app-launcher-info-dialog">GitHub with MathJax</a></li>
+</ol>
+<p>通过本地渲染 GitHub 界面支持 LaTeX，自欺欺人的一种方法，不推荐...</p>
+<ol start="5">
+<li>本地生成图片并上传到图床或者 GitHub</li>
+</ol>
+<p>不是太方便，但是可以解决很多已知问题。</p>
+<h2 id="LaTeX-生成-svg">LaTeX 生成 svg</h2>
+
+<p>参考该回答: <a href="https://stackoverflow.com/questions/9588261/converting-a-latex-code-to-mathml-or-svg-code-in-python#answer-16893390">converting a latex code to mathml or svg code in python</a>。</p>
+<p>通过 <code>latex</code> 命令生成 DVI 文件，然后使用 <a href="https://dvisvgm.de/">dvisvgm</a> 生成 svg 图片。</p>
+<p>通过模板转换:</p>
+<pre><code class="latex">\documentclass[paper=a5,fontsize=12pt]{scrbook}
+\usepackage[pdftex,active,tightpage]{preview}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\begin{document}
+\begin{preview}
+\begin{tikzpicture}[inner sep=0pt, outer sep=0pt]
+\node at (0, 0) {texCode}; % &lt;--Put your tex-code here
+\end{tikzpicture}
+\end{preview}
+\end{document}</code></pre>
+<p>缺点是会产生很多中间文件，需要安装 <code>LaTex</code> 环境，大到 3~4 G。</p>
+<h2 id=如何选择>如何选择</h2>
+<p>目前我认为最好的方法是通过 <a href="http://www.codecogs.com/latex/eqneditor.php">codecogs</a> 下载 gif 图片，然后上传到图床或者本地的仓库，可以解决服务不稳定的问题，至少可以保证自己的服务器或域名是可以访问的。</p>
+<p>另外一种方法，自己搭建一个服务器，随便采用什么框架，然后通过上面介绍的 <a href="#LaTeX-生成-svg">LaTeX 生成 svg</a> 提供一个类似于 codecogs 的服务，返回 svg 图片。而且目前也有类似功能的，例如 <a href="https://github.com/DMOJ/texoid">texoid</a>。</p>
+<p>实现起来很简单，但我嫌麻烦，可以考虑上一种方法，我认为是在 GitHub 不支持 LaTeX 时的最优解。</p>
+<h2 id=实现>实现</h2>
+<p>我最后还是实现了一个类似于 codecogs 的网站，因为不擅长前端，做的比较粗糙，具体原理和功能见 <a href="https://github.com/Hzzone/online-latex-mathmatical-fomula">online-latex-mathmatical-fomula</a></p>
+<p>在线 <a href="https://hzzone.io/api/latex">demo</a></p>
+<p><img src="https://raw.githubusercontent.com/Hzzone/online-latex-mathmatical-fomula/master/demo.gif" alt=""></p>
+
+        </div>
+    </div>
+</body>
+</html>
