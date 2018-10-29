@@ -6,19 +6,19 @@
 
 ### 推导
 <div align="center">
-    <img src="pca/IMG_0040.JPG">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0040.JPG" width="900px">
 </div>
 
 <div align="center">
-    <img src="pca/IMG_0041.JPG">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0041.JPG" width="900px">
 </div>
 
 <div align="center">
-    <img src="pca/IMG_0042.JPG">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0042.JPG" width="900px">
 </div>
 
 <div align="center">
-    <img src="pca/IMG_0043.JPG">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0043.JPG" width="900px">
 </div>
 
 ### Python 实现
@@ -34,7 +34,7 @@ wget http://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.da
 * 效果如图:
 
 <div align="center">
-    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-Figure_1.png" width="900px">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-Figure_1-1.png" width="900px">
 </div>
 
 PCA 实现:
