@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/PreviewHTML"],
+    }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body >
+    <div class="container">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+        <div class="markdown-body " id="content">
+            <h3 id=宜搜小说-api-分析>宜搜小说 API 分析</h3>
+<p>类似的有 <a href="https://github.com/xiadd/zhuishushenqi">追书神器 API</a>，很久以前还挺好用的，但这应用收费章节比原版还贵，收费章节直接加密；后来直接连免费章节也不能用了，不能获取章节内容。</p>
+<p>我做过的包括 <a href="https://github.com/Hzzone-Archives/YourReader">微信小程序</a>，<a href="https://github.com/Hzzone/E-Book">Android</a>，都是使用追书神器 API，现在失效了。</p>
+<p>接下来介绍宜搜小说 API。</p>
+<ul>
+<li>搜索</li>
+</ul>
+<p>url: <code>http://api.easou.com/api/bookapp/search.m?word=红楼梦&amp;type=0&amp;sort_type=0&amp;page_id=1&amp;count=20&amp;cid=eef_&amp;version=002&amp;os=ios&amp;udid=76fbeddf8b73c8b0fc065e2296b767579d8fda38&amp;appverion=1018&amp;ch=bnf1349_10388_001</code></p>
+<p><code>get</code>，改变 word 参数。</p>
+<p>response:</p>
+<pre><code class="json">
+{
+    &quot;type&quot;: 0,
+    &quot;subClass&quot;: &quot;&quot;,
+    &quot;keyWord&quot;: &quot;&quot;,
+    &quot;success&quot;: true,
+    &quot;errorlog&quot;: &quot;&quot;,
+    &quot;sortType&quot;: 0,
+    &quot;all_book_items&quot;: [
+        {
+            &quot;name&quot;: &quot;红楼梦&quot;,
+            &quot;classes&quot;: &quot;连载,其他&quot;,
+            &quot;desc&quot;: &quot;《红楼梦》，作者曹雪芹，中国古代四大名著之一，章回体长篇小说......&quot;,
+            &quot;status&quot;: &quot;连载&quot;,
+            &quot;gid&quot;: 17384298,
+            &quot;category&quot;: &quot;其他&quot;,
+            &quot;chapterCount&quot;: 120,
+            &quot;cpId&quot;: &quot;0&quot;,
+            &quot;charge&quot;: 0,
+            &quot;agentName&quot;: &quot;&quot;,
+            &quot;ad&quot;: 0,
+            &quot;activityInfo&quot;: {
+                &quot;discount&quot;: 0,
+                &quot;price&quot;: 0,
+                &quot;originPrice&quot;: 0,
+                &quot;activityName&quot;: &quot;&quot;,
+                &quot;activityType&quot;: -1,
+                &quot;ttl&quot;: 0
+            },
+            &quot;activityType&quot;: -1,
+            &quot;nid&quot;: 19704996,
+            &quot;author&quot;: &quot;官方好书推荐&quot;,
+            &quot;site&quot;: &quot;lindiankanshu.com&quot;,
+            &quot;chargeGid&quot;: 0,
+            &quot;sourceId&quot;: &quot;3035306&quot;,
+            &quot;imgUrl&quot;: &quot;http://image.book.easou.com/i/default/cover.jpg&quot;,
+            &quot;lastChapterName&quot;: &quot;第一百二十回 甄士隐详说太虚情 贾雨村归结红楼梦&quot;,
+            &quot;lastTime&quot;: 1509105932186,
+            &quot;subscribeCount&quot;: 180910,
+            &quot;tempFree&quot;: false,
+            &quot;siteCount&quot;: 0,
+            &quot;topicGroupId&quot;: 3515373,
+            &quot;topicNum&quot;: 2
+        },
+        ...
+    ],
+    &quot;web_book_items&quot;: [],
+    &quot;guess_like_items&quot;: [],
+    &quot;check_word&quot;: &quot;&quot;,
+    &quot;allTotal&quot;: 56,
+    &quot;parentClass&quot;: &quot;&quot;,
+    &quot;guessLikeReferGids&quot;: &quot;&quot;,
+    &quot;buttonToggle&quot;: &quot;00&quot;,
+    &quot;webTotal&quot;: 0,
+    &quot;recforsoft&quot;: []
+}</code></pre>
+<ul>
+<li>章节目录</li>
+</ul>
+<p>url: <code>http://api.easou.com/api/bookapp/chapter_list.m?gid=17384298&amp;nid=19704996&amp;page_id=1&amp;size=9999&amp;cid=eef_&amp;version=002&amp;os=ios&amp;udid=76fbeddf8b73c8b0fc065e2296b767579d8fda38&amp;appverion=1018&amp;ch=bnf1349_10388_001</code></p>
+<p><code>get</code>，改变 <code>gid</code> 和 <code>nid</code>（由搜索结果获得）。</p>
+<p>response:</p>
+<pre><code class="json">{
+    &quot;novelName&quot;: &quot;&quot;,
+    &quot;totalCount&quot;: 120,
+    &quot;items&quot;: [
+        {
+            &quot;time&quot;: 1509105916000,
+            &quot;sort&quot;: 1,
+            &quot;charge&quot;: 0,
+            &quot;wordCount&quot;: 0,
+            &quot;site&quot;: &quot;lindiankanshu.com&quot;,
+            &quot;nid&quot;: 19704996,
+            &quot;chapter_name&quot;: &quot;第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀&quot;,
+            &quot;gsort&quot;: 0,
+            &quot;curl&quot;: &quot;http://www.lindiankanshu.com/93_93446/4869424.html&quot;,
+            &quot;paid&quot;: 0,
+            &quot;ctype&quot;: &quot;文&quot;,
+            &quot;accelerate&quot;: 0
+        },
+        ...
+    ],
+    &quot;success&quot;: true,
+    &quot;errorlog&quot;: &quot;&quot;
+}</code></pre>
+<ul>
+<li>章节内容
+url: <code>http://api.easou.com/api/bookapp/batch_chapter.m?cid=eef_&amp;version=002&amp;os=ios&amp;udid=76fbeddf8b73c8b0fc065e2296b767579d8fda38&amp;appverion=1018&amp;ch=bnf1349_10388_001</code></li>
+</ul>
+<p><code>post</code>，<code>header：content-type: application/x-www-form-urlencoded</code>，提交以下参数:</p>
+<pre><code>{
+    &quot;gid&quot;: &quot;17384298&quot;,
+    &quot;nid&quot;: &quot;19704996&quot;,
+    &quot;gsort&quot;: 0,
+    &quot;chapter_name&quot;: &quot;第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀&quot;,
+    &quot;sequence&quot;: 0,
+    &quot;sort&quot;: 120
+}</code></pre><p><code>gid</code>、<code>nid</code>、<code>sort</code>、<code>chapter_name</code> 需要改变。</p>
+<p>response:</p>
+<pre><code class="json">{
+    &quot;items&quot;: [
+        {
+            &quot;content&quot;: &quot;　　话说宝钗听秋纹说袭人不好，连忙进去瞧看。巧姐儿同平儿也随着走到袭人炕前，只见袭人心痛难禁，一时气厥。宝钗等用开水灌了过来，仍旧扶她睡下，一面传请大夫。巧姐儿问宝钗道：\&quot;袭人姐姐怎么病到这个样？\&quot;宝钗道：\&quot;大前儿晚上，哭伤了心了，一时发晕栽倒了。太太叫人扶她回来，她就睡倒了。因外头有事，没有请大夫瞧她，所以致此。\&quot;
+            ...
+            &quot;,
+            &quot;time&quot;: 1509105932000,
+            &quot;flag&quot;: 0,
+            &quot;gid&quot;: 17384298,
+            &quot;sort&quot;: 120,
+            &quot;charge&quot;: 0,
+            &quot;sequence&quot;: 0,
+            &quot;nid&quot;: 19704996,
+            &quot;site&quot;: &quot;&quot;,
+            &quot;chapter_name&quot;: &quot;第一百二十回 甄士隐详说太虚情 贾雨村归结红楼梦&quot;,
+            &quot;tempFree&quot;: false,
+            &quot;curl&quot;: &quot;http://www.lindiankanshu.com/93_93446/4869543.html&quot;,
+            &quot;paid&quot;: 0,
+            &quot;ctype&quot;: &quot;文&quot;,
+            &quot;accelerate&quot;: 0,
+            &quot;success&quot;: true,
+            &quot;errorlog&quot;: &quot;&quot;
+        }
+    ],
+    &quot;success&quot;: true,
+    &quot;errorlog&quot;: &quot;&quot;
+}</code></pre>
+
+        </div>
+    </div>
+</body>
+</html>
