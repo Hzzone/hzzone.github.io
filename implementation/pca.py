@@ -5,6 +5,7 @@ from sklearn import decomposition
 
 # 读取数据
 iris_data, iris_label = utils.read_iris('../data/iris.csv')
+# iris_data = (iris_data - np.mean(iris_data, axis=0))/np.std(iris_data, axis=0)
 iris_data -= np.mean(iris_data, axis=0)
 
 # target: 150*4
