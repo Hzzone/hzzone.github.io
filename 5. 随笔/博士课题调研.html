@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/PreviewHTML"],
+    }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body >
+    <div class="container">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+        <div class="markdown-body " id="content">
+            <p>注意调研，收集、阅读文章，了解现阶段的该方向的研究成果、前景、可能的解决方案等等。</p>
+<p>收集包括：论文，中文链接、博客；并概括该方向的具体内容。</p>
+<p>调研方向包括:</p>
+<ul>
+<li><a href="#zero-shot-learning">Zero Shot Learning (零样本学习)</a></li>
+<li><a href="#hand-pose-estimation">Hand Pose Estimation (手部姿态估计)</a></li>
+<li><a href="#handwritten-mathmatical-expression-recognition">Handwritten Mathmatical Expression Recognition (手写体数学公式识别)</a></li>
+<li><a href="#meteorological-prediction">Meteorological prediction (气象预测)</a></li>
+<li><a href="#face-age-esitmation">Face Age Esitmation (人脸年龄预测)</a></li>
+</ul>
+<p>工具:</p>
+<ul>
+<li><a href="http://openaccess.thecvf.com/menu.py">Computer Vision Foundation open access</a>: 近几年 CVPR、ICCV 论文下载。</li>
+<li>好用的数据集标注工具: <a href="http://www.jinglingbiaozhu.com/">精灵标注助手</a>、<a href="https://github.com/tzutalin/labelImg">labelImg</a>、<a href="https://github.com/Jeff-sjtu/labelKeypoint">labelKeypoint</a>、<a href="https://github.com/Labelbox/Labelbox">Labelbox</a>。</li>
+</ul>
+<h3 id=zero-shot-learning>Zero Shot Learning</h3>
+<p>Zero Shot Learning (零样本学习) 属于迁移学习的一个分支，先由李飞飞在 <a href="https://ieeexplore.ieee.org/document/1597116/">One-Shot Learning of Object Categories TPAMI 2006</a> 提出 One Shot Learning，通过少量样本做目标分类，然后由 Bengio 等在 <a href="https://www.aaai.org/Papers/AAAI/2008/AAAI08-103.pdf">Zero-data Learning of New Tasks AAAI 2008</a> 提出无样本目标分类。</p>
+<p>在 Zero Shot Learning 中训练集和测试集的类别无交集，即测试集的类别不在训练集中，然后通过训练训练之后的模型能够正确预测没有见过的类别，这就是零样本学习的目的。</p>
+<p>Zero Shot Learning 的样本类别需要提供一些类别的描述信息，包括 Attribute (属性)、或者 Word Vector (词向量)，所有类别共有。简要描述 Zero Shot Learning 的流程则是: 使用训练集训练一个 CNN 模型 (在有些方法里则是直接使用 IMAGENET 上的预训练模型提取特征，然后使用属性或词向量在训练一个网络结合特征向量进行预测，例如在 <a href="https://arxiv.org/abs/1611.05088">DEM CVPR 2017</a> 就是一个这样的过程。)，数据集的标注是属性或者词向量，计算输出与每个类别之间的距离之后最近的则是预测的类别。</p>
+<p><strong>也就是找到一个语言嵌入空间 (Semantic embedding space) ，实现数据的特征空间到数据标签之间的映射，样本与之相对应的类别会更加接近。</strong></p>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-03-14644ea00fa04d90a7cc13493ebde189.jpeg">
+</div>
+
+<p>基于属性的学习方法最早提出于 <a href="https://ieeexplore.ieee.org/document/6571196">Attribute-Based Classification for Zero-Shot Visual Object Categorization TPAMI 2013</a>，并且该文章公开了一个 benchmark 数据集，<a href="https://cvml.ist.ac.at/AwA/">Animals with Attributes</a> 收集了超过 30000张图片，50 类和 85 个 semantic attributes，并提出了 DAP (直接属性预测，通过数据预测属性) 和 IAP (间接属性预测，属性层作为中间层) 两种方法。</p>
+<p>基于词向量的学习方法和基于属性类似，利用 <a href="https://en.wikipedia.org/wiki/Word2vec">Word2vec</a> 例如 <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a>、<a href="https://iksinc.online/tag/continuous-bag-of-words-cbow/">CBOW</a> 或 Skip-Gram 等模型 one hot 编码词语，获得 Word Emmbedding，语义相近的词语在投影上越接近。这样做的好处是不用像 Attribute-Based 方法一样标注每一个类别 (属性标注对最后结果影响很大)。</p>
+<p>目前国人在 Zero Shot Learning 这个方向的研究走的很前，每年 CVPR，ECCV 等会议基本上都会有十几篇这个方向的文章。我认为 Zero Shot Learnin 还是一个非常有研究价值和前景的方向的，毕竟在这个世界物品种类繁多，就算 IMAGENET 也只有两千类，不可能涵盖整个世界，要收集到更多的数据也是一个非常庞大的工作。除了分类之外，Zero Shot Learning 还可以扩展到零样本的物体检测，例如在 <a href="https://arxiv.org/abs/1804.04340">Zero-Shot Object Detection ECCV 2018</a> 就划分了 MSCOCO 来做零样本检测，是一个非常新颖的方向。</p>
+<p>这个方向还是非常有研究价值的。</p>
+<p>目前 Zero Shot Learning 提出的方法很多，还需要后续多阅读文章。</p>
+<h4 id=数据集-benchmark->数据集 (benchmark)</h4>
+<ul>
+<li><a href="https://cvml.ist.ac.at/AwA/">AwA</a>: This dataset provides a plattform to benchmark <strong>transfer-learning</strong> algorithms, in particular <strong>attribute base classification</strong>. It consists of <strong>30475</strong> images of <strong>50</strong> animals classes with <strong>six</strong> pre-extracted feature representations for each image. The animals classes are aligned with Osherson&#39;s classical class/attribute matrix, thereby providing <strong>85</strong> numeric attribute values for each class. Using the shared attributes, it is possible to transfer information between different classes. 50 类动物，30475 张图片，85 个数值属性，由于版权问题已不提供。</li>
+<li><a href="https://cvml.ist.ac.at/AwA2/">AwA2</a>: 和 AwA 相似，50 类动物，37322 张图片，每张图片有预提取得特征，每类提供 85 个数值属性值。</li>
+<li><a href="http://www.vision.caltech.edu/visipedia/CUB-200.html">Caltech-UCSD Birds 200</a>: 200 类鸟，6033 张图片，288 个属性，每张图片标注属性是否存在以及属性表现的程度，例如 Probably、Definitely、Guessing。也包括 Bounding Box、Segmentation 的标注。</li>
+<li><a href="http://www.vision.caltech.edu/visipedia/CUB-200-2011.html">Caltech-UCSD Birds-200-2011</a>: 扩充了 CUB-200。</li>
+</ul>
+<h4 id=中文链接>中文链接</h4>
+<ul>
+<li><a href="https://www.jiqizhixin.com/technologies/d3a2c2a7-0181-4bfe-ac33-540f12116dbf">零样本学习 One/zero shot learning 机器之心</a></li>
+<li><a href="https://baike.baidu.com/item/%E9%9B%B6%E6%A0%B7%E6%9C%AC%E5%AD%A6%E4%B9%A0/22448231">零样本学习_百度百科</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650739772&amp;idx=5&amp;sn=7be3ddaef15686974df6bb9cfcb49466&amp;chksm=871ad042b06d595499e663b25f6d5d743af4cccc195ab69f47eb4a0829330778b8dc586d1f05&amp;scene=21#wechat_redirect">CVPR 2018 | 中国科学院大学Oral论文：使用鉴别性特征实现零样本识别</a></li>
+<li><a href="https://blog.csdn.net/qq_24305433/article/details/79950735">通过对比实现少样本或零样本学习Learning to Compare: Relation Network for Few-Shot Learning</a></li>
+<li><a href="https://blog.csdn.net/Liangjun_Feng/article/details/82026574">DeepLearning | Zero Shot Learning 零样本学习</a></li>
+<li><a href="http://www.sohu.com/a/232858182_473283">CVPR 2018：阿里提出新零样本学习方法，有效解决偏置问题</a></li>
+</ul>
+<h4 id=相关论文>相关论文</h4>
+<ul>
+<li><a href="https://arxiv.org/abs/1711.06025">Learning to Compare: Relation Network for Few-Shot Learning CVPR2018</a>，<a href="https://github.com/floodsung/LearningToCompare_FSL">Github</a></li>
+<li><a href="https://arxiv.org/abs/1803.06731">Discriminative Learning of Latent Features for Zero-Shot Recognition CVPR 2018 (Oral)</a></li>
+<li><a href="https://arxiv.org/abs/1703.04394">Zero-Shot Learning - The Good, the Bad and the Ugly CVPR 2017</a></li>
+<li><a href="https://arxiv.org/abs/1707.00600">Zero-Shot Learning - A Comprehensive Evaluation of the Good, the Bad and the Ugly TPAMI 2018</a> 和上面这篇一样</li>
+<li><a href="https://ieeexplore.ieee.org/document/6571196">Attribute-Based Classification for Zero-Shot Visual Object Categorization TPAMI 2013</a></li>
+<li><a href="https://arxiv.org/abs/1611.05088">Learning a Deep Embedding Model for Zero-Shot Learning</a>, <a href="https://github.com/dragen1860/DeepEmbeddingModel_ZSL-Pytorch">GitHub</a></li>
+<li><a href="https://arxiv.org/abs/1803.08035">Zero-shot Recognition via Semantic Embeddings and Knowledge Graphs</a>, <a href="https://github.com/JudyYe/zero-shot-gcn">Github</a></li>
+</ul>
+<h3 id=hand-pose-estimation>Hand Pose Estimation</h3>
+<p>Hand Pose Estimation (手部姿态估计) 是 Pose Estimation 的一个分支。Pose Estimation 包括躯干、手部、脸部的姿态估计，主要是预测脸部、手部等等的关键点。</p>
+<p>在 Pose Estimation 上有很多非常惊艳的工作，例如 CMU Perceptual Computing Lab 开源的 <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">openpose</a> 姿态估计框架，上海交大的卢策武团队在姿态估计方面也做的很强，开源了一个类似的框架 <a href="https://github.com/MVIG-SJTU/AlphaPose">AlphaPose</a>。openpose 由三篇 CVPR 的文章实现，具体到细节好像不是分别实现的，我没有研究过源码也不是很清楚。其中 Body Pose Estimation 的实现是基于 <a href="https://github.com/ZheC/Realtime_Multi-Person_Pose_Estimation">Realtime Multi-Person Pose Estimation</a>，我曾经使用过另一个框架实现过，现在还挂在作者的相关链接当中。</p>
+<p>手势识别是一个分类任务，具体到某个手势是那种手势，和 Hand Pose Estimation 完全不同；传统的 CV 方法实现手势姿态估计方法也有很多，我以前就使用 opencv 实现过一个手部估计，利用肤色分割手部，原理非常之简单，暂且不提。</p>
+<p>Hand Pose Estimation 不同于 Body Pose Estimation 和 Face Recognition，有以下几个难点:</p>
+<ul>
+<li>手部相对于人脸、躯干非常小</li>
+<li>手与其它对象交互、手被遮挡、多视角。人脸很难变化，而手部会更加立体，比躯体和脸部更加容易被遮挡。</li>
+</ul>
+<p>当前 Hand Pose Estimation 有两种方法，一种是基于深度摄像机 (RGBD 图片) 的识别，这方面的论文很多，方法也很多；另一种是基于普通的 RGB 图片，比较难做到。</p>
+<p>讨论到普通 RGB 图片，在 <a href="https://arxiv.org/abs/1704.07809">Hand Keypoint Detection in Single Images using Multiview Bootstrapping CVPR 2017</a> 第一个提出了对普通 RGB 图片做姿态估计的方法。这篇文章的核心思想是：作者从 <a href="http://human-pose.mpi-inf.mpg.de/">MPII</a>、<a href="https://nzsl.vuw.ac.nz/">NZSL</a> 挑选并标注了手的关键点数据，作为 $\mathcal{T}_0$，然后训练出一个 weak detector 作为 $\mathcal{d}_0$，$\mathcal{d}_0$ 因为数据量小检测效果不会很好。然后一直迭代，通过多角度 (即多个摄像头的多个角度，并且未标注)自举出许多带有标注的数据。自举的方法是如果一个时间点，超过两个角度检测出同一个关键点，则通过检测出来的点 triangulated 出三维数据，并以此可以推出其他检测失败的角度的点，最后生成许多标注的数据。这篇文章的关键点在于 <strong>Multiview</strong> 和 <strong>Bootstrapping</strong>，一步一步 refine 整个模型。</p>
+<p>一个非常令人惊艳的工作，最后成功使用到了 <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">openpose</a> 的手部关键点检测上，不过我认为一个缺陷在于需要使用另一个模型做 Hand Bounding Box Detection，当然这是用在 openpose 可以取得更好结果。</p>
+<p>基于普通 RGB 的 Hand Pose Estimation 是一个比较新颖的方向，以前很少有人做，因为相对于躯干和脸部、基于深度图片的方法，难度会更大，因为手部的立体和小，数据量也很难提高。当然这是一个非常值得开拓和深入的方向，重要性不亚于 Body Pose Estimation。</p>
+<h4 id=数据集>数据集</h4>
+<p>手部数据集很少，尤其具体到手部 RGB 图片的关键点数据集只有一个。</p>
+<ul>
+<li><a href="http://cvrr.ucsd.edu/vivachallenge/index.php/hands/hand-detection/">VIVA Hand Detection</a>: 驾驶车辆时的手部边框。</li>
+<li><a href="http://www.robots.ox.ac.uk/~vgg/data/hands/">Hand Dataset by Arpit Mittal, Andrew Zisserman and Phil Torr</a>: 从很多公开数据集收集到的图片，标注了手腕方向的边框 (非水平)。</li>
+<li><a href="http://vision.soic.indiana.edu/projects/egohands/">EgoHands</a>: 像素级别的手部分割数据集。</li>
+<li><strong><a href="http://domedb.perception.cs.cmu.edu/handdb.html">CMU Hand Database</a></strong>: 手部、头部、躯干的 RGB 图片关键点标注、合成数据、多角度数据，demo 太惊艳！</li>
+</ul>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-03-ex2_2.flv_000094_r.jpg">
+</div>
+
+<p>接下来是 RGBD 数据集，RGBD 一般由深度摄像机录制的 benchmark 数据集 (主要是 Kinect)，而且普遍数据量很大。</p>
+<ul>
+<li><a href="https://cims.nyu.edu/~tompson/NYU_Hand_Pose_Dataset.htm">NYU Hand Pose Dataset</a></li>
+<li><a href="https://labicvl.github.io/hand.html">ICVL Hand Posture Dataset</a></li>
+<li><a href="https://github.com/geliuhao/CVPR2016_HandPoseEstimation/issues/4">MSRA</a></li>
+</ul>
+<h4 id=链接>链接</h4>
+<ul>
+<li><a href="https://github.com/xinghaochen/awesome-hand-pose-estimation/tree/master/evaluation">awesome-hand-pose-estimation</a>: 包含了基于深度方法的文章和其相应的结果。</li>
+<li><a href="https://blog.csdn.net/MyArrow/article/details/51933651">手势估计- Hand Pose Estimation</a></li>
+</ul>
+<h4 id=论文>论文</h4>
+<ul>
+<li><a href="https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Supancic_Depth-Based_Hand_Pose_ICCV_2015_paper.html">Depth-based hand pose estimation: data, methods, and challenges ICCV 2015</a>: Depth-based 综述，介绍了数据集及对比现有方法。</li>
+<li><a href="https://arxiv.org/abs/1704.07809">Hand Keypoint Detection in Single Images using Multiview Bootstrapping CVPR 2017</a></li>
+</ul>
+<h3 id=handwritten-mathmatical-expression-recognition>Handwritten Mathmatical Expression Recognition</h3>
+<p>Handwritten Mathmatical Expression Recognition 指的是手写体数学公式的识别，具体到某一个应用，主要是将手写体数学公式转为 LaTex 或者 MathType 等，在这里讨论手写体转 LaTex 公式。</p>
+<p><a href="https://en.wikipedia.org/wiki/LaTeX">LaTeX</a> 是一种类似于 HTML 的标记语言，最大的应用就是用来写论文，在排版、尤其是数学公式的书写上优于 Mirosoft Word。而 LaTeX 书写数学公式 <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX/Mathematics</a>，有一定语法，后台渲染出数学公式。很多论文或者博客的数学公式都是使用 LaTeX 书写的，在公式上 LaTeX 是独一无二的。</p>
+<p>例如将此图片转为 LaTex 公式:</p>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-04-69.jpg" />
+</div>
+
+<p>为 <code>n=\sum_{i\ne d}a_i L^i</code>。</p>
+<p>通常这个方向使用的数据是 ink 格式，保存了点书写的顺序和坐标。</p>
+<p>手写体数学公式识别主要有两个重点：1. symbol recognition; 2. structural analysis。两个问题根据解决的顺序有两种方法解决，一种是 sequential 方法 和 global 方法。</p>
+<ul>
+<li><p>sequential 方法首先识别和分割数学符号，然后以此在构建出数学公式的二维结构。这种方法如果在识别时发生错误，那么在第二阶段会继承这些错误。</p>
+</li>
+<li><p>global 方法同时识别符号和二维结构，符号的分割结果只是转化数学公式的副产物。</p>
+</li>
+</ul>
+<p>以上是两种基本思路，其中 grammar-based 方法取得了很好的结果，但是需要提供额外的先验知识 (LaTex 语法)。</p>
+<p>在 <a href="http://home.ustc.edu.cn/~xysszjs/paper/PR2017.pdf">WAP</a> 这篇文章中采用了 encoder-decoder 模型，encoder 使用 CNN (特别的是 FCN 对不同输入大小) 对图片进行编码，输出每一个符号的 feature map。decoder 采用了 RNN 的改进 GRU (the GRU state dimension of the parser is 256, and the embedding dimension is 256)。这种方法不需要提供先验知识，而且在 ICFHR 取得了 state of art 的结果。</p>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-05-Screen%20Shot%202018-11-05%20at%201.09.37%20PM.png" />
+</div>
+
+<p>同一个作者后来在 arxiv 发表了一篇预印本 <a href="https://arxiv.org/abs/1801.03530">Multi-Scale Attention with Dense Encoder for Handwritten Mathematical Expression Recognition</a>，将 FCN 替换成 DenseNet，采用 Multi-Scale Attention Model 避免 pooling 的影响，取得比上一篇文章更好的结果。</p>
+<p>这个方向只是文本识别的一个特定应用，举个例子，在 iOS App Store 有一款应用叫 MathPad，识别手写公式并导出 MathType 或者 LaTex 代码。这是一个非常有趣的方向，在这方面的工作也很多，有待于更进一步调查。这个方向通常发表在 Pattern Recognition 或者 International Conference on Document Analysis and Recognition，也是一个值得研究的方向。</p>
+<h4 id=数据集>数据集</h4>
+<p>目前只能找到一个数据集，但是已经举办过很多年了。</p>
+<ul>
+<li><a href="http://tc11.cvc.uab.es/datasets/ICFHR-CROHME-2016_1">ICFHR 2016 dataset</a>: 合并了前几年比赛的数据集，有超过 12K 的手写数学公式 (来自 wikipidia)。</li>
+</ul>
+<h4 id=论文>论文</h4>
+<ul>
+<li><a href="http://home.ustc.edu.cn/~xysszjs/paper/PR2017.pdf">Watch, attend and parse: An end-to-end neural network based approach to handwritten mathematical expression recognition, Pattern Recognition 2017</a>, <a href="https://github.com/JianshuZhang/WAP">GitHub</a>: 作者是成电一位博士生，Theano 实现。</li>
+</ul>
+<h3 id=meteorological-prediction>Meteorological prediction</h3>
+<p>是否可能使用机器学习做天气预报?</p>
+<ol>
+<li>天气是怎么产生的: 真正的天气预报不是靠机器学习学出来的，而是靠物理模型推算出来，物理模型就是数值天气预报，比如全球模式美国的GFS，欧洲的EC。这些模型都是带有时间的偏微分方程组，通过求解积分这些偏微分方程组得到预报结果。当然，求解出来的预报结果和实际情况会有一定的偏差。但是总体宏观情况基本一致。有点像量子力学和经典物理学，宏观可以准确描述，微观就无法准确观测到。</li>
+<li>机器学习在天气预报中的作用: 机器学习仅仅能解决的问题就是在数值模式产生出预报结果后，进行偏差订正。寻找出数值预报模式与实况观测直接的误差规律，从而让预报更佳准确。但是目前没有一种方法能统治整个偏差订正。每种方法都各有优缺点。</li>
+</ol>
+<p>回波图: 通过模型对回波强度的移动趋势进行预测，进而对部分天气现象进行预测。其实也就是预报员常用的“外推法”的机器版。<a href="http://www.caiyunapp.com/">彩云天气</a> 目前主要是利用国家气象局网站上的雷达图进行扣图，这种方法对于天气系统的发展趋势的预报效果一般比较准确。但是如果只是用回波图外推做天气预测可能有失偏颇，毕竟天气也和温度、湿度、光照等等有关，回波图只是反映的云层内的含水量的分布，对整体天气预报还需要加上其他因素的影响。</p>
+<p>例如知乎提及的:</p>
+<blockquote>
+<p>比如说5月7日的广州突发的暴雨。在事先没有回波的前提下，这种机器学习模式是不会预报出会产生大量强回波的。只有在产生回波之后，才会预报出后面回波的走势和发展。但是这种天气一旦产生了回波，那就是已经开始了暴雨。因此，对于强对流天气的发生，机器学习模式还是存在一定问题的。</p>
+</blockquote>
+<p>所以这是一个很大的问题，如果只是做回波图外推，有一定意义但是不是最终目标。</p>
+<p>所以气象预测有以下难点:</p>
+<ul>
+<li>数据难以收集和整理，<a href="http://data.cma.cn/">中国气象数据网</a> 提供或共享一部分科研数据，包括雷达、地面气象站等检测到的数据。但这些数据如何整理，如何真正用到计算机当中，那就是下一个问题了。一部分数据确实如何做？数据量不够如何做？</li>
+<li>跨学科知识，单纯把数据拿到网络里 train 一遍是不可能有很好的理论基础的，所以如何解释清晰，只能两个方向都有一定的认识，这是一个比较难的地方。我本科的时候做医学图像，就认识到不可能只会计算机，而需要了解交叉学科的知识并运用。但是如果跨度太大，其实是一件非常痛苦的事情。</li>
+<li>完成回波图外推，加上其他的数据，和传统数值预测相比优势在哪里，在传统方法已经准确度很高的情况下，如何取得更好地结果，意义是什么？</li>
+<li>对于上文提到的突发天气如何解决，如何提高模型的鲁棒性？</li>
+<li>每时每刻收集得到的气象数据量非常大，如何解决。</li>
+<li>对于不同地域，不同气候条件，经纬度等等如何，如何提高模型的鲁棒性？</li>
+</ul>
+<p><a href="https://www.semanticscholar.org/paper/Convolutional-LSTM-Network%3A-A-Machine-Learning-for-Shi-Chen/4a861d29f36d2e4f03477c5df2730c579d8394d3">Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting NIPS 2015</a> 这篇文章当中提出 ConvLSTM，将 CNN 与 LSTM 在模型底层结合，并且将 FC-LSTM 中 input-to-state 和 state-to-state 部分由前馈式计算替换成卷积的形式，使其更好地捕捉时空相关性和去除数据冗余。</p>
+<h4 id=链接>链接</h4>
+<ul>
+<li><a href="https://www.zhihu.com/question/34318188">如何用机器学习进行天气预报?</a></li>
+<li><a href="http://www.caiyunapp.com/">彩云天气</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/40712680">卷积长短时记忆神经网络（ConvLSTM） 雷达回波图像外推</a></li>
+</ul>
+<h4 id=论文>论文</h4>
+<ul>
+<li><a href="https://www.semanticscholar.org/paper/Convolutional-LSTM-Network%3A-A-Machine-Learning-for-Shi-Chen/4a861d29f36d2e4f03477c5df2730c579d8394d3">Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting NIPS 2015</a></li>
+</ul>
+<h3 id=face-age-esitmation>Face Age Esitmation</h3>
+<h4 id=数据集>数据集</h4>
+<ul>
+<li><a href="https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/">IMDB-WIKI – 500k+ face images with age and gender labels</a></li>
+</ul>
+<h4 id=链接>链接</h4>
+<ul>
+<li><a href="https://www.zhihu.com/question/40340332">人脸识别是如何判断性别和年龄的？</a></li>
+</ul>
+<h4 id=论文>论文</h4>
+<ul>
+<li><a href="https://ieeexplore.ieee.org/abstract/document/7736925">How Transferable Are CNN-Based Features for Age and Gender Classification?</a></li>
+</ul>
+
+        </div>
+    </div>
+</body>
+</html>
