@@ -11,6 +11,19 @@ pre {
     font-size: 20px;
 }
 
+img {
+    max-width: 600px;
+}
+
+html, body{
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    background-color: white;
+}
+
 html body {
     font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;
     font-size:16px;
