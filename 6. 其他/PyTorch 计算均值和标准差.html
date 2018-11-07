@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
     <link rel="stylesheet" href="../static/css/site.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
@@ -22,12 +22,11 @@
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </head>
 </head>
-<body >
-    <div class="container">
+<body for="html-export">
+    <div class="mume markdown-preview markdown-body">
         <div class="homepage">
             <a href="/">主页</a>
         </div>
-        <div class="markdown-body " id="content">
             <p>在pytorch计算均值、标准差对数据进行归一化，只需加载每一个batch之后在计算一个均值即可。</p>
 <pre><code class="python">from skimage import io, transform
 import torch
@@ -71,7 +70,6 @@ print(pop_mean, pop_std0)</code></pre>
     transforms.Normalize((0.4814507, 0.44941443, 0.3985094), (0.2703836, 0.2638982, 0.27239165))
 ])</code></pre>
 
-        </div>
     </div>
 </body>
 </html>

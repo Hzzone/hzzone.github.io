@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
     <link rel="stylesheet" href="../static/css/site.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
@@ -22,12 +22,11 @@
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </head>
 </head>
-<body >
-    <div class="container">
+<body for="html-export">
+    <div class="mume markdown-preview markdown-body">
         <div class="homepage">
             <a href="/">主页</a>
         </div>
-        <div class="markdown-body " id="content">
             <p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a>
 Data-Driven Approach，数据驱动方法</p>
 <h2 id=参考资料>参考资料</h2>
@@ -76,7 +75,6 @@ Data-Driven Approach，数据驱动方法</p>
 <p>当然也会有测试集代表性不佳，不能很好的反映真实世界。数据创建者，一次性用同样的方法收集大量数据，然后随机分成训练集、测试集。</p>
 <p>有一种陷阱是刚开始收集的数据作为训练集，后面收集的是测试集，然后两者之间可能会存在偏差。但只要整个数据集的划分是随机的，就可以避免。</p>
 
-        </div>
     </div>
 </body>
 </html>
