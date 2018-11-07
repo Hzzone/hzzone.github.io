@@ -1,5 +1,7 @@
+.idea
 build/
 node_modules/
 package-lock.json
 resource/
 .idea
+__pycache__
