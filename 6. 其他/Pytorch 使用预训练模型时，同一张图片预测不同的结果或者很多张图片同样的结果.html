@@ -53,6 +53,10 @@ pred = torch.argmax(prob, dim=1)</code></pre>
 具体原因在<a href="https://discuss.pytorch.org/t/pretrained-resnet-constant-output/2760">Pretrained resnet constant output</a>有解释：</p>
 <p>因为<code>BatchNorm</code>和<code>Dropout</code>是随机的，会导致每次运行都不一致，所以在传递输入之前，需要切换至<code>model.eval()</code>进行预测。或者使用<code>model.train()</code>来进行训练。</p>
 
+        <script data-isso="https://hzzone.io/isso"
+        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+<section id="isso-thread"></section>
     </div>
 </body>
 </html>
