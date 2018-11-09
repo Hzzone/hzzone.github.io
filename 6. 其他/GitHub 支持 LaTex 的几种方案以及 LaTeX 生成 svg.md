@@ -62,11 +62,7 @@ GitHub 因为安全问题不支持引入 js、css 文件，也不支持 `<script
 将 LaTex 公式转 SVG 图片，有几种方法，转其他格式的图片可以使用其他的 API:
 * codecogs API
 
-访问有限制，需要额外的错误控制。请求、生成一张图片总共花费大概 ~2s，效果如下:
-
-<div align="center">
-    <img src="images/codecogs.svg" height="16px"/>
-</div>
+访问有限制，需要额外的错误控制。请求、生成一张图片总共花费大概 ~2s，效果如下。
 
 * tex2svg
 
@@ -83,11 +79,7 @@ npm install --global https://github.com/mathjax/mathjax-node-cli.git
 ```shell
 tex2svg '\sin^2{\theta} + \cos^2{\theta} = 1' > mathjax.svg
 ```
-花费 ~2s，比 codecogs 略长，效果如下:
-
-<div align="center">
-    <img src="images/mathjax.svg" height="16px"/>
-</div>
+花费 ~2s，比 codecogs 略长。
 
 * latex 和 dvisvgm
 
@@ -123,19 +115,11 @@ time dvisvgm --no-fonts test.dvi test.svg
 ...
 dvisvgm --no-fonts test.dvi test.svg  0.19s user 0.01s system 93% cpu 0.211 total
 ```
-这种方法最长也就 ~0.2s，比上面两种短的多得多，效果如图:
-
-<div align="center" style="height: 16px;">
-    <img src="images/dvisvgm.svg" height="16px"/>
-</div>
+这种方法最长也就 ~0.2s，比上面两种短的多得多。
 
 * pdflatex 和 inkscape
 
-未测试，和上一种方法时间上差不多，但是看生成的 pdf 比较好看，没有导出 svg，pdf 效果如下:
-
-<div align="center" style="height: 16px;">
-    <img src="images/pdflatex.jpg" height="16px"/>
-</div>
+未测试，和上一种方法时间上差不多，但是看生成的 pdf 比较好看，没有导出 svg。
 
 * svg to png
 
