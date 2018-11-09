@@ -91,5 +91,3 @@ para:
 
 example: 
 * https://api.douban.com/v2/movie/in_theaters?city=成都&start=0&count=10
-
-# 参考[豆瓣电影API](https://developers.douban.com/wiki/?title=movie_v2 "豆瓣电影API")#
