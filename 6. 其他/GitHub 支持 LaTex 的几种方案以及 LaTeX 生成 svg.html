@@ -82,11 +82,7 @@
 <ul>
 <li>codecogs API</li>
 </ul>
-<p>访问有限制，需要额外的错误控制。请求、生成一张图片总共花费大概 ~2s，效果如下:</p>
-<div align="center">
-    <img src="images/codecogs.svg" height="16px"/>
-</div>
-
+<p>访问有限制，需要额外的错误控制。请求、生成一张图片总共花费大概 ~2s，效果如下。</p>
 <ul>
 <li>tex2svg</li>
 </ul>
@@ -95,11 +91,7 @@
 <pre><code class="shell">npm install --global https://github.com/mathjax/mathjax-node-cli.git</code></pre>
 <p>转换一个公式:</p>
 <pre><code class="shell">tex2svg &#39;\sin^2{\theta} + \cos^2{\theta} = 1&#39; &gt; mathjax.svg</code></pre>
-<p>花费 ~2s，比 codecogs 略长，效果如下:</p>
-<div align="center">
-    <img src="images/mathjax.svg" height="16px"/>
-</div>
-
+<p>花费 ~2s，比 codecogs 略长。</p>
 <ul>
 <li>latex 和 dvisvgm</li>
 </ul>
@@ -124,19 +116,11 @@ latex test.tex  0.20s user 0.03s system 87% cpu 0.264 total</code></pre>
 <pre><code class="shell">time dvisvgm --no-fonts test.dvi test.svg
 ...
 dvisvgm --no-fonts test.dvi test.svg  0.19s user 0.01s system 93% cpu 0.211 total</code></pre>
-<p>这种方法最长也就 ~0.2s，比上面两种短的多得多，效果如图:</p>
-<div align="center" style="height: 16px;">
-    <img src="images/dvisvgm.svg" height="16px"/>
-</div>
-
+<p>这种方法最长也就 ~0.2s，比上面两种短的多得多。</p>
 <ul>
 <li>pdflatex 和 inkscape</li>
 </ul>
-<p>未测试，和上一种方法时间上差不多，但是看生成的 pdf 比较好看，没有导出 svg，pdf 效果如下:</p>
-<div align="center" style="height: 16px;">
-    <img src="images/pdflatex.jpg" height="16px"/>
-</div>
-
+<p>未测试，和上一种方法时间上差不多，但是看生成的 pdf 比较好看，没有导出 svg。</p>
 <ul>
 <li>svg to png</li>
 </ul>
