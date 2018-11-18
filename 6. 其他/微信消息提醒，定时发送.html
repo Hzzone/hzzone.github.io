@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/CommonHTML"]
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body for="html-export">
+    <div class="mume markdown-preview markdown-body">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+            <h2 id=微信消息提醒-定时发送>微信消息提醒，定时发送</h2>
+<h3 id=参考>参考</h3>
+<ul>
+<li><img src="https://github.com/youfou/wxpy" alt="wxpy"></li>
+</ul>
+<p>六点以后定时发送消息，每隔二十分钟发送一次，发送失败是发给文件助手。</p>
+<h3 id=代码>代码</h3>
+<pre><code class="python">from wxpy import *
+import time
+from threading import Timer
+# 初始化机器人，扫码登陆
+bot = Bot(qr_path=&#39;./QRcode.jpg&#39;)
+# bot = Bot(console_qr=True)
+
+def sendMessage():
+    global bot
+    if bot==None: print(&#39;...&#39;)
+    try:
+        girlfriend = bot.friends().search(&#39;黄太太&#39;)[0]
+        start_time = 600
+        local_time = int(time.strftime(&quot;%H%M&quot;, time.localtime())) # 时分
+        intervel = local_time-start_time
+        if intervel&gt;0 and intervel%20==0:
+            girlfriend.send(&#39;这是一条自动消息哦，六点半以后二十分钟发一次，我明早上可能起得晚，不要嫌烦啦，\n一定要记得带坐垫啊，我爱你，你真是我的小傻瓜，我爱你，超级超级爱你！&#39;)
+        t = Timer(60, sendMessage)
+        t.start()
+    except:
+        bot.file_helpe.send(u&#39;消息发送失败&#39;)
+
+if __name__ == &quot;__main__&quot;:
+    sendMessage()
+    embed()</code></pre>
+
+        <script data-isso="https://hzzone.io/isso"
+        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+        <section id="isso-thread" style="padding-bottom: 20px;"></section>
+    </div>
+<script>
+(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
+;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
+;c.parentNode.insertBefore(a,c)
+})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+
+galite('create', 'UA-128984734-1', 'auto');
+galite('send', 'pageview');
+</script>
+</body>
+</html>
