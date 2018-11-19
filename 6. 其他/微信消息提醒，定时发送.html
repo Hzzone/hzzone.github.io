@@ -33,7 +33,7 @@
             <h2 id=微信消息提醒-定时发送>微信消息提醒，定时发送</h2>
 <h3 id=参考>参考</h3>
 <ul>
-<li><img src="https://github.com/youfou/wxpy" alt="wxpy"></li>
+<li><a href="https://github.com/youfou/wxpy">wxpy</a></li>
 </ul>
 <p>六点以后定时发送消息，每隔二十分钟发送一次，发送失败是发给文件助手。</p>
 <h3 id=代码>代码</h3>
@@ -48,12 +48,12 @@ def sendMessage():
     global bot
     if bot==None: print(&#39;...&#39;)
     try:
-        girlfriend = bot.friends().search(&#39;黄太太&#39;)[0]
+        girlfriend = bot.friends().search(&#39;&#39;)[0]
         start_time = 600
         local_time = int(time.strftime(&quot;%H%M&quot;, time.localtime())) # 时分
         intervel = local_time-start_time
         if intervel&gt;0 and intervel%20==0:
-            girlfriend.send(&#39;这是一条自动消息哦，六点半以后二十分钟发一次，我明早上可能起得晚，不要嫌烦啦，\n一定要记得带坐垫啊，我爱你，你真是我的小傻瓜，我爱你，超级超级爱你！&#39;)
+            girlfriend.send(&#39;&#39;)
         t = Timer(60, sendMessage)
         t.start()
     except:
