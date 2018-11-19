@@ -91,3 +91,13 @@ para:
 
 example: 
 * https://api.douban.com/v2/movie/in_theaters?city=成都&start=0&count=10
+
+14. 获取电影评论 (包括评分)
+
+url: https://api.douban.com/v2/movie/subject/:id/comments
+
+para:
+* start: 数据的开始项
+* count: 单页条数
+* apikey: 申请的 api key"
+* id: 电影 id
