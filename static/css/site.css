@@ -11,6 +11,10 @@ pre {
     font-size: 20px;
 }
 
+video {
+    width: 100%;
+}
+
 html, body{
     height: 100%;
 }
