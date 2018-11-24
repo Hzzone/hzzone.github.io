@@ -71,10 +71,7 @@
 <pre><code class="python">import numpy as np
 import matplotlib.pyplot as plt
 X = np.linspace(-10, 10, 10000)</code></pre>
-<ul>
-<li><h4 id=sigmoid>Sigmoid</h4>
-</li>
-</ul>
+<h4 id=sigmoid>Sigmoid</h4>
 <p>$$\sigma ( x ) = \frac { 1 } { 1 + e ^ { - x } }$$</p>
 <pre><code class="python">Y = 1/(1+np.exp(-X))
 plt.plot(X, Y)
@@ -86,15 +83,11 @@ plt.show()</code></pre>
 <p>答案是 <strong>Always all positive or all negative :( (this is also why you want zero-mean data!)</strong> 在<strong>非零为中心</strong>中解答。</p>
 <p>Sigmoid 面临的问题是:</p>
 <ul>
-<li><p>饱和是梯度消失，当输入过大或过小，输出都接近于 1，这是导致导数接近于 0，因此出现梯度消失。所以 Sigmoid 对零附近的输入最敏感。</p>
-</li>
-<li><p>非零为中心。$sigmoid(x)$ 的值域为 $(-1, 1)$，会发现 Sigmoid 的导数一定大于 0，通过上面的梯度计算公式，如果一直 $x_i&gt;0$ 或 $x_i&lt;0$，会出现 $w$ 一直为正或者负。</p>
-</li>
-<li><p>指数计算复杂。</p>
-</li>
-<li><h4 id=tanh>tanh</h4>
-</li>
+<li>饱和是梯度消失，当输入过大或过小，输出都接近于 1，这是导致导数接近于 0，因此出现梯度消失。所以 Sigmoid 对零附近的输入最敏感。</li>
+<li>非零为中心。$sigmoid(x)$ 的值域为 $(-1, 1)$，会发现 Sigmoid 的导数一定大于 0，通过上面的梯度计算公式，如果一直 $x_i&gt;0$ 或 $x_i&lt;0$，会出现 $w$ 一直为正或者负。</li>
+<li>指数计算复杂。</li>
 </ul>
+<h4 id=tanh>tanh</h4>
 <p>$$\tanh ( x )=\frac { e ^ { x } - e ^ { - x } } { e ^ { x } + e ^ { - x } }$$</p>
 <pre><code class="python">Y = np.tanh(X)
 plt.plot(X, Y)
@@ -105,10 +98,7 @@ plt.show()</code></pre>
 <p>对 tanh 求导可得:</p>
 <p>$$\sigma&#39; ( x )= \frac { 4 } { \left( e ^ { x } + e ^ { - x } \right) ^ { 2 } }$$</p>
 <p>tanh 虽然满足 zero centered，关于原点对称，但是饱和时，仍然会出现梯度消失（梯度接近于 0），而且指数计算复杂。</p>
-<ul>
-<li><h4 id=relu-rectified-linear-unit->ReLU(Rectified Linear Unit)</h4>
-</li>
-</ul>
+<h4 id=relu-rectified-linear-unit->ReLU(Rectified Linear Unit)</h4>
 <p>$$\max ( 0 , x )$$</p>
 <pre><code class="python">Y = np.maximum(0, X)
 plt.plot(X, Y)
@@ -128,10 +118,7 @@ plt.show()</code></pre>
 <li>当 $x&lt;0$，通过上面的梯度公式，梯度直接为 0，也就是梯度消失。即 ReLU 不会被激活，不会更新参数。</li>
 </ul>
 <p>需要注意的是，<strong>ReLU 不能配合 Xavier 初始化使用</strong>，这个希望能在权重初始化中介绍。</p>
-<ul>
-<li><h4 id=leaky-relu>Leaky ReLU</h4>
-</li>
-</ul>
+<h4 id=leaky-relu>Leaky ReLU</h4>
 <p>$$
 f ( x ) = \max ( 0.01 x , x )
 $$</p>
@@ -141,18 +128,12 @@ plt.grid()
 plt.show()</code></pre>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-output_46_0.png" alt=""></p>
 <p>ReLU 加上一点正的偏置就是 Leaky ReLU 了，通常用在 GAN 中。优势和面临的问题和 ReLU 一样，<strong>但重要的是 Leaky ReLU 解决了 ReLU 的梯度消失问题，当 $x&lt;0$，梯度不会消失。</strong></p>
-<ul>
-<li><h4 id=parametric-rectifier-prelu->Parametric Rectifier (PReLU)</h4>
-</li>
-</ul>
+<h4 id=parametric-rectifier-prelu->Parametric Rectifier (PReLU)</h4>
 <p>$$
 f ( x ) = \max ( \alpha x , x )
 $$</p>
 <p>PReLU 将 Leaky ReLU 的偏置设为超参，$\alpha$ 需要优化，当 $\alpha=0.01$ 时就是 Leaky ReLU。反向传播的时候会出现 $\alpha$ 更新权重。</p>
-<ul>
-<li><h4 id=exponential-linear-units-elu->Exponential Linear Units (ELU)</h4>
-</li>
-</ul>
+<h4 id=exponential-linear-units-elu->Exponential Linear Units (ELU)</h4>
 <p>$$
 f ( x ) = \left\{ \begin{array} { l l } { x } &amp; { \text { if } x &gt; 0 } \\\ { \alpha ( \exp ( x ) - 1 ) } &amp; { \text { if } x \leq 0 } \end{array} \right.
 $$</p>
@@ -165,17 +146,12 @@ plt.grid()
 plt.show()</code></pre>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-output_53_0.png" alt=""></p>
 <ul>
-<li><p>ReLU 的所有优势。</p>
-</li>
-<li><p>改进之处是近似于 zero mean。</p>
-</li>
-<li><p>$x$ 非常小时，出现饱和。</p>
-</li>
-<li><p>指数计算复杂</p>
-</li>
-<li><h4 id=maxout>Maxout</h4>
-</li>
+<li>ReLU 的所有优势。</li>
+<li>改进之处是近似于 zero mean。</li>
+<li>$x$ 非常小时，出现饱和。</li>
+<li>指数计算复杂</li>
 </ul>
+<h4 id=maxout>Maxout</h4>
 <p>$$
 \max \left( w _ { 1 } ^ { T } x + b _ { 1 } , w _ { 2 } ^ { T } x + b _ { 2 } \right)
 $$</p>
