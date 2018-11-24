@@ -54,19 +54,15 @@
 <li>非线性（应该也可以是线性的，但没有意义）</li>
 <li>可微（通俗点就是可以求导，梯度下降时需要）</li>
 </ul>
-<p>激活函数当然很好，但是使用激活函数时也面临两个问题：</p>
-<ul>
-<li>梯度消失</li>
-<li>梯度饱和</li>
-</ul>
+<p>激活函数当然很好，但是使用激活函数时也面临一个问题：梯度消失，也就是激活函数梯度接近于 0。</p>
 <p>对于梯度下降法不了解的，可以参考我的 <a href="https://hzzone.io/3.%20cs231n/%E4%BB%8E%E4%B8%80%E5%85%83%E5%87%BD%E6%95%B0%E7%9A%84%E8%A7%92%E5%BA%A6%E7%90%86%E8%A7%A3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.html">从一元函数的角度理解梯度下降法</a>。</p>
 <p>假设损失函数 $L$ 在激活函数的梯度为 $\frac{\partial{L}}{\partial{\sigma}}$，输入激活函数的数据为 $x$。</p>
 <p>激活函数输入:</p>
 <p>$$z=\sum_{i}w_i x_i+b$$</p>
-<p>则上一层 $w$ 的梯度则是（需要更新权重）:</p>
+<p>则上一层 $w$ 的梯度是（需要更新权重）:</p>
 <p>$$\frac{\partial{L}}{\partial{w_i}} = \frac{\partial{L}}{\partial{\sigma}}\frac{\partial{\sigma}}{\partial{z}} x_i$$</p>
 <p>这是导数的链式法则，需要了解一些反向传播的知识，权重是利用该层的梯度更新的。</p>
-<p><strong>当 $\frac{\partial{\sigma}}{\partial{x}}$ 接近 0 时，也就是激活函数饱和，则是梯度消失，参数几乎不更新。</strong>梯度消失的情况在具体的激活函数中会出现。</p>
+<p><strong>当 $\frac{\partial{\sigma}}{\partial{x}}$ 接近 0 时，也就是激活函数饱和，则梯度消失，参数几乎不更新。</strong>梯度消失的情况在具体的激活函数中会出现。</p>
 <h3 id=常用激活函数及其实现>常用激活函数及其实现</h3>
 <pre><code class="python">import numpy as np
 import matplotlib.pyplot as plt
@@ -80,10 +76,10 @@ plt.show()</code></pre>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-output_23_0.png" alt=""></p>
 <p>Sigmoid 有一个很大的特性，对 Sigmoid 求导会发现，它的导数恰好是 $\sigma&#39;(x)=\sigma(x)(1-\sigma(x))$</p>
 <p>cs231n 问及：<strong>Consider what happens when the input to a neuron is always positive...What can we say about the gradients on w?</strong></p>
-<p>答案是 <strong>Always all positive or all negative :( (this is also why you want zero-mean data!)</strong> 在<strong>非零为中心</strong>中解答。</p>
+<p>答案是 <strong>Always all positive or all negative :( (this is also why you want zero-mean data!)</strong>，在<strong>非零为中心</strong>中解答。</p>
 <p>Sigmoid 面临的问题是:</p>
 <ul>
-<li>饱和是梯度消失，当输入过大或过小，输出都接近于 1，这是导致导数接近于 0，因此出现梯度消失。所以 Sigmoid 对零附近的输入最敏感。</li>
+<li>饱和时梯度消失，当输入过大或过小，输出都接近于 1，这时导致导数接近于 0，因此出现梯度消失。所以 Sigmoid 对零附近的输入最敏感。</li>
 <li>非零为中心。$sigmoid(x)$ 的值域为 $(-1, 1)$，会发现 Sigmoid 的导数一定大于 0，通过上面的梯度计算公式，如果一直 $x_i&gt;0$ 或 $x_i&lt;0$，会出现 $w$ 一直为正或者负。</li>
 <li>指数计算复杂。</li>
 </ul>
@@ -149,7 +145,7 @@ plt.show()</code></pre>
 <li>ReLU 的所有优势。</li>
 <li>改进之处是近似于 zero mean。</li>
 <li>$x$ 非常小时，出现饱和。</li>
-<li>指数计算复杂</li>
+<li>指数计算复杂。</li>
 </ul>
 <h4 id=maxout>Maxout</h4>
 <p>$$
