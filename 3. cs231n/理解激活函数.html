@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/CommonHTML"]
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body for="html-export">
+    <div class="mume markdown-preview markdown-body">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+            <p>激活函数在 cs231n 的  <a href="http://cs231n.stanford.edu/syllabus.html">Lecture 6: Training Neural Networks, Part I</a> 涉及。</p>
+<p>notebook 地址: <a href="https://nbviewer.jupyter.org/github/Hzzone/hzzone.github.io/blob/source/implementation/%E7%90%86%E8%A7%A3%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0.ipynb">理解激活函数.ipynb</a></p>
+<h3 id=参考>参考</h3>
+<ul>
+<li><a href="https://blog.csdn.net/zouzhen_id/article/details/79701002">什么是激活函数？它有什么作用？</a></li>
+<li><a href="https://baike.baidu.com/item/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/2520792?fr=aladdin">激活函数 百度百科</a></li>
+<li><a href="https://blog.csdn.net/kangyi411/article/details/78969642">几种常用激活函数的简介</a></li>
+<li><a href="https://www.cnblogs.com/home123/p/7484558.html">深度学习 激活函数</a></li>
+<li><a href="https://www.zhihu.com/question/22334626">神经网络激励函数的作用是什么？有没有形象的解释？</a></li>
+</ul>
+<h3 id=激活函数>激活函数</h3>
+<p>我认为在 <a href="https://www.zhihu.com/question/22334626">神经网络激励函数的作用是什么？有没有形象的解释？</a> 已经对激活函数解释的很清楚了，这里只能做出一些自己的理解。</p>
+<p>谈一下神经网络的历史，首先是单层 <a href="https://zh.wikipedia.org/wiki/%E6%84%9F%E7%9F%A5%E5%99%A8">感知机</a>，使用单层感知机实现了字母的识别。但是单层感知机最大的问题在于只能解决线性问题，也就是线性不可分，甚至连简单的异或问题也解决不了。</p>
+<p>再之后就是多层感知机，解决了线性不可分的问题。到现在则是我们熟知的神经网络、卷积神经网络等。</p>
+<p>但是对这几种，仍然脱离不了一个概念，对于单个神经元进行的操作是 $y=Wx+b$，也就是一个线性函数。就算是多层组合在一起，你把输入一层一层代入进去，最后得到的结果依然是一个线性函数，只不过这个线性函数比较复杂而已。更为具体点，多层感知机或神经网络只是多次矩阵的乘法。</p>
+<p><strong>所以才需要激活函数，为神经网络引入非线性因素。</strong> 这时候代入激活函数就会得到非常复杂的函数了: $\sigma(Wx+b)$</p>
+<p>这张图形容的非常好:</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-3e4d3aabb90f51f467437a17861d3bf7_hd.png" alt=""></p>
+<h3 id=激活函数的性质>激活函数的性质</h3>
+<p>激活函数有以下性质:</p>
+<ul>
+<li>非线性（应该也可以是线性的，但没有意义）</li>
+<li>可微（通俗点就是可以求导，梯度下降时需要）</li>
+</ul>
+<p>激活函数当然很好，但是使用激活函数时也面临两个问题：</p>
+<ul>
+<li>梯度消失</li>
+<li>梯度饱和</li>
+</ul>
+<p>对于梯度下降法不了解的，可以参考我的 <a href="https://hzzone.io/3.%20cs231n/%E4%BB%8E%E4%B8%80%E5%85%83%E5%87%BD%E6%95%B0%E7%9A%84%E8%A7%92%E5%BA%A6%E7%90%86%E8%A7%A3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.html">从一元函数的角度理解梯度下降法</a>。</p>
+<p>假设损失函数 $L$ 在激活函数的梯度为 $\frac{\partial{L}}{\partial{\sigma}}$，输入激活函数的数据为 $x$。</p>
+<p>激活函数输入:</p>
+<p>$$z=\sum_{i}w_i x_i+b$$</p>
+<p>则上一层 $w$ 的梯度则是（需要更新权重）:</p>
+<p>$$\frac{\partial{L}}{\partial{w_i}} = \frac{\partial{L}}{\partial{\sigma}}\frac{\partial{\sigma}}{\partial{z}} x_i$$</p>
+<p>这是导数的链式法则，需要了解一些反向传播的知识，权重是利用该层的梯度更新的。</p>
+<p><strong>当 $\frac{\partial{\sigma}}{\partial{x}}$ 接近 0 时，也就是激活函数饱和，则是梯度消失，参数几乎不更新。</strong>梯度消失的情况在具体的激活函数中会出现。</p>
+<h3 id=常用激活函数及其实现>常用激活函数及其实现</h3>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+X = np.linspace(-10, 10, 10000)</code></pre>
+<ul>
+<li><h4 id=sigmoid>Sigmoid</h4>
+</li>
+</ul>
+<p>$$\sigma ( x ) = \frac { 1 } { 1 + e ^ { - x } }$$</p>
+<pre><code class="python">Y = 1/(1+np.exp(-X))
+plt.plot(X, Y)
+plt.grid()
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-output_23_0.png" alt=""></p>
+<p>Sigmoid 有一个很大的特性，对 Sigmoid 求导会发现，它的导数恰好是 $\sigma&#39;(x)=\sigma(x)(1-\sigma(x))$</p>
+<p>cs231n 问及：<strong>Consider what happens when the input to a neuron is always positive...What can we say about the gradients on w?</strong></p>
+<p>答案是 <strong>Always all positive or all negative :( (this is also why you want zero-mean data!)</strong> 在<strong>非零为中心</strong>中解答。</p>
+<p>Sigmoid 面临的问题是:</p>
+<ul>
+<li><p>饱和是梯度消失，当输入过大或过小，输出都接近于 1，这是导致导数接近于 0，因此出现梯度消失。所以 Sigmoid 对零附近的输入最敏感。</p>
+</li>
+<li><p>非零为中心。$sigmoid(x)$ 的值域为 $(-1, 1)$，会发现 Sigmoid 的导数一定大于 0，通过上面的梯度计算公式，如果一直 $x_i&gt;0$ 或 $x_i&lt;0$，会出现 $w$ 一直为正或者负。</p>
+</li>
+<li><p>指数计算复杂。</p>
+</li>
+<li><h4 id=tanh>tanh</h4>
+</li>
+</ul>
+<p>$$\tanh ( x )=\frac { e ^ { x } - e ^ { - x } } { e ^ { x } + e ^ { - x } }$$</p>
+<pre><code class="python">Y = np.tanh(X)
+plt.plot(X, Y)
+plt.grid()
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-output_31_0.png" alt=""></p>
+<p>和 Sigmoid 形状类似，但是 tanh 的值域为 $(-1,1)$。</p>
+<p>对 tanh 求导可得:</p>
+<p>$$\sigma&#39; ( x )= \frac { 4 } { \left( e ^ { x } + e ^ { - x } \right) ^ { 2 } }$$</p>
+<p>tanh 虽然满足 zero centered，关于原点对称，但是饱和时，仍然会出现梯度消失（梯度接近于 0），而且指数计算复杂。</p>
+<ul>
+<li><h4 id=relu-rectified-linear-unit->ReLU(Rectified Linear Unit)</h4>
+</li>
+</ul>
+<p>$$\max ( 0 , x )$$</p>
+<pre><code class="python">Y = np.maximum(0, X)
+plt.plot(X, Y)
+plt.grid()
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-output_38_0.png" alt=""></p>
+<p>ReLU 常用于深度学习中，好处显而易见:</p>
+<ul>
+<li>$x&gt;0$ 不会饱和。</li>
+<li>计算高效。</li>
+<li>实际应用的时候收敛速度比 sigmoid/tanh 快很多。</li>
+<li>比 sigmoid 更像生物上的神经元。</li>
+</ul>
+<p>坏处是:</p>
+<ul>
+<li>非 zero-centered。</li>
+<li>当 $x&lt;0$，通过上面的梯度公式，梯度直接为 0，也就是梯度消失。即 ReLU 不会被激活，不会更新参数。</li>
+</ul>
+<p>需要注意的是，<strong>ReLU 不能配合 Xavier 初始化使用</strong>，这个希望能在权重初始化中介绍。</p>
+<ul>
+<li><h4 id=leaky-relu>Leaky ReLU</h4>
+</li>
+</ul>
+<p>$$
+f ( x ) = \max ( 0.01 x , x )
+$$</p>
+<pre><code class="python">Y = np.maximum(0.01*X, X)
+plt.plot(X, Y)
+plt.grid()
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-output_46_0.png" alt=""></p>
+<p>ReLU 加上一点正的偏置就是 Leaky ReLU 了，通常用在 GAN 中。优势和面临的问题和 ReLU 一样，<strong>但重要的是 Leaky ReLU 解决了 ReLU 的梯度消失问题，当 $x&lt;0$，梯度不会消失。</strong></p>
+<ul>
+<li><h4 id=parametric-rectifier-prelu->Parametric Rectifier (PReLU)</h4>
+</li>
+</ul>
+<p>$$
+f ( x ) = \max ( \alpha x , x )
+$$</p>
+<p>PReLU 将 Leaky ReLU 的偏置设为超参，$\alpha$ 需要优化，当 $\alpha=0.01$ 时就是 Leaky ReLU。反向传播的时候会出现 $\alpha$ 更新权重。</p>
+<ul>
+<li><h4 id=exponential-linear-units-elu->Exponential Linear Units (ELU)</h4>
+</li>
+</ul>
+<p>$$
+f ( x ) = \left\{ \begin{array} { l l } { x } &amp; { \text { if } x &gt; 0 } \\\ { \alpha ( \exp ( x ) - 1 ) } &amp; { \text { if } x \leq 0 } \end{array} \right.
+$$</p>
+<pre><code class="python">alpha = 1
+import copy
+Y = copy.deepcopy(X)
+Y[Y&lt;=0] = alpha*(np.exp(X[X&lt;=0])-1)
+plt.plot(X, Y)
+plt.grid()
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-24-output_53_0.png" alt=""></p>
+<ul>
+<li><p>ReLU 的所有优势。</p>
+</li>
+<li><p>改进之处是近似于 zero mean。</p>
+</li>
+<li><p>$x$ 非常小时，出现饱和。</p>
+</li>
+<li><p>指数计算复杂</p>
+</li>
+<li><h4 id=maxout>Maxout</h4>
+</li>
+</ul>
+<p>$$
+\max \left( w _ { 1 } ^ { T } x + b _ { 1 } , w _ { 2 } ^ { T } x + b _ { 2 } \right)
+$$</p>
+<p>不是乘积再到激活函数，而是直接两个输出取最大。cs231n 描述 <strong>Linear Regime! Does not saturate! Does not die!</strong></p>
+<p>坏处是增加了一倍的参数。</p>
+<h3 id=激活函数使用技巧>激活函数使用技巧</h3>
+<ul>
+<li>使用 ReLU 时注意学习率，不能和 Xavier 初始化一起使用。</li>
+<li>都试一下这几个激活函数: Leaky ReLU / Maxout / ELU。</li>
+<li>可以尝试 tanh 但不要期望可以得到很好的效果。</li>
+<li><strong>不要使用 sigmoid</strong>，cs231n 重点强调，可能是因为缺点太多。</li>
+</ul>
+
+        <script data-isso="https://hzzone.io/isso"
+        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+        <section id="isso-thread" style="padding-bottom: 20px;"></section>
+    </div>
+<script>
+(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
+;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
+;c.parentNode.insertBefore(a,c)
+})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+
+galite('create', 'UA-128984734-1', 'auto');
+galite('send', 'pageview');
+</script>
+</body>
+</html>
