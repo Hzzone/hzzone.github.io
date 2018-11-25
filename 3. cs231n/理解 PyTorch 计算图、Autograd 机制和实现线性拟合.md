@@ -130,7 +130,7 @@ plt.show()
 ```
 
 
-![](https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_32_0.png)
+![](https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_32_0-1.png)
 
 
 接下来就是一系列计算然后更新 $a$ 和 $b$ 了。
@@ -141,7 +141,7 @@ X = torch.from_numpy(Nx)
 Y = torch.from_numpy(Ny)
 X = X.float()
 Y = Y.float()
-lr = 1e-9
+lr = 1e-5
 iA, iB = torch.Tensor([0]), torch.Tensor([0])
 # 需要计算梯度
 iA.requires_grad = True
@@ -169,6 +169,8 @@ for _ in range(max_epochs):
             best_a = iA.item()
             best_b = iB.item()
             best_loss = cur_loss
+        iA.grad.zero_()
+        iB.grad.zero_()
         loss_list.append(cur_loss)
 
 # loss 曲线
@@ -177,7 +179,7 @@ plt.show()
 ```
 
 
-![](https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_34_0.png)
+![](https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_34_0-1.png)
 
 
 
@@ -188,7 +190,7 @@ best_a, best_b, best_loss
 
 
 
-    (2.511101245880127, 0.02796928584575653, 4.386769771575928)
+    (2.505525827407837, 0.027117641642689705, 4.3863372802734375)
 
 
 
@@ -201,9 +203,9 @@ plt.show()
 ```
 
 
-![](https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_36_0.png)
+![](https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_36_0-1.png)
 
 
-最后可以看到拟合效果已经很好了。调节 learning rate 可以获得更好的效果，loss 曲线最后又增大是因为可能在最小值点，loss 震荡，无法到达最小值点。这点可以参考我的梯度下降的理解博客。
+最后可以看到拟合效果已经很好了。调节 learning rate 和最大迭代次数可以获得更好的效果，loss 曲线最后又增大是因为可能在最小值点，loss 震荡，无法到达最小值点。这点可以参考我的梯度下降的理解博客。
 
-当 learning rate 较大时，拟合的效果没有这么好。**总结就是梯度下降法应用 learning rate deacy 的非常重要。**
+当 learning rate 为 1e-5 时，可以获得很好的效果，而如果不调大迭代次数，1e-6 的学习率效果不是很好。**总结就是梯度下降法初始学习率和应用 learning rate deacy 非常重要。**
