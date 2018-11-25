@@ -106,13 +106,13 @@ for i in range(X.shape[0]):
 plt.plot(X, Y)
 plt.scatter(Nx, Ny, marker=&#39;.&#39;, color=&#39;r&#39;)
 plt.show()</code></pre>
-<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_32_0.png" alt=""></p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_32_0-1.png" alt=""></p>
 <p>接下来就是一系列计算然后更新 $a$ 和 $b$ 了。</p>
 <pre><code class="python">X = torch.from_numpy(Nx)
 Y = torch.from_numpy(Ny)
 X = X.float()
 Y = Y.float()
-lr = 1e-9
+lr = 1e-5
 iA, iB = torch.Tensor([0]), torch.Tensor([0])
 # 需要计算梯度
 iA.requires_grad = True
@@ -140,20 +140,22 @@ for _ in range(max_epochs):
             best_a = iA.item()
             best_b = iB.item()
             best_loss = cur_loss
+        iA.grad.zero_()
+        iB.grad.zero_()
         loss_list.append(cur_loss)
 
 # loss 曲线
 plt.plot(list(range(max_epochs)), loss_list)
 plt.show()</code></pre>
-<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_34_0.png" alt=""></p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_34_0-1.png" alt=""></p>
 <pre><code class="python">best_a, best_b, best_loss</code></pre>
-<pre><code>(2.511101245880127, 0.02796928584575653, 4.386769771575928)</code></pre><pre><code class="python">nX = np.linspace(0, 100, 100,endpoint=True)
+<pre><code>(2.505525827407837, 0.027117641642689705, 4.3863372802734375)</code></pre><pre><code class="python">nX = np.linspace(0, 100, 100,endpoint=True)
 plt.plot(nX, best_a*nX+best_b)
 plt.scatter(Nx, Ny, marker=&#39;.&#39;, color=&#39;r&#39;)
 plt.show()</code></pre>
-<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_36_0.png" alt=""></p>
-<p>最后可以看到拟合效果已经很好了。调节 learning rate 可以获得更好的效果，loss 曲线最后又增大是因为可能在最小值点，loss 震荡，无法到达最小值点。这点可以参考我的梯度下降的理解博客。</p>
-<p>当 learning rate 较大时，拟合的效果没有这么好。<strong>总结就是梯度下降法应用 learning rate deacy 的非常重要。</strong></p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-output_36_0-1.png" alt=""></p>
+<p>最后可以看到拟合效果已经很好了。调节 learning rate 和最大迭代次数可以获得更好的效果，loss 曲线最后又增大是因为可能在最小值点，loss 震荡，无法到达最小值点。这点可以参考我的梯度下降的理解博客。</p>
+<p>当 learning rate 为 1e-5 时，可以获得很好的效果，而如果不调大迭代次数，1e-6 的学习率效果不是很好。<strong>总结就是梯度下降法初始学习率和应用 learning rate deacy 非常重要。</strong></p>
 
         <script data-isso="https://hzzone.io/isso"
         src="https://hzzone.io/isso/js/embed.min.js"></script>
