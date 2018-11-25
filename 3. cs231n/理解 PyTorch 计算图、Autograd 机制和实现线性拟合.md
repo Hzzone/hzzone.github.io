@@ -1,6 +1,6 @@
 <br>
 
-notebook 地址: [理解 PyTorch 计算图、Autograd 机制和实现线性拟合.ipynb](https%3a%2f%2fnbviewer.jupyter.org%2fgithub%2fHzzone%2fhzzone.github.io%2fblob%2fsource%2fimplementation%2f%e7%90%86%e8%a7%a3+PyTorch+%e8%ae%a1%e7%ae%97%e5%9b%be%e3%80%81Autograd+%e6%9c%ba%e5%88%b6%e5%92%8c%e5%ae%9e%e7%8e%b0%e7%ba%bf%e6%80%a7%e6%8b%9f%e5%90%88.ipynb)
+notebook 地址: [理解 PyTorch 计算图、Autograd 机制和实现线性拟合.ipynb](https://nbviewer.jupyter.org/github/Hzzone/hzzone.github.io/blob/source/implementation/理解%20PyTorch%20计算图、Autograd%20机制和实现线性拟合.ipynb)
 
 ## 理解 PyTorch 计算图、Autograd 机制和实现线性拟合
 
