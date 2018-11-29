@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/CommonHTML"]
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body for="html-export">
+    <div class="mume markdown-preview markdown-body">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+            <h2 id=softmax-k-l-散度-交叉熵和-cross-entropy-loss-推导和实现>Softmax、K-L 散度、交叉熵和 Cross Entropy Loss 推导和实现</h2>
+<h3 id=参考>参考</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Logistic_function">Logistic function</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Softmax_function">Softmax function</a></li>
+<li><a href="https://www.jianshu.com/p/43318a3dc715?from=timeline&amp;isappinstalled=0">如何理解K-L散度（相对熵）</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cross_entropy">Cross entropy</a></li>
+<li><a href="https://www.zhihu.com/question/41252833">如何通俗的解释交叉熵与相对熵?</a></li>
+<li><a href="https://blog.csdn.net/jiajunlee/article/details/79665062">Cross Entropy Loss with Softmax的求导</a></li>
+</ul>
+<p>推导和实现 Softmax、KL 散度、交叉熵和 Cross Entropy Loss，最后实现一个线性分类器 $y=xW+b$做 mnist 分类。</p>
+<h3 id=softmax-函数>Softmax 函数</h3>
+<p>Softmax 函数是 Logistic function 的一种泛化，所以先介绍 Logistic function。</p>
+<p>Logistic function 形式如下:</p>
+<p>$$
+f ( x ) = \frac { L } { 1 + e ^ { - k \left( x - x _ { 0 } \right) } }
+$$</p>
+<p>其中 $k$ 是 Logistic function 的抖动程度，$x_0$ 是函数关于 $x=x_0$ 对称，$L$ 曲线的最大值。</p>
+<p>当 $k=1,L=1,x_0=0$ 时，Logistic function 就是 sigmoid 函数:</p>
+<p>$$
+f ( x ) = \frac { 1 } { 1 + e ^ { - x } }
+$$</p>
+<p>sigmoid 函数已经在激活函数中介绍，满足如下性质:</p>
+<p>$$
+\tanh ( x ) = \frac { e ^ { x } - e ^ { - x } } { e ^ { x } + e ^ { - x } }=2 f ( 2 x ) - 1
+$$</p>
+<p>$$
+f(x)= \frac { 1 } { 2 } + \frac { 1 } { 2 } \tanh \left( \frac { x } { 2 } \right)
+$$</p>
+<p>$$
+\frac { d f ( x )} { d x } = \frac { e ^ { x } \cdot \left( 1 + e ^ { x } \right) - e ^ { x } \cdot e ^ { x } } { \left( 1 + e ^ { x } \right) ^ { 2 } } = \frac { e ^ { x } } { \left( 1 + e ^ { x } \right) ^ { 2 } } = f ( x ) ( 1 - f ( x ) )
+$$</p>
+<p>$K$ 维向量经过 softmax 函数，输出归一化之后的向量可以作为 $K$ 个不同结果发生的概率，概率值和为 1，范围在 $[0,1]$。深度学习中常用于网络输出之后使用 softmax 函数输出概率。</p>
+<p>softmax 函数公式如下:</p>
+<p>$$
+\sigma ( \mathbf { z } ) _ { j } = \frac { e ^ { z _ { j } } } { \sum _ { k = 1 } ^ { K } e ^ { z _ { k } } } \quad \text { for } j = 1 , \ldots , K
+$$</p>
+<p>numpy 实现 softmax 函数，输入为一个 $batch\_size\times class\_total$ 的矩阵。</p>
+<pre><code class="python">import numpy as np
+def softmax(input):
+    exp_value = np.exp(input) #首先计算指数
+    output = exp_value/np.sum(exp_value, axis=1)[:, np.newaxis] # 然后按行标准化
+    return output</code></pre>
+<pre><code class="python">output = np.random.randn(2, 3)
+prob = softmax(output)
+output, prob</code></pre>
+<pre><code>(array([[-0.33234003,  0.44697765, -1.4677743 ],
+        [-1.06887423, -0.41212265, -1.07418837]]),
+ array([[0.2856109 , 0.62262729, 0.09176181],
+        [0.25489283, 0.49156529, 0.25354189]]))</code></pre><h3 id=k-l-散度和-cross-entropy>K-L 散度和 Cross Entropy</h3>
+<p>在 <a href="https://www.jianshu.com/p/43318a3dc715?from=timeline&amp;isappinstalled=0">如何理解K-L散度（相对熵）</a> 已经介绍的非常详细了，看完就可以理解 K-L 散度了。下面我提出自己的理解。</p>
+<p>K-L 散度（Kullback–Leibler divergenc，相对熵）是描述两个概率分布 $p$ 和 $q$ 差异的一种方法，$D_{KL}(p||q)$ 表示当用概率分布 $q$ 来拟合真实分布 $p$ 时，产生的信息损耗。</p>
+<p>首先介绍 <strong>熵（Entropy）</strong>，是信息论中信息的度量单位，基本公式如下:</p>
+<p>$$
+H(p) = - \sum _ { i = 1 } ^ { N } p \left( x _ { i } \right) \cdot \log p \left( x _ { i } \right)
+$$</p>
+<p>当对数底为 $2$ 时，表示的是编码概率分布 $p$ 所需要的最少二进制位个数。</p>
+<p><strong>熵的大小告诉我们编码 $p$ 最少需要多少空间，而 K-L 散度则是衡量使用一个概率分布代表另一个概率分布所损失的数据量。</strong></p>
+<p>K-L 散度定义如下:</p>
+<p>$$
+D _ { K L } ( p \| q ) = \sum _ { i = 1 } ^ { N } p \left( x _ { i } \right) \cdot \left( \log p \left( x _ { i } \right) - \log q \left( x _ { i } \right) \right)\\
+=\sum _ { i = 1 } ^ { N } p \left( x _ { i } \right) \cdot \log \frac { p \left( x _ { i } \right) } { q \left( x _ { i } \right) }
+$$</p>
+<p>$p$ 为真实分布，使用 $q$ 来近似 $p$。</p>
+<p>由公式可以看出，$D _ { K L } ( p \| q )$ 就是 $q$ 和 $p$ 对数差值的期望，所以 k-L 散度表示如下:</p>
+<p>$$
+D _ { K L } ( p \| q ) = E [ \log p ( x ) - \log q ( x ) ]
+$$</p>
+<p>如果继续用 2 为底的对数计算，则 K-L 散度值表示信息损失的二进制位数。</p>
+<p><strong>K-L 散度不是距离</strong>，因为不符合对称性，而距离度量应该满足对称性，例如 L1、L2 距离都是对称的。</p>
+<p>$$D _ { K L } ( p \| q )\ne D _ { K L } ( q \| p )$$</p>
+<p><strong>交叉熵是 $q$ 表示 $p$ 的平均编码长度。</strong></p>
+<p>$$
+H ( p , q ) = \mathrm { E } _ { p } [ - \log q ] = H ( p ) + D _ { \mathrm { KL } } ( p \| q )
+$$</p>
+<p>交叉熵刚好为 <strong>熵加上 K-L 散度</strong>，所以具体公式是:</p>
+<p>$$
+H ( p , q ) = - \sum _ { x } p ( x ) \log q ( x )
+$$</p>
+<p><strong>那么为什么不用 K-L 散度而是选择交叉熵呢，K-L 散度不是更直观吗？</strong></p>
+<p>参考 <a href="https://stats.stackexchange.com/questions/265966/why-do-we-use-kullback-leibler-divergence-rather-than-cross-entropy-in-the-t-sne">Why do we use Kullback-Leibler divergence rather than cross entropy in the t-SNE objective function?</a> 和 <a href="https://www.reddit.com/r/MachineLearning/comments/4mebvf/why_train_with_crossentropy_instead_of_kl/">Why train with cross-entropy instead of KL divergence in classification?</a>。</p>
+<p>因为 Cross Entropy 和 K-L divergence 的结果是一样的。</p>
+<p>在机器学习中，真实分布 $p$ 是固定的，是我们给训练集打的标签，因此对 K-L 散度由交叉熵决定，求梯度的结果是一样的。更何况交叉熵计算也非常方便。</p>
+<p>这就是交叉熵的真实含义，由交叉熵和 softmax 函数组合之后就是交叉熵损失函数。<strong>目的是最大化真是标签的概率。</strong></p>
+<p>接下来介绍和实现交叉熵损失函数，并训练一个线性分类器。</p>
+<h3 id=cross-entropy-loss>Cross Entropy Loss</h3>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-27-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-27%20%E4%B8%8B%E5%8D%8811.03.41.png" alt=""></p>
+<p>上图是交叉熵损失函数的整个流程，来源于 cs231n 的 <a href="http://cs231n.stanford.edu/syllabus.html">Loss Functions and Optimization </a>，神经网络的输出先经过 softmax 归一化，再使用交叉熵损失函数和真实概率计算 Loss。</p>
+<p>深度学习中使用的交叉熵损失函数形式如下，由交叉熵的公式代入 softmax 函数得来:</p>
+<p>$$
+L = - \frac{1}{N} \sum _ { i } y_i \log  \frac { e ^ { z _ { i } } } { \sum e ^ { z _ { j } } }
+$$</p>
+<p>$y_i$ 为真实标签的 one-hot 编码，<strong>因此求和时只需要将真实标签对应的概率取对数求和即可</strong>。</p>
+<p>因此在 Pytorch 中 <a href="https://pytorch.org/docs/stable/nn.html#crossentropyloss">torch.nn.CrossEntropyLoss</a> 使用的是 class based 来计算 Loss，因为这样计算的速度相对于矩阵乘法更快，也节约了空间，基本公式为:</p>
+<p>$$\text{loss}(x, class) = -\log\left(\frac{\exp(x[class])}{\sum_j \exp(x[j])}\right)
+               = -x[class] + \log\left(\sum_j \exp(x[j])\right)$$</p>
+<p>先实现交叉熵损失函数的 <strong>前向传播</strong> 过程:</p>
+<pre><code class="python">N, C = 10, 3  # 随机数据，batch*class
+
+input = np.random.randn(N, C)
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder()
+labels = encoder.fit_transform(np.random.randint(0, C,(N, 1))).toarray() # 生成标签并独热编码
+
+prob = softmax(input)
+# labels N*C
+# prob N*C
+loss = -np.sum(np.multiply(labels, np.log(prob)))/labels.shape[0] # 根据公式计算 loss，并求和
+loss</code></pre>
+<pre><code>1.6763745848377714</code></pre><p><strong>反向传播</strong> 过程需要对交叉熵损失函数计算偏导。</p>
+<p>先对 softmax 函数求导在利用链式法则求解，对于输入 $x\in \mathcal{R}^{1\times C}$，$x=(x_0,\dots,x_i,\dots)$。</p>
+<p>因为真实概率 $Y=(y_0,\dots,y_i,\dots)$ 为独热编码，只有一个位置为 1，所以化简 $L_i$ 为:</p>
+<p>$$
+L = - \sum _ { i } y_{i} (\log  (e ^ { x _ { i } }) - \log(\sum e ^ { x _ { j } } ))\\
+=-(\log  (e ^ { x _ { i } }) - \log(\sum e ^ { x _ { j } } )),y_i=1\\
+=\log(\sum e ^ { x _ { j } } )-x_i,y_i=1
+$$</p>
+<p>下标舍去，所以对 $L$ 关于 $x_i$ 求偏导为，并且 $y_i=1$:</p>
+<p>$$\frac{\partial L}{\partial x_i}=\log(\sum e ^ { x _ { j } } )-x_i,y_i=1\\
+=\frac{e^{x_ { i }}}{\sum}-1\\
+=\frac{e^{x_ { i }}}{\sum}-y_i\\
+=p_i-y_i$$</p>
+<p>上面只求了对于 $x_i$ 的偏导，且 $x_i$ 满足 $y_i=1$，对于 $x_j$ 且 $y_j\ne 1$，即 $y_j=0$:</p>
+<p>$$\frac{\partial L}{\partial x_j}=\log(\sum e ^ { x _ { j } } )-x_i,y_j=0\\
+=\frac{e^{x_ { j }}}{\sum}\\
+=p_j\\
+=p_j-0\\
+=p_j-y_j$$</p>
+<p>$p$ 为经过 softmax 的概率，$y$ 为独热编码的矩阵，即真实概率。</p>
+<p>所以交叉熵的梯度为 <strong>预测概率减去真实概率！</strong></p>
+<p>所以最后的解为:</p>
+<p>$$\frac{\partial L}{\partial x}=\frac{1}{N}(P-Y)$$</p>
+<p>因此最后整个反向传播过程实现就很简单了:</p>
+<pre><code class="python">grad = prob - labels
+grad</code></pre>
+<pre><code>array([[ 0.10707167, -0.12583787,  0.01876621],
+       [-0.89813245,  0.32953853,  0.56859392],
+       [ 0.73705126, -0.83412744,  0.09707618],
+       [ 0.1666249 , -0.90880152,  0.74217661],
+       [ 0.41876515,  0.50426485, -0.92303   ],
+       [-0.73118834,  0.26607816,  0.46511018],
+       [-0.91878922,  0.07298688,  0.84580235],
+       [ 0.68774499, -0.77065113,  0.08290614],
+       [ 0.21098268, -0.75737717,  0.54639448],
+       [-0.58370983,  0.51392215,  0.06978768]])</code></pre><p>接下来就实现整个交叉熵损失函数的封装:</p>
+<pre><code class="python">class CrossEntropyLossLayer():
+    def __init__(self):
+        pass
+
+    def forward(self, input, labels):
+        # 做一些防止误用的措施，输入数据必须是二维的，且标签和数据必须维度一致
+        assert len(input.shape)==2, &#39;输入的数据必须是一个二维矩阵&#39;
+        assert len(labels.shape)==2, &#39;输入的标签必须是独热编码&#39;
+        assert labels.shape==input.shape, &#39;数据和标签数量必须一致&#39;
+        self.data = input
+        self.labels = labels
+        self.prob = np.clip(softmax(input), 1e-9, 1.0) #在取对数时不能为 0，所以用极小数代替 0
+        loss = -np.sum(np.multiply(self.labels, np.log(self.prob)))/self.labels.shape[0]
+        return loss
+
+    def backward(self):
+        self.grad = (self.prob - self.labels)/self.labels.shape[0] # 根据公式计算梯度</code></pre>
+<pre><code class="python">N, C = 3, 3
+data = np.random.randn(N, C)
+labels = np.array([[0, 1, 0], [1, 0, 0], [0, 0, 1]], dtype=np.float32)
+loss = CrossEntropyLossLayer()
+l = loss.forward(data, labels)
+loss.backward()
+loss.grad, l</code></pre>
+<pre><code>(array([[ 0.10171029, -0.21004019,  0.1083299 ],
+        [-0.10804168,  0.03667105,  0.07137063],
+        [ 0.14886429,  0.09000375, -0.23886804]]), 0.8824119515040371)</code></pre><p>利用 Pytorch 的自动求导机制检验计算是否正确:</p>
+<pre><code class="python">import torch
+data = torch.from_numpy(data).float()
+data.requires_grad = True
+labels = torch.from_numpy(labels)
+prob = torch.nn.functional.softmax(data, dim=1)
+loss = -torch.sum(torch.mul(torch.log(prob), labels))/prob.size(0)
+loss.backward()
+data.grad, loss.item()</code></pre>
+<pre><code>(tensor([[ 0.1017, -0.2100,  0.1083],
+         [-0.1080,  0.0367,  0.0714],
+         [ 0.1489,  0.0900, -0.2389]]), 0.8824119567871094)</code></pre><p><strong>两个结果对输入求梯度是一样的，所以我最后的答案是正确的。</strong></p>
+<p>只是因为精度不同有些差异，numpy 使用 64 位浮点数，而 Pytorch 使用 32 位，因为 GPU 计算单精度浮点数速度比双精度快得多。</p>
+<h3 id=线性分类器>线性分类器</h3>
+<p>实现一个线性分类器，使用交叉熵损失函数。</p>
+<p>$$y=xW$$</p>
+<p>梯度下降更新参数，先求 $W$ 的偏导:</p>
+<p>$$\frac{\partial y}{\partial W}=x^T$$</p>
+<p>再根据链式法则可以求得 $L$ 关于 $W$ 的偏导:</p>
+<p>$$\frac{\partial L}{\partial W}=x^T \frac{\partial L}{\partial y}\\
+=\frac{1}{N} x^T(P-Y)$$</p>
+<p>$P$ 为 softmax 之后的预测概率，$Y$ 为独热编码的真实概率。</p>
+<p>既然我的实现是正确的，因此读取数据:</p>
+<pre><code class="python">import struct
+import numpy as np
+def read_mnist(filename):
+    with open(filename, &#39;rb&#39;) as f:
+        zero, data_type, dims = struct.unpack(&#39;&gt;HBB&#39;, f.read(4))
+        shape = tuple(struct.unpack(&#39;&gt;I&#39;, f.read(4))[0] for d in range(dims))
+        return np.frombuffer(f.read(), dtype=np.uint8).reshape(shape)
+
+# 读取并归一化数据，不归一化会导致 nan
+test_data = (read_mnist(&#39;../data/mnist/t10k-images.idx3-ubyte&#39;).reshape((-1, 784))-127.0)/255.0
+train_data = (read_mnist(&#39;../data/mnist/train-images.idx3-ubyte&#39;).reshape((-1, 784))-127.0)/255.0
+# 独热编码标签
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder()
+encoder.fit(np.arange(10).reshape((-1, 1)))
+train_labels = encoder.transform(read_mnist(&#39;../data/mnist/train-labels.idx1-ubyte&#39;).reshape((-1, 1))).toarray()
+test_labels = encoder.transform(read_mnist(&#39;../data/mnist/t10k-labels.idx1-ubyte&#39;).reshape((-1, 1))).toarray()</code></pre>
+<pre><code class="python">from nn import lr_scheduler
+loss_layer = CrossEntropyLossLayer()
+lr = 0.1
+D, C = 784, 10
+np.random.seed(1) # 固定随机生成的权重
+W = np.random.randn(D, C)*0.01 # 高斯初始化，均值为 0，标准差 0.01
+b = np.zeros((1, C)) # 偏置项
+best_acc = -float(&#39;inf&#39;)
+max_iter = 900
+step_size = 400
+scheduler = lr_scheduler(lr, step_size)
+loss_list = []
+from tqdm import tqdm_notebook
+for epoch in tqdm_notebook(range(max_iter)):
+    # 测试
+    test_pred = np.dot(test_data, W) + b
+    pred_labels = np.argmax(test_pred, axis=1)
+    real_labels = np.argmax(test_labels, axis=1)
+    acc = np.mean(pred_labels==real_labels)
+    if acc&gt;best_acc: best_acc=acc
+    # 训练
+    train_pred = np.dot(train_data, W) + b
+    loss = loss_layer.forward(train_pred, train_labels)
+    loss_list.append(loss)
+    loss_layer.backward()
+    grad = np.dot(train_data.T, loss_layer.grad)
+    # 更新参数
+    W -= scheduler.get_lr()*grad
+    b -= scheduler.get_lr()*np.mean(loss_layer.grad, axis=0)
+    scheduler.step()</code></pre>
+<pre><code class="python">best_acc</code></pre>
+<pre><code>0.8992</code></pre><p>获得了 ~90% 的准确度。绘制 Loss 曲线:</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+plt.plot(np.arange(max_iter), loss_list)
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-29-output_86_0.png" alt=""></p>
+<p>使用 Pytorch 实现一个线性分类器。</p>
+<pre><code class="python">import torch
+train_data = torch.from_numpy(train_data).float()
+train_labels = torch.from_numpy(train_labels).float()
+test_data = torch.from_numpy(test_data).float()
+test_labels = torch.from_numpy(test_labels).float()</code></pre>
+<pre><code class="python"># 初始化一样的权重和偏置
+np.random.seed(1) # 固定随机生成的权重
+linear_classifier = torch.nn.Linear(784, 10)
+linear_classifier.weight.data = torch.from_numpy((np.random.randn(D, C)*0.01).transpose((1, 0))).float()
+_ = linear_classifier.bias.data.fill_(0)
+best_acc = -float(&#39;inf&#39;)
+lr = 0.1
+max_iter = 900
+step_size = 400
+scheduler = lr_scheduler(lr, step_size)
+loss_list = []
+criterion = torch.nn.CrossEntropyLoss()
+for epoch in tqdm_notebook(range(max_iter)):
+    with torch.no_grad():
+        # 测试
+        test_pred = linear_classifier(test_data)
+        pred_labels = torch.argmax(test_pred, dim=1)
+        real_labels = torch.argmax(test_labels, dim=1)
+        acc = torch.mean((pred_labels==real_labels).float())
+        if acc&gt;best_acc: best_acc=acc
+    train_pred = linear_classifier(train_data)
+    real_labels = torch.argmax(train_labels, dim=1)
+    loss = criterion(train_pred, real_labels)
+    loss.backward()
+    for p in linear_classifier.parameters():
+        p.data.add_(-scheduler.get_lr(), p.grad.data)
+    linear_classifier.zero_grad()
+    loss_list.append(loss.item())
+    scheduler.step()</code></pre>
+<pre><code class="python">best_acc</code></pre>
+<pre><code>tensor(0.8992)</code></pre><pre><code class="python">import matplotlib.pyplot as plt
+plt.plot(np.arange(max_iter), loss_list)
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-29-output_91_0.png" alt=""></p>
+<p>同样的参数，获得了一样的结果，所以我的实现是完全正确的！区别在于运行速度，Pytorch 比 numpy 要快大约一倍，可能是 Pytorch 优化过矩阵预算，且单精度比双精度计算快。</p>
+
+        <script data-isso="https://hzzone.io/isso"
+        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+        <section id="isso-thread" style="padding-bottom: 20px;"></section>
+    </div>
+<script>
+(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
+;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
+;c.parentNode.insertBefore(a,c)
+})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+
+galite('create', 'UA-128984734-1', 'auto');
+galite('send', 'pageview');
+</script>
+</body>
+</html>
