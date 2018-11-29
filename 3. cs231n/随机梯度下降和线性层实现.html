@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/CommonHTML"]
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body for="html-export">
+    <div class="mume markdown-preview markdown-body">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+            <h2 id=随机梯度下降和线性层实现>随机梯度下降和线性层实现</h2>
+<h3 id=随机梯度下降>随机梯度下降</h3>
+<p>梯度下降计算 Loss:</p>
+<p>$$
+L ( W ) = \frac { 1 } { N } \sum _ { i = 1 } ^ { N } L _ { i } \left( x _ { i } , y _ { i } , W \right)
+$$</p>
+<p>梯度下降计算 Loss 关于权重的梯度</p>
+<p>$$
+\nabla _ { W } L ( W ) = \frac { 1 } { N } \sum _ { i = 1 } ^ { N } \nabla _ { W } L _ { i } \left( x _ { i } , y _ { i } , W \right)
+$$</p>
+<p>当 $N$ 非常大时，全批量计算是不可能的，没有这么大的内存和显存可以容纳。这时候使用一个 minibatch 来估计全部数据集，minibatch 通常为 32/64/128。</p>
+<p>SGD 示例:</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-29-1601E590-7AEE-4743-B77B-10C783A461A4.png" alt=""></p>
+<p>按批读取数据，计算梯度更新参数。</p>
+<p>接下来模仿 Pytorch 实现一个 Dataloader，重写 <code>__getitem__</code>、<code>__iter__</code>、<code>__len__</code>，因此可以根据下标获取数据、迭代数据和获取数据长度。</p>
+<pre><code class="python">class Dataloader(object):
+    def __init__(self, data, labels, batch_size, shuffle=True):
+        self.data = data
+        self.batch_size = batch_size
+        self.shuffle = shuffle
+        self.labels = labels
+
+    def __getitem__(self, index):
+        return self.data[index], self.labels[index]
+
+    def __iter__(self):
+        datasize = self.data.shape[0]
+        data_seq = np.arange(datasize)
+        if self.shuffle:
+            np.random.shuffle(data_seq)
+        interval_list = np.append(np.arange(0, datasize, self.batch_size), datasize)
+        for index in range(interval_list.shape[0]-1):
+            s = data_seq[interval_list[index]:interval_list[index+1]]
+            yield self.data[s], self.labels[s]
+
+    def __len__(self):
+        return self.data.shape[0]</code></pre>
+<p>PyTorch 中首先需要重写 <a href="https://pytorch.org/docs/stable/torchvision/datasets.html">torchvision.datasets</a>，然后使用 <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">torch.utils.data.DataLoader</a> 加载数据，支持并行加载和打乱数据。</p>
+<p>SGD 只是最简单的一个优化器，通常不会单独使用，SDG+Momentum 和 Adam 更为常用，几种优化器只是在参数的更新上有所差别。希望能整理一下各种优化器的知识。</p>
+<h3 id=线性层实现>线性层实现</h3>
+<p>在 <a href="https://hzzone.io/3.%20cs231n/Softmax%E3%80%81KL%20%E6%95%A3%E5%BA%A6%E5%92%8C%20Cross%20Entropy%20Loss%20%E6%8E%A8%E5%AF%BC%E5%92%8C%E5%AE%9E%E7%8E%B0.html">Softmax、K-L 散度、交叉熵和 Cross Entropy Loss 推导和实现</a> 推到了交叉熵损失函数，实现了一个线性分类器。</p>
+<p>其实线性层的基本算法就是简单的 $y=Wx+b$，这个线性分类器就是单层神经网络。</p>
+<p>因此对于参数 $W$ 和 $b$ 求导可得:</p>
+<p>$$\frac{\partial y}{\partial W}=x^T$$</p>
+<p>$$\frac{\partial y}{\partial b}=1$$</p>
+<p>然后再用链式法则乘以上一层的梯度即可。</p>
+<pre><code class="python">import numpy as np
+
+class Linear(object):
+    def __init__(self, D_in, D_out):
+        self.weight = np.random.randn(D_in, D_out).astype(np.float32)*0.01
+        self.bias = np.zeros((1, D_out), dtype=np.float32)
+
+    def forward(self, input):
+        self.data = input
+        return np.dot(self.data, self.weight)+self.bias
+
+    def backward(self, top_grad, lr):
+        self.grad = np.dot(top_grad, self.weight.T).astype(np.float32)
+        # 更新参数
+        self.weight -= lr*np.dot(self.data.T, top_grad)
+        self.bias -= lr*np.mean(top_grad, axis=0)</code></pre>
+<p>接下来使用 SGD 重新训练一个单层神经网络分类 mnist。</p>
+<pre><code class="python">from utils import read_mnist
+from nn import CrossEntropyLossLayer, lr_scheduler
+
+# 读取并归一化数据，不归一化会导致 nan
+test_data = ((read_mnist(&#39;../data/mnist/t10k-images.idx3-ubyte&#39;).reshape((-1, 784))-127.0)/255.0).astype(np.float32)
+train_data = ((read_mnist(&#39;../data/mnist/train-images.idx3-ubyte&#39;).reshape((-1, 784))-127.0)/255.0).astype(np.float32)
+# 独热编码标签
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder()
+encoder.fit(np.arange(10).reshape((-1, 1)))
+train_labels = encoder.transform(read_mnist(&#39;../data/mnist/train-labels.idx1-ubyte&#39;).reshape((-1, 1))).toarray().astype(np.float32)
+test_labels = encoder.transform(read_mnist(&#39;../data/mnist/t10k-labels.idx1-ubyte&#39;).reshape((-1, 1))).toarray().astype(np.float32)
+
+loss_layer = CrossEntropyLossLayer()
+lr = 0.1
+D, C = 784, 10
+np.random.seed(1) # 固定随机生成的权重
+best_acc = -float(&#39;inf&#39;)
+max_iter = 900
+step_size = 400
+scheduler = lr_scheduler(lr, step_size)
+loss_list = []
+
+batch_size = 120
+
+train_dataloader = Dataloader(train_data, train_labels, batch_size, shuffle=True)
+test_dataloader = Dataloader(test_data, test_labels, batch_size, shuffle=False)
+
+linear_classifer = Linear(D, C)
+
+from tqdm import tqdm_notebook
+for epoch in tqdm_notebook(range(max_iter)):
+    # 测试
+    correct = 0
+    for data, labels in test_dataloader:
+        test_pred = linear_classifer.forward(data)
+        pred_labels = np.argmax(test_pred, axis=1)
+        real_labels = np.argmax(labels, axis=1)
+        correct += np.sum(pred_labels==real_labels)
+    acc = correct/len(test_dataloader)
+    if acc&gt;best_acc: best_acc=acc
+    # 训练
+    total_loss = 0
+    for data, labels in test_dataloader:
+        train_pred = linear_classifer.forward(data)
+        loss = loss_layer.forward(train_pred, labels)
+        total_loss += loss
+        loss_layer.backward()
+        linear_classifer.backward(loss_layer.grad, scheduler.get_lr())
+    loss_list.append(total_loss)
+    scheduler.step()</code></pre>
+<pre><code class="python">best_acc</code></pre>
+<pre><code>0.967</code></pre><p>绘制 Loss 曲线。</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+plt.plot(np.arange(max_iter), loss_list)
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-29-output_24_0.png" alt=""></p>
+<p>训练速度比全批量训练提升很多倍，且精度达到了 ~97%，应该是我做了打乱训练数据的原因，可能和使用了 SGD 有关。</p>
+
+        <script data-isso="https://hzzone.io/isso"
+        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+        <section id="isso-thread" style="padding-bottom: 20px;"></section>
+    </div>
+<script>
+(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
+;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
+;c.parentNode.insertBefore(a,c)
+})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+
+galite('create', 'UA-128984734-1', 'auto');
+galite('send', 'pageview');
+</script>
+</body>
+</html>
