@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/CommonHTML"]
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body for="html-export">
+    <div class="mume markdown-preview markdown-body">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+            <h2 id=理解反向传播和框架源码阅读>理解反向传播和框架源码阅读</h2>
+<h3 id=反向传播>反向传播</h3>
+<p>反向传播其实很简单，就是梯度下降和链式法则的结合运用。对于多层神经网络反向传播尤其容易理解。</p>
+<p>首先梯度下降的基本公式如下:</p>
+<p>$$W = W-lr\frac{\partial L}{\partial W}$$</p>
+<p>计算损失函数关于权重的梯度，然后梯度下降法更新参数。</p>
+<p>不管是卷积、池化、全连接层，假设基本公式为:</p>
+<p>$$y=f(x, W, b)$$</p>
+<p>$x$ 为上一层的输入，$W$、$b$ 分别是需要训练的参数，$y$ 是输出。</p>
+<p>对于每一层神经网络，需要计算三个偏导，$\frac{\partial L}{W}$、$\frac{\partial L}{b}$、$\frac{\partial L}{x}$。对于多层神经网络肯定不能直接对函数进行求导，而是需要利用链式法则、以前向传播的逆序获得上一层的梯度，再乘以该层的梯度即可。</p>
+<p>例如:</p>
+<p>$$\frac{\partial L}{W}=\frac{\partial L}{f}\frac{\partial f}{W}$$</p>
+<p>$$\frac{\partial L}{x}=\frac{\partial L}{f}\frac{\partial f}{x}$$</p>
+<p>对于反向传播的上一层的梯度，应为该层的 $\frac{\partial L}{\partial x}$。</p>
+<p>用一张图来解释整个神经网络更新参数的过程:</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-30-%E6%9C%AA%E5%91%BD%E5%90%8D.001.jpeg" alt=""></p>
+<p>这张图是我自己画的，所以加个水印保护下版权。</p>
+<p>所以按照 cs231n 的总结，反向传播有三个步骤:</p>
+<ol>
+<li><p>Identify intermediate functions (forward prop)</p>
+</li>
+<li><p>Compute local gradients</p>
+</li>
+<li><p>Combine with upstream error signal to get full gradient</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li><p>前向传播计算损失，保留中间变量</p>
+</li>
+<li><p>计算局部梯度</p>
+</li>
+<li><p>利用链式法则结合上一层的梯度，计算出完整的梯度</p>
+</li>
+</ol>
+<p>最后再根据梯度更新参数。</p>
+<h3 id=矩阵求导>矩阵求导</h3>
+<p>按照 cs231n 总结一下矩阵求导的几种情况:</p>
+<ul>
+<li>Scalar-by-Vector（标量关于向量求导）</li>
+</ul>
+<p>$$
+\frac { \partial y } { \partial \mathbf { x } } = \left[ \frac { \partial y } { \partial x _ { 1 } } \quad \frac { \partial y } { \partial x _ { 2 } } \ldots \frac { \partial y } { \partial x _ { n } } \right]
+$$</p>
+<ul>
+<li>Vector-by-Vector（向量关于向量求导）</li>
+</ul>
+<p>$$
+\frac { \partial \mathbf { y } } { \partial \mathbf { x } } = \left[ \begin{array} { c c c c } { \frac { \partial y _ { 1 } } { \partial x _ { 1 } } } &amp; { \frac { \partial y _ { 1 } } { \partial x _ { 2 } } } &amp; { \dots } &amp; { \frac { \partial y _ { 1 } } { \partial x _ { n } } } \\\ { \vdots } &amp; { \vdots } &amp; { \ddots } &amp; { \vdots } \\\ { \frac { \partial y _ { m } } { \partial x _ { 1 } } } &amp; { \frac { \partial y _ { m } } { \partial x _ { 2 } } } &amp; { \cdots } &amp; { \frac { \partial y _ { m } } { \partial x _ { n } } } \end{array} \right]
+$$</p>
+<ul>
+<li>Scalar-by-Matrix（标量关于矩阵求导）</li>
+</ul>
+<p>$$
+\frac { \partial y } { \partial A } = \left[ \begin{array} { c c c c } { \frac { \partial y } { \partial A _ { 11 } } } &amp; { \frac { \partial y } { \partial A _ { 12 } } } &amp; { \dots } &amp; { \frac { \partial y } { \partial A _ { 1 n } } } \\\ { \vdots } &amp; { \vdots } &amp; { \ddots } &amp; { \vdots } \\\ { \frac { \partial y } { \partial A _ { m 1 } } } &amp; { \frac { \partial y } { \partial A _ { m 2 } } } &amp; { \cdots } &amp; { \frac { \partial y } { \partial A _ { m n } } } \end{array} \right]
+$$</p>
+<ul>
+<li>Vector-by-Matrix（向量关于矩阵求导）</li>
+</ul>
+<p>$$
+\frac { \partial y } { \partial A _ { i j } } = \sigma_i x_j, y=Ax
+$$</p>
+<p>$\sigma$ 为上一层梯度。</p>
+<p>下面是 cs231n 总结的深度学习中会用到的矩阵梯度的公式。其中 $W$ 是权重，$x$ 是数据，维度满足矩阵乘法。</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-30-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-12-01%20%E4%B8%8A%E5%8D%8812.58.48.png" alt=""></p>
+<p>分成了两部分求 $z$ 关于权重 $W$ 和输入数据 $x$ 的偏导，$z=Wx$ 和 $z=xW$，$\sigma$ 为上一层梯度。</p>
+<ul>
+<li>$z=Wx$</li>
+</ul>
+<p>$$
+\delta = \frac { \partial J } { \partial z }\\
+\frac { \partial z } { \partial x } = W\\
+\frac { \partial J } { \partial W } = \delta ^ { \top } x
+$$</p>
+<ul>
+<li>$z=xW$</li>
+</ul>
+<p>$$
+\delta = \frac { \partial J } { \partial z }\\
+\frac { \partial z } { \partial x } = W ^ { \top }\\
+\frac { \partial J } { \partial W } = x ^ { \top } \delta
+$$</p>
+<p>关于矩阵求导，在 cs231n 的 <a href="http://cs231n.stanford.edu/syllabus.html">Discussion Section Backpropagation</a> 讨论了，对于损失函数为什么输出一定要是个标量，由于 Dimension Balancing 的原则，最后求偏导一定等于变量的维度，只有这样才能更新参数。</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-01-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-12-01%20%E4%B8%8B%E5%8D%881.03.02.png" alt=""></p>
+<h3 id=框架实现>框架实现</h3>
+<p>Caffe 是在每一个定义的 <a href="https://github.com/BVLC/caffe/tree/master/src/caffe/layers">caffe/layers</a> 中实现一对 <code>Forward</code> 和 <code>Backward</code> 函数，分别有 GPU 版本和 CPU 版本，GPU 版本定义了其核函数。</p>
+<p>以 Sigmoid 和 ReLU 为例:</p>
+<ul>
+<li>Sigmoid</li>
+</ul>
+<pre><code class="C++">template &lt;typename Dtype&gt;
+void SigmoidLayer&lt;Dtype&gt;::Forward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+    const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  const Dtype* bottom_data = bottom[0]-&gt;cpu_data();
+  Dtype* top_data = top[0]-&gt;mutable_cpu_data();
+  const int count = bottom[0]-&gt;count();
+  for (int i = 0; i &lt; count; ++i) {
+    // Sigmoid 函数
+    top_data[i] = sigmoid(bottom_data[i]);
+  }
+}
+
+template &lt;typename Dtype&gt;
+void SigmoidLayer&lt;Dtype&gt;::Backward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
+    const vector&lt;bool&gt;&amp; propagate_down,
+    const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) {
+  if (propagate_down[0]) {
+    const Dtype* top_data = top[0]-&gt;cpu_data();
+    const Dtype* top_diff = top[0]-&gt;cpu_diff();
+    Dtype* bottom_diff = bottom[0]-&gt;mutable_cpu_diff();
+    const int count = bottom[0]-&gt;count();
+    for (int i = 0; i &lt; count; ++i) {
+      const Dtype sigmoid_x = top_data[i];
+      // 上一层梯度乘以该层梯度
+      bottom_diff[i] = top_diff[i] * sigmoid_x * (1. - sigmoid_x);
+    }
+  }
+}</code></pre>
+<ul>
+<li>ReLU</li>
+</ul>
+<pre><code class="C++">template &lt;typename Dtype&gt;
+void ReLULayer&lt;Dtype&gt;::Forward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+    const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  const Dtype* bottom_data = bottom[0]-&gt;cpu_data();
+  Dtype* top_data = top[0]-&gt;mutable_cpu_data();
+  const int count = bottom[0]-&gt;count();
+  // 该参数表明使用 ReLU、Leaky ReLU 还是 PReLU
+    // negative_slope=0，ReLU
+    // negative_slope=0.01 Leaky ReLU
+    // negative_slope=whatever PReLU
+  Dtype negative_slope = this-&gt;layer_param_.relu_param().negative_slope();
+  for (int i = 0; i &lt; count; ++i) {
+    // 实现该激活函数
+    top_data[i] = std::max(bottom_data[i], Dtype(0))
+        + negative_slope * std::min(bottom_data[i], Dtype(0));
+  }
+}
+
+template &lt;typename Dtype&gt;
+void ReLULayer&lt;Dtype&gt;::Backward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
+    const vector&lt;bool&gt;&amp; propagate_down,
+    const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) {
+  if (propagate_down[0]) {
+    const Dtype* bottom_data = bottom[0]-&gt;cpu_data();
+    const Dtype* top_diff = top[0]-&gt;cpu_diff();
+    Dtype* bottom_diff = bottom[0]-&gt;mutable_cpu_diff();
+    const int count = bottom[0]-&gt;count();
+    Dtype negative_slope = this-&gt;layer_param_.relu_param().negative_slope();
+    for (int i = 0; i &lt; count; ++i) {
+      // 计算梯度，大于零就等于 x，小于零的部分只需要乘以 negative_slope
+      bottom_diff[i] = top_diff[i] * ((bottom_data[i] &gt; 0)
+          + negative_slope * (bottom_data[i] &lt;= 0));
+    }
+  }
+}</code></pre>
+<p>PyTorch 是以计算图为基础的自动求导机制，我整理过 PyTorch 的自动求导机制，并实现了一个初中知识里的线性拟合。</p>
+<p>一个示例:</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-30-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-12-01%20%E4%B8%8A%E5%8D%881.17.47.png" alt=""></p>
+
+        <script data-isso="https://hzzone.io/isso"
+        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+        <section id="isso-thread" style="padding-bottom: 20px;"></section>
+    </div>
+<script>
+(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
+;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
+;c.parentNode.insertBefore(a,c)
+})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+
+galite('create', 'UA-128984734-1', 'auto');
+galite('send', 'pageview');
+</script>
+</body>
+</html>
