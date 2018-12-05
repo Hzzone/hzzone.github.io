@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      jax: ["input/TeX", "output/CommonHTML"]
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+</head>
+<body for="html-export">
+    <div class="mume markdown-preview markdown-body">
+        <div class="homepage">
+            <a href="/">主页</a>
+        </div>
+            <h2 id=对-numpy-矩阵进行直方图数值统计>对 Numpy 矩阵进行直方图数值统计</h2>
+<p>说实话对矩阵进行可视化在深度学习中需求很大，例如可视化权重分布。</p>
+<p><a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.ravel.html">np.ravel</a> 将矩阵展开，<code>plt.hist</code> 绘制直方图。</p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+
+a = np.random.randn(1000, 1000)
+plt.hist(a.ravel(), bins=np.arange(np.min(a), np.max(a), 0.01))
+plt.show()</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-05-output_3_0.png" alt=""></p>
+
+        <script data-isso="https://hzzone.io/isso"
+        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+        <section id="isso-thread" style="padding-bottom: 20px;"></section>
+    </div>
+<script>
+(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
+;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
+;c.parentNode.insertBefore(a,c)
+})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+
+galite('create', 'UA-128984734-1', 'auto');
+galite('send', 'pageview');
+</script>
+</body>
+</html>
