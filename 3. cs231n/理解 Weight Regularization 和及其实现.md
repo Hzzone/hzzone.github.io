@@ -1,6 +1,3 @@
-
-## 理解 Weight Regularization 和及其实现
-
 ### 参考
 
 * [正则化](https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/chap3/c3s5ss1.html)

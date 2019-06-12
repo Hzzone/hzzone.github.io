@@ -1,19 +1,19 @@
 [CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.stanford.edu/)
 Data-Driven Approach，数据驱动方法
 
-## 参考资料
+### 参考资料
 * [slides](http://cs231n.stanford.edu/slides/2018/cs231n_2018_lecture02.pdf)
 * [bilibili video](https://www.bilibili.com/video/av17204303/?p=4)
 * [course notes](http://cs231n.github.io/classification/)
 
-## 笔记
+### 笔记
 * 分类是指预先设定一张图片的语义（semantic）标签，例如 cat，由计算机预测。
 * 图像由矩阵构成，当视角、光照、变形、遮挡，图片背景混乱（比如毛的纹理和背景相似），猫的年龄、毛发颜色不同，等条件变化时，图像是完全不一样的，这就需要我们的算法足够鲁棒（Robust，        对于聚类算法而言，鲁棒性意味着聚类结果不应受到模型中存在的数据扰动、噪声及离群点的太大影响。）
 * high-end coded rules（硬编码规则）来识别动物，例如边缘信息，猫有耳朵、眼睛等，然后通过边缘、角度等信息组合在一起通过预先设置的规则进行分类。但是当识别其他类别时，也需要写规则。
 * Data-Driven Approach，数据驱动的方法不通过预先设置的规则进行分类，而是通过手机大量数据，训练一个分类器，总结一个 model，总结对象的核心知识要素，最后识别新的图片。
 * 所以分为两个过程，train 训练模型，predict 预测模型。
 
-## 数据
+### 数据
 超参数（hyperparameter），例如 K-Nearest-Neighbor 中的 K、距离度量等，不在训练中获得，而需要我们提前设置。
 * 根据最高准确率选择超参（不是很好，例如 K=1 时，Nearest-Neighbor 永远都能分类的很好）
 * 机器学习更关注的是如何在训练集以外的数据集（测试集、验证集）上表现的更好。如果只分为训练集和测试集，那我们训练的算法只是选一种在测试集上表现结果最好的，测试集不能代表所有的 unseen data，而算法在其他 unseen 的数据集上表现可能并不好。

@@ -1,6 +1,3 @@
-
-## K-Nearest Neighbor Classifier
-
 这是 cs231n 第一次作业的 $k$ 邻近分类器作业的实现和其相关知识总结。
 
 ### 读取数据
