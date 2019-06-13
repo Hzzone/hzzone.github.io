@@ -16,6 +16,7 @@ install:
   - git clone --depth 1 https://github.com/Hzzone/hzzone.github.io.git --branch=master generate
 
 script:
+  - python -V
   - python main.py
 
 # safelist
