@@ -12,8 +12,11 @@ import urllib
 import pysnooper
 import nbformat
 from nbconvert import MarkdownExporter
+import sys
 
 
+cfg.github.headers = cfg.github.headers.format(sys.argv[1])
+print(cfg.github.headers)
 
 os.popen('cp -r {} {}'.format(cfg.local.generate, osp.join('template', 'static'), osp.join(cfg.local.generate, 'static')))
 base_template_path = 'template/layout.html'

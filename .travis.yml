@@ -20,11 +20,9 @@ install:
   - git clone --depth 1 "https://${GH_REF}" --branch=source source
 
 script:
-  - ls
-  - node markdown.js dGhpcyBpcyBhIGV4YW1wbGU=
   - git pull
   - cd source && git pull
-  - cd .. && python3 main.py
+  - cd .. && python3 main.py $GITHUB_TOKEN
 
 after_script:
   # 部署
