@@ -105,7 +105,7 @@
   <div class="post-title">博士课题调研</div>
   <div class="post-meta">
     <span class="attr">发布于：
-      <span>2019-06-13 10:44:50</span>
+      <span>2019-06-13 17:18:08</span>
     </span>
     <span class="attr">标签：
       <span>随笔</span>
@@ -113,7 +113,7 @@
     <span class="attr">访问：
       <span id="busuanzi_value_page_pv">1368</span></span>
   </div>
-    <div class="markdown-body post-content">
+    <div class="markdown-body post-content post_href">
         
         <p>注意调研，收集、阅读文章，了解现阶段的该方向的研究成果、前景、可能的解决方案等等。</p>
 <p>收集包括：论文，中文链接、博客；并概括该方向的具体内容。</p>
@@ -340,6 +340,11 @@
             );
             domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
         },false);
+
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+
     </script>
     </body>
 

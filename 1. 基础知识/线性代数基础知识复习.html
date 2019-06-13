@@ -105,7 +105,7 @@
   <div class="post-title">线性代数基础知识复习</div>
   <div class="post-meta">
     <span class="attr">发布于：
-      <span>2019-06-13 10:44:50</span>
+      <span>2019-06-13 17:18:08</span>
     </span>
     <span class="attr">标签：
       <span>基础知识</span>
@@ -113,7 +113,7 @@
     <span class="attr">访问：
       <span id="busuanzi_value_page_pv">1368</span></span>
   </div>
-    <div class="markdown-body post-content">
+    <div class="markdown-body post-content post_href">
         
         <p>线性代数基础知识复习，来源于四川大学数学学院的线性代数教材。</p>
 <p>线性代数其实并不难，相反如果理解透彻之后其实非常简单，公式、原理摆在那里，能变的其实很少。</p>
@@ -383,6 +383,11 @@ $$P_kP_{k-1}\cdots P_1=A^{-1}$$</p>
             );
             domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
         },false);
+
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+
     </script>
     </body>
 

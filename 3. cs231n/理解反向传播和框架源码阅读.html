@@ -105,7 +105,7 @@
   <div class="post-title">理解反向传播和框架源码阅读</div>
   <div class="post-meta">
     <span class="attr">发布于：
-      <span>2019-06-13 10:44:50</span>
+      <span>2019-06-13 17:18:08</span>
     </span>
     <span class="attr">标签：
       <span>cs231n</span>
@@ -113,7 +113,7 @@
     <span class="attr">访问：
       <span id="busuanzi_value_page_pv">1368</span></span>
   </div>
-    <div class="markdown-body post-content">
+    <div class="markdown-body post-content post_href">
         
         <h3>反向传播</h3>
 <p>反向传播其实很简单，就是梯度下降和链式法则的结合运用。对于多层神经网络反向传播尤其容易理解。</p>
@@ -333,6 +333,11 @@ $$</p>
             );
             domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
         },false);
+
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+
     </script>
     </body>
 

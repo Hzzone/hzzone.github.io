@@ -105,7 +105,7 @@
   <div class="post-title">宜搜小说 API 分析</div>
   <div class="post-meta">
     <span class="attr">发布于：
-      <span>2019-06-13 10:44:50</span>
+      <span>2019-06-13 17:18:08</span>
     </span>
     <span class="attr">标签：
       <span>其他</span>
@@ -113,7 +113,7 @@
     <span class="attr">访问：
       <span id="busuanzi_value_page_pv">1368</span></span>
   </div>
-    <div class="markdown-body post-content">
+    <div class="markdown-body post-content post_href">
         
         <h3>宜搜小说 API 分析</h3>
 <p>类似的有 <a href="https://github.com/xiadd/zhuishushenqi">追书神器 API</a>，很久以前还挺好用的，但这应用收费章节比原版还贵，收费章节直接加密；后来直接连免费章节也不能用了，不能获取章节内容。</p>
@@ -308,6 +308,11 @@ url: <code>http://api.easou.com/api/bookapp/batch_chapter.m?cid=eef_&amp;version
             );
             domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
         },false);
+
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+
     </script>
     </body>
 

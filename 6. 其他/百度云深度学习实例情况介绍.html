@@ -105,7 +105,7 @@
   <div class="post-title">百度云深度学习实例情况介绍</div>
   <div class="post-meta">
     <span class="attr">发布于：
-      <span>2019-06-13 10:44:50</span>
+      <span>2019-06-13 17:18:08</span>
     </span>
     <span class="attr">标签：
       <span>其他</span>
@@ -113,7 +113,7 @@
     <span class="attr">访问：
       <span id="busuanzi_value_page_pv">1368</span></span>
   </div>
-    <div class="markdown-body post-content">
+    <div class="markdown-body post-content post_href">
         
         <p>百度云深度学习不能保存镜像，但胜在价格便宜。</p>
 <p>相对来说腾讯云最便宜的 14￥ ，阿里云最低 9￥ (且需要最低余额 100￥)，AWS p2.xlarge 最低大概 6-7￥，需要申请实例限制和国外信用卡，但是胜在有很多配好环境的实例。</p>
@@ -243,6 +243,11 @@ xkit                    0.0.0
             );
             domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
         },false);
+
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+
     </script>
     </body>
 
