@@ -12,6 +12,7 @@ before_install:
   - sudo pip3 install -U virtualenvwrapper
   - python3 -V
   - pip3 -V
+  - sudo apt install sshpass
 
 install:
   - pip3 install -r requirements.txt
