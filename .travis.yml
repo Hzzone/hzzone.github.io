@@ -20,6 +20,7 @@ install:
   - git clone --depth 1 "https://${GH_REF}" --branch=source source
   - echo -e $KEY >> ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
+  - sshpass -p passphrase ssh-add ~/.ssh/id_rsa
 
 script:
   - git pull
