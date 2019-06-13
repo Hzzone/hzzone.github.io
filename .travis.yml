@@ -12,7 +12,6 @@ before_install:
   - sudo pip3 install -U virtualenvwrapper
   - python3 -V
   - pip3 -V
-  - sudo apt install sshpass
 
 install:
   - pip3 install -r requirements.txt
@@ -21,7 +20,6 @@ install:
   - git clone --depth 1 "https://${GH_REF}" --branch=source source
   - echo -e $KEY >> ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
-  - sshpass -p passphrase ssh-add ~/.ssh/id_rsa
 
 script:
   - git pull
