@@ -4,3 +4,4 @@ easydict
 requests
 pysnooper
 nbformat
+nbconvert
