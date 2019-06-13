@@ -22,6 +22,7 @@ install:
 
 script:
   - ls
+  - node markdown.js dGhpcyBpcyBhIGV4YW1wbGU=
   - git pull
   - cd source && git pull
   - cd .. && python3 main.py
