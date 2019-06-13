@@ -1,145 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>PCA 主成分分析推导及 Python 实现</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
         </div>
-            <h2 id=pca-主成分分析推导及-python-实现>PCA 主成分分析推导及 Python 实现</h2>
-<p>此证明推导来源于 Deep Learning 这本书，和原书不同的在于:</p>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">PCA 主成分分析推导及 Python 实现</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>机器学习</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <p>此证明推导来源于 Deep Learning 这本书，和原书不同的在于:</p>
 <ul>
 <li>我证明了当 $l&gt;1$ 时的普遍情况下的目标函数。</li>
 <li>原书提出使用归纳法证明 <strong>$D$ 应为 $X^TX$ 前 $l$ 个最大特征值对应的特征向量</strong> (并未证明)，在此我使用迹与特征值的性质求证最后的误差为 $\sum^l_{i=1}\lambda_i$，其中 $\lambda_i$ 为 $X^TX$ 的特征值。</li>
 </ul>
-<h3 id=推导>推导</h3>
+<h3>推导</h3>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0040.JPG" width="900px">
 </div>
-
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0041.JPG" width="900px">
 </div>
-
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0042.JPG" width="900px">
 </div>
-
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0043.JPG" width="900px">
 </div>
-
-<h3 id=python-实现>Python 实现</h3>
+<h3>Python 实现</h3>
 <p>下载鸢尾花数据集:</p>
-<pre><code class="shell">wget http://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data -O iris.csv</code></pre>
+<pre class="hljs"><code>wget http://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data -O iris.csv
+</code></pre>
 <p>在此对比了自己实现的 PCA 和 sklearn 实现的 <a href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">PCA</a> 之间的效果和误差。</p>
 <ul>
-<li><p>误差: 12.909879891741815 3.8993133189625775</p>
+<li>
+<p>误差: 12.909879891741815 3.8993133189625775</p>
 </li>
-<li><p>效果如图:</p>
+<li>
+<p>效果如图:</p>
 </li>
 </ul>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-Figure_1-1.png" width="900px">
 </div>
-
 <p>PCA 实现:</p>
-<pre><code class="python">import utils
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import decomposition
+<pre class="hljs"><code><span class="hljs-keyword">import</span> utils
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> decomposition
 
-# 读取数据
-iris_data, iris_label = utils.read_iris(&#39;../data/iris.csv&#39;)
-iris_data -= np.mean(iris_data, axis=0)
+<span class="hljs-comment"># 读取数据</span>
+iris_data, iris_label = utils.read_iris(<span class="hljs-string">'../data/iris.csv'</span>)
+iris_data -= np.mean(iris_data, axis=<span class="hljs-number">0</span>)
 
-# target: 150*4
-def pca(target, l):
-    # l 必须小于 n，这里 n=4;
-    assert l&lt;=target.shape[1]
+<span class="hljs-comment"># target: 150*4</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pca</span><span class="hljs-params">(target, l)</span>:</span>
+    <span class="hljs-comment"># l 必须小于 n，这里 n=4;</span>
+    <span class="hljs-keyword">assert</span> l&lt;=target.shape[<span class="hljs-number">1</span>]
 
-    # 计算 X^T*X 的特征向量和特征值
-    # 参考 https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.linalg.eig.html
+    <span class="hljs-comment"># 计算 X^T*X 的特征向量和特征值</span>
+    <span class="hljs-comment"># 参考 https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.linalg.eig.html</span>
     eig_value, eig_vector = np.linalg.eig(np.dot(target.T, target))
 
     index = np.argsort(eig_value)
     eig_vector = eig_vector[index]
-    # 取前 l 最大的特征值对应的特征向量
-    # D: N*L
+    <span class="hljs-comment"># 取前 l 最大的特征值对应的特征向量</span>
+    <span class="hljs-comment"># D: N*L</span>
     D = eig_vector[:l, :]
-    D = np.transpose(D, (1, 0))
+    D = np.transpose(D, (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
 
-    # 解码计算误差, frobenius norm
-    # X-DD^TX
+    <span class="hljs-comment"># 解码计算误差, frobenius norm</span>
+    <span class="hljs-comment"># X-DD^TX</span>
     error = np.linalg.norm(target - np.dot(np.dot(D, D.T), target.T).T)
-    return np.dot(target, D), error
+    <span class="hljs-keyword">return</span> np.dot(target, D), error
 
-# 150*2
-result1, self_implemented_error = pca(iris_data, 2)
+<span class="hljs-comment"># 150*2</span>
+result1, self_implemented_error = pca(iris_data, <span class="hljs-number">2</span>)
 
-f = plt.figure(figsize=(16,9))
-c = [&#39;#ff0000&#39;, &#39;#ffff00&#39;, &#39;#00ff00&#39;, &#39;#00ffff&#39;]
+f = plt.figure(figsize=(<span class="hljs-number">16</span>,<span class="hljs-number">9</span>))
+c = [<span class="hljs-string">'#ff0000'</span>, <span class="hljs-string">'#ffff00'</span>, <span class="hljs-string">'#00ff00'</span>, <span class="hljs-string">'#00ffff'</span>]
 
 
-plt.subplot(1, 2, 1)
-plt.title(&#39;self-implemented PCA&#39;)
-for i in [0, 1, 2]:
-    plt.plot(result1[iris_label == i, 0].flatten(), result1[iris_label == i, 1].flatten(), &#39;.&#39;, c=c[i])
+plt.subplot(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)
+plt.title(<span class="hljs-string">'self-implemented PCA'</span>)
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]:
+    plt.plot(result1[iris_label == i, <span class="hljs-number">0</span>].flatten(), result1[iris_label == i, <span class="hljs-number">1</span>].flatten(), <span class="hljs-string">'.'</span>, c=c[i])
 
-plt.legend([&#39;0&#39;, &#39;1&#39;, &#39;2&#39;])
+plt.legend([<span class="hljs-string">'0'</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'2'</span>])
 
-plt.subplot(1, 2, 2)
-plt.title(&#39;sklearn PCA&#39;)
-# 150*2
-model = decomposition.pca.PCA(n_components=2).fit(iris_data)
+plt.subplot(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>)
+plt.title(<span class="hljs-string">'sklearn PCA'</span>)
+<span class="hljs-comment"># 150*2</span>
+model = decomposition.pca.PCA(n_components=<span class="hljs-number">2</span>).fit(iris_data)
 result2 = model.transform(iris_data)
 pca_error = np.linalg.norm(iris_data - model.inverse_transform(result2))
 
-for i in [0, 1, 2]:
-    plt.plot(result2[iris_label==i, 0].flatten(), result2[iris_label==i, 1].flatten(), &#39;.&#39;, c=c[i])
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]:
+    plt.plot(result2[iris_label==i, <span class="hljs-number">0</span>].flatten(), result2[iris_label==i, <span class="hljs-number">1</span>].flatten(), <span class="hljs-string">'.'</span>, c=c[i])
 
-plt.legend([&#39;0&#39;, &#39;1&#39;, &#39;2&#39;])
+plt.legend([<span class="hljs-string">'0'</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'2'</span>])
 plt.grid()
 plt.show()
-print(self_implemented_error, pca_error)</code></pre>
+print(self_implemented_error, pca_error)
+</code></pre>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+  </div>
+</div>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>

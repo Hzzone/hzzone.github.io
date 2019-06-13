@@ -1,36 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>博士课题调研</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
         </div>
-            <p>注意调研，收集、阅读文章，了解现阶段的该方向的研究成果、前景、可能的解决方案等等。</p>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">博士课题调研</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>随笔</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <p>注意调研，收集、阅读文章，了解现阶段的该方向的研究成果、前景、可能的解决方案等等。</p>
 <p>收集包括：论文，中文链接、博客；并概括该方向的具体内容。</p>
 <p>调研方向包括:</p>
 <ul>
@@ -45,7 +130,7 @@
 <li><a href="http://openaccess.thecvf.com/menu.py">Computer Vision Foundation open access</a>: 近几年 CVPR、ICCV 论文下载。</li>
 <li>好用的数据集标注工具: <a href="http://www.jinglingbiaozhu.com/">精灵标注助手</a>、<a href="https://github.com/tzutalin/labelImg">labelImg</a>、<a href="https://github.com/Jeff-sjtu/labelKeypoint">labelKeypoint</a>、<a href="https://github.com/Labelbox/Labelbox">Labelbox</a>。</li>
 </ul>
-<h3 id=zero-shot-learning>Zero Shot Learning</h3>
+<h3>Zero Shot Learning</h3>
 <p>Zero Shot Learning (零样本学习) 属于迁移学习的一个分支，先由李飞飞在 <a href="https://ieeexplore.ieee.org/document/1597116/">One-Shot Learning of Object Categories TPAMI 2006</a> 提出 One Shot Learning，通过少量样本做目标分类，然后由 Bengio 等在 <a href="https://www.aaai.org/Papers/AAAI/2008/AAAI08-103.pdf">Zero-data Learning of New Tasks AAAI 2008</a> 提出无样本目标分类。</p>
 <p>在 Zero Shot Learning 中训练集和测试集的类别无交集，即测试集的类别不在训练集中，然后通过训练训练之后的模型能够正确预测没有见过的类别，这就是零样本学习的目的。</p>
 <p>Zero Shot Learning 的样本类别需要提供一些类别的描述信息，包括 Attribute (属性)、或者 Word Vector (词向量)，所有类别共有。简要描述 Zero Shot Learning 的流程则是: 使用训练集训练一个 CNN 模型 (在有些方法里则是直接使用 IMAGENET 上的预训练模型提取特征，然后使用属性或词向量在训练一个网络结合特征向量进行预测，例如在 <a href="https://arxiv.org/abs/1611.05088">DEM CVPR 2017</a> 就是一个这样的过程。)，数据集的标注是属性或者词向量，计算输出与每个类别之间的距离之后最近的则是预测的类别。</p>
@@ -53,20 +138,19 @@
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-03-14644ea00fa04d90a7cc13493ebde189.jpeg">
 </div>
-
 <p>基于属性的学习方法最早提出于 <a href="https://ieeexplore.ieee.org/document/6571196">Attribute-Based Classification for Zero-Shot Visual Object Categorization TPAMI 2013</a>，并且该文章公开了一个 benchmark 数据集，<a href="https://cvml.ist.ac.at/AwA/">Animals with Attributes</a> 收集了超过 30000张图片，50 类和 85 个 semantic attributes，并提出了 DAP (直接属性预测，通过数据预测属性) 和 IAP (间接属性预测，属性层作为中间层) 两种方法。</p>
 <p>基于词向量的学习方法和基于属性类似，利用 <a href="https://en.wikipedia.org/wiki/Word2vec">Word2vec</a> 例如 <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a>、<a href="https://iksinc.online/tag/continuous-bag-of-words-cbow/">CBOW</a> 或 Skip-Gram 等模型 one hot 编码词语，获得 Word Emmbedding，语义相近的词语在投影上越接近。这样做的好处是不用像 Attribute-Based 方法一样标注每一个类别 (属性标注对最后结果影响很大)。</p>
 <p>目前国人在 Zero Shot Learning 这个方向的研究走的很前，每年 CVPR，ECCV 等会议基本上都会有十几篇这个方向的文章。我认为 Zero Shot Learnin 还是一个非常有研究价值和前景的方向的，毕竟在这个世界物品种类繁多，就算 IMAGENET 也只有两千类，不可能涵盖整个世界，要收集到更多的数据也是一个非常庞大的工作。除了分类之外，Zero Shot Learning 还可以扩展到零样本的物体检测，例如在 <a href="https://arxiv.org/abs/1804.04340">Zero-Shot Object Detection ECCV 2018</a> 就划分了 MSCOCO 来做零样本检测，是一个非常新颖的方向。</p>
 <p>这个方向还是非常有研究价值的。</p>
 <p>目前 Zero Shot Learning 提出的方法很多，还需要后续多阅读文章。</p>
-<h4 id=数据集-benchmark->数据集 (benchmark)</h4>
+<h4>数据集 (benchmark)</h4>
 <ul>
-<li><a href="https://cvml.ist.ac.at/AwA/">AwA</a>: This dataset provides a plattform to benchmark <strong>transfer-learning</strong> algorithms, in particular <strong>attribute base classification</strong>. It consists of <strong>30475</strong> images of <strong>50</strong> animals classes with <strong>six</strong> pre-extracted feature representations for each image. The animals classes are aligned with Osherson&#39;s classical class/attribute matrix, thereby providing <strong>85</strong> numeric attribute values for each class. Using the shared attributes, it is possible to transfer information between different classes. 50 类动物，30475 张图片，85 个数值属性，由于版权问题已不提供。</li>
+<li><a href="https://cvml.ist.ac.at/AwA/">AwA</a>: This dataset provides a plattform to benchmark <strong>transfer-learning</strong> algorithms, in particular <strong>attribute base classification</strong>. It consists of <strong>30475</strong> images of <strong>50</strong> animals classes with <strong>six</strong> pre-extracted feature representations for each image. The animals classes are aligned with Osherson’s classical class/attribute matrix, thereby providing <strong>85</strong> numeric attribute values for each class. Using the shared attributes, it is possible to transfer information between different classes. 50 类动物，30475 张图片，85 个数值属性，由于版权问题已不提供。</li>
 <li><a href="https://cvml.ist.ac.at/AwA2/">AwA2</a>: 和 AwA 相似，50 类动物，37322 张图片，每张图片有预提取得特征，每类提供 85 个数值属性值。</li>
 <li><a href="http://www.vision.caltech.edu/visipedia/CUB-200.html">Caltech-UCSD Birds 200</a>: 200 类鸟，6033 张图片，288 个属性，每张图片标注属性是否存在以及属性表现的程度，例如 Probably、Definitely、Guessing。也包括 Bounding Box、Segmentation 的标注。</li>
 <li><a href="http://www.vision.caltech.edu/visipedia/CUB-200-2011.html">Caltech-UCSD Birds-200-2011</a>: 扩充了 CUB-200。</li>
 </ul>
-<h4 id=中文链接>中文链接</h4>
+<h4>中文链接</h4>
 <ul>
 <li><a href="https://www.jiqizhixin.com/technologies/d3a2c2a7-0181-4bfe-ac33-540f12116dbf">零样本学习 One/zero shot learning 机器之心</a></li>
 <li><a href="https://baike.baidu.com/item/%E9%9B%B6%E6%A0%B7%E6%9C%AC%E5%AD%A6%E4%B9%A0/22448231">零样本学习_百度百科</a></li>
@@ -75,7 +159,7 @@
 <li><a href="https://blog.csdn.net/Liangjun_Feng/article/details/82026574">DeepLearning | Zero Shot Learning 零样本学习</a></li>
 <li><a href="http://www.sohu.com/a/232858182_473283">CVPR 2018：阿里提出新零样本学习方法，有效解决偏置问题</a></li>
 </ul>
-<h4 id=相关论文>相关论文</h4>
+<h4>相关论文</h4>
 <ul>
 <li><a href="https://arxiv.org/abs/1711.06025">Learning to Compare: Relation Network for Few-Shot Learning CVPR2018</a>，<a href="https://github.com/floodsung/LearningToCompare_FSL">Github</a></li>
 <li><a href="https://arxiv.org/abs/1803.06731">Discriminative Learning of Latent Features for Zero-Shot Recognition CVPR 2018 (Oral)</a></li>
@@ -85,7 +169,7 @@
 <li><a href="https://arxiv.org/abs/1611.05088">Learning a Deep Embedding Model for Zero-Shot Learning</a>, <a href="https://github.com/dragen1860/DeepEmbeddingModel_ZSL-Pytorch">GitHub</a></li>
 <li><a href="https://arxiv.org/abs/1803.08035">Zero-shot Recognition via Semantic Embeddings and Knowledge Graphs</a>, <a href="https://github.com/JudyYe/zero-shot-gcn">Github</a></li>
 </ul>
-<h3 id=hand-pose-estimation>Hand Pose Estimation</h3>
+<h3>Hand Pose Estimation</h3>
 <p>Hand Pose Estimation (手部姿态估计) 是 Pose Estimation 的一个分支。Pose Estimation 包括躯干、手部、脸部的姿态估计，主要是预测脸部、手部等等的关键点。</p>
 <p>在 Pose Estimation 上有很多非常惊艳的工作，例如 CMU Perceptual Computing Lab 开源的 <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">openpose</a> 姿态估计框架，上海交大的卢策武团队在姿态估计方面也做的很强，开源了一个类似的框架 <a href="https://github.com/MVIG-SJTU/AlphaPose">AlphaPose</a>。openpose 由三篇 CVPR 的文章实现，具体到细节好像不是分别实现的，我没有研究过源码也不是很清楚。其中 Body Pose Estimation 的实现是基于 <a href="https://github.com/ZheC/Realtime_Multi-Person_Pose_Estimation">Realtime Multi-Person Pose Estimation</a>，我曾经使用过另一个框架实现过，现在还挂在作者的相关链接当中。</p>
 <p>手势识别是一个分类任务，具体到某个手势是那种手势，和 Hand Pose Estimation 完全不同；传统的 CV 方法实现手势姿态估计方法也有很多，我以前就使用 opencv 实现过一个手部估计，利用肤色分割手部，原理非常之简单，暂且不提。</p>
@@ -98,7 +182,7 @@
 <p>讨论到普通 RGB 图片，在 <a href="https://arxiv.org/abs/1704.07809">Hand Keypoint Detection in Single Images using Multiview Bootstrapping CVPR 2017</a> 第一个提出了对普通 RGB 图片做姿态估计的方法。这篇文章的核心思想是：作者从 <a href="http://human-pose.mpi-inf.mpg.de/">MPII</a>、<a href="https://nzsl.vuw.ac.nz/">NZSL</a> 挑选并标注了手的关键点数据，作为 $\mathcal{T}_0$，然后训练出一个 weak detector 作为 $\mathcal{d}_0$，$\mathcal{d}_0$ 因为数据量小检测效果不会很好。然后一直迭代，通过多角度 (即多个摄像头的多个角度，并且未标注)自举出许多带有标注的数据。自举的方法是如果一个时间点，超过两个角度检测出同一个关键点，则通过检测出来的点 triangulated 出三维数据，并以此可以推出其他检测失败的角度的点，最后生成许多标注的数据。这篇文章的关键点在于 <strong>Multiview</strong> 和 <strong>Bootstrapping</strong>，一步一步 refine 整个模型。</p>
 <p>一个非常令人惊艳的工作，最后成功使用到了 <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">openpose</a> 的手部关键点检测上，不过我认为一个缺陷在于需要使用另一个模型做 Hand Bounding Box Detection，当然这是用在 openpose 可以取得更好结果。</p>
 <p>基于普通 RGB 的 Hand Pose Estimation 是一个比较新颖的方向，以前很少有人做，因为相对于躯干和脸部、基于深度图片的方法，难度会更大，因为手部的立体和小，数据量也很难提高。当然这是一个非常值得开拓和深入的方向，重要性不亚于 Body Pose Estimation。</p>
-<h4 id=数据集>数据集</h4>
+<h4>数据集</h4>
 <p>手部数据集很少，尤其具体到手部 RGB 图片的关键点数据集只有一个。</p>
 <ul>
 <li><a href="http://cvrr.ucsd.edu/vivachallenge/index.php/hands/hand-detection/">VIVA Hand Detection</a>: 驾驶车辆时的手部边框。</li>
@@ -109,38 +193,38 @@
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-03-ex2_2.flv_000094_r.jpg">
 </div>
-
 <p>接下来是 RGBD 数据集，RGBD 一般由深度摄像机录制的 benchmark 数据集 (主要是 Kinect)，而且普遍数据量很大。</p>
 <ul>
 <li><a href="https://cims.nyu.edu/~tompson/NYU_Hand_Pose_Dataset.htm">NYU Hand Pose Dataset</a></li>
 <li><a href="https://labicvl.github.io/hand.html">ICVL Hand Posture Dataset</a></li>
 <li><a href="https://github.com/geliuhao/CVPR2016_HandPoseEstimation/issues/4">MSRA</a></li>
 </ul>
-<h4 id=链接>链接</h4>
+<h4>链接</h4>
 <ul>
 <li><a href="https://github.com/xinghaochen/awesome-hand-pose-estimation/tree/master/evaluation">awesome-hand-pose-estimation</a>: 包含了基于深度方法的文章和其相应的结果。</li>
 <li><a href="https://blog.csdn.net/MyArrow/article/details/51933651">手势估计- Hand Pose Estimation</a></li>
 </ul>
-<h4 id=论文>论文</h4>
+<h4>论文</h4>
 <ul>
 <li><a href="https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Supancic_Depth-Based_Hand_Pose_ICCV_2015_paper.html">Depth-based hand pose estimation: data, methods, and challenges ICCV 2015</a>: Depth-based 综述，介绍了数据集及对比现有方法。</li>
 <li><a href="https://arxiv.org/abs/1704.07809">Hand Keypoint Detection in Single Images using Multiview Bootstrapping CVPR 2017</a></li>
 </ul>
-<h3 id=handwritten-mathmatical-expression-recognition>Handwritten Mathmatical Expression Recognition</h3>
+<h3>Handwritten Mathmatical Expression Recognition</h3>
 <p>Handwritten Mathmatical Expression Recognition 指的是手写体数学公式的识别，具体到某一个应用，主要是将手写体数学公式转为 LaTex 或者 MathType 等，在这里讨论手写体转 LaTex 公式。</p>
 <p><a href="https://en.wikipedia.org/wiki/LaTeX">LaTeX</a> 是一种类似于 HTML 的标记语言，最大的应用就是用来写论文，在排版、尤其是数学公式的书写上优于 Mirosoft Word。而 LaTeX 书写数学公式 <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX/Mathematics</a>，有一定语法，后台渲染出数学公式。很多论文或者博客的数学公式都是使用 LaTeX 书写的，在公式上 LaTeX 是独一无二的。</p>
 <p>例如将此图片转为 LaTex 公式:</p>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-04-69.jpg" />
 </div>
-
 <p>为 <code>n=\sum_{i\ne d}a_i L^i</code>。</p>
 <p>通常这个方向使用的数据是 ink 格式，保存了点书写的顺序和坐标。</p>
 <p>手写体数学公式识别主要有两个重点：1. symbol recognition; 2. structural analysis。两个问题根据解决的顺序有两种方法解决，一种是 sequential 方法 和 global 方法。</p>
 <ul>
-<li><p>sequential 方法首先识别和分割数学符号，然后以此在构建出数学公式的二维结构。这种方法如果在识别时发生错误，那么在第二阶段会继承这些错误。</p>
+<li>
+<p>sequential 方法首先识别和分割数学符号，然后以此在构建出数学公式的二维结构。这种方法如果在识别时发生错误，那么在第二阶段会继承这些错误。</p>
 </li>
-<li><p>global 方法同时识别符号和二维结构，符号的分割结果只是转化数学公式的副产物。</p>
+<li>
+<p>global 方法同时识别符号和二维结构，符号的分割结果只是转化数学公式的副产物。</p>
 </li>
 </ul>
 <p>以上是两种基本思路，其中 grammar-based 方法取得了很好的结果，但是需要提供额外的先验知识 (LaTex 语法)。</p>
@@ -148,19 +232,18 @@
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-05-Screen%20Shot%202018-11-05%20at%201.09.37%20PM.png" />
 </div>
-
 <p>同一个作者后来在 arxiv 发表了一篇预印本 <a href="https://arxiv.org/abs/1801.03530">Multi-Scale Attention with Dense Encoder for Handwritten Mathematical Expression Recognition</a>，将 FCN 替换成 DenseNet，采用 Multi-Scale Attention Model 避免 pooling 的影响，取得比上一篇文章更好的结果。</p>
 <p>这个方向只是文本识别的一个特定应用，举个例子，在 iOS App Store 有一款应用叫 MathPad，识别手写公式并导出 MathType 或者 LaTex 代码。这是一个非常有趣的方向，在这方面的工作也很多，有待于更进一步调查。这个方向通常发表在 Pattern Recognition 或者 International Conference on Document Analysis and Recognition，也是一个值得研究的方向。</p>
-<h4 id=数据集>数据集</h4>
+<h4>数据集</h4>
 <p>目前只能找到一个数据集，但是已经举办过很多年了。</p>
 <ul>
 <li><a href="http://tc11.cvc.uab.es/datasets/ICFHR-CROHME-2016_1">ICFHR 2016 dataset</a>: 合并了前几年比赛的数据集，有超过 12K 的手写数学公式 (来自 wikipidia)。</li>
 </ul>
-<h4 id=论文>论文</h4>
+<h4>论文</h4>
 <ul>
 <li><a href="http://home.ustc.edu.cn/~xysszjs/paper/PR2017.pdf">Watch, attend and parse: An end-to-end neural network based approach to handwritten mathematical expression recognition, Pattern Recognition 2017</a>, <a href="https://github.com/JianshuZhang/WAP">GitHub</a>: 作者是成电一位博士生，Theano 实现。</li>
 </ul>
-<h3 id=meteorological-prediction>Meteorological prediction</h3>
+<h3>Meteorological prediction</h3>
 <p>是否可能使用机器学习做天气预报?</p>
 <ol>
 <li>天气是怎么产生的: 真正的天气预报不是靠机器学习学出来的，而是靠物理模型推算出来，物理模型就是数值天气预报，比如全球模式美国的GFS，欧洲的EC。这些模型都是带有时间的偏微分方程组，通过求解积分这些偏微分方程组得到预报结果。当然，求解出来的预报结果和实际情况会有一定的偏差。但是总体宏观情况基本一致。有点像量子力学和经典物理学，宏观可以准确描述，微观就无法准确观测到。</li>
@@ -182,43 +265,82 @@
 <li>对于不同地域，不同气候条件，经纬度等等如何，如何提高模型的鲁棒性？</li>
 </ul>
 <p><a href="https://www.semanticscholar.org/paper/Convolutional-LSTM-Network%3A-A-Machine-Learning-for-Shi-Chen/4a861d29f36d2e4f03477c5df2730c579d8394d3">Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting NIPS 2015</a> 这篇文章当中提出 ConvLSTM，将 CNN 与 LSTM 在模型底层结合，并且将 FC-LSTM 中 input-to-state 和 state-to-state 部分由前馈式计算替换成卷积的形式，使其更好地捕捉时空相关性和去除数据冗余。</p>
-<h4 id=链接>链接</h4>
+<h4>链接</h4>
 <ul>
 <li><a href="https://www.zhihu.com/question/34318188">如何用机器学习进行天气预报?</a></li>
 <li><a href="http://www.caiyunapp.com/">彩云天气</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/40712680">卷积长短时记忆神经网络（ConvLSTM） 雷达回波图像外推</a></li>
 </ul>
-<h4 id=论文>论文</h4>
+<h4>论文</h4>
 <ul>
 <li><a href="https://www.semanticscholar.org/paper/Convolutional-LSTM-Network%3A-A-Machine-Learning-for-Shi-Chen/4a861d29f36d2e4f03477c5df2730c579d8394d3">Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting NIPS 2015</a></li>
 </ul>
-<h3 id=face-age-esitmation>Face Age Esitmation</h3>
-<h4 id=数据集>数据集</h4>
+<h3>Face Age Esitmation</h3>
+<h4>数据集</h4>
 <ul>
 <li><a href="https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/">IMDB-WIKI – 500k+ face images with age and gender labels</a></li>
 </ul>
-<h4 id=链接>链接</h4>
+<h4>链接</h4>
 <ul>
 <li><a href="https://www.zhihu.com/question/40340332">人脸识别是如何判断性别和年龄的？</a></li>
 </ul>
-<h4 id=论文>论文</h4>
+<h4>论文</h4>
 <ul>
 <li><a href="https://ieeexplore.ieee.org/abstract/document/7736925">How Transferable Are CNN-Based Features for Age and Gender Classification?</a></li>
 </ul>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+  </div>
+</div>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>

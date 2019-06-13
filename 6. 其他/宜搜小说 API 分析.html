@@ -1,36 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>宜搜小说 API 分析</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
         </div>
-            <h3 id=宜搜小说-api-分析>宜搜小说 API 分析</h3>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">宜搜小说 API 分析</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>其他</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <h3>宜搜小说 API 分析</h3>
 <p>类似的有 <a href="https://github.com/xiadd/zhuishushenqi">追书神器 API</a>，很久以前还挺好用的，但这应用收费章节比原版还贵，收费章节直接加密；后来直接连免费章节也不能用了，不能获取章节内容。</p>
 <p>我做过的包括 <a href="https://github.com/Hzzone-Archives/YourReader">微信小程序</a>，<a href="https://github.com/Hzzone/E-Book">Android</a>，都是使用追书神器 API，现在失效了。</p>
 <p>接下来介绍宜搜小说 API。</p>
@@ -40,146 +125,190 @@
 <p>url: <code>http://api.easou.com/api/bookapp/search.m?word=红楼梦&amp;type=0&amp;sort_type=0&amp;page_id=1&amp;count=20&amp;cid=eef_&amp;version=002&amp;os=ios&amp;udid=76fbeddf8b73c8b0fc065e2296b767579d8fda38&amp;appverion=1018&amp;ch=bnf1349_10388_001</code></p>
 <p><code>get</code>，改变 word 参数。</p>
 <p>response:</p>
-<pre><code class="json">
+<pre class="hljs"><code>
 {
-    &quot;type&quot;: 0,
-    &quot;subClass&quot;: &quot;&quot;,
-    &quot;keyWord&quot;: &quot;&quot;,
-    &quot;success&quot;: true,
-    &quot;errorlog&quot;: &quot;&quot;,
-    &quot;sortType&quot;: 0,
-    &quot;all_book_items&quot;: [
+    <span class="hljs-attr">"type"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"subClass"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"keyWord"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"errorlog"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"sortType"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"all_book_items"</span>: [
         {
-            &quot;name&quot;: &quot;红楼梦&quot;,
-            &quot;classes&quot;: &quot;连载,其他&quot;,
-            &quot;desc&quot;: &quot;《红楼梦》，作者曹雪芹，中国古代四大名著之一，章回体长篇小说......&quot;,
-            &quot;status&quot;: &quot;连载&quot;,
-            &quot;gid&quot;: 17384298,
-            &quot;category&quot;: &quot;其他&quot;,
-            &quot;chapterCount&quot;: 120,
-            &quot;cpId&quot;: &quot;0&quot;,
-            &quot;charge&quot;: 0,
-            &quot;agentName&quot;: &quot;&quot;,
-            &quot;ad&quot;: 0,
-            &quot;activityInfo&quot;: {
-                &quot;discount&quot;: 0,
-                &quot;price&quot;: 0,
-                &quot;originPrice&quot;: 0,
-                &quot;activityName&quot;: &quot;&quot;,
-                &quot;activityType&quot;: -1,
-                &quot;ttl&quot;: 0
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"红楼梦"</span>,
+            <span class="hljs-attr">"classes"</span>: <span class="hljs-string">"连载,其他"</span>,
+            <span class="hljs-attr">"desc"</span>: <span class="hljs-string">"《红楼梦》，作者曹雪芹，中国古代四大名著之一，章回体长篇小说......"</span>,
+            <span class="hljs-attr">"status"</span>: <span class="hljs-string">"连载"</span>,
+            <span class="hljs-attr">"gid"</span>: <span class="hljs-number">17384298</span>,
+            <span class="hljs-attr">"category"</span>: <span class="hljs-string">"其他"</span>,
+            <span class="hljs-attr">"chapterCount"</span>: <span class="hljs-number">120</span>,
+            <span class="hljs-attr">"cpId"</span>: <span class="hljs-string">"0"</span>,
+            <span class="hljs-attr">"charge"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"agentName"</span>: <span class="hljs-string">""</span>,
+            <span class="hljs-attr">"ad"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"activityInfo"</span>: {
+                <span class="hljs-attr">"discount"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"price"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"originPrice"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"activityName"</span>: <span class="hljs-string">""</span>,
+                <span class="hljs-attr">"activityType"</span>: <span class="hljs-number">-1</span>,
+                <span class="hljs-attr">"ttl"</span>: <span class="hljs-number">0</span>
             },
-            &quot;activityType&quot;: -1,
-            &quot;nid&quot;: 19704996,
-            &quot;author&quot;: &quot;官方好书推荐&quot;,
-            &quot;site&quot;: &quot;lindiankanshu.com&quot;,
-            &quot;chargeGid&quot;: 0,
-            &quot;sourceId&quot;: &quot;3035306&quot;,
-            &quot;imgUrl&quot;: &quot;http://image.book.easou.com/i/default/cover.jpg&quot;,
-            &quot;lastChapterName&quot;: &quot;第一百二十回 甄士隐详说太虚情 贾雨村归结红楼梦&quot;,
-            &quot;lastTime&quot;: 1509105932186,
-            &quot;subscribeCount&quot;: 180910,
-            &quot;tempFree&quot;: false,
-            &quot;siteCount&quot;: 0,
-            &quot;topicGroupId&quot;: 3515373,
-            &quot;topicNum&quot;: 2
+            <span class="hljs-attr">"activityType"</span>: <span class="hljs-number">-1</span>,
+            <span class="hljs-attr">"nid"</span>: <span class="hljs-number">19704996</span>,
+            <span class="hljs-attr">"author"</span>: <span class="hljs-string">"官方好书推荐"</span>,
+            <span class="hljs-attr">"site"</span>: <span class="hljs-string">"lindiankanshu.com"</span>,
+            <span class="hljs-attr">"chargeGid"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"sourceId"</span>: <span class="hljs-string">"3035306"</span>,
+            <span class="hljs-attr">"imgUrl"</span>: <span class="hljs-string">"http://image.book.easou.com/i/default/cover.jpg"</span>,
+            <span class="hljs-attr">"lastChapterName"</span>: <span class="hljs-string">"第一百二十回 甄士隐详说太虚情 贾雨村归结红楼梦"</span>,
+            <span class="hljs-attr">"lastTime"</span>: <span class="hljs-number">1509105932186</span>,
+            <span class="hljs-attr">"subscribeCount"</span>: <span class="hljs-number">180910</span>,
+            <span class="hljs-attr">"tempFree"</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">"siteCount"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"topicGroupId"</span>: <span class="hljs-number">3515373</span>,
+            <span class="hljs-attr">"topicNum"</span>: <span class="hljs-number">2</span>
         },
         ...
     ],
-    &quot;web_book_items&quot;: [],
-    &quot;guess_like_items&quot;: [],
-    &quot;check_word&quot;: &quot;&quot;,
-    &quot;allTotal&quot;: 56,
-    &quot;parentClass&quot;: &quot;&quot;,
-    &quot;guessLikeReferGids&quot;: &quot;&quot;,
-    &quot;buttonToggle&quot;: &quot;00&quot;,
-    &quot;webTotal&quot;: 0,
-    &quot;recforsoft&quot;: []
-}</code></pre>
+    <span class="hljs-attr">"web_book_items"</span>: [],
+    <span class="hljs-attr">"guess_like_items"</span>: [],
+    <span class="hljs-attr">"check_word"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"allTotal"</span>: <span class="hljs-number">56</span>,
+    <span class="hljs-attr">"parentClass"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"guessLikeReferGids"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"buttonToggle"</span>: <span class="hljs-string">"00"</span>,
+    <span class="hljs-attr">"webTotal"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"recforsoft"</span>: []
+}
+</code></pre>
 <ul>
 <li>章节目录</li>
 </ul>
 <p>url: <code>http://api.easou.com/api/bookapp/chapter_list.m?gid=17384298&amp;nid=19704996&amp;page_id=1&amp;size=9999&amp;cid=eef_&amp;version=002&amp;os=ios&amp;udid=76fbeddf8b73c8b0fc065e2296b767579d8fda38&amp;appverion=1018&amp;ch=bnf1349_10388_001</code></p>
 <p><code>get</code>，改变 <code>gid</code> 和 <code>nid</code>（由搜索结果获得）。</p>
 <p>response:</p>
-<pre><code class="json">{
-    &quot;novelName&quot;: &quot;&quot;,
-    &quot;totalCount&quot;: 120,
-    &quot;items&quot;: [
+<pre class="hljs"><code>{
+    <span class="hljs-attr">"novelName"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"totalCount"</span>: <span class="hljs-number">120</span>,
+    <span class="hljs-attr">"items"</span>: [
         {
-            &quot;time&quot;: 1509105916000,
-            &quot;sort&quot;: 1,
-            &quot;charge&quot;: 0,
-            &quot;wordCount&quot;: 0,
-            &quot;site&quot;: &quot;lindiankanshu.com&quot;,
-            &quot;nid&quot;: 19704996,
-            &quot;chapter_name&quot;: &quot;第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀&quot;,
-            &quot;gsort&quot;: 0,
-            &quot;curl&quot;: &quot;http://www.lindiankanshu.com/93_93446/4869424.html&quot;,
-            &quot;paid&quot;: 0,
-            &quot;ctype&quot;: &quot;文&quot;,
-            &quot;accelerate&quot;: 0
+            <span class="hljs-attr">"time"</span>: <span class="hljs-number">1509105916000</span>,
+            <span class="hljs-attr">"sort"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"charge"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"wordCount"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"site"</span>: <span class="hljs-string">"lindiankanshu.com"</span>,
+            <span class="hljs-attr">"nid"</span>: <span class="hljs-number">19704996</span>,
+            <span class="hljs-attr">"chapter_name"</span>: <span class="hljs-string">"第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀"</span>,
+            <span class="hljs-attr">"gsort"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"curl"</span>: <span class="hljs-string">"http://www.lindiankanshu.com/93_93446/4869424.html"</span>,
+            <span class="hljs-attr">"paid"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"ctype"</span>: <span class="hljs-string">"文"</span>,
+            <span class="hljs-attr">"accelerate"</span>: <span class="hljs-number">0</span>
         },
         ...
     ],
-    &quot;success&quot;: true,
-    &quot;errorlog&quot;: &quot;&quot;
-}</code></pre>
+    <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"errorlog"</span>: <span class="hljs-string">""</span>
+}
+</code></pre>
 <ul>
 <li>章节内容
 url: <code>http://api.easou.com/api/bookapp/batch_chapter.m?cid=eef_&amp;version=002&amp;os=ios&amp;udid=76fbeddf8b73c8b0fc065e2296b767579d8fda38&amp;appverion=1018&amp;ch=bnf1349_10388_001</code></li>
 </ul>
 <p><code>post</code>，<code>header：content-type: application/x-www-form-urlencoded</code>，提交以下参数:</p>
-<pre><code>{
-    &quot;gid&quot;: &quot;17384298&quot;,
-    &quot;nid&quot;: &quot;19704996&quot;,
-    &quot;gsort&quot;: 0,
-    &quot;chapter_name&quot;: &quot;第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀&quot;,
-    &quot;sequence&quot;: 0,
-    &quot;sort&quot;: 120
-}</code></pre><p><code>gid</code>、<code>nid</code>、<code>sort</code>、<code>chapter_name</code> 需要改变。</p>
+<pre class="hljs"><code>{
+    <span class="hljs-attr">"gid"</span>: <span class="hljs-string">"17384298"</span>,
+    <span class="hljs-attr">"nid"</span>: <span class="hljs-string">"19704996"</span>,
+    <span class="hljs-attr">"gsort"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"chapter_name"</span>: <span class="hljs-string">"第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀"</span>,
+    <span class="hljs-attr">"sequence"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"sort"</span>: <span class="hljs-number">120</span>
+}
+</code></pre>
+<p><code>gid</code>、<code>nid</code>、<code>sort</code>、<code>chapter_name</code> 需要改变。</p>
 <p>response:</p>
-<pre><code class="json">{
-    &quot;items&quot;: [
+<pre class="hljs"><code>{
+    <span class="hljs-attr">"items"</span>: [
         {
-            &quot;content&quot;: &quot;　　话说宝钗听秋纹说袭人不好，连忙进去瞧看。巧姐儿同平儿也随着走到袭人炕前，只见袭人心痛难禁，一时气厥。宝钗等用开水灌了过来，仍旧扶她睡下，一面传请大夫。巧姐儿问宝钗道：\&quot;袭人姐姐怎么病到这个样？\&quot;宝钗道：\&quot;大前儿晚上，哭伤了心了，一时发晕栽倒了。太太叫人扶她回来，她就睡倒了。因外头有事，没有请大夫瞧她，所以致此。\&quot;
+            <span class="hljs-attr">"content"</span>: <span class="hljs-string">"　　话说宝钗听秋纹说袭人不好，连忙进去瞧看。巧姐儿同平儿也随着走到袭人炕前，只见袭人心痛难禁，一时气厥。宝钗等用开水灌了过来，仍旧扶她睡下，一面传请大夫。巧姐儿问宝钗道：\"袭人姐姐怎么病到这个样？\"宝钗道：\"大前儿晚上，哭伤了心了，一时发晕栽倒了。太太叫人扶她回来，她就睡倒了。因外头有事，没有请大夫瞧她，所以致此。\"
             ...
-            &quot;,
-            &quot;time&quot;: 1509105932000,
-            &quot;flag&quot;: 0,
-            &quot;gid&quot;: 17384298,
-            &quot;sort&quot;: 120,
-            &quot;charge&quot;: 0,
-            &quot;sequence&quot;: 0,
-            &quot;nid&quot;: 19704996,
-            &quot;site&quot;: &quot;&quot;,
-            &quot;chapter_name&quot;: &quot;第一百二十回 甄士隐详说太虚情 贾雨村归结红楼梦&quot;,
-            &quot;tempFree&quot;: false,
-            &quot;curl&quot;: &quot;http://www.lindiankanshu.com/93_93446/4869543.html&quot;,
-            &quot;paid&quot;: 0,
-            &quot;ctype&quot;: &quot;文&quot;,
-            &quot;accelerate&quot;: 0,
-            &quot;success&quot;: true,
-            &quot;errorlog&quot;: &quot;&quot;
+            "</span>,
+            <span class="hljs-attr">"time"</span>: <span class="hljs-number">1509105932000</span>,
+            <span class="hljs-attr">"flag"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"gid"</span>: <span class="hljs-number">17384298</span>,
+            <span class="hljs-attr">"sort"</span>: <span class="hljs-number">120</span>,
+            <span class="hljs-attr">"charge"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"sequence"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"nid"</span>: <span class="hljs-number">19704996</span>,
+            <span class="hljs-attr">"site"</span>: <span class="hljs-string">""</span>,
+            <span class="hljs-attr">"chapter_name"</span>: <span class="hljs-string">"第一百二十回 甄士隐详说太虚情 贾雨村归结红楼梦"</span>,
+            <span class="hljs-attr">"tempFree"</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">"curl"</span>: <span class="hljs-string">"http://www.lindiankanshu.com/93_93446/4869543.html"</span>,
+            <span class="hljs-attr">"paid"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"ctype"</span>: <span class="hljs-string">"文"</span>,
+            <span class="hljs-attr">"accelerate"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"errorlog"</span>: <span class="hljs-string">""</span>
         }
     ],
-    &quot;success&quot;: true,
-    &quot;errorlog&quot;: &quot;&quot;
-}</code></pre>
+    <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"errorlog"</span>: <span class="hljs-string">""</span>
+}
+</code></pre>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+  </div>
+</div>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>

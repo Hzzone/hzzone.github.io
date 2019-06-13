@@ -1,129 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
-        </div>
-            <br>
-<br>
 
-<p><a href="https://nbviewer.jupyter.org/github/Hzzone/hzzone.github.io/blob/source/implementation/%E4%BB%8E%E4%B8%80%E5%85%83%E5%87%BD%E6%95%B0%E7%9A%84%E8%A7%92%E5%BA%A6%E7%90%86%E8%A7%A3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.ipynb">Notebook 地址: 从一元函数的角度理解梯度下降法.ipynb</a></p>
-<h3 id=从一元函数的角度理解梯度下降法>从一元函数的角度理解梯度下降法</h3>
-<pre><code class="python">import matplotlib.pyplot as plt
-import numpy as np
-import math</code></pre>
+    <head>
+        <meta charset="UTF-8">
+        <title>从一元函数的角度理解梯度下降法</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
+        </div>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">从一元函数的角度理解梯度下降法</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>cs231n</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <h4>
+          <a target="_blank" href="https://nbviewer.jupyter.org/github/Hzzone/hzzone.github.io/blob/source/3. cs231n/从一元函数的角度理解梯度下降法.ipynb">Notebook 地址</a>
+        </h4>
+        
+        <h3>从一元函数的角度理解梯度下降法</h3>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> math
+</code></pre>
 <p>生成一个拥有两个极小值点的四次函数:</p>
-<pre><code class="python">f = lambda x: (x+2)*(x+1)*(x-2)*(x-1)
-X = np.linspace(-3, 3, 10000) 
-Y = np.array([f(x) for x in X])</code></pre>
+<pre class="hljs"><code>f = <span class="hljs-keyword">lambda</span> x: (x+<span class="hljs-number">2</span>)*(x+<span class="hljs-number">1</span>)*(x<span class="hljs-number">-2</span>)*(x<span class="hljs-number">-1</span>)
+X = np.linspace(<span class="hljs-number">-3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">10000</span>) 
+Y = np.array([f(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> X])
+</code></pre>
 <p>离散点的最小的 Y 和对应的 X:</p>
-<pre><code class="python">Y[np.argmin(Y)], X[np.argmin(Y)]</code></pre>
-<pre><code>(-2.2499992119664576, -1.5808580858085808)</code></pre><p>绘制出该四次函数曲线可以发现有两个极小值点，并且最小值是左边的极小值点。</p>
-<pre><code class="python">plt.plot(X, Y)
-plt.show()</code></pre>
-<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-23-output_7_0.png" alt="png"></p>
+<pre class="hljs"><code>Y[np.argmin(Y)], X[np.argmin(Y)]
+</code></pre>
+<pre><code>(-2.2499992119664576, -1.5808580858085808)
+</code></pre>
+<p>绘制出该四次函数曲线可以发现有两个极小值点，并且最小值是左边的极小值点。</p>
+<pre class="hljs"><code>plt.plot(X, Y)
+plt.show()
+</code></pre>
+<p><img src="data:image/png;base64,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" alt="png"></p>
 <p>$f(x)$ 为:</p>
 <p>$$f(x)=(x+1)(x-1)(x+2)(x-2)$$</p>
 <p>对 $f(x)$ 求导可得:</p>
-<p>$$f&#39;(x)=4x^3-10x$$</p>
-<p>通过对 $f&#39;(x)$ 等于零可得 $f(x)$ 的最小值为 $x=\sqrt{\frac{5}{2}}$。</p>
-<pre><code class="python">df = lambda x: 4*x**3-10*x
-math.sqrt(5/2)</code></pre>
-<pre><code>1.5811388300841898</code></pre><p>利用梯度下降法求函数的极小值，基本公式为:</p>
-<p>$$x= x-\lambda f&#39;(x)$$</p>
+<p>$$f’(x)=4x^3-10x$$</p>
+<p>通过对 $f’(x)$ 等于零可得 $f(x)$ 的最小值为 $x=\sqrt{\frac{5}{2}}$。</p>
+<pre class="hljs"><code>df = <span class="hljs-keyword">lambda</span> x: <span class="hljs-number">4</span>*x**<span class="hljs-number">3</span><span class="hljs-number">-10</span>*x
+math.sqrt(<span class="hljs-number">5</span>/<span class="hljs-number">2</span>)
+</code></pre>
+<pre><code>1.5811388300841898
+</code></pre>
+<p>利用梯度下降法求函数的极小值，基本公式为:</p>
+<p>$$x= x-\lambda f’(x)$$</p>
 <p>其中 $\lambda$ 是控制 $x$ 更新的幅度，更具体点就是深度学习中的学习率。</p>
 <p>下面就是利用梯度下降法求函数的极值点。</p>
-<pre><code class="python">lr = 0.001
-x = -3
-for i in range(1000):
+<pre class="hljs"><code>lr = <span class="hljs-number">0.001</span>
+x = <span class="hljs-number">-3</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1000</span>):
     x -= lr*df(x)
-x</code></pre>
-<pre><code>-1.581138831026283</code></pre><p>$1000$ 其实就是控制 $x$ 更新的次数，对应的是深度学习中的最大迭代次数，可以看出该值基本上和 $\sqrt{\frac{5}{2}}$ 相差无几了。</p>
-<h3 id=一个好的权重初始化的意义>一个好的权重初始化的意义</h3>
+x
+</code></pre>
+<pre><code>-1.581138831026283
+</code></pre>
+<p>$1000$ 其实就是控制 $x$ 更新的次数，对应的是深度学习中的最大迭代次数，可以看出该值基本上和 $\sqrt{\frac{5}{2}}$ 相差无几了。</p>
+<h3>一个好的权重初始化的意义</h3>
 <p>为了方便理解，同样从一元函数的角度出发，<strong>为什么一个好的权重初始化非常重要？</strong></p>
 <p>首先要知道梯度下降法最大的问题是什么：迭代终止于<strong>局部最优解</strong>，很难找到<strong>全局最优解</strong>。</p>
 <p>当 $x$ 初始化为 3 呢？</p>
-<pre><code class="python">lr = 0.001
-x = 3
-for i in range(1000):
+<pre class="hljs"><code>lr = <span class="hljs-number">0.001</span>
+x = <span class="hljs-number">3</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1000</span>):
     x -= lr*df(x)
-x</code></pre>
-<pre><code>1.581138831026283</code></pre><p>同样的参数取得了不同的结果(ps: 为了计算方便这个四次函数关于 Y 轴对称，两个极值点都为最小值)。</p>
+x
+</code></pre>
+<pre><code>1.581138831026283
+</code></pre>
+<p>同样的参数取得了不同的结果(ps: 为了计算方便这个四次函数关于 Y 轴对称，两个极值点都为最小值)。</p>
 <p>所以这就是一个好的初始化方法的重要性，caffe 权重的初始化方法一般为 Gaussian 和 XavierFiller，偏置项一般常数初始化为 0，具体如何初始化可以参考 <a href="https://www.cnblogs.com/tianshifu/p/6165809.html">caffe中权值初始化方法</a>。</p>
-<h3 id=动画展示梯度下降的过程>动画展示梯度下降的过程</h3>
-<pre><code class="python">%%capture
+<h3>动画展示梯度下降的过程</h3>
+<pre class="hljs"><code>%%capture
 %matplotlib inline
-import numpy as np
-import matplotlib.pyplot as plt
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-from matplotlib import animation
-from IPython.display import HTML
+<span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> animation
+<span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> HTML
 
-def show_anim(X, Y, f, df, max_iterations, lr, initial_x):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show_anim</span><span class="hljs-params">(X, Y, f, df, max_iterations, lr, initial_x)</span>:</span>
     fig, ax = plt.subplots()
     ax.plot(X, Y)
-    line, = ax.plot(0, 0, &#39;ro&#39;)
-    annotation = ax.annotate(&quot;&quot;, xy=(0, 0), xytext=(0, 0), arrowprops=dict(arrowstyle=&quot;-&gt;&quot;))
-    # 返回梯度下降的点，生成动画的箭头
-    def gradient_descent(f, df, Y, max_iterations=30, lr=0.001, x=-3):
+    line, = ax.plot(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">'ro'</span>)
+    annotation = ax.annotate(<span class="hljs-string">""</span>, xy=(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), xytext=(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), arrowprops=dict(arrowstyle=<span class="hljs-string">"-&gt;"</span>))
+    <span class="hljs-comment"># 返回梯度下降的点，生成动画的箭头</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gradient_descent</span><span class="hljs-params">(f, df, Y, max_iterations=<span class="hljs-number">30</span>, lr=<span class="hljs-number">0.001</span>, x=<span class="hljs-number">-3</span>)</span>:</span>
         points = [(x, f(x))]
         print(lr)
-        for _ in range(max_iterations):
+        <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(max_iterations):
             x -= lr*df(x)
             points.append((x, f(x)))
         arrows = []
-        for i in range(len(points)-1):
-            arrows.append((points[i], points[i+1]))
-        return arrows
-
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(points)<span class="hljs-number">-1</span>):
+            arrows.append((points[i], points[i+<span class="hljs-number">1</span>]))
+        <span class="hljs-keyword">return</span> arrows
+    
     arrows = gradient_descent(f, df, Y, max_iterations, lr, initial_x)
 
-    def init():
-        return line,
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>:</span>
+        <span class="hljs-keyword">return</span> line,
 
-    def update(index):
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update</span><span class="hljs-params">(index)</span>:</span>
         start, end = arrows[index]
-        line.set_data(end[0], end[1])
+        line.set_data(end[<span class="hljs-number">0</span>], end[<span class="hljs-number">1</span>])
 
         annotation.set_position(start)
         annotation.xy = end
 
-        return line, annotation
+        <span class="hljs-keyword">return</span> line, annotation
 
-    anim = animation.FuncAnimation(fig, update, interval=500, blit=False, frames=max_iterations, init_func=init)
-    return anim
+    anim = animation.FuncAnimation(fig, update, interval=<span class="hljs-number">500</span>, blit=<span class="hljs-literal">False</span>, frames=max_iterations, init_func=init)
+    <span class="hljs-keyword">return</span> anim
 
-lr = 0.001
-initial_x = -3
-max_iterations = 100
-anim = show_anim(X, Y, f, df, max_iterations, lr, initial_x)</code></pre>
-<pre><code class="python">HTML(anim.to_html5_video())</code></pre>
+lr = <span class="hljs-number">0.001</span>
+initial_x = <span class="hljs-number">-3</span>
+max_iterations = <span class="hljs-number">100</span>
+anim = show_anim(X, Y, f, df, max_iterations, lr, initial_x)
+</code></pre>
+<pre class="hljs"><code>HTML(anim.to_html5_video())
+</code></pre>
 <video width="432" height="288" controls autoplay loop>
   <source type="video/mp4" src="data:video/mp4;base64,AAAAHGZ0eXBNNFYgAAACAGlzb21pc28yYXZjMQAAAAhmcmVlAAA9dm1kYXQAAAKtBgX//6ncRem9
 5tlIt5Ys2CDZI+7veDI2NCAtIGNvcmUgMTUyIHIyODU0IGU5YTU5MDMgLSBILjI2NC9NUEVHLTQg
@@ -440,18 +542,17 @@ NTguMTIuMTAw
 ">
   Your browser does not support the video tag.
 </video>
-
-
-
 <p>改变一些参数，例如学习率，初始值时会有什么不同。</p>
 <p>学习率非常大:</p>
-<pre><code class="python">%%capture
+<pre class="hljs"><code>%%capture
 %matplotlib inline
-lr = 0.075
-initial_x = -3
-max_iterations = 100
-anim = show_anim(X, Y, f, df, max_iterations, lr, initial_x)</code></pre>
-<pre><code class="python">HTML(anim.to_html5_video())</code></pre>
+lr = <span class="hljs-number">0.075</span>
+initial_x = <span class="hljs-number">-3</span>
+max_iterations = <span class="hljs-number">100</span>
+anim = show_anim(X, Y, f, df, max_iterations, lr, initial_x)
+</code></pre>
+<pre class="hljs"><code>HTML(anim.to_html5_video())
+</code></pre>
 <video width="432" height="288" controls autoplay loop>
   <source type="video/mp4" src="data:video/mp4;base64,AAAAHGZ0eXBNNFYgAAACAGlzb21pc28yYXZjMQAAAAhmcmVlAAA8Cm1kYXQAAAKtBgX//6ncRem9
 5tlIt5Ys2CDZI+7veDI2NCAtIGNvcmUgMTUyIHIyODU0IGU5YTU5MDMgLSBILjI2NC9NUEVHLTQg
@@ -762,9 +863,6 @@ AB1kYXRhAAAAAQAAAABMYXZmNTguMTIuMTAw
 ">
   Your browser does not support the video tag.
 </video>
-
-
-
 <p>设定权重初始值（即 $x$）、学习率、最大迭代次数等，会发现以下几点:</p>
 <ul>
 <li>越在前面 loss 收敛速度越快，后面则改变幅度很小。</li>
@@ -772,21 +870,60 @@ AB1kYXRhAAAAAQAAAABMYXZmNTguMTIuMTAw
 <li>学习率过小，收敛速度慢。</li>
 </ul>
 <p>因此，如何选择一个合适的学习率很重要，同时也要应用相应的学习率衰减策略（略）。</p>
-<p>所以深度学习的基础算法之一，梯度下降其实并不难理解，只需要一些数值计算的只是即可。通过一元函数的梯度下降法求极值点，可以对应到深度学习中的很多知识。真正的深度学习当然不可能只是一个一元函数，而是非常复杂的函数，但不管在哪，梯度下降法都是适用的。</p>
+<p>所以深度学习的基础算法之一，梯度下降其实并不难理解，只需要一些数值计算的知识即可。通过一元函数的梯度下降法求极值点，可以对应到深度学习中的很多知识。真正的深度学习当然不可能只是一个一元函数，而是非常复杂的函数，但不管在哪，梯度下降法都是适用的。</p>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+  </div>
+</div>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>

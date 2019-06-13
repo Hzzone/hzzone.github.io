@@ -1,44 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Data-Driven Approach</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
         </div>
-            <p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">Data-Driven Approach</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>cs231n</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a>
 Data-Driven Approach，数据驱动方法</p>
-<h2 id=参考资料>参考资料</h2>
+<h3>参考资料</h3>
 <ul>
 <li><a href="http://cs231n.stanford.edu/slides/2018/cs231n_2018_lecture02.pdf">slides</a></li>
 <li><a href="https://www.bilibili.com/video/av17204303/?p=4">bilibili video</a></li>
 <li><a href="http://cs231n.github.io/classification/">course notes</a></li>
 </ul>
-<h2 id=笔记>笔记</h2>
+<h3>笔记</h3>
 <ul>
 <li>分类是指预先设定一张图片的语义（semantic）标签，例如 cat，由计算机预测。</li>
 <li>图像由矩阵构成，当视角、光照、变形、遮挡，图片背景混乱（比如毛的纹理和背景相似），猫的年龄、毛发颜色不同，等条件变化时，图像是完全不一样的，这就需要我们的算法足够鲁棒（Robust，        对于聚类算法而言，鲁棒性意味着聚类结果不应受到模型中存在的数据扰动、噪声及离群点的太大影响。）</li>
@@ -46,31 +131,26 @@ Data-Driven Approach，数据驱动方法</p>
 <li>Data-Driven Approach，数据驱动的方法不通过预先设置的规则进行分类，而是通过手机大量数据，训练一个分类器，总结一个 model，总结对象的核心知识要素，最后识别新的图片。</li>
 <li>所以分为两个过程，train 训练模型，predict 预测模型。</li>
 </ul>
-<h2 id=数据>数据</h2>
+<h3>数据</h3>
 <p>超参数（hyperparameter），例如 K-Nearest-Neighbor 中的 K、距离度量等，不在训练中获得，而需要我们提前设置。</p>
 <ul>
-<li><p>根据最高准确率选择超参（不是很好，例如 K=1 时，Nearest-Neighbor 永远都能分类的很好）</p>
-</li>
-<li><p>机器学习更关注的是如何在训练集以外的数据集（测试集、验证集）上表现的更好。如果只分为训练集和测试集，那我们训练的算法只是选一种在测试集上表现结果最好的，测试集不能代表所有的 unseen data，而算法在其他 unseen 的数据集上表现可能并不好。</p>
-</li>
-<li><p>将数据集分为三组，<strong>训练集、验证集、测试集</strong>，在训练集上训练，所以步骤完成之后，选择一组在验证集上效果最好的参数，最后在测试集上跑一边，然后论文中的数据是测试集上的实验结果。只有在最后才使用测试集，以保证算法在全新数据集上的效果是一样的。</p>
-<div align=center>
-  <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-20-130924.png">
-</div>
-</li>
-<li><p>交叉验证（Cross Validation），通常在小数据集上使用，在深度学习很少用。例如将数据集分成 5 份（Five Cross Validation），进行五次操作，选择一份作为验证集，其他四份训练，最后可以得到那组超参最稳定。但是深度学习需要花大量时间训练，所以不常用。</p>
-<div align=center>
-  <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-20-131042.png">
-</div>
-
-</li>
+<li>根据最高准确率选择超参（不是很好，例如 K=1 时，Nearest-Neighbor 永远都能分类的很好）</li>
+<li>机器学习更关注的是如何在训练集以外的数据集（测试集、验证集）上表现的更好。如果只分为训练集和测试集，那我们训练的算法只是选一种在测试集上表现结果最好的，测试集不能代表所有的 unseen data，而算法在其他 unseen 的数据集上表现可能并不好。</li>
+<li>将数据集分为三组，<strong>训练集、验证集、测试集</strong>，在训练集上训练，所以步骤完成之后，选择一组在验证集上效果最好的参数，最后在测试集上跑一边，然后论文中的数据是测试集上的实验结果。只有在最后才使用测试集，以保证算法在全新数据集上的效果是一样的。</li>
 </ul>
+<div align=center>
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-20-130924.png">
+</div>
+<ul>
+<li>交叉验证（Cross Validation），通常在小数据集上使用，在深度学习很少用。例如将数据集分成 5 份（Five Cross Validation），进行五次操作，选择一份作为验证集，其他四份训练，最后可以得到那组超参最稳定。但是深度学习需要花大量时间训练，所以不常用。</li>
+</ul>
+<div align=center>
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-20-131042.png">
+</div>
 <p>每个点代表一次结果，X 轴是 K 的值，Y 轴是准确度，线由均值连接，bar 是方差，然后准确度最高，方差最小的明显是 k ~= 7。</p>
 <div align=center>
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-20-131138.png">
 </div>
-
-
 <ul>
 <li>测试集数据是否可以代表现实世界中的所有数据？</li>
 </ul>
@@ -78,19 +158,58 @@ Data-Driven Approach，数据驱动方法</p>
 <p>当然也会有测试集代表性不佳，不能很好的反映真实世界。数据创建者，一次性用同样的方法收集大量数据，然后随机分成训练集、测试集。</p>
 <p>有一种陷阱是刚开始收集的数据作为训练集，后面收集的是测试集，然后两者之间可能会存在偏差。但只要整个数据集的划分是随机的，就可以避免。</p>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+  </div>
+</div>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>

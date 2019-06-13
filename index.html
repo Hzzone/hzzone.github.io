@@ -1,106 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 黄智忠的个人笔记</title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
+
+    <head>
+        <meta charset="UTF-8">
+        <title>主页</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
+        </div>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div id="tag_cloud" class="tags">
+
+    
+    <a href="#基础知识" title="基础知识" rel="3">基础知识</a>
+    
+    <a href="#机器学习" title="机器学习" rel="3">机器学习</a>
+    
+    <a href="#cs231n" title="cs231n" rel="3">cs231n</a>
+    
+    <a href="#深度学习" title="深度学习" rel="3">深度学习</a>
+    
+    <a href="#随笔" title="随笔" rel="3">随笔</a>
+    
+    <a href="#其他" title="其他" rel="3">其他</a>
+    
+
+</div>
+
+<div class="markdown-body post-content">
+    <ul>
+<li>相关链接: <a href="https://hzzone.me/">主页</a> | <a href="https://github.com/Hzzone">Github</a> | <a href="https://www.zhihu.com/people/hzzone">Zhihu</a></li>
+<li>邮箱: zhizhonghwang[at]<a href="http://gmail.com">gmail.com</a> | hzzone.scu[at]<a href="http://foxmail.com">foxmail.com</a></li>
+</ul>
+<p>如果你觉得我写的东西对你有帮助，欢迎 star 或 follow 我。</p>
+
+
+    
+    <h3 id="基础知识">1. 基础知识</h3>
+    <ul>
+        
+        <li>
+            <a target="_blank" href="/1. 基础知识/基础知识学习资料归纳.html" class="post_link">基础知识学习资料归纳</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/1. 基础知识/必备应用列表.html" class="post_link">必备应用列表</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/1. 基础知识/线性代数基础知识复习.html" class="post_link">线性代数基础知识复习</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/1. 基础知识/微积分基础知识复习.html" class="post_link">微积分基础知识复习</a>
+        </li>
+        
+    </ul>
+    
+    <h3 id="机器学习">2. 机器学习</h3>
+    <ul>
+        
+        <li>
+            <a target="_blank" href="/2. 机器学习/PCA 主成分分析推导及 Python 实现.html" class="post_link">PCA 主成分分析推导及 Python 实现</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/2. 机器学习/范数与距离的关系及应用.html" class="post_link">范数与距离的关系及应用</a>
+        </li>
+        
+    </ul>
+    
+    <h3 id="cs231n">3. cs231n</h3>
+    <ul>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/从一元函数的角度理解梯度下降法.html" class="post_link">从一元函数的角度理解梯度下降法</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/Data-Driven Approach.html" class="post_link">Data-Driven Approach</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/理解激活函数.html" class="post_link">理解激活函数</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/k-Nearest Neighbor classifier.html" class="post_link">k-Nearest Neighbor classifier</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/Softmax、KL 散度和 Cross Entropy Loss 推导和实现.html" class="post_link">Softmax、KL 散度和 Cross Entropy Loss 推导和实现</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/随机梯度下降和线性层实现.html" class="post_link">随机梯度下降和线性层实现</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/理解反向传播和框架源码阅读.html" class="post_link">理解反向传播和框架源码阅读</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/理解 PyTorch 计算图、Autograd 机制和实现线性拟合.html" class="post_link">理解 PyTorch 计算图、Autograd 机制和实现线性拟合</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/3. cs231n/理解 Weight Regularization 和及其实现.html" class="post_link">理解 Weight Regularization 和及其实现</a>
+        </li>
+        
+    </ul>
+    
+    <h3 id="深度学习">4. 深度学习</h3>
+    <ul>
+        
+        <li>
+            <a target="_blank" href="/4. 深度学习/人脸识别常用损失函数介绍.html" class="post_link">人脸识别常用损失函数介绍</a>
+        </li>
+        
+    </ul>
+    
+    <h3 id="随笔">5. 随笔</h3>
+    <ul>
+        
+        <li>
+            <a target="_blank" href="/5. 随笔/博士课题调研.html" class="post_link">博士课题调研</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/5. 随笔/交大、中科院、复旦保研经历总结.html" class="post_link">交大、中科院、复旦保研经历总结</a>
+        </li>
+        
+    </ul>
+    
+    <h3 id="其他">6. 其他</h3>
+    <ul>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0.html" class="post_link">Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/PyTorch 计算均值和标准差.html" class="post_link">PyTorch 计算均值和标准差</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/highlightjs 和 marked 高亮 markdown 转 html.html" class="post_link">highlightjs 和 marked 高亮 markdown 转 html</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/Pytorch 使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果.html" class="post_link">Pytorch 使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/TensorBoardX 绘制曲线的简单例子.html" class="post_link">TensorBoardX 绘制曲线的简单例子</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/宜搜小说 API 分析.html" class="post_link">宜搜小说 API 分析</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/微信消息提醒，定时发送.html" class="post_link">微信消息提醒，定时发送</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/百度云深度学习实例情况介绍.html" class="post_link">百度云深度学习实例情况介绍</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/对 Numpy 矩阵进行直方图数值统计.html" class="post_link">对 Numpy 矩阵进行直方图数值统计</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/alias 上传图片到服务器做图床，支持 https.html" class="post_link">alias 上传图片到服务器做图床，支持 https</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="/6. 其他/GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg.html" class="post_link">GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg</a>
+        </li>
+        
+    </ul>
+    
+</div>
+
+
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
     tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
     },
     CommonHTML: { linebreaks: { automatic: true } },
     "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
-        </div>
-            <p>记录我日常学习笔记的宝地。</p>
-<h2 id=相关链接>相关链接</h2>
-<ul>
-<li>主页: <a href="https://hzzone.io/">https://hzzone.io</a></li>
-<li>个人简历: <a href="https://hzzone.io/resume_zh-CN.html">中文简历</a> | <a href="resume_en-US.html">英文简历</a></li>
-<li>Github: <a href="https://github.com/Hzzone">https://github.com/Hzzone</a></li>
-<li>邮箱: zhizhonghwang[at]gmail.com | hzzone.scu[at]foxmail.com</li>
-<li>联系方式: <a href="javascript:void(0);" onclick="alert(window.atob('MTc3MjE4NzY5MDM='));">base64</a> 解密</li>
-</ul>
-<h2>1. 基础知识</h2>
-<ul><li><a class="link" href="1. 基础知识/基础知识学习资料归纳.html">基础知识学习资料归纳</a></li>
-<li><a class="link" href="1. 基础知识/微积分基础知识复习.html">微积分基础知识复习</a></li>
-<li><a class="link" href="1. 基础知识/必备应用列表.html">必备应用列表</a></li>
-<li><a class="link" href="1. 基础知识/概率统计基础知识复习.html">概率统计基础知识复习</a></li>
-<li><a class="link" href="1. 基础知识/线性代数基础知识复习.html">线性代数基础知识复习</a></li>
-</ul>
-<h2>2. 机器学习</h2>
-<ul><li><a class="link" href="2. 机器学习/PCA 主成分分析推导及 Python 实现.html">PCA 主成分分析推导及 Python 实现</a></li>
-<li><a class="link" href="2. 机器学习/SVM 支持向量机.html">SVM 支持向量机</a></li>
-<li><a class="link" href="2. 机器学习/scikit-learn 实用机器学习方法.html">scikit-learn 实用机器学习方法</a></li>
-<li><a class="link" href="2. 机器学习/朴素贝叶斯分类器推导及实现.html">朴素贝叶斯分类器推导及实现</a></li>
-<li><a class="link" href="2. 机器学习/范数与距离的关系及应用.html">范数与距离的关系及应用</a></li>
-</ul>
-<h2>3. cs231n</h2>
-<ul><li><a class="link" href="3. cs231n/Data-Driven Approach.html">Data-Driven Approach</a></li>
-<li><a class="link" href="3. cs231n/Softmax、KL 散度和 Cross Entropy Loss 推导和实现.html">Softmax、KL 散度和 Cross Entropy Loss 推导和实现</a></li>
-<li><a class="link" href="3. cs231n/k-Nearest Neighbor classifier.html">k-Nearest Neighbor classifier</a></li>
-<li><a class="link" href="3. cs231n/从一元函数的角度理解梯度下降法.html">从一元函数的角度理解梯度下降法</a></li>
-<li><a class="link" href="3. cs231n/理解 PyTorch 计算图、Autograd 机制和实现线性拟合.html">理解 PyTorch 计算图、Autograd 机制和实现线性拟合</a></li>
-<li><a class="link" href="3. cs231n/理解 Weight Regularization 和及其实现.html">理解 Weight Regularization 和及其实现</a></li>
-<li><a class="link" href="3. cs231n/理解反向传播和框架源码阅读.html">理解反向传播和框架源码阅读</a></li>
-<li><a class="link" href="3. cs231n/理解激活函数.html">理解激活函数</a></li>
-<li><a class="link" href="3. cs231n/随机梯度下降和线性层实现.html">随机梯度下降和线性层实现</a></li>
-</ul>
-<h2>4. 深度学习</h2>
-<ul><li><a class="link" href="4. 深度学习/PyTorch 资源整理.html">PyTorch 资源整理</a></li>
-<li><a class="link" href="4. 深度学习/人脸识别常用损失函数介绍.html">人脸识别常用损失函数介绍</a></li>
-</ul>
-<h2>5. 随笔</h2>
-<ul><li><a class="link" href="5. 随笔/交大、中科院、复旦保研经历总结.html">交大、中科院、复旦保研经历总结</a></li>
-<li><a class="link" href="5. 随笔/博士课题调研.html">博士课题调研</a></li>
-</ul>
-<h2>6. 其他</h2>
-<ul><li><a class="link" href="6. 其他/GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg.html">GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg</a></li>
-<li><a class="link" href="6. 其他/Linux 常用命令记载.html">Linux 常用命令记载</a></li>
-<li><a class="link" href="6. 其他/PyTorch 计算均值和标准差.html">PyTorch 计算均值和标准差</a></li>
-<li><a class="link" href="6. 其他/Pytorch 使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果.html">Pytorch 使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果</a></li>
-<li><a class="link" href="6. 其他/TensorBoardX 绘制曲线的简单例子.html">TensorBoardX 绘制曲线的简单例子</a></li>
-<li><a class="link" href="6. 其他/Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0.html">Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0</a></li>
-<li><a class="link" href="6. 其他/alias 上传图片到服务器做图床，支持 https.html">alias 上传图片到服务器做图床，支持 https</a></li>
-<li><a class="link" href="6. 其他/highlightjs 和 marked 高亮 markdown 转 html.html">highlightjs 和 marked 高亮 markdown 转 html</a></li>
-<li><a class="link" href="6. 其他/宜搜小说 API 分析.html">宜搜小说 API 分析</a></li>
-<li><a class="link" href="6. 其他/对 Numpy 矩阵进行直方图数值统计.html">对 Numpy 矩阵进行直方图数值统计</a></li>
-<li><a class="link" href="6. 其他/微信消息提醒，定时发送.html">微信消息提醒，定时发送</a></li>
-<li><a class="link" href="6. 其他/百度云深度学习实例情况介绍.html">百度云深度学习实例情况介绍</a></li>
-<li><a class="link" href="6. 其他/豆瓣电影 API 分析.html">豆瓣电影 API 分析</a></li>
-</ul>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
-
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
-
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
-</script>
-</body>
 </html>

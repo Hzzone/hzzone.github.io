@@ -1,41 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>理解 Weight Regularization 和及其实现</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
         </div>
-            <h2 id=理解-weight-regularization-和及其实现>理解 Weight Regularization 和及其实现</h2>
-<h3 id=参考>参考</h3>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">理解 Weight Regularization 和及其实现</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>cs231n</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <h3>参考</h3>
 <ul>
 <li><a href="https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/chap3/c3s5ss1.html">正则化</a></li>
 </ul>
-<h3 id=weight-regularization-正则化->Weight Regularization（正则化）</h3>
+<h3>Weight Regularization（正则化）</h3>
 <p>Weight Regularization 在 cs231n 的 <a href="http://cs231n.stanford.edu/syllabus.html">Loss Functions and Optimization </a> 提及。我觉得这篇文章 <a href="https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/chap3/c3s5ss1.html">正则化</a> 写得很详细，可以参考一下，不过其中应该有个错误正则项应该是不需要除 $n$ 的。</p>
 <p>下面是 cs231n 涉及到正则化的内容，非常直观，我就不再多写了:</p>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-02-%E6%9C%AA%E5%91%BD%E5%90%8D%E6%8B%BC%E5%9B%BE%20-1-.jpg" alt=""></p>
@@ -60,7 +144,7 @@
 <p>在探究不同范数的正则化表现之前，我们需要说明一下，在神经网络中，参数包括每一层仿射变换的权重和偏置，我们通常只对权重做惩罚而不对偏置做正则惩罚。 精确拟合偏置所需的数据通常比拟合权重少得多。每个权重会指定两个变量如何相互作用。我们需要在各种条件下观察这两个变量才能良好地拟合权重。而每个偏置仅控制一个单变量。这意味着，我们不对其进行正则化也不会导致太大的方差。另外，正则化偏置参数可能会导致明显的欠拟合。因此，我们使用向量 w 表示所有应受范 数惩罚影响的权重，而向量 θ 表示所有参数 (包括 w 和无需正则化的参数)。在神经网络的情况下，有时希望对网络的每一层使用单独的惩罚，并分配不同的 α 系数。寻找合适的多个超参数的代价很大，因此为了减少搜索空间，我们会在所有层使用相同的权重衰减。</p>
 </blockquote>
 <p>书中在 <strong>第七章 深度学习中的正则化</strong> 对正则化的证明、作用有很深的探讨，比上面的两个介绍的多。而且证明的很漂亮，强烈推荐。</p>
-<h4 id=l2-正则化>L2 正则化</h4>
+<h4>L2 正则化</h4>
 <p>$L^2$ 参数范数惩罚又被叫做权重衰减（weight decay），在其他学术圈，也被称为岭回归或 Tikhonov 正则。</p>
 <p>$L^2$ 正则化的公式为:</p>
 <p>$$
@@ -77,7 +161,7 @@ $$</p>
 \boldsymbol { w } \leftarrow  w  - \epsilon \left( \alpha w  + \nabla _ { w } J (  w  ; X  ,y  ) \right)
 $$</p>
 <p>$$
- w  \leftarrow ( 1 - \epsilon \alpha )  w  - \epsilon \nabla _ { w } J (  w  ; X  ,  y  )
+w  \leftarrow ( 1 - \epsilon \alpha )  w  - \epsilon \nabla _ { w } J (  w  ; X  ,  y  )
 $$</p>
 <p>在每步执行通常的梯度更新之前先收缩权重向量（将权重向量乘以一个常数因子）。</p>
 <p>再贴一些来自 Deep Learning 书上的说明:</p>
@@ -88,7 +172,7 @@ $$</p>
 <p>我们可以看到，L2 正则化能让学习算法 ‘‘感知’’ 到具有较高方差的输入 x，因此与输出目标的协方差较小（相对增加方差）的特征的权重将会收缩。</p>
 </blockquote>
 <p>有些地方我也没看懂，难过。</p>
-<h3 id=l1-正则化>L1 正则化</h3>
+<h3>L1 正则化</h3>
 <p>L1 正则项为:</p>
 <p>$$
 \Omega (  \theta  ) = \|  w  \| _ { 1 } = \sum _ { i } \left| w _ { i } \right|
@@ -112,200 +196,214 @@ $$</p>
 <blockquote>
 <p>稀疏化的结果使优化后的参数一部分为 0，另一部分为非零实值。非零实值的那部分参数可起到选择重要参数或特征维度的作用，同时可起到去除噪声的效果。</p>
 </blockquote>
-<h4 id=elastic-正则化>Elastic 正则化</h4>
+<h4>Elastic 正则化</h4>
 <p>联合使用 L1、L2 正则化，正则项为:</p>
 <p>$$
 \alpha _ { 1 } \| \omega \| _ { 1 } + \alpha _ { 2 } \| \alpha \| _ { 2 } ^ { 2 }
 $$</p>
-<h3 id=正则化实现>正则化实现</h3>
+<h3>正则化实现</h3>
 <p>我前面实现了线性层、交叉熵等，我直接复制不需要改的代码，然后修改线性层实现包括 L1、L2 正则化。</p>
 <p>再对比一下三个的效果。</p>
 <p><strong>复制不需要改的代码，保存在最后一个单元格。</strong></p>
 <p>原先的实现没有正则化，在这里直接修改，关于梯度在上面已经求了。</p>
-<pre><code class="python">def l1_regularization(W, alpha):
-    return alpha*np.sign(W)
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">l1_regularization</span><span class="hljs-params">(W, alpha)</span>:</span>
+    <span class="hljs-keyword">return</span> alpha*np.sign(W)
 
-def l2_regularization(W, alpha):
-    return alpha*W
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">l2_regularization</span><span class="hljs-params">(W, alpha)</span>:</span>
+    <span class="hljs-keyword">return</span> alpha*W
 
-def no_regularization(W, alpha):
-    return np.zeros_like(W)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">no_regularization</span><span class="hljs-params">(W, alpha)</span>:</span>
+    <span class="hljs-keyword">return</span> np.zeros_like(W)
 
 regularize = {
-    0: no_regularization,
-    1: l1_regularization,
-    2: l2_regularization
+    <span class="hljs-number">0</span>: no_regularization,
+    <span class="hljs-number">1</span>: l1_regularization,
+    <span class="hljs-number">2</span>: l2_regularization
 }
-class Linear(object):
-    def __init__(self, D_in, D_out, regularization=0, alpha=0):
-        self.weight = np.random.randn(D_in, D_out).astype(np.float32)*0.01
-        self.bias = np.zeros((1, D_out), dtype=np.float32)
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Linear</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, D_in, D_out, regularization=<span class="hljs-number">0</span>, alpha=<span class="hljs-number">0</span>)</span>:</span>
+        self.weight = np.random.randn(D_in, D_out).astype(np.float32)*<span class="hljs-number">0.01</span>
+        self.bias = np.zeros((<span class="hljs-number">1</span>, D_out), dtype=np.float32)
         self.regularization = regularization
         self.alpha = alpha
-
-    def forward(self, input):
+        
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, input)</span>:</span>
         self.data = input
-        return np.dot(self.data, self.weight)+self.bias
-
-    def backward(self, top_grad, lr):
+        <span class="hljs-keyword">return</span> np.dot(self.data, self.weight)+self.bias
+        
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backward</span><span class="hljs-params">(self, top_grad, lr)</span>:</span>
         self.grad = np.dot(top_grad, self.weight.T).astype(np.float32)
         grad_w = np.dot(self.data.T, top_grad)
-        # 加上正则项求导
+        <span class="hljs-comment"># 加上正则项求导</span>
         grad_w += regularize[self.regularization](self.weight, self.alpha)
-        # 更新参数
+        <span class="hljs-comment"># 更新参数</span>
         self.weight -= lr*grad_w
-        self.bias -= lr*np.mean(top_grad, axis=0)</code></pre>
+        self.bias -= lr*np.mean(top_grad, axis=<span class="hljs-number">0</span>)
+</code></pre>
 <p>更新了一下线性层如果加上正则化项之后的反向传播的关于权重 $w$ 的梯度，bias 没有正则项。</p>
 <p>我在写一个通用的训练函数，测试一下这三种情况的结果有什么区别。</p>
-<pre><code class="python">from tqdm import tqdm_notebook
-import copy
+<pre class="hljs"><code><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm_notebook
+<span class="hljs-keyword">import</span> copy
 
-batch_size = 120
-# 读取并归一化数据，不归一化会导致 nan
-test_data = ((read_mnist(&#39;../data/mnist/t10k-images.idx3-ubyte&#39;).reshape((-1, 784))-127.0)/255.0).astype(np.float32)
-train_data = ((read_mnist(&#39;../data/mnist/train-images.idx3-ubyte&#39;).reshape((-1, 784))-127.0)/255.0).astype(np.float32)
-# 独热编码标签
-from sklearn.preprocessing import OneHotEncoder
+batch_size = <span class="hljs-number">120</span>
+<span class="hljs-comment"># 读取并归一化数据，不归一化会导致 nan</span>
+test_data = ((read_mnist(<span class="hljs-string">'../data/mnist/t10k-images.idx3-ubyte'</span>).reshape((<span class="hljs-number">-1</span>, <span class="hljs-number">784</span>))<span class="hljs-number">-127.0</span>)/<span class="hljs-number">255.0</span>).astype(np.float32)
+train_data = ((read_mnist(<span class="hljs-string">'../data/mnist/train-images.idx3-ubyte'</span>).reshape((<span class="hljs-number">-1</span>, <span class="hljs-number">784</span>))<span class="hljs-number">-127.0</span>)/<span class="hljs-number">255.0</span>).astype(np.float32)
+<span class="hljs-comment"># 独热编码标签</span>
+<span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> OneHotEncoder
 encoder = OneHotEncoder()
-encoder.fit(np.arange(10).reshape((-1, 1)))
-train_labels = encoder.transform(read_mnist(&#39;../data/mnist/train-labels.idx1-ubyte&#39;).reshape((-1, 1))).toarray().astype(np.float32)
-test_labels = encoder.transform(read_mnist(&#39;../data/mnist/t10k-labels.idx1-ubyte&#39;).reshape((-1, 1))).toarray().astype(np.float32)
-train_dataloader = Dataloader(train_data, train_labels, batch_size, shuffle=True)
-test_dataloader = Dataloader(test_data, test_labels, batch_size, shuffle=False)
+encoder.fit(np.arange(<span class="hljs-number">10</span>).reshape((<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>)))
+train_labels = encoder.transform(read_mnist(<span class="hljs-string">'../data/mnist/train-labels.idx1-ubyte'</span>).reshape((<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>))).toarray().astype(np.float32)
+test_labels = encoder.transform(read_mnist(<span class="hljs-string">'../data/mnist/t10k-labels.idx1-ubyte'</span>).reshape((<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>))).toarray().astype(np.float32)
+train_dataloader = Dataloader(train_data, train_labels, batch_size, shuffle=<span class="hljs-literal">True</span>)
+test_dataloader = Dataloader(test_data, test_labels, batch_size, shuffle=<span class="hljs-literal">False</span>)
 
-# net 应该是一个一层的线性网络
-def train_and_test(loss_layer, net, scheduler, max_iter, train_dataloader, test_dataloader):
+<span class="hljs-comment"># net 应该是一个一层的线性网络</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train_and_test</span><span class="hljs-params">(loss_layer, net, scheduler, max_iter, train_dataloader, test_dataloader)</span>:</span>
     test_loss_list, train_loss_list, train_acc_list, test_acc_list = [], [], [], []
-    best_net = None
-    # 最高准确度，和对应权重
-    best_acc = -float(&#39;inf&#39;)
-    for epoch in tqdm_notebook(range(max_iter)):
-        # 训练
-        correct = 0
-        total_loss = 0
-        for data, labels in train_dataloader:
-            # 前向输出概率
+    best_net = <span class="hljs-literal">None</span>
+    <span class="hljs-comment"># 最高准确度，和对应权重</span>
+    best_acc = -float(<span class="hljs-string">'inf'</span>)
+    <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> tqdm_notebook(range(max_iter)):
+        <span class="hljs-comment"># 训练</span>
+        correct = <span class="hljs-number">0</span>
+        total_loss = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">for</span> data, labels <span class="hljs-keyword">in</span> train_dataloader:
+            <span class="hljs-comment"># 前向输出概率</span>
             train_pred = net.forward(data)
 
-            # 计算准确度
-            pred_labels = np.argmax(train_pred, axis=1)
-            real_labels = np.argmax(labels, axis=1)
+            <span class="hljs-comment"># 计算准确度</span>
+            pred_labels = np.argmax(train_pred, axis=<span class="hljs-number">1</span>)
+            real_labels = np.argmax(labels, axis=<span class="hljs-number">1</span>)
             correct += np.sum(pred_labels==real_labels)
 
-            # 前向输出损失
+            <span class="hljs-comment"># 前向输出损失</span>
             loss = loss_layer.forward(train_pred, labels)
-            total_loss += loss*data.shape[0]
+            total_loss += loss*data.shape[<span class="hljs-number">0</span>]
+            
 
-
-            # 反向更新参数
+            <span class="hljs-comment"># 反向更新参数</span>
             loss_layer.backward()
             net.backward(loss_layer.grad, scheduler.get_lr())
-
+            
         total_loss /= len(train_dataloader)
-        if net.regularization==0:
-            reg_loss = 0
-        elif net.regularization==1:
+        <span class="hljs-keyword">if</span> net.regularization==<span class="hljs-number">0</span>:
+            reg_loss = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">elif</span> net.regularization==<span class="hljs-number">1</span>:
             reg_loss = np.sum(net.weight)*net.alpha
-        else:
-            reg_loss = np.sqrt(np.sum(np.square(net.weight)))*net.alpha/2
+        <span class="hljs-keyword">else</span>:
+            reg_loss = np.sqrt(np.sum(np.square(net.weight)))*net.alpha/<span class="hljs-number">2</span>
         total_loss += reg_loss
-
+        
         acc = correct/len(train_dataloader)
         train_acc_list.append(acc)
         train_loss_list.append(total_loss)
         scheduler.step()
-
-        # 测试
-        correct = 0
-        total_loss = 0
-        for data, labels in test_dataloader:
-            # 前向输出概率
+        
+        <span class="hljs-comment"># 测试</span>
+        correct = <span class="hljs-number">0</span>
+        total_loss = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">for</span> data, labels <span class="hljs-keyword">in</span> test_dataloader:
+            <span class="hljs-comment"># 前向输出概率</span>
             test_pred = net.forward(data)
 
-            # 前向输出损失
+            <span class="hljs-comment"># 前向输出损失</span>
             loss = loss_layer.forward(test_pred, labels)
-            total_loss += loss*data.shape[0]
+            total_loss += loss*data.shape[<span class="hljs-number">0</span>]
 
-            # 计算准确度
-            pred_labels = np.argmax(test_pred, axis=1)
-            real_labels = np.argmax(labels, axis=1)
+            <span class="hljs-comment"># 计算准确度</span>
+            pred_labels = np.argmax(test_pred, axis=<span class="hljs-number">1</span>)
+            real_labels = np.argmax(labels, axis=<span class="hljs-number">1</span>)
             correct += np.sum(pred_labels==real_labels)
-
+            
         total_loss /= len(test_dataloader)
-
-        # 正则项损失因为没有更新参数所以不变
+        
+        <span class="hljs-comment"># 正则项损失因为没有更新参数所以不变</span>
         total_loss += reg_loss
-
+        
         acc = correct/len(test_dataloader)
         test_acc_list.append(acc)
         test_loss_list.append(total_loss)
 
-        if acc &gt; best_acc: 
+        <span class="hljs-keyword">if</span> acc &gt; best_acc: 
             best_acc = acc
             best_net = copy.deepcopy(net)
-    return test_loss_list, train_loss_list, train_acc_list, test_acc_list, best_net</code></pre>
+    <span class="hljs-keyword">return</span> test_loss_list, train_loss_list, train_acc_list, test_acc_list, best_net
+</code></pre>
 <p>初始化各项参数:</p>
-<pre><code class="python"># 损失层
+<pre class="hljs"><code><span class="hljs-comment"># 损失层</span>
 loss_layer = CrossEntropyLossLayer()
-# 输入输出维度
-D, C = 784, 10
-np.random.seed(1) # 固定随机生成的权重</code></pre>
+<span class="hljs-comment"># 输入输出维度</span>
+D, C = <span class="hljs-number">784</span>, <span class="hljs-number">10</span>
+np.random.seed(<span class="hljs-number">1</span>) <span class="hljs-comment"># 固定随机生成的权重</span>
+</code></pre>
 <p>开始训练:</p>
-<pre><code class="python"># 最大迭代次数和步长
-max_iter = 120
-step_size = 50
-# 学习率
-lr = 0.1
-# 学习率衰减
+<pre class="hljs"><code><span class="hljs-comment"># 最大迭代次数和步长</span>
+max_iter = <span class="hljs-number">120</span>
+step_size = <span class="hljs-number">50</span>
+<span class="hljs-comment"># 学习率</span>
+lr = <span class="hljs-number">0.1</span>
+<span class="hljs-comment"># 学习率衰减</span>
 scheduler = lr_scheduler(lr, step_size)
 linear_classifer_0 = Linear(D, C)
-test_loss_list0, train_loss_list0, train_acc_list0, test_acc_list0, best_net0 = train_and_test(loss_layer, linear_classifer_0, scheduler, max_iter, train_dataloader, test_dataloader)</code></pre>
-<pre><code class="python">def show(max_iter, train_loss_list, test_loss_list, train_acc_list, test_acc_list):
-    plt.subplot(2, 1, 1)
-    plt.title(&#39;loss&#39;)
-    plt.plot(range(max_iter), train_loss_list, label=&#39;train_loss&#39;)
-    plt.plot(range(max_iter), test_loss_list, label=&#39;test_loss&#39;)
+test_loss_list0, train_loss_list0, train_acc_list0, test_acc_list0, best_net0 = train_and_test(loss_layer, linear_classifer_0, scheduler, max_iter, train_dataloader, test_dataloader)
+</code></pre>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span><span class="hljs-params">(max_iter, train_loss_list, test_loss_list, train_acc_list, test_acc_list)</span>:</span>
+    plt.subplot(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
+    plt.title(<span class="hljs-string">'loss'</span>)
+    plt.plot(range(max_iter), train_loss_list, label=<span class="hljs-string">'train_loss'</span>)
+    plt.plot(range(max_iter), test_loss_list, label=<span class="hljs-string">'test_loss'</span>)
     plt.legend()
-    plt.subplot(2, 1, 2)
-    plt.title(&#39;accuracy&#39;)
-    plt.plot(range(max_iter), train_acc_list, label=&#39;train_acc&#39;)
-    plt.plot(range(max_iter), test_acc_list, label=&#39;test_acc&#39;)
+    plt.subplot(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+    plt.title(<span class="hljs-string">'accuracy'</span>)
+    plt.plot(range(max_iter), train_acc_list, label=<span class="hljs-string">'train_acc'</span>)
+    plt.plot(range(max_iter), test_acc_list, label=<span class="hljs-string">'test_acc'</span>)
     plt.legend()
-    plt.subplots_adjust(hspace=0.5)
-
-show(max_iter, train_loss_list0, test_loss_list0, train_acc_list0, test_acc_list0)</code></pre>
+    plt.subplots_adjust(hspace=<span class="hljs-number">0.5</span>)
+    
+show(max_iter, train_loss_list0, test_loss_list0, train_acc_list0, test_acc_list0)
+</code></pre>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-05-output_50_0.png" alt=""></p>
-<pre><code class="python"># 最大迭代次数和步长
-max_iter = 120
-step_size = 50
-# 学习率
-lr = 0.1
-# 学习率衰减
+<pre class="hljs"><code><span class="hljs-comment"># 最大迭代次数和步长</span>
+max_iter = <span class="hljs-number">120</span>
+step_size = <span class="hljs-number">50</span>
+<span class="hljs-comment"># 学习率</span>
+lr = <span class="hljs-number">0.1</span>
+<span class="hljs-comment"># 学习率衰减</span>
 scheduler = lr_scheduler(lr, step_size)
-linear_classifer_1 = Linear(D, C, regularization=1, alpha=1e-4)
-test_loss_list1, train_loss_list1, train_acc_list1, test_acc_list1, best_net1 = train_and_test(loss_layer, linear_classifer_1, scheduler, max_iter, train_dataloader, test_dataloader)</code></pre>
-<pre><code>HBox(children=(IntProgress(value=0, max=120), HTML(value=&#39;&#39;)))</code></pre><pre><code class="python">show(max_iter, train_loss_list1, test_loss_list1, train_acc_list1, test_acc_list1)</code></pre>
+linear_classifer_1 = Linear(D, C, regularization=<span class="hljs-number">1</span>, alpha=<span class="hljs-number">1e-4</span>)
+test_loss_list1, train_loss_list1, train_acc_list1, test_acc_list1, best_net1 = train_and_test(loss_layer, linear_classifer_1, scheduler, max_iter, train_dataloader, test_dataloader)
+</code></pre>
+<pre><code>HBox(children=(IntProgress(value=0, max=120), HTML(value='')))
+</code></pre>
+<pre class="hljs"><code>show(max_iter, train_loss_list1, test_loss_list1, train_acc_list1, test_acc_list1)
+</code></pre>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-05-output_52_0.png" alt=""></p>
-<pre><code class="python"># 最大迭代次数和步长
-max_iter = 120
-step_size = 50
-# 学习率
-lr = 0.1
-# 学习率衰减
+<pre class="hljs"><code><span class="hljs-comment"># 最大迭代次数和步长</span>
+max_iter = <span class="hljs-number">120</span>
+step_size = <span class="hljs-number">50</span>
+<span class="hljs-comment"># 学习率</span>
+lr = <span class="hljs-number">0.1</span>
+<span class="hljs-comment"># 学习率衰减</span>
 scheduler = lr_scheduler(lr, step_size)
-linear_classifer_2 = Linear(D, C, regularization=2, alpha=1e-3)
-test_loss_list2, train_loss_list2, train_acc_list2, test_acc_list2, best_net2 = train_and_test(loss_layer, linear_classifer_2, scheduler, max_iter, train_dataloader, test_dataloader)</code></pre>
-<pre><code>HBox(children=(IntProgress(value=0, max=120), HTML(value=&#39;&#39;)))</code></pre><pre><code class="python">show(max_iter, train_loss_list2, test_loss_list2, train_acc_list2, test_acc_list2)</code></pre>
+linear_classifer_2 = Linear(D, C, regularization=<span class="hljs-number">2</span>, alpha=<span class="hljs-number">1e-3</span>)
+test_loss_list2, train_loss_list2, train_acc_list2, test_acc_list2, best_net2 = train_and_test(loss_layer, linear_classifer_2, scheduler, max_iter, train_dataloader, test_dataloader)
+</code></pre>
+<pre><code>HBox(children=(IntProgress(value=0, max=120), HTML(value='')))
+</code></pre>
+<pre class="hljs"><code>show(max_iter, train_loss_list2, test_loss_list2, train_acc_list2, test_acc_list2)
+</code></pre>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-05-output_54_0.png" alt=""></p>
 <p>可视化无正则、L1 正则、L2 正则的权重差别:</p>
-<pre><code class="python">import numpy as np
-import matplotlib.pyplot as plt
+<pre class="hljs"><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-plt.hist(best_net0.weight.ravel(), bins=np.arange(-1, 1, 0.01), label=&#39;no regularization&#39;)
-plt.hist(best_net1.weight.ravel(), bins=np.arange(-1, 1, 0.01), label=&#39;l1 regularization&#39;)
-plt.hist(best_net2.weight.ravel(), bins=np.arange(-1, 1, 0.01), label=&#39;l2 regularization&#39;)
+plt.hist(best_net0.weight.ravel(), bins=np.arange(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.01</span>), label=<span class="hljs-string">'no regularization'</span>)
+plt.hist(best_net1.weight.ravel(), bins=np.arange(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.01</span>), label=<span class="hljs-string">'l1 regularization'</span>)
+plt.hist(best_net2.weight.ravel(), bins=np.arange(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.01</span>), label=<span class="hljs-string">'l2 regularization'</span>)
 plt.legend()
-plt.show()</code></pre>
+plt.show()
+</code></pre>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-05-output_56_0.png" alt=""></p>
 <p>在可视化一下三者之间的收敛速度:</p>
 <p><strong>从以上的结果可以得出几个结论:</strong></p>
@@ -315,95 +413,143 @@ plt.show()</code></pre>
 <li>同样的参数下 L2 的约束能力比 L1 要强，所以需要注意一下正则参数的大小不要太大，否则不能收敛（欠拟合）。</li>
 <li>test accuracy 和 train accuracy 之间的 gap 变小（正则化的意义）。</li>
 </ul>
-<pre><code class="python">np.std(best_net0.weight), np.std(best_net1.weight), np.std(best_net2.weight)</code></pre>
-<pre><code>(0.18500698, 0.14412738, 0.11477291)</code></pre><p>测试集上的准确度也没有太大区别，一点小差距调整下步长和迭代次数就可以 work 了。</p>
-<pre><code class="python">np.max(test_acc_list0), np.max(test_acc_list1), np.max(test_acc_list2)</code></pre>
-<pre><code>(0.9257, 0.9232, 0.9218)</code></pre><pre><code class="python"></code></pre>
+<pre class="hljs"><code>np.std(best_net0.weight), np.std(best_net1.weight), np.std(best_net2.weight)
+</code></pre>
+<pre><code>(0.18500698, 0.14412738, 0.11477291)
+</code></pre>
+<p>测试集上的准确度也没有太大区别，一点小差距调整下步长和迭代次数就可以 work 了。</p>
+<pre class="hljs"><code>np.max(test_acc_list0), np.max(test_acc_list1), np.max(test_acc_list2)
+</code></pre>
+<pre><code>(0.9257, 0.9232, 0.9218)
+</code></pre>
+<pre class="hljs"><code>
+</code></pre>
 <p><strong>最后总结一下，为了防止过拟合，减小 test accuracy 和 train accuracy 之间的 gap，非常需要权重衰减，获得更简单的权重。</strong></p>
 <p><strong>一下是需要的代码</strong></p>
-<pre><code class="python">import numpy as np
-import struct
-def softmax(input):
-    exp_value = np.exp(input) #首先计算指数
-    output = exp_value/np.sum(exp_value, axis=1)[:, np.newaxis] # 然后按行标准化
-    return output
+<pre class="hljs"><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> struct
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax</span><span class="hljs-params">(input)</span>:</span>
+    exp_value = np.exp(input) <span class="hljs-comment">#首先计算指数</span>
+    output = exp_value/np.sum(exp_value, axis=<span class="hljs-number">1</span>)[:, np.newaxis] <span class="hljs-comment"># 然后按行标准化</span>
+    <span class="hljs-keyword">return</span> output
 
-class CrossEntropyLossLayer():
-    def __init__(self):
-        pass
-
-    def forward(self, input, labels):
-        # 做一些防止误用的措施，输入数据必须是二维的，且标签和数据必须维度一致
-        assert len(input.shape)==2, &#39;输入的数据必须是一个二维矩阵&#39;
-        assert len(labels.shape)==2, &#39;输入的标签必须是独热编码&#39;
-        assert labels.shape==input.shape, &#39;数据和标签数量必须一致&#39;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CrossEntropyLossLayer</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">pass</span>
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, input, labels)</span>:</span>
+        <span class="hljs-comment"># 做一些防止误用的措施，输入数据必须是二维的，且标签和数据必须维度一致</span>
+        <span class="hljs-keyword">assert</span> len(input.shape)==<span class="hljs-number">2</span>, <span class="hljs-string">'输入的数据必须是一个二维矩阵'</span>
+        <span class="hljs-keyword">assert</span> len(labels.shape)==<span class="hljs-number">2</span>, <span class="hljs-string">'输入的标签必须是独热编码'</span>
+        <span class="hljs-keyword">assert</span> labels.shape==input.shape, <span class="hljs-string">'数据和标签数量必须一致'</span>
         self.data = input
         self.labels = labels
-        self.prob = np.clip(softmax(input), 1e-9, 1.0) #在取对数时不能为 0，所以用极小数代替 0
-        loss = -np.sum(np.multiply(self.labels, np.log(self.prob)))/self.labels.shape[0]
-        return loss
+        self.prob = np.clip(softmax(input), <span class="hljs-number">1e-9</span>, <span class="hljs-number">1.0</span>) <span class="hljs-comment">#在取对数时不能为 0，所以用极小数代替 0</span>
+        loss = -np.sum(np.multiply(self.labels, np.log(self.prob)))/self.labels.shape[<span class="hljs-number">0</span>]
+        <span class="hljs-keyword">return</span> loss
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backward</span><span class="hljs-params">(self)</span>:</span>
+        self.grad = (self.prob - self.labels)/self.labels.shape[<span class="hljs-number">0</span>] <span class="hljs-comment"># 根据公式计算梯度</span>
 
-    def backward(self):
-        self.grad = (self.prob - self.labels)/self.labels.shape[0] # 根据公式计算梯度
-
-class Dataloader(object):
-    def __init__(self, data, labels, batch_size, shuffle=True):
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dataloader</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, data, labels, batch_size, shuffle=True)</span>:</span>
         self.data = data
         self.batch_size = batch_size
         self.shuffle = shuffle
         self.labels = labels
-
-    def __getitem__(self, index):
-        return self.data[index], self.labels[index]
-
-    def __iter__(self):
-        datasize = self.data.shape[0]
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, index)</span>:</span>
+        <span class="hljs-keyword">return</span> self.data[index], self.labels[index]
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
+        datasize = self.data.shape[<span class="hljs-number">0</span>]
         data_seq = np.arange(datasize)
-        if self.shuffle:
+        <span class="hljs-keyword">if</span> self.shuffle:
             np.random.shuffle(data_seq)
-        interval_list = np.append(np.arange(0, datasize, self.batch_size), datasize)
-        for index in range(interval_list.shape[0]-1):
-            s = data_seq[interval_list[index]:interval_list[index+1]]
-            yield self.data[s], self.labels[s]
-
-    def __len__(self):
-        return self.data.shape[0]
-class lr_scheduler(object):
-    def __init__(self, base_lr, step_size, deacy_factor=0.1):
-        self.base_lr = base_lr # 最初的学习率
-        self.deacy_factor = deacy_factor # 学习率衰减因子
-        self.step_count = 0 # 当前的迭代次数
-        self.lr = base_lr # 当前学习率
-        self.step_size = step_size # 步长
-
-    def step(self, step_count=1): # 默认 1 次
+        interval_list = np.append(np.arange(<span class="hljs-number">0</span>, datasize, self.batch_size), datasize)
+        <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> range(interval_list.shape[<span class="hljs-number">0</span>]<span class="hljs-number">-1</span>):
+            s = data_seq[interval_list[index]:interval_list[index+<span class="hljs-number">1</span>]]
+            <span class="hljs-keyword">yield</span> self.data[s], self.labels[s]
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> self.data.shape[<span class="hljs-number">0</span>]
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">lr_scheduler</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, base_lr, step_size, deacy_factor=<span class="hljs-number">0.1</span>)</span>:</span>
+        self.base_lr = base_lr <span class="hljs-comment"># 最初的学习率</span>
+        self.deacy_factor = deacy_factor <span class="hljs-comment"># 学习率衰减因子</span>
+        self.step_count = <span class="hljs-number">0</span> <span class="hljs-comment"># 当前的迭代次数</span>
+        self.lr = base_lr <span class="hljs-comment"># 当前学习率</span>
+        self.step_size = step_size <span class="hljs-comment"># 步长</span>
+        
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">step</span><span class="hljs-params">(self, step_count=<span class="hljs-number">1</span>)</span>:</span> <span class="hljs-comment"># 默认 1 次</span>
         self.step_count += step_count
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_lr</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-comment"># 根据公式 12 实现</span>
+        self.lr = self.base_lr*(self.deacy_factor**(self.step_count//self.step_size)) <span class="hljs-comment"># 实现上面的公式</span>
+        <span class="hljs-keyword">return</span> self.lr
 
-    def get_lr(self):
-        # 根据公式 12 实现
-        self.lr = self.base_lr*(self.deacy_factor**(self.step_count//self.step_size)) # 实现上面的公式
-        return self.lr
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_mnist</span><span class="hljs-params">(filename)</span>:</span>
+    <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> f:
+        zero, data_type, dims = struct.unpack(<span class="hljs-string">'&gt;HBB'</span>, f.read(<span class="hljs-number">4</span>))
+        shape = tuple(struct.unpack(<span class="hljs-string">'&gt;I'</span>, f.read(<span class="hljs-number">4</span>))[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> range(dims))
+        <span class="hljs-keyword">return</span> np.frombuffer(f.read(), dtype=np.uint8).reshape(shape)
+</code></pre>
+<pre class="hljs"><code>
+</code></pre>
 
-def read_mnist(filename):
-    with open(filename, &#39;rb&#39;) as f:
-        zero, data_type, dims = struct.unpack(&#39;&gt;HBB&#39;, f.read(4))
-        shape = tuple(struct.unpack(&#39;&gt;I&#39;, f.read(4))[0] for d in range(dims))
-        return np.frombuffer(f.read(), dtype=np.uint8).reshape(shape)</code></pre>
-<pre><code class="python"></code></pre>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
+  </div>
+</div>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>

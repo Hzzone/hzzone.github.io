@@ -1,36 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
         </div>
-            <h3 id=github-支持-latex-的几种方案>GitHub 支持 LaTex 的几种方案</h3>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>其他</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <h3>GitHub 支持 LaTex 的几种方案</h3>
 <ol>
 <li><a href="http://www.codecogs.com/latex/eqneditor.php">codecogs</a> 生成外部链接</li>
 </ol>
@@ -49,35 +134,35 @@
 <ol start="4">
 <li><a href="https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima?utm_source=chrome-app-launcher-info-dialog">GitHub with MathJax</a></li>
 </ol>
-<p>通过本地渲染 GitHub 界面支持 LaTeX，自欺欺人的一种方法，不推荐...</p>
+<p>通过本地渲染 GitHub 界面支持 LaTeX，自欺欺人的一种方法，不推荐…</p>
 <ol start="5">
 <li>本地生成图片并上传到图床或者 GitHub</li>
 </ol>
 <p>不是太方便，但是可以解决很多已知问题。</p>
 <h2 id="LaTeX-生成-svg">LaTeX 生成 svg</h2>
-
 <p>参考该回答: <a href="https://stackoverflow.com/questions/9588261/converting-a-latex-code-to-mathml-or-svg-code-in-python#answer-16893390">converting a latex code to mathml or svg code in python</a>。</p>
 <p>通过 <code>latex</code> 命令生成 DVI 文件，然后使用 <a href="https://dvisvgm.de/">dvisvgm</a> 生成 svg 图片。</p>
 <p>通过模板转换:</p>
-<pre><code class="latex">\documentclass[paper=a5,fontsize=12pt]{scrbook}
-\usepackage[pdftex,active,tightpage]{preview}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{tikz}
-\begin{document}
-\begin{preview}
-\begin{tikzpicture}[inner sep=0pt, outer sep=0pt]
-\node at (0, 0) {texCode}; % &lt;--Put your tex-code here
-\end{tikzpicture}
-\end{preview}
-\end{document}</code></pre>
+<pre class="hljs"><code><span class="hljs-tag">\<span class="hljs-name">documentclass</span><span class="hljs-string">[paper=a5,fontsize=12pt]</span><span class="hljs-string">{scrbook}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">[pdftex,active,tightpage]</span><span class="hljs-string">{preview}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">{amsmath}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">{amssymb}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">{amsfonts}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">{tikz}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">{document}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">{preview}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">{tikzpicture}</span><span class="hljs-string">[inner sep=0pt, outer sep=0pt]</span></span>
+<span class="hljs-tag">\<span class="hljs-name">node</span></span> at (0, 0) {texCode}; <span class="hljs-comment">% &lt;--Put your tex-code here</span>
+<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">{tikzpicture}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">{preview}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">{document}</span></span>
+</code></pre>
 <p>缺点是会产生很多中间文件，需要安装 <code>LaTex</code> 环境，大到 3~4 G。</p>
-<h3 id=如何选择>如何选择</h3>
+<h3>如何选择</h3>
 <p>目前我认为最好的方法是通过 <a href="http://www.codecogs.com/latex/eqneditor.php">codecogs</a> 下载 gif 图片，然后上传到图床或者本地的仓库，可以解决服务不稳定的问题，至少可以保证自己的服务器或域名是可以访问的。</p>
 <p>另外一种方法，自己搭建一个服务器，随便采用什么框架，然后通过上面介绍的 <a href="#LaTeX-生成-svg">LaTeX 生成 svg</a> 提供一个类似于 codecogs 的服务，返回 svg 图片。而且目前也有类似功能的，例如 <a href="https://github.com/DMOJ/texoid">texoid</a>。</p>
 <p>实现起来很简单，但我嫌麻烦，可以考虑上一种方法，我认为是在 GitHub 不支持 LaTeX 时的最优解。</p>
-<h3 id=latex-fomula-to-svg>LaTex Fomula to SVG</h3>
+<h3>LaTex Fomula to SVG</h3>
 <p>将 LaTex 公式转 SVG 图片，有几种方法，转其他格式的图片可以使用其他的 API:</p>
 <ul>
 <li>codecogs API</li>
@@ -88,34 +173,40 @@
 </ul>
 <p>来源于 <a href="https://askubuntu.com/questions/33196/how-to-convert-latex-equations-to-svg">How to convert LaTeX equations to SVG?</a>。</p>
 <p>安装命令行工具:</p>
-<pre><code class="shell">npm install --global https://github.com/mathjax/mathjax-node-cli.git</code></pre>
+<pre class="hljs"><code>npm install --global https://github.com/mathjax/mathjax-node-cli.git
+</code></pre>
 <p>转换一个公式:</p>
-<pre><code class="shell">tex2svg &#39;\sin^2{\theta} + \cos^2{\theta} = 1&#39; &gt; mathjax.svg</code></pre>
+<pre class="hljs"><code>tex2svg '\sin^2{\theta} + \cos^2{\theta} = 1' &gt; mathjax.svg
+</code></pre>
 <p>花费 ~2s，比 codecogs 略长。</p>
 <ul>
 <li>latex 和 dvisvgm</li>
 </ul>
 <p>首先 ubuntu 需要安装 LaTex:</p>
-<pre><code class="shell">sudo apt-get install texlive-full</code></pre>
-<pre><code class="latex">\documentclass[paper=a5,fontsize=15px]{scrbook}
-\usepackage[pdftex,active,tightpage]{preview}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{tikz}
-\begin{document}
-\begin{preview}
-\begin{tikzpicture}[inner sep=0pt, outer sep=0pt]
-\node at (0, 0) {\begin{math}\sin^2{\theta} + \cos^2{\theta} = 1\end{math}}; % &lt;--Put your tex-code here
-\end{tikzpicture}
-\end{preview}
-\end{document}</code></pre>
-<pre><code class="shell">➜  tmp time latex test.tex
+<pre class="hljs"><code>sudo apt-get install texlive-full
+</code></pre>
+<pre class="hljs"><code><span class="hljs-tag">\<span class="hljs-name">documentclass</span><span class="hljs-string">[paper=a5,fontsize=15px]</span><span class="hljs-string">{scrbook}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">[pdftex,active,tightpage]</span><span class="hljs-string">{preview}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">{amsmath}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">{amssymb}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">{amsfonts}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">usepackage</span><span class="hljs-string">{tikz}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">{document}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">{preview}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">{tikzpicture}</span><span class="hljs-string">[inner sep=0pt, outer sep=0pt]</span></span>
+<span class="hljs-tag">\<span class="hljs-name">node</span></span> at (0, 0) {<span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">{math}</span></span><span class="hljs-tag">\<span class="hljs-name">sin</span></span>^2{<span class="hljs-tag">\<span class="hljs-name">theta</span></span>} + <span class="hljs-tag">\<span class="hljs-name">cos</span></span>^2{<span class="hljs-tag">\<span class="hljs-name">theta</span></span>} = 1<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">{math}</span></span>}; <span class="hljs-comment">% &lt;--Put your tex-code here</span>
+<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">{tikzpicture}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">{preview}</span></span>
+<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">{document}</span></span>
+</code></pre>
+<pre class="hljs"><code>➜  tmp time latex test.tex
 ...
-latex test.tex  0.20s user 0.03s system 87% cpu 0.264 total</code></pre>
-<pre><code class="shell">time dvisvgm --no-fonts test.dvi test.svg
+latex test.tex  0.20s user 0.03s system 87% cpu 0.264 total
+</code></pre>
+<pre class="hljs"><code>time dvisvgm --no-fonts test.dvi test.svg
 ...
-dvisvgm --no-fonts test.dvi test.svg  0.19s user 0.01s system 93% cpu 0.211 total</code></pre>
+dvisvgm --no-fonts test.dvi test.svg  0.19s user 0.01s system 93% cpu 0.211 total
+</code></pre>
 <p>这种方法最长也就 ~0.2s，比上面两种短的多得多。</p>
 <ul>
 <li>pdflatex 和 inkscape</li>
@@ -126,29 +217,71 @@ dvisvgm --no-fonts test.dvi test.svg  0.19s user 0.01s system 93% cpu 0.211 tota
 </ul>
 <p><a href="https://cairosvg.org/">CairoSVG</a> 将 svg 转 png</p>
 <p>ubuntu:</p>
-<pre><code>sudo apt-get install libcairo2-dev
-sudo apt-get install libffi-dev
-pip3 install cairosvg</code></pre><p><strong>综上，其实最后两种方法速度最快且效果很好</strong></p>
-<pre><code class="shell">ssh://ubuntu@hzzone.io:22/home/ubuntu/miniconda3/bin/python3 -u /home/ubuntu/online-latex-mathmatical-fomula/benchmark.py
-  1%|▎                                    | 695/68883 [02:45&lt;4:30:15,  4.21it/s]</code></pre>
-<h3 id=实现>实现</h3>
+<pre class="hljs"><code>sudo apt-<span class="hljs-built_in">get</span> install libcairo2-<span class="hljs-built_in">dev</span>
+sudo apt-<span class="hljs-built_in">get</span> install libffi-<span class="hljs-built_in">dev</span>
+pip3 install cairosvg
+</code></pre>
+<p><strong>综上，其实最后两种方法速度最快且效果很好</strong></p>
+<pre class="hljs"><code>ssh://ubuntu@hzzone.io:22/home/ubuntu/miniconda3/bin/python3 -u /home/ubuntu/online-latex-mathmatical-fomula/benchmark.py
+<span class="hljs-meta">  1%</span><span class="bash">|▎                                    | 695/68883 [02:45&lt;4:30:15,  4.21it/s]</span>
+</code></pre>
+<h3>实现</h3>
 <p>我最后还是实现了一个类似于 codecogs 的网站，因为不擅长前端，做的比较粗糙，具体原理和功能见 <a href="https://github.com/Hzzone/online-latex-mathmatical-fomula">online-latex-mathmatical-fomula</a></p>
 <p>在线 <a href="https://hzzone.io/api/latex">demo</a></p>
 <p><img src="https://raw.githubusercontent.com/Hzzone/online-latex-mathmatical-fomula/master/demo.gif" alt=""></p>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+  </div>
+</div>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>

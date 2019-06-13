@@ -1,37 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>理解反向传播和框架源码阅读</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
         </div>
-            <h2 id=理解反向传播和框架源码阅读>理解反向传播和框架源码阅读</h2>
-<h3 id=反向传播>反向传播</h3>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">理解反向传播和框架源码阅读</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>cs231n</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <h3>反向传播</h3>
 <p>反向传播其实很简单，就是梯度下降和链式法则的结合运用。对于多层神经网络反向传播尤其容易理解。</p>
 <p>首先梯度下降的基本公式如下:</p>
 <p>$$W = W-lr\frac{\partial L}{\partial W}$$</p>
@@ -49,24 +133,30 @@
 <p>这张图是我自己画的，所以加个水印保护下版权。</p>
 <p>所以按照 cs231n 的总结，反向传播有三个步骤:</p>
 <ol>
-<li><p>Identify intermediate functions (forward prop)</p>
+<li>
+<p>Identify intermediate functions (forward prop)</p>
 </li>
-<li><p>Compute local gradients</p>
+<li>
+<p>Compute local gradients</p>
 </li>
-<li><p>Combine with upstream error signal to get full gradient</p>
+<li>
+<p>Combine with upstream error signal to get full gradient</p>
 </li>
 </ol>
 <hr>
 <ol>
-<li><p>前向传播计算损失，保留中间变量</p>
+<li>
+<p>前向传播计算损失，保留中间变量</p>
 </li>
-<li><p>计算局部梯度</p>
+<li>
+<p>计算局部梯度</p>
 </li>
-<li><p>利用链式法则结合上一层的梯度，计算出完整的梯度</p>
+<li>
+<p>利用链式法则结合上一层的梯度，计算出完整的梯度</p>
 </li>
 </ol>
 <p>最后再根据梯度更新参数。</p>
-<h3 id=矩阵求导>矩阵求导</h3>
+<h3>矩阵求导</h3>
 <p>按照 cs231n 总结一下矩阵求导的几种情况:</p>
 <ul>
 <li>Scalar-by-Vector（标量关于向量求导）</li>
@@ -78,13 +168,13 @@ $$</p>
 <li>Vector-by-Vector（向量关于向量求导）</li>
 </ul>
 <p>$$
-\frac { \partial \mathbf { y } } { \partial \mathbf { x } } = \left[ \begin{array} { c c c c } { \frac { \partial y _ { 1 } } { \partial x _ { 1 } } } &amp; { \frac { \partial y _ { 1 } } { \partial x _ { 2 } } } &amp; { \dots } &amp; { \frac { \partial y _ { 1 } } { \partial x _ { n } } } \\\ { \vdots } &amp; { \vdots } &amp; { \ddots } &amp; { \vdots } \\\ { \frac { \partial y _ { m } } { \partial x _ { 1 } } } &amp; { \frac { \partial y _ { m } } { \partial x _ { 2 } } } &amp; { \cdots } &amp; { \frac { \partial y _ { m } } { \partial x _ { n } } } \end{array} \right]
+\frac { \partial \mathbf { y } } { \partial \mathbf { x } } = \left[ \begin{array} { c c c c } { \frac { \partial y _ { 1 } } { \partial x _ { 1 } } } &amp; { \frac { \partial y _ { 1 } } { \partial x _ { 2 } } } &amp; { \dots } &amp; { \frac { \partial y _ { 1 } } { \partial x _ { n } } } \\ { \vdots } &amp; { \vdots } &amp; { \ddots } &amp; { \vdots } \\ { \frac { \partial y _ { m } } { \partial x _ { 1 } } } &amp; { \frac { \partial y _ { m } } { \partial x _ { 2 } } } &amp; { \cdots } &amp; { \frac { \partial y _ { m } } { \partial x _ { n } } } \end{array} \right]
 $$</p>
 <ul>
 <li>Scalar-by-Matrix（标量关于矩阵求导）</li>
 </ul>
 <p>$$
-\frac { \partial y } { \partial A } = \left[ \begin{array} { c c c c } { \frac { \partial y } { \partial A _ { 11 } } } &amp; { \frac { \partial y } { \partial A _ { 12 } } } &amp; { \dots } &amp; { \frac { \partial y } { \partial A _ { 1 n } } } \\\ { \vdots } &amp; { \vdots } &amp; { \ddots } &amp; { \vdots } \\\ { \frac { \partial y } { \partial A _ { m 1 } } } &amp; { \frac { \partial y } { \partial A _ { m 2 } } } &amp; { \cdots } &amp; { \frac { \partial y } { \partial A _ { m n } } } \end{array} \right]
+\frac { \partial y } { \partial A } = \left[ \begin{array} { c c c c } { \frac { \partial y } { \partial A _ { 11 } } } &amp; { \frac { \partial y } { \partial A _ { 12 } } } &amp; { \dots } &amp; { \frac { \partial y } { \partial A _ { 1 n } } } \\ { \vdots } &amp; { \vdots } &amp; { \ddots } &amp; { \vdots } \\ { \frac { \partial y } { \partial A _ { m 1 } } } &amp; { \frac { \partial y } { \partial A _ { m 2 } } } &amp; { \cdots } &amp; { \frac { \partial y } { \partial A _ { m n } } } \end{array} \right]
 $$</p>
 <ul>
 <li>Vector-by-Matrix（向量关于矩阵求导）</li>
@@ -114,95 +204,136 @@ $$</p>
 $$</p>
 <p>关于矩阵求导，在 cs231n 的 <a href="http://cs231n.stanford.edu/syllabus.html">Discussion Section Backpropagation</a> 讨论了，对于损失函数为什么输出一定要是个标量，由于 Dimension Balancing 的原则，最后求偏导一定等于变量的维度，只有这样才能更新参数。</p>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-01-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-12-01%20%E4%B8%8B%E5%8D%881.03.02.png" alt=""></p>
-<h3 id=框架实现>框架实现</h3>
+<h3>框架实现</h3>
 <p>Caffe 是在每一个定义的 <a href="https://github.com/BVLC/caffe/tree/master/src/caffe/layers">caffe/layers</a> 中实现一对 <code>Forward</code> 和 <code>Backward</code> 函数，分别有 GPU 版本和 CPU 版本，GPU 版本定义了其核函数。</p>
 <p>以 Sigmoid 和 ReLU 为例:</p>
 <ul>
 <li>Sigmoid</li>
 </ul>
-<pre><code class="C++">template &lt;typename Dtype&gt;
-void SigmoidLayer&lt;Dtype&gt;::Forward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
-    const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
-  const Dtype* bottom_data = bottom[0]-&gt;cpu_data();
-  Dtype* top_data = top[0]-&gt;mutable_cpu_data();
-  const int count = bottom[0]-&gt;count();
-  for (int i = 0; i &lt; count; ++i) {
-    // Sigmoid 函数
+<pre class="hljs"><code><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> Dtype&gt;
+<span class="hljs-keyword">void</span> SigmoidLayer&lt;Dtype&gt;::Forward_cpu(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+    <span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  <span class="hljs-keyword">const</span> Dtype* bottom_data = bottom[<span class="hljs-number">0</span>]-&gt;cpu_data();
+  Dtype* top_data = top[<span class="hljs-number">0</span>]-&gt;mutable_cpu_data();
+  <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> count = bottom[<span class="hljs-number">0</span>]-&gt;count();
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; ++i) {
+    <span class="hljs-comment">// Sigmoid 函数</span>
     top_data[i] = sigmoid(bottom_data[i]);
   }
 }
 
-template &lt;typename Dtype&gt;
-void SigmoidLayer&lt;Dtype&gt;::Backward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
-    const vector&lt;bool&gt;&amp; propagate_down,
-    const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) {
-  if (propagate_down[0]) {
-    const Dtype* top_data = top[0]-&gt;cpu_data();
-    const Dtype* top_diff = top[0]-&gt;cpu_diff();
-    Dtype* bottom_diff = bottom[0]-&gt;mutable_cpu_diff();
-    const int count = bottom[0]-&gt;count();
-    for (int i = 0; i &lt; count; ++i) {
-      const Dtype sigmoid_x = top_data[i];
-      // 上一层梯度乘以该层梯度
-      bottom_diff[i] = top_diff[i] * sigmoid_x * (1. - sigmoid_x);
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> Dtype&gt;
+<span class="hljs-keyword">void</span> SigmoidLayer&lt;Dtype&gt;::Backward_cpu(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
+    <span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt;&amp; propagate_down,
+    <span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) {
+  <span class="hljs-keyword">if</span> (propagate_down[<span class="hljs-number">0</span>]) {
+    <span class="hljs-keyword">const</span> Dtype* top_data = top[<span class="hljs-number">0</span>]-&gt;cpu_data();
+    <span class="hljs-keyword">const</span> Dtype* top_diff = top[<span class="hljs-number">0</span>]-&gt;cpu_diff();
+    Dtype* bottom_diff = bottom[<span class="hljs-number">0</span>]-&gt;mutable_cpu_diff();
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> count = bottom[<span class="hljs-number">0</span>]-&gt;count();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; ++i) {
+      <span class="hljs-keyword">const</span> Dtype sigmoid_x = top_data[i];
+      <span class="hljs-comment">// 上一层梯度乘以该层梯度</span>
+      bottom_diff[i] = top_diff[i] * sigmoid_x * (<span class="hljs-number">1.</span> - sigmoid_x);
     }
   }
-}</code></pre>
+}
+</code></pre>
 <ul>
 <li>ReLU</li>
 </ul>
-<pre><code class="C++">template &lt;typename Dtype&gt;
-void ReLULayer&lt;Dtype&gt;::Forward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
-    const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
-  const Dtype* bottom_data = bottom[0]-&gt;cpu_data();
-  Dtype* top_data = top[0]-&gt;mutable_cpu_data();
-  const int count = bottom[0]-&gt;count();
-  // 该参数表明使用 ReLU、Leaky ReLU 还是 PReLU
-    // negative_slope=0，ReLU
-    // negative_slope=0.01 Leaky ReLU
-    // negative_slope=whatever PReLU
-  Dtype negative_slope = this-&gt;layer_param_.relu_param().negative_slope();
-  for (int i = 0; i &lt; count; ++i) {
-    // 实现该激活函数
-    top_data[i] = std::max(bottom_data[i], Dtype(0))
-        + negative_slope * std::min(bottom_data[i], Dtype(0));
+<pre class="hljs"><code><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> Dtype&gt;
+<span class="hljs-keyword">void</span> ReLULayer&lt;Dtype&gt;::Forward_cpu(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+    <span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  <span class="hljs-keyword">const</span> Dtype* bottom_data = bottom[<span class="hljs-number">0</span>]-&gt;cpu_data();
+  Dtype* top_data = top[<span class="hljs-number">0</span>]-&gt;mutable_cpu_data();
+  <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> count = bottom[<span class="hljs-number">0</span>]-&gt;count();
+  <span class="hljs-comment">// 该参数表明使用 ReLU、Leaky ReLU 还是 PReLU</span>
+    <span class="hljs-comment">// negative_slope=0，ReLU</span>
+    <span class="hljs-comment">// negative_slope=0.01 Leaky ReLU</span>
+    <span class="hljs-comment">// negative_slope=whatever PReLU</span>
+  Dtype negative_slope = <span class="hljs-keyword">this</span>-&gt;layer_param_.relu_param().negative_slope();
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; ++i) {
+    <span class="hljs-comment">// 实现该激活函数</span>
+    top_data[i] = <span class="hljs-built_in">std</span>::max(bottom_data[i], Dtype(<span class="hljs-number">0</span>))
+        + negative_slope * <span class="hljs-built_in">std</span>::min(bottom_data[i], Dtype(<span class="hljs-number">0</span>));
   }
 }
 
-template &lt;typename Dtype&gt;
-void ReLULayer&lt;Dtype&gt;::Backward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
-    const vector&lt;bool&gt;&amp; propagate_down,
-    const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) {
-  if (propagate_down[0]) {
-    const Dtype* bottom_data = bottom[0]-&gt;cpu_data();
-    const Dtype* top_diff = top[0]-&gt;cpu_diff();
-    Dtype* bottom_diff = bottom[0]-&gt;mutable_cpu_diff();
-    const int count = bottom[0]-&gt;count();
-    Dtype negative_slope = this-&gt;layer_param_.relu_param().negative_slope();
-    for (int i = 0; i &lt; count; ++i) {
-      // 计算梯度，大于零就等于 x，小于零的部分只需要乘以 negative_slope
-      bottom_diff[i] = top_diff[i] * ((bottom_data[i] &gt; 0)
-          + negative_slope * (bottom_data[i] &lt;= 0));
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> Dtype&gt;
+<span class="hljs-keyword">void</span> ReLULayer&lt;Dtype&gt;::Backward_cpu(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
+    <span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt;&amp; propagate_down,
+    <span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) {
+  <span class="hljs-keyword">if</span> (propagate_down[<span class="hljs-number">0</span>]) {
+    <span class="hljs-keyword">const</span> Dtype* bottom_data = bottom[<span class="hljs-number">0</span>]-&gt;cpu_data();
+    <span class="hljs-keyword">const</span> Dtype* top_diff = top[<span class="hljs-number">0</span>]-&gt;cpu_diff();
+    Dtype* bottom_diff = bottom[<span class="hljs-number">0</span>]-&gt;mutable_cpu_diff();
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> count = bottom[<span class="hljs-number">0</span>]-&gt;count();
+    Dtype negative_slope = <span class="hljs-keyword">this</span>-&gt;layer_param_.relu_param().negative_slope();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; ++i) {
+      <span class="hljs-comment">// 计算梯度，大于零就等于 x，小于零的部分只需要乘以 negative_slope</span>
+      bottom_diff[i] = top_diff[i] * ((bottom_data[i] &gt; <span class="hljs-number">0</span>)
+          + negative_slope * (bottom_data[i] &lt;= <span class="hljs-number">0</span>));
     }
   }
-}</code></pre>
+}
+</code></pre>
 <p>PyTorch 是以计算图为基础的自动求导机制，我整理过 PyTorch 的自动求导机制，并实现了一个初中知识里的线性拟合。</p>
 <p>一个示例:</p>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-30-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-12-01%20%E4%B8%8A%E5%8D%881.17.47.png" alt=""></p>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+  </div>
+</div>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>

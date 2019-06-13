@@ -1,36 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
-    <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/github-markdown.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/site.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      jax: ["input/TeX", "output/CommonHTML"]
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-</script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-</head>
-<body for="html-export">
-    <div class="mume markdown-preview markdown-body">
-        <div class="homepage">
-            <a href="/">主页</a>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>线性代数基础知识复习</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">-->
+        <!--<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
         </div>
-            <p>线性代数基础知识复习，来源于四川大学数学学院的线性代数教材。</p>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/index.html">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i>To be talented & positive.</i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">线性代数基础知识复习</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-13 10:14:06</span>
+    </span>
+    <span class="attr">标签：
+      <span>基础知识</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        
+        <p>线性代数基础知识复习，来源于四川大学数学学院的线性代数教材。</p>
 <p>线性代数其实并不难，相反如果理解透彻之后其实非常简单，公式、原理摆在那里，能变的其实很少。</p>
 <p>我认为线性代数不管怎么变化，本质上仍旧是在讨论线性方程组的一些性质、解的存在性、如何求解。它的东西这么多，完全是因为概念、方法很多，导致理解上有些困难。但是只要串通这些概念之后，其实并没有多复杂。</p>
 <p>为什么本质上仍然是对线性方程组的求解呢？</p>
@@ -42,22 +127,24 @@
 <p>再到向量空间，讨论一组向量之间的线性相关性仍然可以引用到相应的齐次方程组的性质，这个齐次方程组是否只有零解或者有无穷多解。矩阵的零空间、列空间、行空间的基和维数，矩阵的秩，向量组的极大无关组中向量的个数，仍然可以对应到矩阵化简为阶梯型之后的主元列数、自由变量个数（不管他们的关系是怎么样的）。</p>
 <p>矩阵的特征值和特征向量反映了矩阵的部分本质特征，例如 $A^m$ 的特征值仍然是 $\lambda ^m$、特征值之和等于对角元素之和、特征值的乘积等于矩阵的秩，balabala。然后使用特征值和特征向量讨论矩阵的相似对角化和正交相似对角化，$P^{-1}AP=\Lambda$，$\Lambda$ 为对称阵，如果 $P$ 是正交阵，因为满足 $P^T=P^{-1}$，这时候对矩阵多项式更容易求解。</p>
 <p>综上所述，我认为线性代数的目的是为复杂的线性方程组求解提供许多工具，通过很多技巧求解线性方程组。所以在线性代数里，很多概念都能相互对应，如果理解之后会非常轻松。</p>
-<h3 id=大纲>大纲</h3>
+<h3>大纲</h3>
 <ul>
-<li><p><a href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84">第一章 线性方程组</a></p>
+<li>
+<p><a href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84">第一章 线性方程组</a></p>
 <ul>
 <li><a href="#1-1-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84-%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83%E6%B3%95%E4%B8%8E%E7%9F%A9%E9%98%B5">1.1 线性方程组 高斯消元法与矩阵</a></li>
 <li><a href="#1-2-%E8%A1%8C%E5%8C%96%E7%AE%80%E5%92%8C%E9%98%B6%E6%A2%AF%E5%9E%8B%E7%9F%A9%E9%98%B5-%E8%A7%A3%E7%9A%84%E5%AD%98%E5%9C%A8%E6%80%A7%E5%92%8C%E5%94%AF%E4%B8%80%E6%80%A7">1.2 行化简和阶梯型矩阵 解的存在性和唯一性</a></li>
 </ul>
 </li>
-<li><p><a href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9F%A9%E9%98%B5%E4%BB%A3%E6%95%B0">第二章 矩阵代数</a></p>
+<li>
+<p><a href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9F%A9%E9%98%B5%E4%BB%A3%E6%95%B0">第二章 矩阵代数</a></p>
 <ul>
 <li><a href="2-1-%E7%9F%A9%E9%98%B5%E4%B8%8E%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97">2.1 矩阵与矩阵运算</a></li>
 <li><a href="2-2-%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97">2.2 一些特殊矩阵及其运算</a></li>
 </ul>
 </li>
 </ul>
-<h3 id=第一章-线性方程组>第一章 线性方程组</h3>
+<h3>第一章 线性方程组</h3>
 <p>方程组:
 $$
 \left\{\begin{aligned}
@@ -69,18 +156,19 @@ a_{n1}x_1+a_{n2}x_2+\cdots+a_{nn}x_n=b_n\\
 $$</p>
 <p>对应矩阵（增广矩阵）:
 $$
-\begin{bmatrix} 
+\begin{bmatrix}
 a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} &amp; b_1\\
 a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} &amp; b_2\\
 \cdots\\
 a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} &amp; b_n
 \end{bmatrix}
 $$</p>
-<h4 id=1-1-线性方程组-高斯消元法与矩阵>1.1 线性方程组 高斯消元法与矩阵</h4>
+<h4>1.1 线性方程组 高斯消元法与矩阵</h4>
 <ul>
 <li>当 $b_i$ 全为 0 时，称为齐次线性方程组；当 $b_i$ 不全为 0 时，称为非齐次线性方程组。</li>
 <li>包含相同变量的两个方程组有相同解，则它们是等价的。</li>
-<li>线性方程组的初等变换:<ul>
+<li>线性方程组的初等变换:
+<ul>
 <li>交换方程组两个方程的顺序（矩阵行的顺序）；</li>
 <li>在一个方程两端乘以一个非零的常数（矩阵行乘常数）；</li>
 <li>一个方程常数倍加在另一个方程上。</li>
@@ -94,68 +182,64 @@ $$</p>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.12.18%20PM.png"/>
 </div>
-
 <ul>
-<li><p><a href="https://github.com/Hzzone/hzzone.github.io/blob/source/1.%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%95%99%E6%9D%90/1.4.jpg">增广矩阵求解例题</a></p>
+<li>
+<p><a href="https://github.com/Hzzone/hzzone.github.io/blob/source/1.%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%95%99%E6%9D%90/1.4.jpg">增广矩阵求解例题</a></p>
 </li>
-<li><p>矩阵初等行变换</p>
+<li>
+<p>矩阵初等行变换</p>
 </li>
 </ul>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.17.54%20PM.png"/>
 </div>
-
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.18.03%20PM.png"/>
 </div>
-
-
 <ul>
 <li>两个矩阵可以通过初等行变换进行转换，则两个矩阵等价。</li>
 </ul>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.23.50%20PM.png"/>
 </div>
-
-<h4 id=1-2-行化简和阶梯型矩阵-解的存在性和唯一性>1.2 行化简和阶梯型矩阵 解的存在性和唯一性</h4>
+<h4>1.2 行化简和阶梯型矩阵 解的存在性和唯一性</h4>
 <ul>
 <li>阶梯矩阵（首元位置唯一）和行最简形矩阵（唯一）</li>
 </ul>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.25.57%20PM.png"/>
 </div>
-
-
 <ul>
 <li>主元和主元列</li>
 </ul>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.29.11%20PM.png"/>
 </div>
-
 <ul>
-<li><p><a href="https://github.com/Hzzone/hzzone.github.io/blob/source/1.%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%95%99%E6%9D%90/1.6.jpg">阶梯矩阵和行最简形矩阵化简例题</a></p>
+<li>
+<p><a href="https://github.com/Hzzone/hzzone.github.io/blob/source/1.%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%95%99%E6%9D%90/1.6.jpg">阶梯矩阵和行最简形矩阵化简例题</a></p>
 </li>
-<li><p>初等行变换化简</p>
+<li>
+<p>初等行变换化简</p>
 </li>
 </ul>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.33.28%20PM.png"/>
 </div>
-
 <ul>
-<li><p>主元的变量称为基本变量，非主元称为自由变量。自由变量由基本变量确定。主元列数（以后是矩阵的秩）小于变量个数，有无穷多解。$m\times n$ 的矩阵，当 $m&lt;n$ 时，齐次线性方程组一定有非零解（无穷多解）。</p>
+<li>
+<p>主元的变量称为基本变量，非主元称为自由变量。自由变量由基本变量确定。主元列数（以后是矩阵的秩）小于变量个数，有无穷多解。$m\times n$ 的矩阵，当 $m&lt;n$ 时，齐次线性方程组一定有非零解（无穷多解）。</p>
 </li>
-<li><p>增广矩阵存在 $[0,0,\cdots,b]$ 无解。</p>
+<li>
+<p>增广矩阵存在 $[0,0,\cdots,b]$ 无解。</p>
 </li>
 </ul>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.49.30%20PM.png"/>
 </div>
-
 <p>例如下面这个增广矩阵无解（化为阶梯型就可以判断）:</p>
 <p>$$
-\begin{bmatrix} 
+\begin{bmatrix}
 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1\\
 0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 1\\
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 3\\
@@ -169,63 +253,54 @@ $$</p>
 <div align="center">
     <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-23-Screen%20Shot%202018-10-23%20at%208.33.28%20PM.png"/>
 </div>
-
-<h3 id=第二章-矩阵代数>第二章 矩阵代数</h3>
-<h4 id=2-1-矩阵与矩阵运算>2.1 矩阵与矩阵运算</h4>
+<h3>第二章 矩阵代数</h3>
+<h4>2.1 矩阵与矩阵运算</h4>
 <p>这一节在教科书上分为两节，分别是矩阵与向量和矩阵的代数运算，但是内容比较少，也比较容易，所以合并。当然还需要通读公式的证明。</p>
 <ul>
-<li><p>矩阵 $A$ 和 $B$ 的维度相同，则称为同型矩阵。两个矩阵对应元素相等，则 $A=B$。</p>
+<li>
+<p>矩阵 $A$ 和 $B$ 的维度相同，则称为同型矩阵。两个矩阵对应元素相等，则 $A=B$。</p>
 </li>
-<li><p>矩阵的乘法，例如$AB$，$A$ 的列数必须等于 $B$ 的行数，表示为 $A_{m\times n}B_{n\times s}$</p>
+<li>
+<p>矩阵的乘法，例如$AB$，$A$ 的列数必须等于 $B$ 的行数，表示为 $A_{m\times n}B_{n\times s}$</p>
 </li>
-<li><p>矩阵的乘法不满足 <em>交换律</em>，即 $AB\ne BA$，除此之外满足交换律、结合律等。</p>
+<li>
+<p>矩阵的乘法不满足 <em>交换律</em>，即 $AB\ne BA$，除此之外满足交换律、结合律等。</p>
 </li>
-<li><p>矩阵乘法示例:</p>
+<li>
+<p>矩阵乘法示例:</p>
 </li>
 </ul>
-<p>$$
-\left[ \begin{array}{ccc}
-a_{11} &amp; a_{12}\\
-a_{21} &amp; a_{22}\\
-\end{array} 
-\right ]
-\left[ \begin{array}{ccc}
-b_{11} &amp; b_{12}\\
-b_{21} &amp; b_{22}\\
-\end{array} 
-\right ]
-=
-\left[ \begin{array}{ccc}
-a_{11}b_{11}+a_{12}b_{21} &amp; a_{11}b_{12}+a_{12}b_{22}\\
-a_{21}b_{11}+a_{22}b_{21} &amp; a_{21}b_{12}+a_{22}b_{22}\\
-\end{array} 
-\right ]
-$$</p>
 <p>即 $A$ 的每一行乘以 $B$ 的每一列。</p>
 <ul>
-<li><p>行向量乘以列向量得到一个标量（数），这种乘法称为形式标量积、数量级（scalar product）或内积。
+<li>
+<p>行向量乘以列向量得到一个标量（数），这种乘法称为形式标量积、数量级（scalar product）或内积。
 $$
 AX=\left[ \begin{array}{ccc}
 a_1\ a_2\ \cdots\ a_n
-\end{array} 
+\end{array}
 \right]\left[ \begin{array}{ccc}
 x_1\\x_2\\\vdots\\x_n
-\end{array} 
+\end{array}
 \right ]=a_1x_1+a_2x_2+\cdots+a_nx_n
 $$</p>
 </li>
-<li><p>非对角线上元素全为 0 的方阵称为对角矩阵。</p>
+<li>
+<p>非对角线上元素全为 0 的方阵称为对角矩阵。</p>
 </li>
-<li><p>每一个元素都为 0 的矩阵称为零矩阵，即为 $0$ 或 $0_{m\times n}$。</p>
+<li>
+<p>每一个元素都为 0 的矩阵称为零矩阵，即为 $0$ 或 $0_{m\times n}$。</p>
 </li>
-<li><p>n 维行向量（$1\times n$）和 n 维列向量（$n\times 1$）。</p>
+<li>
+<p>n 维行向量（$1\times n$）和 n 维列向量（$n\times 1$）。</p>
 </li>
-<li><p>$A_kA_l=A_{k+l},(A_k)_l=A_{kl}$，但 $(AB)_k \ne A_kB_k$ 因为不满足交换律。</p>
+<li>
+<p>$A_kA_l=A_{k+l},(A_k)<em>l=A</em>{kl}$，但 $(AB)_k \ne A_kB_k$ 因为不满足交换律。</p>
 </li>
-<li><p>矩阵的多项式。</p>
+<li>
+<p>矩阵的多项式。</p>
 </li>
 </ul>
-<h4 id=2-2-一些特殊矩阵及其运算>2.2 一些特殊矩阵及其运算</h4>
+<h4>2.2 一些特殊矩阵及其运算</h4>
 <ul>
 <li>矩阵的逆</li>
 <li>矩阵的三种初等变换可以通过左乘一系列初等矩阵获得化简单位矩阵 $E$ :</li>
@@ -236,35 +311,79 @@ $$P_kP_{k-1}\cdots P_1=A^{-1}$$</p>
 <p>具体求法为: 初等行变换，$(A|E)\to (E|A^{-1})$；初等列变换，$\left[ \begin{array}{ccc}A\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\A^{-1} \end{array} \right ]$。</p>
 <p>如果是求解线性方程组 $\left[ \begin{array}{ccc}A\\E \end{array}\right ] \to \left[ \begin{array}{ccc}E\\A^{-1} \end{array} \right ]$</p>
 <ul>
-<li><p>矩阵的转置: 矩阵的行变为矩阵的列。$A$ 的转置矩阵，记为 $A^T$。满足的性质包括:</p>
+<li>
+<p>矩阵的转置: 矩阵的行变为矩阵的列。$A$ 的转置矩阵，记为 $A^T$。满足的性质包括:</p>
 </li>
-<li><p>对称矩阵，$a_{ij}=a_{ji}$，即 $A^T=A$，按对角线对称。</p>
+<li>
+<p>对称矩阵，$a_{ij}=a_{ji}$，即 $A^T=A$，按对角线对称。</p>
 </li>
-<li><p>反对称矩阵，主对角线为 0，主对角线两侧反号，即 $A^T=-A$。</p>
-<p>  两个对称阵之和为对称阵，两个反对称阵之和为反对称阵。</p>
-<p>  $BB^T,A=B+B^T$ 为对称阵，$A=B-B^T$ 为反对称阵。</p>
-<p>  比较重要的性质是任意矩阵都可以表示为两个对称阵和反对称阵之和:</p>
-<p>  例如矩阵 $C$，有矩阵 $A=C+C^T,B=C-C^T$，则$C=\frac{A+B}{2}$。</p>
+<li>
+<p>反对称矩阵，主对角线为 0，主对角线两侧反号，即 $A^T=-A$。</p>
+<p>两个对称阵之和为对称阵，两个反对称阵之和为反对称阵。</p>
+<p>$BB^T,A=B+B^T$ 为对称阵，$A=B-B^T$ 为反对称阵。</p>
+<p>比较重要的性质是任意矩阵都可以表示为两个对称阵和反对称阵之和:</p>
+<p>例如矩阵 $C$，有矩阵 $A=C+C^T,B=C-C^T$，则$C=\frac{A+B}{2}$。</p>
 </li>
-<li><p>正交矩阵: $A^T=A_{-1}$，满足每一行(列)的平方和为 1，任意两个不同行(列)的数量积(内积)为 0。$A,B$ 为正交阵，则 $AB(BA)$ 也为正交阵，但 $A+B$ 不一定为正交阵。</p>
+<li>
+<p>正交矩阵: $A^T=A_{-1}$，满足每一行(列)的平方和为 1，任意两个不同行(列)的数量积(内积)为 0。$A,B$ 为正交阵，则 $AB(BA)$ 也为正交阵，但 $A+B$ 不一定为正交阵。</p>
 </li>
-<li><p>分块矩阵则是按照行和列对矩阵分块，运算和矩阵类似，但是需要同型矩阵。例如 $A$ 按列分块为 $[A_1, A_2, \cdots A_n]$。</p>
+<li>
+<p>分块矩阵则是按照行和列对矩阵分块，运算和矩阵类似，但是需要同型矩阵。例如 $A$ 按列分块为 $[A_1, A_2, \cdots A_n]$。</p>
 </li>
 </ul>
 
-        <script data-isso="https://hzzone.io/isso"
-        src="https://hzzone.io/isso/js/embed.min.js"></script>
 
-        <section id="isso-thread" style="padding-bottom: 20px;"></section>
-    </div>
-<script>
-(function(e,t,n,i,s,a,c){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)}
-;a=t.createElement(i);c=t.getElementsByTagName(i)[0];a.async=true;a.src=s
-;c.parentNode.insertBefore(a,c)
-})(window,document,"galite","script","https://cdn.jsdelivr.net/npm/ga-lite@2/dist/ga-lite.min.js");
+  </div>
+</div>
 
-galite('create', 'UA-128984734-1', 'auto');
-galite('send', 'pageview');
+                <script data-isso="https://hzzone.me/isso"
+                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
 </script>
-</body>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+    </script>
+    </body>
+
 </html>
