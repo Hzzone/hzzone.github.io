@@ -15,7 +15,7 @@ from nbconvert import MarkdownExporter
 import sys
 
 
-cfg.github.headers = cfg.github.headers.format(sys.argv[1])
+cfg.github.headers = {'Authorization': 'token {}'.format(sys.argv[1])}
 print(cfg.github.headers)
 
 os.popen('cp -r {} {}'.format(cfg.local.generate, osp.join('template', 'static'), osp.join(cfg.local.generate, 'static')))
