@@ -16,9 +16,17 @@ import sys
 
 
 cfg.github.headers = {'Authorization': 'token {}'.format(sys.argv[1])}
-print(cfg.github.headers)
 
-os.popen('cp -r {} {}'.format(cfg.local.generate, osp.join('template', 'static'), osp.join(cfg.local.generate, 'static')))
+# 删除生成的文件，除 .git 以外
+for f in os.listdir(cfg.local.generate):
+    if f == '.git':
+        continue
+    os.popen('rm -rf {}'.format(osp.join(cfg.local.generate, f.replace(' ', '\ '))))
+# 拷贝静态文件
+os.popen('cp -r {} {}'.format(osp.join('template', 'static'),
+                              osp.join(cfg.local.generate, 'static')))
+
+# 加载模板
 base_template_path = 'template/layout.html'
 post_template_path = 'template/post.html'
 index_template_path = 'template/index.html'
