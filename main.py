@@ -24,7 +24,7 @@ for f in os.listdir(cfg.local.generate):
     os.popen('rm -rf {}'.format(osp.join(cfg.local.generate, f.replace(' ', '\ '))))
 # 拷贝静态文件
 os.popen('cp -r {} {}'.format(osp.join('template', 'static'),
-                              osp.join(cfg.local.generate, 'static')))
+                              cfg.local.generate))
 
 # 加载模板
 base_template_path = 'template/layout.html'

@@ -28,7 +28,8 @@ cfg.github.notebook_preview_url = 'https://nbviewer.jupyter.org/github/{}/{}/blo
 # 本地读取的目录和生成目录
 cfg.local = edict()
 cfg.local.source = 'source'
-cfg.local.generate = 'generate'
+# cfg.local.generate = 'generate'
+cfg.local.generate = '/usr/local/Cellar/nginx/1.15.9/html'
 
 # 个人设置：介绍，头像，名字
 cfg.self = edict()
@@ -39,5 +40,3 @@ cfg.self.name = 'Zhizhong Huang'
 cfg.conversion = edict()
 # 转换的后缀名，notebook 转成 md 再转 html
 cfg.conversion.postfix = ['.md', '.ipynb']
-# 预览 notebook 的地址
-cfg.conversion.preview_notebook_url = ''

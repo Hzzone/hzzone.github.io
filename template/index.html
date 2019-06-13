@@ -13,7 +13,7 @@
     <ul>
         {% for post in tag.posts %}
         <li>
-            <a target="_blank" href="{{ '/' + tag.org_name + '/' + post.name + '.html'}}" class="post_link">{{ post.name }}</a>
+            <a href="{{ '/' + tag.org_name + '/' + post.name + '.html'}}" class="post_link">{{ post.name }}</a>
         </li>
         {% endfor %}
     </ul>

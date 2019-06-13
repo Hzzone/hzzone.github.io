@@ -10,10 +10,10 @@
     <span class="attr">访问：
       <span id="busuanzi_value_page_pv">1368</span></span>
   </div>
-    <div class="markdown-body post-content">
+    <div class="markdown-body post-content post_href">
         {% if post.postfix=='.ipynb' %}
         <h4>
-          <a target="_blank" href="{{ '{}/{}/{}.ipynb'.format(cfg.github.notebook_preview_url, post.org_tag, post.name) }}">Notebook 地址</a>
+          <a href="{{ '{}/{}/{}.ipynb'.format(cfg.github.notebook_preview_url, post.org_tag, post.name) }}">Notebook 地址</a>
         </h4>
         {% endif %}
         {{ post_content }}
