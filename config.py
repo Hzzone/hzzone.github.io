@@ -16,7 +16,7 @@ cfg.github.commits_url = '{}/git/commits'.format(cfg.github.base_url)
 cfg.github.file_commit_url = '{}/commits'.format(cfg.github.base_url)
 cfg.github.tree_url = '{}/git/trees'.format(cfg.github.base_url)
 cfg.github.blob_url = '{}/git/blobs'.format(cfg.github.base_url)
-cfg.github.headers = {'Authorization': 'token {}'}
+
 
 # notebook 预览地址
 cfg.github.notebook_preview_url = 'https://nbviewer.jupyter.org/github/{}/{}/blob/{}'.format(
