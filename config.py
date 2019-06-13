@@ -27,7 +27,7 @@ cfg.github.notebook_preview_url = 'https://nbviewer.jupyter.org/github/{}/{}/blo
 
 # 本地读取的目录和生成目录
 cfg.local = edict()
-cfg.local.source = '/Users/hzzone/Desktop/source'
+cfg.local.source = 'source'
 cfg.local.generate = 'generate'
 
 # 个人设置：介绍，头像，名字

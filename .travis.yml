@@ -18,9 +18,12 @@ install:
   - pip3 install -r requirements.txt
   - npm install package.json
   - git clone --depth 1 https://github.com/Hzzone/hzzone.github.io.git --branch=master generate
+  - git clone --depth 1 https://github.com/Hzzone/hzzone.github.io.git --branch=source source
 
 script:
-  - python3 main.py
+  - git pull
+  - cd source && git pull
+  - cd .. && python3 main.py
 
 # safelist
 branches:
