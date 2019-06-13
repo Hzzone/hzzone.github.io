@@ -15,7 +15,7 @@ from nbconvert import MarkdownExporter
 
 
 
-os.popen('rm -rf {}/* && cp -r {} {}'.format(cfg.local.generate, osp.join('template', 'static'), osp.join(cfg.local.generate, 'static')))
+os.popen('cp -r {} {}'.format(cfg.local.generate, osp.join('template', 'static'), osp.join(cfg.local.generate, 'static')))
 base_template_path = 'template/layout.html'
 post_template_path = 'template/post.html'
 index_template_path = 'template/index.html'
