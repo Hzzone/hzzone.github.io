@@ -5,3 +5,4 @@ package-lock.json
 resource/
 .idea
 __pycache__
+generate

@@ -1,0 +1,25 @@
+matrix:
+  include:
+    - language: python
+      python: 3.6
+      install: python -m pip install -r requirements.txt
+      cache: pip
+  include:
+    - language: node_js
+      node_js: 8.9.0
+      cache:
+        directories:
+          - node_modules
+      install: npm install package.json
+
+install:
+  - git clone --depth 1 https://github.com/Hzzone/hzzone.github.io.git --branch=master generate
+
+script:
+  - python main.py
+
+# safelist
+branches:
+  only:
+  - source
+  - dev

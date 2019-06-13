@@ -1,0 +1,21 @@
+<div class="post-container">
+  <div class="post-title">{{ post.name }}</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>{{ post.formated_ctime }}</span>
+    </span>
+    <span class="attr">标签：
+      <span>{{ post.tag }}</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content">
+        {% if post.postfix=='.ipynb' %}
+        <h4>
+          <a target="_blank" href="{{ '{}/{}/{}.ipynb'.format(cfg.github.notebook_preview_url, post.org_tag, post.name) }}">Notebook 地址</a>
+        </h4>
+        {% endif %}
+        {{ post_content }}
+  </div>
+</div>
