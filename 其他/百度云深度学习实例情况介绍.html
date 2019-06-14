@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>主页</title>
+        <title>百度云深度学习实例情况介绍</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
@@ -99,186 +99,105 @@
             </div>
             <div class="content-wrap">
                 <!-- Main Content -->
-                <div id="tag_cloud" class="tags">
-
-    
-    <a href="#基础知识" title="基础知识" rel="3">基础知识</a>
-    
-    <a href="#机器学习" title="机器学习" rel="3">机器学习</a>
-    
-    <a href="#cs231n" title="cs231n" rel="3">cs231n</a>
-    
-    <a href="#深度学习" title="深度学习" rel="3">深度学习</a>
-    
-    <a href="#随笔" title="随笔" rel="3">随笔</a>
-    
-    <a href="#其他" title="其他" rel="3">其他</a>
-    
-
-</div>
-
-<div class="markdown-body post-content">
-    <img src="https://travis-ci.com/Hzzone/hzzone.github.io.svg?branch=source" alt="Build Status" style="display: inline;">
+                <div class="post-container">
+  <div class="post-title">百度云深度学习实例情况介绍</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2018-10-19 16:48:33</span>
+    </span>
+    <span class="attr">标签：
+      <span>其他</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content post_href">
+        
+        <p>百度云深度学习不能保存镜像，但胜在价格便宜。</p>
+<p>相对来说腾讯云最便宜的 14￥ ，阿里云最低 9￥ (且需要最低余额 100￥)，AWS p2.xlarge 最低大概 6-7￥，需要申请实例限制和国外信用卡，但是胜在有很多配好环境的实例。</p>
+<p>百度云深度学习每次都要配置环境，而我需要使用 pytorch，为了简化步骤，特此记录。</p>
+<h3>简介</h3>
 <ul>
-<li>相关链接: <a href="https://hzzone.me/">主页</a> | <a href="https://github.com/Hzzone">Github</a> | <a href="https://www.zhihu.com/people/hzzone">Zhihu</a></li>
-<li>邮箱: zhizhonghwang[at]<a href="http://gmail.com">gmail.com</a> | hzzone.scu[at]<a href="http://foxmail.com">foxmail.com</a></li>
+<li>最低余额 20 元</li>
+<li>tensorflow 1.2.0</li>
+<li>GPU 计算K1型（ CPU: 6核、 GPU:1 Nvidia K40、 内存: 40GB、 硬盘: 200GB ）</li>
+<li>GPU Total memory: 11.17GiB</li>
+<li>￥5.16/小时</li>
 </ul>
-<p>如果你觉得我写的东西对你有帮助，欢迎 star 或 follow 我。</p>
+<h3>环境</h3>
+<ul>
+<li>Ubuntu 14.04.5 LTS</li>
+<li>CUDA Version 8.0.61</li>
+<li>Python 3.4.3/Python 2.7.6</li>
+</ul>
+<p>不幸的是，pytorch 只支持 Python 2.7/3.5/3.6，所以需要安装 &gt;3.5 的版本，我安装 <code>mini conda</code> 配置 python 3.6：</p>
+<pre class="hljs"><code>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+sudo sh Miniconda3-latest-Linux-x86_64.sh
+source ~/.bashrc
+python -V
+Python 3.6.5 :: Anaconda, Inc.
+pip -V
+pip 10.0.1 from /root/miniconda3/lib/python3.6/site-packages/pip (python 3.6)
+</code></pre>
+<p>之后就是使用 rsync 来同步文件，如果数据比较大，可以使用百度的 BOS，推荐 <a href="https://www.cnblogs.com/kidsitcn/p/4645372.html">rsync教程</a>。</p>
+<p>最后安装依赖。</p>
+<h3>使用tensorboard可视化</h3>
+<pre class="hljs"><code><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## 服务器启动tensorboard：</span></span>
+tensorboard --logdir runs
+ssh -L 16006:127.0.0.1:6006 account@ip
+</code></pre>
+<p>本地访问 <a href="http://127.0.0.1:16006/">http://127.0.0.1:16006/</a> 查看。</p>
+<h3>Python 3.4.3预装的Package</h3>
+<ul>
+<li><code>pip3 list</code></li>
+</ul>
+<pre class="hljs"><code>Package                 Version
+----------------------- ----------------
+backports.weakref       1.0rc1
+bleach                  1.5.0
+chardet                 2.2.1
+colorama                0.2.5
+command-not-found       0.3
+defer                   1.0.6
+html5lib                0.9999999
+Keras                   2.0.4
+language-selector       0.1
+Markdown                2.2.0
+numpy                   1.13.0
+pandas                  0.20.2
+pip                     9.0.1
+protobuf                3.3.0
+pycurl                  7.19.3
+pygobject               3.12.0
+python-apt              0.9.3.5ubuntu2
+python-dateutil         2.6.0
+pytz                    2017.2
+pyxdg                   0.25
+PyYAML                  3.12
+requests                2.2.1
+scikit-learn            0.18.1
+scipy                   0.19.0
+screen-resolution-extra 0.0.0
+setuptools              36.0.1
+six                     1.10.0
+tensorflow-gpu          1.2.0
+Theano                  0.9.0
+ufw                     0.34-rc-0ubuntu2
+unattended-upgrades     0.1
+urllib3                 1.7.1
+Werkzeug                0.12.2
+wheel                   0.29.0
+xkit                    0.0.0
+</code></pre>
 
 
-    
-    <h3 id="基础知识">1. 基础知识</h3>
-    <ul>
-        
-        <li>
-            <a href="/基础知识/基础知识学习资料归纳.html">基础知识学习资料归纳</a>
-        </li>
-        
-        <li>
-            <a href="/基础知识/线性代数基础知识复习.html">线性代数基础知识复习</a>
-        </li>
-        
-        <li>
-            <a href="/基础知识/微积分基础知识复习.html">微积分基础知识复习</a>
-        </li>
-        
-        <li>
-            <a href="/基础知识/必备应用列表.html">必备应用列表</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="机器学习">2. 机器学习</h3>
-    <ul>
-        
-        <li>
-            <a href="/机器学习/范数与距离的关系及应用.html">范数与距离的关系及应用</a>
-        </li>
-        
-        <li>
-            <a href="/机器学习/PCA-主成分分析推导及-Python-实现.html">PCA 主成分分析推导及 Python 实现</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="cs231n">3. cs231n</h3>
-    <ul>
-        
-        <li>
-            <a href="/cs231n/Data-Driven-Approach.html">Data-Driven Approach</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/理解反向传播和框架源码阅读.html">理解反向传播和框架源码阅读</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/k-Nearest-Neighbor-classifier.html">k-Nearest Neighbor classifier</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/理解-Weight-Regularization-和及其实现.html">理解 Weight Regularization 和及其实现</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/从一元函数的角度理解梯度下降法.html">从一元函数的角度理解梯度下降法</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/理解激活函数.html">理解激活函数</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/Softmax、KL-散度和-Cross-Entropy-Loss-推导和实现.html">Softmax、KL 散度和 Cross Entropy Loss 推导和实现</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/随机梯度下降和线性层实现.html">随机梯度下降和线性层实现</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/理解-PyTorch-计算图、Autograd-机制和实现线性拟合.html">理解 PyTorch 计算图、Autograd 机制和实现线性拟合</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="深度学习">4. 深度学习</h3>
-    <ul>
-        
-        <li>
-            <a href="/深度学习/人脸识别常用损失函数介绍.html">人脸识别常用损失函数介绍</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="随笔">5. 随笔</h3>
-    <ul>
-        
-        <li>
-            <a href="/随笔/交大、中科院、复旦保研经历总结.html">交大、中科院、复旦保研经历总结</a>
-        </li>
-        
-        <li>
-            <a href="/随笔/博士课题调研.html">博士课题调研</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="其他">6. 其他</h3>
-    <ul>
-        
-        <li>
-            <a href="/其他/Ubuntu-16.04-安装-CUDA-9.0-和-cudnn-7.0.html">Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0</a>
-        </li>
-        
-        <li>
-            <a href="/其他/highlightjs-和-marked-高亮-markdown-转-html.html">highlightjs 和 marked 高亮 markdown 转 html</a>
-        </li>
-        
-        <li>
-            <a href="/其他/百度云深度学习实例情况介绍.html">百度云深度学习实例情况介绍</a>
-        </li>
-        
-        <li>
-            <a href="/其他/alias-上传图片到服务器做图床，支持-https.html">alias 上传图片到服务器做图床，支持 https</a>
-        </li>
-        
-        <li>
-            <a href="/其他/GitHub-支持-LaTex-的几种方案以及-LaTeX-生成-svg.html">GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg</a>
-        </li>
-        
-        <li>
-            <a href="/其他/PyTorch-计算均值和标准差.html">PyTorch 计算均值和标准差</a>
-        </li>
-        
-        <li>
-            <a href="/其他/Pytorch-使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果.html">Pytorch 使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果</a>
-        </li>
-        
-        <li>
-            <a href="/其他/TensorBoardX-绘制曲线的简单例子.html">TensorBoardX 绘制曲线的简单例子</a>
-        </li>
-        
-        <li>
-            <a href="/其他/宜搜小说-API-分析.html">宜搜小说 API 分析</a>
-        </li>
-        
-        <li>
-            <a href="/其他/微信消息提醒，定时发送.html">微信消息提醒，定时发送</a>
-        </li>
-        
-        <li>
-            <a href="/其他/对-Numpy-矩阵进行直方图数值统计.html">对 Numpy 矩阵进行直方图数值统计</a>
-        </li>
-        
-        <li>
-            <a href="/其他/知乎-markdown-如何支持直接转换-LaTeX-公式.html">知乎 markdown 如何支持直接转换 LaTeX 公式</a>
-        </li>
-        
-    </ul>
-    
+  </div>
+    <script>
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+    </script>
 </div>
-
 
                 <script data-isso="https://hzzone.me/isso" data-isso-vote="false"
                         src="https://hzzone.me/isso/js/embed.min.js"></script>

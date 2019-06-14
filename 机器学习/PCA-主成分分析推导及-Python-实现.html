@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>主页</title>
+        <title>PCA 主成分分析推导及 Python 实现</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
@@ -99,186 +99,123 @@
             </div>
             <div class="content-wrap">
                 <!-- Main Content -->
-                <div id="tag_cloud" class="tags">
-
-    
-    <a href="#基础知识" title="基础知识" rel="3">基础知识</a>
-    
-    <a href="#机器学习" title="机器学习" rel="3">机器学习</a>
-    
-    <a href="#cs231n" title="cs231n" rel="3">cs231n</a>
-    
-    <a href="#深度学习" title="深度学习" rel="3">深度学习</a>
-    
-    <a href="#随笔" title="随笔" rel="3">随笔</a>
-    
-    <a href="#其他" title="其他" rel="3">其他</a>
-    
-
-</div>
-
-<div class="markdown-body post-content">
-    <img src="https://travis-ci.com/Hzzone/hzzone.github.io.svg?branch=source" alt="Build Status" style="display: inline;">
+                <div class="post-container">
+  <div class="post-title">PCA 主成分分析推导及 Python 实现</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2018-10-29 02:36:30</span>
+    </span>
+    <span class="attr">标签：
+      <span>机器学习</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content post_href">
+        
+        <p>此证明推导来源于 Deep Learning 这本书，和原书不同的在于:</p>
 <ul>
-<li>相关链接: <a href="https://hzzone.me/">主页</a> | <a href="https://github.com/Hzzone">Github</a> | <a href="https://www.zhihu.com/people/hzzone">Zhihu</a></li>
-<li>邮箱: zhizhonghwang[at]<a href="http://gmail.com">gmail.com</a> | hzzone.scu[at]<a href="http://foxmail.com">foxmail.com</a></li>
+<li>我证明了当 $l&gt;1$ 时的普遍情况下的目标函数。</li>
+<li>原书提出使用归纳法证明 <strong>$D$ 应为 $X^TX$ 前 $l$ 个最大特征值对应的特征向量</strong> (并未证明)，在此我使用迹与特征值的性质求证最后的误差为 $\sum^l_{i=1}\lambda_i$，其中 $\lambda_i$ 为 $X^TX$ 的特征值。</li>
 </ul>
-<p>如果你觉得我写的东西对你有帮助，欢迎 star 或 follow 我。</p>
-
-
-    
-    <h3 id="基础知识">1. 基础知识</h3>
-    <ul>
-        
-        <li>
-            <a href="/基础知识/基础知识学习资料归纳.html">基础知识学习资料归纳</a>
-        </li>
-        
-        <li>
-            <a href="/基础知识/线性代数基础知识复习.html">线性代数基础知识复习</a>
-        </li>
-        
-        <li>
-            <a href="/基础知识/微积分基础知识复习.html">微积分基础知识复习</a>
-        </li>
-        
-        <li>
-            <a href="/基础知识/必备应用列表.html">必备应用列表</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="机器学习">2. 机器学习</h3>
-    <ul>
-        
-        <li>
-            <a href="/机器学习/范数与距离的关系及应用.html">范数与距离的关系及应用</a>
-        </li>
-        
-        <li>
-            <a href="/机器学习/PCA-主成分分析推导及-Python-实现.html">PCA 主成分分析推导及 Python 实现</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="cs231n">3. cs231n</h3>
-    <ul>
-        
-        <li>
-            <a href="/cs231n/Data-Driven-Approach.html">Data-Driven Approach</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/理解反向传播和框架源码阅读.html">理解反向传播和框架源码阅读</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/k-Nearest-Neighbor-classifier.html">k-Nearest Neighbor classifier</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/理解-Weight-Regularization-和及其实现.html">理解 Weight Regularization 和及其实现</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/从一元函数的角度理解梯度下降法.html">从一元函数的角度理解梯度下降法</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/理解激活函数.html">理解激活函数</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/Softmax、KL-散度和-Cross-Entropy-Loss-推导和实现.html">Softmax、KL 散度和 Cross Entropy Loss 推导和实现</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/随机梯度下降和线性层实现.html">随机梯度下降和线性层实现</a>
-        </li>
-        
-        <li>
-            <a href="/cs231n/理解-PyTorch-计算图、Autograd-机制和实现线性拟合.html">理解 PyTorch 计算图、Autograd 机制和实现线性拟合</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="深度学习">4. 深度学习</h3>
-    <ul>
-        
-        <li>
-            <a href="/深度学习/人脸识别常用损失函数介绍.html">人脸识别常用损失函数介绍</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="随笔">5. 随笔</h3>
-    <ul>
-        
-        <li>
-            <a href="/随笔/交大、中科院、复旦保研经历总结.html">交大、中科院、复旦保研经历总结</a>
-        </li>
-        
-        <li>
-            <a href="/随笔/博士课题调研.html">博士课题调研</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="其他">6. 其他</h3>
-    <ul>
-        
-        <li>
-            <a href="/其他/Ubuntu-16.04-安装-CUDA-9.0-和-cudnn-7.0.html">Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0</a>
-        </li>
-        
-        <li>
-            <a href="/其他/highlightjs-和-marked-高亮-markdown-转-html.html">highlightjs 和 marked 高亮 markdown 转 html</a>
-        </li>
-        
-        <li>
-            <a href="/其他/百度云深度学习实例情况介绍.html">百度云深度学习实例情况介绍</a>
-        </li>
-        
-        <li>
-            <a href="/其他/alias-上传图片到服务器做图床，支持-https.html">alias 上传图片到服务器做图床，支持 https</a>
-        </li>
-        
-        <li>
-            <a href="/其他/GitHub-支持-LaTex-的几种方案以及-LaTeX-生成-svg.html">GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg</a>
-        </li>
-        
-        <li>
-            <a href="/其他/PyTorch-计算均值和标准差.html">PyTorch 计算均值和标准差</a>
-        </li>
-        
-        <li>
-            <a href="/其他/Pytorch-使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果.html">Pytorch 使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果</a>
-        </li>
-        
-        <li>
-            <a href="/其他/TensorBoardX-绘制曲线的简单例子.html">TensorBoardX 绘制曲线的简单例子</a>
-        </li>
-        
-        <li>
-            <a href="/其他/宜搜小说-API-分析.html">宜搜小说 API 分析</a>
-        </li>
-        
-        <li>
-            <a href="/其他/微信消息提醒，定时发送.html">微信消息提醒，定时发送</a>
-        </li>
-        
-        <li>
-            <a href="/其他/对-Numpy-矩阵进行直方图数值统计.html">对 Numpy 矩阵进行直方图数值统计</a>
-        </li>
-        
-        <li>
-            <a href="/其他/知乎-markdown-如何支持直接转换-LaTeX-公式.html">知乎 markdown 如何支持直接转换 LaTeX 公式</a>
-        </li>
-        
-    </ul>
-    
+<h3>推导</h3>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0040.JPG" width="900px">
 </div>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0041.JPG" width="900px">
+</div>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0042.JPG" width="900px">
+</div>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-IMG_0043.JPG" width="900px">
+</div>
+<h3>Python 实现</h3>
+<p>下载鸢尾花数据集:</p>
+<pre class="hljs"><code>wget http://archive.ics.uci.edu/ml/machine-learning-databases/iris/bezdekIris.data -O iris.csv
+</code></pre>
+<p>在此对比了自己实现的 PCA 和 sklearn 实现的 <a href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">PCA</a> 之间的效果和误差。</p>
+<ul>
+<li>
+<p>误差: 12.909879891741815 3.8993133189625775</p>
+</li>
+<li>
+<p>效果如图:</p>
+</li>
+</ul>
+<div align="center">
+    <img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-10-29-Figure_1-1.png" width="900px">
+</div>
+<p>PCA 实现:</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> utils
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> decomposition
 
+<span class="hljs-comment"># 读取数据</span>
+iris_data, iris_label = utils.read_iris(<span class="hljs-string">'../data/iris.csv'</span>)
+iris_data -= np.mean(iris_data, axis=<span class="hljs-number">0</span>)
+
+<span class="hljs-comment"># target: 150*4</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pca</span><span class="hljs-params">(target, l)</span>:</span>
+    <span class="hljs-comment"># l 必须小于 n，这里 n=4;</span>
+    <span class="hljs-keyword">assert</span> l&lt;=target.shape[<span class="hljs-number">1</span>]
+
+    <span class="hljs-comment"># 计算 X^T*X 的特征向量和特征值</span>
+    <span class="hljs-comment"># 参考 https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.linalg.eig.html</span>
+    eig_value, eig_vector = np.linalg.eig(np.dot(target.T, target))
+
+    index = np.argsort(eig_value)
+    eig_vector = eig_vector[index]
+    <span class="hljs-comment"># 取前 l 最大的特征值对应的特征向量</span>
+    <span class="hljs-comment"># D: N*L</span>
+    D = eig_vector[:l, :]
+    D = np.transpose(D, (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
+
+    <span class="hljs-comment"># 解码计算误差, frobenius norm</span>
+    <span class="hljs-comment"># X-DD^TX</span>
+    error = np.linalg.norm(target - np.dot(np.dot(D, D.T), target.T).T)
+    <span class="hljs-keyword">return</span> np.dot(target, D), error
+
+<span class="hljs-comment"># 150*2</span>
+result1, self_implemented_error = pca(iris_data, <span class="hljs-number">2</span>)
+
+f = plt.figure(figsize=(<span class="hljs-number">16</span>,<span class="hljs-number">9</span>))
+c = [<span class="hljs-string">'#ff0000'</span>, <span class="hljs-string">'#ffff00'</span>, <span class="hljs-string">'#00ff00'</span>, <span class="hljs-string">'#00ffff'</span>]
+
+
+plt.subplot(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)
+plt.title(<span class="hljs-string">'self-implemented PCA'</span>)
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]:
+    plt.plot(result1[iris_label == i, <span class="hljs-number">0</span>].flatten(), result1[iris_label == i, <span class="hljs-number">1</span>].flatten(), <span class="hljs-string">'.'</span>, c=c[i])
+
+plt.legend([<span class="hljs-string">'0'</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'2'</span>])
+
+plt.subplot(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>)
+plt.title(<span class="hljs-string">'sklearn PCA'</span>)
+<span class="hljs-comment"># 150*2</span>
+model = decomposition.pca.PCA(n_components=<span class="hljs-number">2</span>).fit(iris_data)
+result2 = model.transform(iris_data)
+pca_error = np.linalg.norm(iris_data - model.inverse_transform(result2))
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]:
+    plt.plot(result2[iris_label==i, <span class="hljs-number">0</span>].flatten(), result2[iris_label==i, <span class="hljs-number">1</span>].flatten(), <span class="hljs-string">'.'</span>, c=c[i])
+
+plt.legend([<span class="hljs-string">'0'</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'2'</span>])
+plt.grid()
+plt.show()
+print(self_implemented_error, pca_error)
+</code></pre>
+
+
+  </div>
+    <script>
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+    </script>
+</div>
 
                 <script data-isso="https://hzzone.me/isso" data-isso-vote="false"
                         src="https://hzzone.me/isso/js/embed.min.js"></script>
