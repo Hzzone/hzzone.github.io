@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>主页</title>
+        <title>知乎 markdown 如何支持直接转换 LaTeX 公式</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
@@ -101,186 +101,74 @@
             </div>
             <div class="content-wrap">
                 <!-- Main Content -->
-                <div id="tag_cloud" class="tags">
+                <div class="post-container">
+  <div class="post-title">知乎 markdown 如何支持直接转换 LaTeX 公式</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-14 06:56:29</span>
+    </span>
+    <span class="attr">标签：
+      <span>其他</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content post_href">
+        
+        <p>知乎编辑器支持直接导入 markdown 文本，但是不支持直接渲染使用 LaTeX 写的数学公式，必须使用编辑器输入，对于公式比较多的内容很不方便。现在的知乎编辑器插件也不要想了，不支持公式。</p>
+<p>我最开始考虑直接写 js 修改输入文本框内的内容，因为知乎编辑器公式渲染都是通过以下格式:</p>
+<pre class="hljs"><code>&lt;span <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"Formula isEditable"</span> style=<span class="hljs-string">"background-image: url(&amp;quot;//www.zhihu.com/equation?tex=x_1&amp;quot;);"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Formula-image"</span> <span class="hljs-attr">data-eeimg</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"//www.zhihu.com/equation?tex=x_1"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"x_1"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"19"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"16"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Formula-placeholder"</span> <span class="hljs-attr">data-paste-ignore</span>=<span class="hljs-string">"true"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">data-offset-key</span>=<span class="hljs-string">"ackhh-1-0"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">data-text</span>=<span class="hljs-string">"true"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</code></pre>
+<p>修改成功之后虽然文本编辑器渲染公式成功了，提交修改后依然为原来的内容。</p>
+<p>再后来通过观察之后，知乎的其实是通过图片存在的：</p>
+<pre class="hljs"><code>&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">"https://www.zhihu.com/equation?tex=p"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-string">"p"</span> <span class="hljs-attribute">eeimg</span>=<span class="hljs-string">"1"</span>&gt;
+</code></pre>
+<p>当我在 markdown 文件中直接这样写公式时，再导入编辑器，成功渲染并修改。</p>
+<p>所以最后，我通过正则表达式匹配 LaTeX 公式，并修改成以上格式，达到了直接导入 markdown 的功能。因此也不需要一个一个去转换公式。</p>
+<p>可以写 python 实现，几行代码而已，但对我来说既然追求简便，那就最简单吧。我稍微写了点界面直接转换 markdown 文件，提交文件后点击 submit，文本不会上传，全部本地完成，而且只有一个 html 文件（PS: 我不太熟悉 js）</p>
+<p>在线地址: <a href="https://hzzone.me/zhihu_markdown_latex_math_conversion.html">https://hzzone.me/zhihu_markdown_latex_math_conversion.html</a></p>
+<p>测试代码:</p>
+<pre class="hljs"><code>### 测试公式
+<span class="hljs-comment">* 行内公式</span>
 
-    
-    <a href="#基础知识" title="基础知识" rel="3">基础知识</a>
-    
-    <a href="#机器学习" title="机器学习" rel="3">机器学习</a>
-    
-    <a href="#cs231n" title="cs231n" rel="3">cs231n</a>
-    
-    <a href="#深度学习" title="深度学习" rel="3">深度学习</a>
-    
-    <a href="#随笔" title="随笔" rel="3">随笔</a>
-    
-    <a href="#其他" title="其他" rel="3">其他</a>
-    
+哈哈哈哈哈 <span class="hljs-symbol">$</span>x_1+x_2<span class="hljs-symbol">$</span> 公式你好！
 
+<span class="hljs-comment">* 行间公式</span>
+
+哈哈哈哈哈
+
+<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span>x_1+x_2<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span>
+
+公式你好！
+</code></pre>
+<p>导出:</p>
+<pre class="hljs"><code><span class="hljs-comment">### 测试公式</span>
+* 行内公式
+
+哈哈哈哈哈 &lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">"https://www.zhihu.com/equation?tex=x_1+x_2"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-string">"x_1+x_2"</span> <span class="hljs-attribute">eeimg</span>=<span class="hljs-string">"1"</span>&gt; 公式你好！
+
+* 行间公式
+
+哈哈哈哈哈
+
+
+&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">"https://www.zhihu.com/equation?tex=x_1+x_2"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-string">"x_1+x_2"</span> <span class="hljs-attribute">eeimg</span>=<span class="hljs-string">"1"</span>&gt;
+
+
+公式你好！
+</code></pre>
+<p>效果图:
+<img src="http://ww3.sinaimg.cn/large/006tNc79gy1g3u6tkltabj315s0qatas.jpg" alt=""></p>
+<p>（知乎的 markdown 转 html 和 vscode 一样）</p>
+
+
+  </div>
+    <script>
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+    </script>
 </div>
-
-<div class="markdown-body post-content">
-    <p><a href="https://travis-ci.com/Hzzone/hzzone.github.io"><img src="https://travis-ci.com/Hzzone/hzzone.github.io.svg?branch=source" alt="Build Status"></a></p>
-<ul>
-<li>相关链接: <a href="https://hzzone.me/">主页</a> | <a href="https://github.com/Hzzone">Github</a> | <a href="https://www.zhihu.com/people/hzzone">Zhihu</a></li>
-<li>邮箱: zhizhonghwang[at]<a href="http://gmail.com">gmail.com</a> | hzzone.scu[at]<a href="http://foxmail.com">foxmail.com</a></li>
-</ul>
-<p>如果你觉得我写的东西对你有帮助，欢迎 star 或 follow 我。</p>
-
-
-    
-    <h3 id="基础知识">1. 基础知识</h3>
-    <ul>
-        
-        <li>
-            <a href="/1. 基础知识/基础知识学习资料归纳.html">基础知识学习资料归纳</a>
-        </li>
-        
-        <li>
-            <a href="/1. 基础知识/线性代数基础知识复习.html">线性代数基础知识复习</a>
-        </li>
-        
-        <li>
-            <a href="/1. 基础知识/微积分基础知识复习.html">微积分基础知识复习</a>
-        </li>
-        
-        <li>
-            <a href="/1. 基础知识/必备应用列表.html">必备应用列表</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="机器学习">2. 机器学习</h3>
-    <ul>
-        
-        <li>
-            <a href="/2. 机器学习/范数与距离的关系及应用.html">范数与距离的关系及应用</a>
-        </li>
-        
-        <li>
-            <a href="/2. 机器学习/PCA 主成分分析推导及 Python 实现.html">PCA 主成分分析推导及 Python 实现</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="cs231n">3. cs231n</h3>
-    <ul>
-        
-        <li>
-            <a href="/3. cs231n/Data-Driven Approach.html">Data-Driven Approach</a>
-        </li>
-        
-        <li>
-            <a href="/3. cs231n/理解反向传播和框架源码阅读.html">理解反向传播和框架源码阅读</a>
-        </li>
-        
-        <li>
-            <a href="/3. cs231n/k-Nearest Neighbor classifier.html">k-Nearest Neighbor classifier</a>
-        </li>
-        
-        <li>
-            <a href="/3. cs231n/理解 Weight Regularization 和及其实现.html">理解 Weight Regularization 和及其实现</a>
-        </li>
-        
-        <li>
-            <a href="/3. cs231n/从一元函数的角度理解梯度下降法.html">从一元函数的角度理解梯度下降法</a>
-        </li>
-        
-        <li>
-            <a href="/3. cs231n/理解激活函数.html">理解激活函数</a>
-        </li>
-        
-        <li>
-            <a href="/3. cs231n/Softmax、KL 散度和 Cross Entropy Loss 推导和实现.html">Softmax、KL 散度和 Cross Entropy Loss 推导和实现</a>
-        </li>
-        
-        <li>
-            <a href="/3. cs231n/随机梯度下降和线性层实现.html">随机梯度下降和线性层实现</a>
-        </li>
-        
-        <li>
-            <a href="/3. cs231n/理解 PyTorch 计算图、Autograd 机制和实现线性拟合.html">理解 PyTorch 计算图、Autograd 机制和实现线性拟合</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="深度学习">4. 深度学习</h3>
-    <ul>
-        
-        <li>
-            <a href="/4. 深度学习/人脸识别常用损失函数介绍.html">人脸识别常用损失函数介绍</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="随笔">5. 随笔</h3>
-    <ul>
-        
-        <li>
-            <a href="/5. 随笔/交大、中科院、复旦保研经历总结.html">交大、中科院、复旦保研经历总结</a>
-        </li>
-        
-        <li>
-            <a href="/5. 随笔/博士课题调研.html">博士课题调研</a>
-        </li>
-        
-    </ul>
-    
-    <h3 id="其他">6. 其他</h3>
-    <ul>
-        
-        <li>
-            <a href="/6. 其他/Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0.html">Ubuntu 16.04 安装 CUDA 9.0 和 cudnn 7.0</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/highlightjs 和 marked 高亮 markdown 转 html.html">highlightjs 和 marked 高亮 markdown 转 html</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/百度云深度学习实例情况介绍.html">百度云深度学习实例情况介绍</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/alias 上传图片到服务器做图床，支持 https.html">alias 上传图片到服务器做图床，支持 https</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg.html">GitHub 支持 LaTex 的几种方案以及 LaTeX 生成 svg</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/PyTorch 计算均值和标准差.html">PyTorch 计算均值和标准差</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/Pytorch 使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果.html">Pytorch 使用预训练模型时，同一张图片预测不同的结果或者很多张图片同样的结果</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/TensorBoardX 绘制曲线的简单例子.html">TensorBoardX 绘制曲线的简单例子</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/宜搜小说 API 分析.html">宜搜小说 API 分析</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/微信消息提醒，定时发送.html">微信消息提醒，定时发送</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/对 Numpy 矩阵进行直方图数值统计.html">对 Numpy 矩阵进行直方图数值统计</a>
-        </li>
-        
-        <li>
-            <a href="/6. 其他/知乎 markdown 如何支持直接转换 LaTeX 公式.html">知乎 markdown 如何支持直接转换 LaTeX 公式</a>
-        </li>
-        
-    </ul>
-    
-</div>
-
 
                 <script data-isso="https://hzzone.me/isso"
                         src="https://hzzone.me/isso/js/embed.min.js"></script>
