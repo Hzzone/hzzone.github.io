@@ -1,4 +1,5 @@
 from easydict import EasyDict as edict
+import os
 
 cfg = edict()
 
@@ -18,6 +19,7 @@ cfg.github.tree_url = '{}/git/trees'.format(cfg.github.base_url)
 cfg.github.blob_url = '{}/git/blobs'.format(cfg.github.base_url)
 
 
+
 # notebook 预览地址
 cfg.github.notebook_preview_url = 'https://nbviewer.jupyter.org/github/{}/{}/blob/{}'.format(
     cfg.github.user_name,
@@ -27,9 +29,14 @@ cfg.github.notebook_preview_url = 'https://nbviewer.jupyter.org/github/{}/{}/blo
 
 # 本地读取的目录和生成目录
 cfg.local = edict()
-cfg.local.source = 'source'
-cfg.local.generate = 'generate'
-# cfg.local.generate = '/usr/local/Cellar/nginx/1.15.9/html'
+if 'GITHUB_TOKEN' in os.environ.keys():
+    # travis 部署
+    cfg.local.source = 'source'
+    cfg.local.generate = 'generate'
+else:
+    # 本地
+    cfg.local.source = '/Users/hzzone/Desktop/hzzone.github.io'
+    cfg.local.generate = '/usr/local/Cellar/nginx/1.15.9/html'
 
 # 个人设置：介绍，头像，名字
 cfg.self = edict()

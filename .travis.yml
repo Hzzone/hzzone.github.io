@@ -6,6 +6,8 @@ cache:
   directories:
   - node_modules
 before_install:
+  # travis login --pro 登录，注意 pro 和 org 对应两个网站
+  # travis encrypt-file ~/.ssh/id_rsa --add --pro 加密私钥，然后添加以下一行就可以使用 ssh 连接服务器
 - openssl aes-256-cbc -K $encrypted_a6f8c23ee827_key -iv $encrypted_a6f8c23ee827_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 - sudo apt-get -y install python3-pip python-dev
@@ -28,7 +30,8 @@ after_script:
 - git config user.email "Hzzone@outlook.com"
 - cd generate && git add -A && git commit -m "update" && git push --force "https://$GITHUB_TOKEN@${GH_REF}"
   master:master
-- ssh ubuntu@hzzone.me -o StrictHostKeyChecking=no 'ls'
+# ssh 服务器
+# - ssh ubuntu@hzzone.me -o StrictHostKeyChecking=no 'ls'
 env:
   global:
   - GH_REF: github.com/Hzzone/hzzone.github.io.git

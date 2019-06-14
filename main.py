@@ -74,7 +74,6 @@ def read_from_github():
             post.name, post.postfix = osp.splitext(tmp_post['path'])
             content = requests.get(tmp_post['url'], headers=cfg.github.headers).json()['content']
 
-            print(tmp_post['url'], post.name)
             content = convert_functions[post.postfix](content)
 
             post.content = base64.b64decode(content).decode('utf-8')
@@ -99,6 +98,9 @@ def read_from_github():
     return data
 
 def read_from_local():
+    # 获取博客分支的 commit 内容
+    branch_sha = requests.get(cfg.github.source_branch_url, headers=cfg.github.headers).json()['commit']['sha']
+
     tmp_tags = list(filter(lambda x: x[0].isdigit() and os.path.isdir(osp.join(cfg.local.source, x)), sorted(os.listdir(cfg.local.source))))
     data = edict()
     data.tags = []
@@ -117,10 +119,27 @@ def read_from_local():
             post_path = osp.join(tag_source, tmp_post)
             with open(post_path) as f:
                 post.content = convert_functions[post.postfix](f.read())
-            mtime = time.localtime(os.path.getmtime(post_path))
-            post.year = mtime.tm_year
-            post.formated_ctime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(post_path)))
-            post.formated_mtime = time.strftime("%Y-%m-%d %H:%M:%S", mtime)
+            try:
+                payload = {
+                    'sha': branch_sha,
+                    'path': '{}/{}'.format(tmp_tag, tmp_post, 'utf-8')
+                }
+                params = urllib.parse.urlencode(payload, quote_via=urllib.parse.quote)
+                commits = requests.get(cfg.github.file_commit_url, params=params, headers=cfg.github.headers).json()
+                commits_time = [x['commit']['committer']['date'] for x in commits]
+                commits_time = [time.strptime(x, '%Y-%m-%dT%H:%M:%SZ') for x in commits_time]
+                post.year = commits_time[-1].tm_year
+                post.formated_ctime = time.strftime("%Y-%m-%d %H:%M:%S", commits_time[-1])
+                if len(commits) > 1:
+                    post.formated_mtime = time.strftime("%Y-%m-%d %H:%M:%S", commits_time[0])
+                else:
+                    post.formated_mtime = None
+                print(post.formated_ctime, post.formated_mtime)
+            except:
+                mtime = time.localtime(os.path.getmtime(post_path))
+                post.year = mtime.tm_year
+                post.formated_ctime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(post_path)))
+                post.formated_mtime = time.strftime("%Y-%m-%d %H:%M:%S", mtime)
             post.tag = tag.name
             post.org_tag = tag.org_name
             tag.posts.append(post)
