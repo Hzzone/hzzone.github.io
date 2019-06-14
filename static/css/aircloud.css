@@ -1244,3 +1244,8 @@ pre .javascript .function {
   -webkit-transition:width .3s linear;
 }
 
+.text p {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
