@@ -10,8 +10,8 @@ before_install:
 # source 是博客内容，dev 是开发分支，master 是生成的html
 # 判断分支，clone 开发分支
 - if [ "$TRAVIS_BRANCH" == "source" ]; then cd .. && mv hzzone.github.io source; fi
-- if [ "$TRAVIS_BRANCH" == "source" ]; git clone --depth 1 "https://${GH_REF}" --branch=dev && cd hzzone.github.io; fi
-- if [ "$TRAVIS_BRANCH" == "source" ]; mv ../source .; fi
+- if [ "$TRAVIS_BRANCH" == "source" ]; then git clone --depth 1 "https://${GH_REF}" --branch=dev && cd hzzone.github.io; fi
+- if [ "$TRAVIS_BRANCH" == "source" ]; then mv ../source .; fi
   # travis login --pro 登录，注意 pro 和 org 对应两个网站
   # travis encrypt-file ~/.ssh/id_rsa --add --pro 加密私钥，然后添加以下一行就可以使用 ssh 连接服务器
 - openssl aes-256-cbc -K $encrypted_a6f8c23ee827_key -iv $encrypted_a6f8c23ee827_iv
@@ -28,7 +28,7 @@ install:
 - npm install
 - git clone --depth 1 "https://${GH_REF}" --branch=master generate
 # 开发分支才 clone source
-- if [ "$TRAVIS_BRANCH" == "dev" ]; git clone --depth 1 "https://${GH_REF}" --branch=source source; fi
+- if [ "$TRAVIS_BRANCH" == "dev" ]; then git clone --depth 1 "https://${GH_REF}" --branch=source source; fi
 - chmod 600 ~/.ssh/id_rsa
 script:
 - python3 main.py $GITHUB_TOKEN
