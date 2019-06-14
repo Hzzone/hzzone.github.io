@@ -42,5 +42,3 @@ branches:
   only:
   - source
   - dev
-git:
-  depth: 1
