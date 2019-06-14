@@ -135,7 +135,7 @@
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-123659.png" alt=""></p>
 <p>TensorFlow 的数据流图的例子，数据经过节点被处理，然后输出，就像水一样流动:</p>
 <p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-11-25-tensors_flowing.jpg" alt=""></p>
-<p>**Pytorch 是动态图，每一次训练，都会销毁图并重新创建，这样做花销很大，但是更加灵活。**而 Tensorflow 是静态图，一旦定义训练时就不能修改。Pytorch 合并 caffe2 发布 1.0 版本之后引入静态图，而 Tensorflow 已经发布 <a href="https://www.tensorflow.org/guide/eager">Eager Execution</a> 引入动态图。但相对来说还是 Pytorch 更加灵活。</p>
+<p><strong>Pytorch 是动态图，每一次训练，都会销毁图并重新创建，这样做花销很大，但是更加灵活。</strong> 而 Tensorflow 是静态图，一旦定义训练时就不能修改。Pytorch 合并 caffe2 发布 1.0 版本之后引入静态图，而 Tensorflow 已经发布 <a href="https://www.tensorflow.org/guide/eager">Eager Execution</a> 引入动态图。但相对来说还是 Pytorch 更加灵活。</p>
 <h3>Autograd mechanics</h3>
 <p>首先要知道，Pytorch 的数据和参数（权重、偏置等）都是以 Tensor 存储的，Pytorch 的 Tensor 相当于 caffe 的 Blob，Tensorflow 的 Tensor。Pytorch 已经定义了 Tensor 的很多操作，可以在 GPU 上运算加速。</p>
 <p>Pytorch 会自动跟踪计算图的操作，在计算图执行完成后，调用 <code>backward</code> 计算梯度。很久以前数据需要使用 <code>Variable</code> 封装，像这样的:</p>
