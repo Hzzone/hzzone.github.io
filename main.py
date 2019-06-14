@@ -134,7 +134,6 @@ def read_from_local():
                     post.formated_mtime = time.strftime("%Y-%m-%d %H:%M:%S", commits_time[0])
                 else:
                     post.formated_mtime = None
-                print(post.formated_ctime, post.formated_mtime)
             except:
                 mtime = time.localtime(os.path.getmtime(post_path))
                 post.year = mtime.tm_year

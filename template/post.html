@@ -18,4 +18,9 @@
         {% endif %}
         {{ post_content }}
   </div>
+    <script>
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+    </script>
 </div>

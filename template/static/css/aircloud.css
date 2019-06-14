@@ -1228,11 +1228,6 @@ pre .javascript .function {
   padding-bottom: 0.3em;
 }
 
-.post_link::before {
-  content: ""!important;
-  padding-left: 0.5em;
-}
-
 .post-container * {
   max-width: 100%;
 }
