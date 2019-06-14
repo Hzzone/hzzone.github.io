@@ -13,7 +13,7 @@
     <ul>
         {% for post in tag.posts %}
         <li>
-            <a href="{{ '/' + tag.org_name + '/' + post.name + '.html'}}">{{ post.name }}</a>
+            <a href="{{ '/{}/{}.html'.format(tag.name.replace(' ', '-'), post.name.replace(' ', '-')) }}">{{ post.name }}</a>
         </li>
         {% endfor %}
     </ul>

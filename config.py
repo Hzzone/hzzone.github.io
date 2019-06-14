@@ -35,7 +35,7 @@ if 'GITHUB_TOKEN' in os.environ.keys():
     cfg.local.generate = 'generate'
 else:
     # 本地
-    cfg.local.source = '/Users/hzzone/Desktop/hzzone.github.io'
+    cfg.local.source = '/Users/hzzone/Downloads/hzzone.github.io'
     cfg.local.generate = '/usr/local/Cellar/nginx/1.15.9/html'
 
 # 个人设置：介绍，头像，名字

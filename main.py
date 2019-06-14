@@ -178,9 +178,9 @@ for tag in tqdm(data.tags):
                                             short_introduction=cfg.self.short_introduction,
                                             name=cfg.self.name,
                                             title=post.name)
-        tag_dir = osp.join(cfg.local.generate, tag.org_name)
+        tag_dir = osp.join(cfg.local.generate, tag.name.replace(' ', '-'))
         if not os.path.exists(tag_dir):
             os.mkdir(tag_dir)
-        with open(osp.join(tag_dir, post.name + '.html'), 'w') as f:
+        with open(osp.join(tag_dir, post.name.replace(' ', '-') + '.html'), 'w') as f:
             f.write(main_content)
 
