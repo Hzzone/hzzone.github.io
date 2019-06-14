@@ -149,6 +149,11 @@ writer.close()
 
 
   </div>
+    <script>
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+    </script>
 </div>
 
                 <script data-isso="https://hzzone.me/isso"
@@ -198,10 +203,6 @@ writer.close()
             );
             domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
         },false);
-
-        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
-        for (var i=0; i<posts.length; i++)
-            posts[i].setAttribute('target', '_blank');
 
     </script>
     </body>
