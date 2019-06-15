@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>雷达回波外推和施行健的两篇降水预测文章介绍</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
+        </div>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i></i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">雷达回波外推和施行健的两篇降水预测文章介绍</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-06-15 16:21:16</span>
+    </span>
+    <span class="attr">标签：
+      <span>深度学习</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content post_href">
+        
+        <p>雷达回波外推是一个还算处女的方向，本质上来说这就是一个视频序列预测视频序列的问题，比如这里的使用已知的 5 帧预测未来的 20 帧雷达回波序列(通常每 6 分钟采集一次)。所以这个问题是可以使用现有的一些处理视频的方法来解决的，例如 RNN 和 Conv3D 等能处理时空信息的结构。</p>
+<p>虽然我以后不再研究这个方向，总归还是做过一些相关的东西，尤其是目前这个领域中文的一些资料很少有人介绍和总结。趁着还有些记忆，写点东西记录一下。在这里我会介绍雷达回波外推这个问题、HKO-7 数据集以及施行健的两篇 NPIS 文章，分别是 ConvLSTM 和 TrajGRU。</p>
+<p>我用 pytorch 实现了这两篇文章，并在 HKO-7 数据集上取得了和作者近似的结果。原始代码在 <a href="https://github.com/sxjscience/HKO-7">HKO-7</a>，使用 mxnet 实现，其中有 ConvGRU 和 TrajGRU，没有 ConvLSTM。作者的代码实现了整个数据加载、训练和测试流程，封装的也非常好，我在实现时也使用了一部分作者的代码，我认为我的实现要更容易理解一些。</p>
+<p>代码挂在了 <a href="https://github.com/Hzzone/Precipitation-Nowcasting">Github</a>。如果你觉得这篇文章或代码对你有一定帮助，欢迎点赞这篇文章或 star 这个 repo。</p>
+<p>在开始之前，可以通过 <a href="https://www.hko.gov.hk/research_forum/RF2018_dyyeung.pdf">Machine Learning for Spatiotemporal Sequence Forecasting and Its Application to Nowcasting</a> 和 <a href="https://www.leiphone.com/news/201712/GnlC56qEtbrIqmI2.html">香港科技大学施行健：深度学习用于短临降雨预报的一个基准和一个新模型 | 分享总结</a> 对雷达回波外推问题有一个比较清晰的认识。</p>
+<h3>数据集</h3>
+<ul>
+<li><a href="https://tianchi.aliyun.com/dataset/dataDetail?dataId=110&amp;userId=1">Tianchi CIKM AnalytiCup 2017</a>, <a href="https://tianchi.aliyun.com/dataset/dataDetail?dataId=1085">数据集地址</a></li>
+<li><a href="https://tianchi.aliyun.com/competition/entrance/231662/information">Tianchi IEEE ICDM 2018 全球气象AI挑战赛</a>, <a href="https://tianchi.aliyun.com/dataset/dataDetail?dataId=110&amp;userId=1">数据集地址</a></li>
+<li><a href="https://github.com/sxjscience/HKO-7">HKO-7 Dataset</a></li>
+</ul>
+<p>雷达回波数据主要是通过天气雷达往四周发射电磁波并通过云层的反射得到，国内用的大多是多普勒雷达，下面是雷达的扫描示意图，天气雷达的覆盖区域是一个圆形区域：</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%9B%BE%E7%89%87%201.png" alt=""></p>
+<p>因为是通过反射得到的，所以雷达一般部署在空旷地区。如果四周出现了如建筑物、灰尘等物体，会在雷达回波中出现明显的噪声，使模型难以收敛。</p>
+<p>现在能找到的开源数据集主要有三个，其中两个来自于天池比赛，分别是 <a href="https://tianchi.aliyun.com/dataset/dataDetail?dataId=110&amp;userId=1">Tianchi CIKM AnalytiCup 2017</a> 和 <a href="https://tianchi.aliyun.com/competition/entrance/231662/information">Tianchi IEEE ICDM 2018 全球气象AI挑战赛</a>。这两个比赛最终目的不相同，但是数据集的含义是一样的，降水量可以等价于雷达反射的 dBZ。这两个比赛一些分享的经验，有一定参考意义，最主要的是 <a href="https://tianchi.aliyun.com/competition/entrance/231662/information">Tianchi IEEE ICDM 2018 全球气象AI挑战赛</a> 这个比赛的主题才是雷达回波外推，但是没有找到开源的比较好的解决方案。</p>
+<p>如果希望使用到私有的数据集可以向本地的气象台询问，或者在 <a href="http://data.cma.cn/">中国气象数据网</a> 下载多普勒雷达基数据。后者我尝试过实名注册，个人用户每日限额 2M，想真正用是不可能的，只能采用前面介绍的方法，或者注册企业单位（可能收费）。</p>
+<p>最后则是 <a href="https://github.com/sxjscience/HKO-7">HKO-7 Dataset</a>，这个数据集是施行健在 <a href="http://papers.nips.cc/paper/7145-deep-learning-for-precipitation-nowcasting-a-benchmark-and-a-new-model">Deep Learning for Precipitation Nowcasting: A Benchmark and A New Model
+</a> 针对雷达回波外推这个领域没有统一的 benchmark 而提出的一个数据集，来源于香港天文台。因为不开放所以需要申请，填张表就 OK，学生的话要找导师去申请，然后用工作邮箱发过去。</p>
+<p>这个数据集覆盖了香港周边的雷达回波数据，图片大小是 $480\times 480$ 的灰度图，涵盖了 2009 到 2015 的 <strong>下雨天</strong> 的数据，812 天用于训练、50 天用于验证、131 天用于测试。更详细信息可以去阅读论文。</p>
+<p>首先数据集的转换关系是这样的：dBZ 是雷达的基本反射率（雷达扫出来的结果），然后通过 $\left[ 255 \times \frac { \mathrm { dBZ } + 10 } { 70 } + 0.5 \right]$ 并裁剪到 $[0, 255]$ 之间转换成了可以普通的 png 图片。这种转换对于最后的训练和测试没有多大的影响，只是个线性转换，在深度学习中这个范围才是更常见也更容易解决问题的。</p>
+<p>最后还有一种转换关系则是通过 Z-R 关系在 dBZ 和降水值 R（单位是 mm/h）之间转换：$\mathrm { dBZ } = 10 \log a + 10 b \log R, a = 58.53,b = 1.56$，$a$，$b$ 通过线性回归计算。</p>
+<p>作者统计了全部数据集的降水值分布：</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-15%20%E4%B8%8B%E5%8D%886.29.23.png" alt=""></p>
+<p>由于降水值分布不均匀，并且大雨对现实生活的影响更大，所以 <strong>使用了一个加权损失函数</strong> 进行训练（这篇文章采用的是 MSE 和 MAE 之和）。</p>
+<p>$$
+w ( x ) = \left\{ \begin{array} { l l } { 1 , } &amp; { x &lt; 2 } \\ { 2 , } &amp; { 2 \leq x &lt; 5 } \\ { 5 , } &amp; { 5 \leq x &lt; 10 } \\ { 10 , } &amp; { 10 \leq x &lt; 30 } \\ { 30 , } &amp; { x \geq 30 } \end{array} \right.
+$$</p>
+<p>在数据预处理上，除了以上介绍的，由于原始雷达回波数据还存在大量噪声，作者采用马氏距离去除噪声点，得到一个 mask 之后，只有正常数据才会参与训练和评估。因此整个数据集分成了原始 png 和对应的 mask 两个部分。</p>
+<p>具体过程是：计算每一张图片的均值 $
+\hat { \mu } = \frac { \sum _ { i = 1 } ^ { N } x _ { i } } { N }
+$ 和协方差矩阵 $\hat { \mathbf { S } } = \frac { \sum _ { i = 1 } ^ { N } \left( x _ { i } - \mu \right) \left( x _ { i } - \mu \right) ^ { T } } { N - 1 }$，然后计算出马氏距离：
+$$D _ { M } ( x ) =\sqrt { ( x - \hat { \mu } ) ^ { T } \hat { \mathbf { S } } ^ { \dagger } ( x - \hat { \mu } ) ^ { 4 } }$$</p>
+<p>去除掉马氏距离大于 $\mu + 3\sigma$ 和像素值在 $[0, 71]$ 之间的数据，最后得到一个掩膜就是正常的数据。第一步是为了去除一些离散点，因为存在噪声；第二步则是去除雷达监测范围以外的区域，因为雷达扫描区域是一个圆形的。最后的效果则是：</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-15%20%E4%B8%8B%E5%8D%886.41.20.png" alt=""></p>
+<p>作者采用的是用 5 帧预测未来的 20 帧。在训练的时候计算量非常大，我在实现过程中一颗 1070 的 batch_size 只能为 2，迭代 100000 次需要三天。由于这个数据量是完全足够的，所以不需要什么数据扩充，只做了一个归一化到 1 以内。</p>
+<p>我采用的是作者实现的数据加载的代码，训练时从数据集随机抽取连续的 25 帧（已知 5 帧，预测 20 帧），而评估时则是按 5 的窗口进行滑动，直到结束。这种方式在实际用的时候最好还是上多显卡进行训练，并且加载数据时采用 prefetcher 提前加载数据集，否则在训练的时候大部分时间都会用在数据加载上，浪费很多时间。关于如何加速训练可以参考 <a href="https://zhuanlan.zhihu.com/p/66145913">如何给你PyTorch里的Dataloader打鸡血</a>。</p>
+<p>雷达回波外推的评价标准主要使用 HSS、CSI、POD 等指标，参考 <a href="https://www.cawcr.gov.au/projects/verification/?spm=5176.12281978.0.0.145e48e2vSqjde">评价标准</a>，这几个指标和机器学习中的 precision 和 recall 类似，越高越好。其他的还有 MSE、MAE，施行健采用的 B-MSE 和 B-MAE 其实就是加权的 MSE、MAE，这两个指标越低越好。</p>
+<h3>ConvLSTM</h3>
+<p>ConvLSTM 来源于 <a href="https://papers.nips.cc/paper/5955-convolutional-lstm-network-a-machine-learning-approach-for-precipitation-nowcasting">Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting</a>。</p>
+<p>传统的 FC-LSTM 将数据展开成一维进行预测，雷达回波数据存在大量冗余信息，FC-LSTM 无法处理，而且 FC-LSTM 只能提取时间序列信息，而无法提取空间信息。</p>
+<p>ConvLSTM 使用卷积替换 FC-LSTM，利用卷积操作提取空间信息，FC-LSTM 和 ConvLSTM 的区别主要在输入 $\mathcal { X } _ { 1 } , \ldots , \mathcal { X } _ { t }$，候选态 $\mathcal { C } _ { 1 } , \ldots , \mathcal { C } _ { t }$，隐藏态 $\mathcal { H } _ { 1 } , \ldots , \mathcal { H } _ { t }$ 和三个门 $i _ { t } , f _ { t } , o _ { t }$ 都是三维张量，其中最后两个维度是 spatial 空间维度。如下图：</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%9B%BE%E7%89%87%201-2.png" alt=""></p>
+<p>对比两个结构的公式，LSTM 的公式:
+$$
+\begin{equation}
+\begin{aligned}
+i _ { t } &amp;= \sigma \left( W _ { x i }  \mathrm { X } _ { t } + W _ { h i }  \mathrm { H } _ { t - 1 } + W _ { c i } \circ \mathrm { C } _ { t - 1 } + b _ { i } \right)\\
+f _ { t } &amp;= \sigma \left( W _ { x f }  \mathrm { X } _ { t } + W _ { h f }  \mathrm { H } _ { t - 1 } + W _ { c f } \circ \mathrm { C } _ { i - 1 } + b _ { f } \right)\\
+C _ { t } &amp;= f _ { t } \circ C _ { t - 1 } + i _ { t } \circ \tanh \left( W _ { x c }  X _ { t } + W _ { h c }  H _ { t - 1 } + b _ { c } \right)\\
+o _ { t } &amp;= \sigma \left( W _ { x o }  \mathrm { X } _ { t } + W _ { h o } ^ {  } \mathrm { H } _ { t - 1 } + W _ { c o } \circ \mathrm { C } _ { t } + b _ { o } \right)\\
+\mathrm { H } _ { t } &amp;= o _ { t } \circ \tanh \left( \mathrm { C } _ { t } \right)
+\end{aligned}
+\end{equation}
+$$</p>
+<p>ConvLSTM 的公式:</p>
+<p>$$
+\begin{equation}
+\begin{aligned}
+i _ { t } &amp;= \sigma \left( W _ { x i } * \mathrm { X } _ { t } + W _ { h i } * \mathrm { H } _ { t - 1 } + W _ { c i } \circ \mathrm { C } _ { t - 1 } + b _ { i } \right)\\
+f _ { t } &amp;= \sigma \left( W _ { x f } * \mathrm { X } _ { t } + W _ { h f } * \mathrm { H } _ { t - 1 } + W _ { c f } \circ \mathrm { C } _ { i - 1 } + b _ { f } \right)\\
+C _ { t } &amp;= f _ { t } \circ C _ { t - 1 } + i _ { t } \circ \tanh \left( W _ { x c } * X _ { t } + W _ { h c } * H _ { t - 1 } + b _ { c } \right)\\
+o _ { t } &amp;= \sigma \left( W _ { x o } * \mathrm { X } _ { t } + W _ { h o }  *  \mathrm { H } _ { t - 1 } + W _ { c o } \circ \mathrm { C } _ { t } + b _ { o } \right)\\
+\mathrm { H } _ { t } &amp;= o _ { t } \circ \tanh \left( \mathrm { C } _ { t } \right)
+\end{aligned}
+\end{equation}
+$$</p>
+<p>$*$ 是卷积操作，$\circ$ 是哈达玛乘积。因此 FC-LSTM 与 ConvLSTM 的主要差别在于将矩阵乘法替换成了卷积操作，即 input-to-state 和 state-to-state 的转换中使用的是卷积而不是全连接。</p>
+<p>PyTorch 实现可以参考 <a href="https://github.com/Hzzone/Precipitation-Nowcasting/blob/master/nowcasting/models/convLSTM.py">ConvLSTM</a>，我合并了八次卷积操作，所以整个计算量和普通的卷积差不多，偏置项影响不大。</p>
+<h3>TrajGRU</h3>
+<p>TrajGRU(Trajectory GRU) 来自于施行健的第二篇文章 <a href="http://papers.nips.cc/paper/7145-deep-learning-for-precipitation-nowcasting-a-benchmark-and-a-new-model">Deep Learning for Precipitation Nowcasting: A Benchmark and A New Model
+</a>，在这篇文章中，作者提出了一个新的 Benchmark 也就是上面介绍的数据集，对比了 ConvGRU、不使用/使用加权损失函数训练、Conv2d、Conv3d 等几种方法，构建了一个 Encoder-Forecaster 模型。</p>
+<p>ConvGRU 类似于上面介绍的 ConvLSTM，只是将 LSTM 替换成了 GRU。</p>
+<p>而 TrajGRU 使用 GRU 结构，区别是首先使用了一个 $32@5k2p1s$ 的卷积层对隐藏态进行卷积提取光流，然后使用 $2L@1k1s$ 的卷积层对光流进行卷积，建立一个动态的对应关系。</p>
+<p>按照作者的说法，普通卷积网络的对应关系不变，对于 local-invariant 的操作比较合适，而 local-variant 的操作比如旋转普通卷积是不够的。相比普通卷积固定的领域集，TrajGRU 可以有 $L$ 个变化的领域集，而且参数要少于原来的普通卷积。我的想法是云层的运动与消散是动态的，一团云在某一帧的位置对应到下一帧的位置不一样，所以需要建立一个动态的链接。</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-15%20%E4%B8%8B%E5%8D%8810.50.09.png" alt=""></p>
+<p>TrajGRU 的公式如下，首先使用一个子网络提取光流 $\mathcal{U}_t,\mathcal{V}_t$，然后使用 <code>wrap</code> 函数变换，有 $L$ 个链接。</p>
+<p>$$
+\begin{align}
+{{\mathcal{U}}<em>{t}},{{\mathcal{V}}</em>{t}} &amp;=\gamma \left( {{\mathcal{X}}<em>{t}},{{\mathcal{H}}</em>{t-1}} \right) \\
+{{\mathcal{Z}}<em>{t}} &amp;=\sigma \left( {{\mathcal{W}}</em>{xz}}<em>{{\mathcal{X}}<em>{t}}+\sum\limits</em>{l=1}^{L}{\mathcal{W}_{hz}^{l}}</em> warp \left( {{\mathcal{H}}<em>{t-1}},{{\mathcal{U}}</em>{t,l}},{{\mathcal{V}}<em>{t,l}} \right) \right) \\
+{{\mathcal{R}}</em>{t}} &amp;=\sigma \left( {{\mathcal{W}}<em>{xr}}*{{\mathcal{X}}</em>{t}}+\sum\limits_{l=1}^{L}{\mathcal{W}<em>{hr}^{l}}* warp \left( {{\mathcal{H}}</em>{t-1}},{{\mathcal{U}}<em>{t,l}},{{\mathcal{V}}</em>{t,l}} \right) \right) \\
+\mathcal{H}<em>{t}^{\prime } &amp;=f\left( {{\mathcal{W}}</em>{xh}}<em>{{\mathcal{X}}<em>{t}}+{{\mathcal{R}}</em>{t}}{}^\circ \left( \sum\limits_{l=1}^{L}{\mathcal{W}_{hh}^{l}}</em> warp \left( {{\mathcal{H}}<em>{t-1}},{{\mathcal{U}}</em>{t,l}},{{\mathcal{V}}<em>{t,l}} \right) \right) \right) \\
+{{\mathcal{H}}</em>{t}} &amp;=\left( 1-{{\mathcal{Z}}<em>{t}} \right){}^\circ \mathcal{H}</em>{t}^{\prime }+{{\mathcal{Z}}<em>{t}}{}^\circ {{\mathcal{H}}</em>{t-1}}
+\end{align}
+$$</p>
+<p><code>wrap</code> 函数的 mxnet 可以参考 <a href="https://github.com/sxjscience/HKO-7/blob/b9235ca7edd4e5bd275f1abaf6f735f8059121be/nowcasting/operators/traj_rnn.py#L14">traj_rnn.py#L14</a>，pytorch 没有该函数，可以参考我的实现 <a href="https://github.com/Hzzone/Precipitation-Nowcasting/blob/b29879896f6cee372f1a16528989fe2d6042bd24/nowcasting/models/trajGRU.py#L9">trajGRU.py#L9</a>。</p>
+<h3>Encoder-Forecaster</h3>
+<p>这两篇文章都采用了一个 Encoder-Forecaster 模型，和普通的 Encoder-Decoder 模型还是不一样的。Encoder-Forecaster 分成两部分，分别是 Encoder(编码器)，Forecaster(预测器)，分别对应了 Encoder 和 Decoder。</p>
+<p>模型展开之后示意图如下：</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-2.jpg" alt=""></p>
+<p>这是一个输入 2 帧，预测未来 2 帧的 RNN 展开后的结构图。Encoder-Forecaster 模型对应层次的 RNN 的 <strong>隐藏态</strong> 输入到下一层次之中，提取不同层次的时空信息。Downsample 和 Unsample 分别通过 Convolution 和 Deconvolution 实现。这里的 RNN 可以采用 ConvGRU、ConvLSTM 和 TrajGRU 等能提取时空信息的结构。</p>
+<p>Encoder 的初始隐藏态和 Forecaster 的初始输入为 0，因为这两个没有输入。最后的输出则通过一个 $1\times 1$ 的卷积层进行回归。</p>
+<p><a href="http://papers.nips.cc/paper/7145-deep-learning-for-precipitation-nowcasting-a-benchmark-and-a-new-model">Deep Learning for Precipitation Nowcasting: A Benchmark and A New Model
+</a> 的网络结构可以参考如下图:</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-1.png" alt=""></p>
+<p>通过实验发现，TrajGRU 取得了比 ConvGRU、Conv3d、光流法等方法更好地结果；所有深度学习方法都取得了比其他方法更好地结构；文中的 Baseline 是直接使用最后一帧的作为未来所有帧的预测结果。</p>
+<p><strong>在训练时作者采用了一个 50 的梯度阶段，防止梯度爆炸。</strong> 还有一些更具体的参数，比如网络结构，学习率等可以参考我的实现 <a href="https://github.com/Hzzone/Precipitation-Nowcasting/blob/master/experiments/net_params.py">experiments/net_params.py</a>。</p>
+<h3>总结</h3>
+<p>我实现了 ConvLTSM 和 TrajGRU，取得了和作者接近的结果，有个疑问则是 ConvLTSM 取得了要比 TrajGRU 的更好地结果，而且因为合并了八个卷积所以运行速度也快得多。更具体的说明可以参考 <a href="https://github.com/sxjscience/HKO-7/issues/11">关于 TrajGRU 的意义</a>。</p>
+<p>运行效果图如下：</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-demo.gif" alt=""></p>
+<p>虽然结果可能不错，在实际预测时还是发现了输出的结果越往后的输出越暗，即越往后的误差越大，参考 <a href="https://github.com/sxjscience/HKO-7/issues/3#issuecomment-385568493">回复</a>。</p>
+<p>如果更进一步改进，可以考虑对这一方面进行论述，运行速度的比较等。现在气象台采用的还是光流法，预测之后由专业人员进行判断是否有下雨天气等。</p>
+
+
+  </div>
+    <script>
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+    </script>
+</div>
+
+                <script data-isso="https://hzzone.io/isso" data-isso-vote="false"
+                        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
+</script>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+
+    </script>
+    </body>
+
+</html>
