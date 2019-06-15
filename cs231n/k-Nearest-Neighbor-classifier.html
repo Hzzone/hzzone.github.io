@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>k-Nearest Neighbor classifier</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
+        </div>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/">
+                                    <!--<i class="fa fa-fw fa-home"></i>-->
+                                    <!--<span class="iconfont icon-zhihu"></span>-->
+                                    <!--<i class="iconfont icon-home"></i>-->
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                            <!--<li>-->
+                                <!--<a href="https://github.com/Hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fab fa-github"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-github"></i>-->
+                                    <!--<span>Github</span></a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="https://www.zhihu.com/people/hzzone">-->
+                                    <!--&lt;!&ndash;<i class="fa fa-fw fa-zhihu"></i>&ndash;&gt;-->
+                                    <!--<i class="iconfont icon-zhihu"></i>-->
+                                    <!--<span>知乎</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <!--<div id="toc" class="toc-article toc-fixed" style="height: 823px; overflow-y: scroll;">-->
+                        <!--<ol class="toc">-->
+                            <!--<li class="toc-item toc-level-3 active">-->
+                                <!--<a class="toc-link" href="#目前遇到的问题">-->
+                                    <!--<span class="toc-text">目前遇到的问题</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#问题归纳与解决">-->
+                                    <!--<span class="toc-text">问题归纳与解决</span></a>-->
+                            <!--</li>-->
+                            <!--<li class="toc-item toc-level-3">-->
+                                <!--<a class="toc-link" href="#更多">-->
+                                    <!--<span class="toc-text">更多</span></a>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</div>-->
+                </div>
+                <div class="index-about-mobile">
+                    <i></i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">k-Nearest Neighbor classifier</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2018-12-02 10:53:11</span>
+    </span>
+    <span class="attr">标签：
+      <span>cs231n</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content post_href">
+        
+        <p>这是 cs231n 第一次作业的 $k$ 邻近分类器作业的实现和其相关知识总结。</p>
+<h3>读取数据</h3>
+<p>先写一个函数读入 <a href="https://www.cs.toronto.edu/~kriz/cifar.html">cifar10</a> 的数据:</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> os
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_cifar10</span><span class="hljs-params">(filepath)</span>:</span>
+    <span class="hljs-keyword">import</span> pickle
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unpickle</span><span class="hljs-params">(file)</span>:</span>
+        <span class="hljs-keyword">with</span> open(file, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> fo:
+            file_dict = pickle.load(fo, encoding=<span class="hljs-string">'bytes'</span>)
+        <span class="hljs-keyword">return</span> file_dict
+    train_data = []
+    train_labels = []
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>):
+        file_dict = unpickle(os.path.join(filepath, <span class="hljs-string">'data_batch_%d'</span>%i))
+        train_data.append(file_dict[<span class="hljs-string">b'data'</span>])
+        train_labels += file_dict[<span class="hljs-string">b'labels'</span>]
+    train_data = np.concatenate(train_data).astype(np.float64)
+    file_dict = unpickle(os.path.join(filepath, <span class="hljs-string">'test_batch'</span>))
+    test_data, test_labels = file_dict[<span class="hljs-string">b'data'</span>].astype(np.float64), file_dict[<span class="hljs-string">b'labels'</span>]
+    
+    <span class="hljs-keyword">return</span> train_data.reshape(train_data.shape[<span class="hljs-number">0</span>], <span class="hljs-number">3</span>, <span class="hljs-number">32</span>, <span class="hljs-number">32</span>), np.array(train_labels), test_data.reshape(test_data.shape[<span class="hljs-number">0</span>], <span class="hljs-number">3</span>, <span class="hljs-number">32</span>, <span class="hljs-number">32</span>), np.array(test_labels)
+    
+train_data, train_labels, test_data, test_labels = read_cifar10(<span class="hljs-string">'../data/cifar-10-batches-py'</span>)
+</code></pre>
+<p>可视化训练集每个类的示例数据:</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-comment"># Visualize some examples from the dataset.</span>
+<span class="hljs-comment"># We show a few examples of training images from each class.</span>
+classes = [<span class="hljs-string">'plane'</span>, <span class="hljs-string">'car'</span>, <span class="hljs-string">'bird'</span>, <span class="hljs-string">'cat'</span>, <span class="hljs-string">'deer'</span>, <span class="hljs-string">'dog'</span>, <span class="hljs-string">'frog'</span>, <span class="hljs-string">'horse'</span>, <span class="hljs-string">'ship'</span>, <span class="hljs-string">'truck'</span>]
+num_classes = len(classes)
+samples_per_class = <span class="hljs-number">7</span>
+<span class="hljs-keyword">for</span> y, cls <span class="hljs-keyword">in</span> enumerate(classes):
+    idxs = np.flatnonzero(train_labels == y)
+    idxs = np.random.choice(idxs, samples_per_class, replace=<span class="hljs-literal">False</span>)
+    <span class="hljs-keyword">for</span> i, idx <span class="hljs-keyword">in</span> enumerate(idxs):
+        plt_idx = i * num_classes + y + <span class="hljs-number">1</span>
+        plt.subplot(samples_per_class, num_classes, plt_idx)
+        plt.imshow(train_data[idx].transpose((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)).astype(<span class="hljs-string">'uint8'</span>))
+        plt.axis(<span class="hljs-string">'off'</span>)
+        <span class="hljs-keyword">if</span> i == <span class="hljs-number">0</span>:
+            plt.title(cls)
+</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-02-output_6_0.png" alt=""></p>
+<h3>距离度量</h3>
+<h4>L1 (Manhattan) distance</h4>
+<p>$$d _ { 1 } \left( I _ { 1 } , I _ { 2 } \right) = \sum _ { p } \left| I _ { 1 } ^ { p } - I _ { 2 } ^ { p } \right|$$</p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-01-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-12-01%20%E4%B8%8B%E5%8D%888.55.13.png" alt=""></p>
+<p>L1 距离计算两个矩阵的差，取绝对值之后求所有元素的和。</p>
+<pre class="hljs"><code>test_img = test_data[<span class="hljs-number">0</span>]
+train_img = train_data[<span class="hljs-number">1</span>]
+np.sum(np.abs(test_img - train_img))
+</code></pre>
+<pre><code>188615.0
+</code></pre>
+<h4>L2 (Euclidean) distance</h4>
+<p>$$d _ { 2 } \left( I _ { 1 } , I _ { 2 } \right) = \sqrt { \sum _ { p } \left( I _ { 1 } ^ { p } - I _ { 2 } ^ { p } \right) ^ { 2 } }$$</p>
+<p>欧氏距离直接相应位置相减后平方再取根号。在最邻近上表现一样。</p>
+<p><strong>但是 L1 更依赖于坐标，L2 不受坐标影响。</strong></p>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-01-AE32DDC8-92D6-451E-9C8E-CAE488EE5CB7.png" alt=""></p>
+<h3>K-Nearest Neighbor Classifier</h3>
+<p>首先讲一下最邻近分类吧。</p>
+<p><strong>Nearest Neighbor classifier（最邻近分类器）只是简单的计算测试图片和每一张训练样本之间的距离，然后选出和测试样本距离最小的训练样本的标签作为输出。</strong></p>
+<p>例如下面对于一张测试图片，计算其与训练数据之间的距离，然后选出距离最小的训练数据中的图片的标签，作为该测试图片的预测。</p>
+<pre class="hljs"><code>train_labels[np.argmin(np.sum(np.abs(train_data-test_img), axis=(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)))]
+</code></pre>
+<pre><code>4
+</code></pre>
+<p><strong>然后是 K-Nearest Neighbor Classifier（K 最邻近分类器）和最邻近差不多吧，一张图片和训练数据计算距离，然后选出前 $K$ 个距离最小的训练图片，其中出现次数最多的标签最为该测试图片的预测。</strong></p>
+<p>The kNN classifier consists of two stages:</p>
+<ul>
+<li>During training, the classifier takes the training data and simply remembers it</li>
+<li>During testing, kNN classifies every test image by comparing to all training images and transfering the labels of the k most similar training examples</li>
+<li>The value of k is cross-validated</li>
+</ul>
+<p>实现的话分成三步，训练直接记录数据，测试计算与训练数据的距离，最后通过交叉验证获得最好的 $K$。</p>
+<p>这次作业分成四部分，双层循环、单层循环、无循环计算距离和交叉验证计算效果最好的 $K$。</p>
+<p>在此之前数据预处理，节省时间选出一部分数据进行试验，然后压缩一张图片为向量。</p>
+<pre class="hljs"><code><span class="hljs-comment"># Subsample the data for more efficient code execution in this exercise</span>
+num_training = <span class="hljs-number">5000</span>
+train_data = train_data[:num_training].reshape((num_training, <span class="hljs-number">-1</span>))
+train_labels = train_labels[:num_training]
+num_test = <span class="hljs-number">500</span>
+test_data = test_data[:num_test].reshape((num_test, <span class="hljs-number">-1</span>))
+test_labels = test_labels[:num_test] 
+print(train_data.shape, train_labels.shape, test_data.shape, test_labels.shape)
+</code></pre>
+<pre><code>(5000, 3072) (5000,) (500, 3072) (500,)
+</code></pre>
+<p>下面的过程我就直接把其他源文件的代码粘贴过来（作者不用 tab 而是用两个空格简直反人类）。</p>
+<p>计算距离会保存在一个 $Ntest\times Ntrain$ 的矩阵中，对应 ith 和 jth 之间的距离。</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KNearestNeighbor</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-string">""" a kNN classifier with L2 distance """</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">pass</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span><span class="hljs-params">(self, X, y)</span>:</span>
+        <span class="hljs-string">"""
+        训练过程记录数据
+        """</span>
+        self.X_train = X
+        self.y_train = y
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">predict</span><span class="hljs-params">(self, X, k=<span class="hljs-number">1</span>, num_loops=<span class="hljs-number">0</span>)</span>:</span>
+        <span class="hljs-string">"""
+        预测标签
+        输入 (num_test, D) 数据，k 邻近，和训练数据和测试数据计算距离循环嵌套个数。
+        返回预测标签 list
+        """</span>
+        <span class="hljs-keyword">if</span> num_loops == <span class="hljs-number">0</span>:
+            dists = self.compute_distances_no_loops(X)
+        <span class="hljs-keyword">elif</span> num_loops == <span class="hljs-number">1</span>:
+            dists = self.compute_distances_one_loop(X)
+        <span class="hljs-keyword">elif</span> num_loops == <span class="hljs-number">2</span>:
+            dists = self.compute_distances_two_loops(X)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Invalid value %d for num_loops'</span> % num_loops)
+
+        <span class="hljs-keyword">return</span> self.predict_labels(dists, k=k)
+
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute_distances_two_loops</span><span class="hljs-params">(self, X)</span>:</span>
+        <span class="hljs-string">"""
+        返回距离矩阵（欧氏距离）。
+        """</span>
+        num_test = X.shape[<span class="hljs-number">0</span>]
+        num_train = self.X_train.shape[<span class="hljs-number">0</span>]
+        dists = np.zeros((num_test, num_train))
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num_test):
+            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(num_train):
+            <span class="hljs-comment">#####################################################################</span>
+                dists[i, j] = np.sum(np.square((X[i] - self.X_train[j])))
+            <span class="hljs-comment">#####################################################################</span>
+        <span class="hljs-keyword">return</span> dists
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute_distances_one_loop</span><span class="hljs-params">(self, X)</span>:</span>
+        <span class="hljs-string">"""
+        Compute the distance between each test point in X and each training point
+        in self.X_train using a single loop over the test data.
+
+        Input / Output: Same as compute_distances_two_loops
+        """</span>
+        num_test = X.shape[<span class="hljs-number">0</span>]
+        num_train = self.X_train.shape[<span class="hljs-number">0</span>]
+        dists = np.zeros((num_test, num_train))
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num_test):
+          <span class="hljs-comment">#######################################################################</span>
+            dists[i, :] = np.sum(np.square(X[i] - self.X_train), axis=<span class="hljs-number">1</span>)
+          <span class="hljs-comment">#######################################################################</span>
+        <span class="hljs-keyword">return</span> dists
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute_distances_no_loops</span><span class="hljs-params">(self, X)</span>:</span>
+        <span class="hljs-string">"""
+        Compute the distance between each test point in X and each training point
+        in self.X_train using no explicit loops.
+
+        Input / Output: Same as compute_distances_two_loops
+        """</span>
+        num_test = X.shape[<span class="hljs-number">0</span>]
+        num_train = self.X_train.shape[<span class="hljs-number">0</span>]
+<span class="hljs-comment">#         dists = np.zeros((num_test, num_train)) </span>
+        <span class="hljs-comment">#########################################################################</span>
+        <span class="hljs-comment"># 矩阵乘法 L2 = X*X^T</span>
+        test_squared_sum = np.sum(np.square(X), axis=<span class="hljs-number">1</span>)
+        test_squared_sum = np.broadcast_to(test_squared_sum.reshape(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>), (num_test, num_train))
+        train_squared_sum = np.sum(np.square(self.X_train), axis=<span class="hljs-number">1</span>)
+        train_squared_sum = np.broadcast_to(train_squared_sum.reshape(<span class="hljs-number">1</span>, <span class="hljs-number">-1</span>), (num_test, num_train))
+        dists = test_squared_sum + train_squared_sum - <span class="hljs-number">2</span>*np.dot(X, self.X_train.T)
+        <span class="hljs-comment">#########################################################################</span>
+        <span class="hljs-keyword">return</span> dists
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">predict_labels</span><span class="hljs-params">(self, dists, k=<span class="hljs-number">1</span>)</span>:</span>
+        <span class="hljs-string">"""
+        输入距离矩阵然后根据 K 值返回标签 list
+        """</span>
+        num_test = dists.shape[<span class="hljs-number">0</span>]
+        classes = <span class="hljs-number">10</span>
+        <span class="hljs-comment"># 每一类的出现次数统计</span>
+        y_count = np.zeros((num_test, classes)) <span class="hljs-comment"># 10 类</span>
+        <span class="hljs-comment"># 原来的解法太 low 了</span>
+        <span class="hljs-comment"># 排序，获得前 k 个的下标</span>
+        labels = np.argsort(dists)[:, :k].reshape(<span class="hljs-number">1</span>, <span class="hljs-number">-1</span>)
+        labels = self.y_train[labels].reshape(num_test, <span class="hljs-number">-1</span>)
+        <span class="hljs-comment"># 统计</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(classes):
+            y_count[:, i] = np.sum(labels==i, axis=<span class="hljs-number">1</span>)
+        <span class="hljs-comment"># 获得出现次数最多的标签作为预测</span>
+        y_pred = np.argmax(y_count, axis=<span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> y_pred
+</code></pre>
+<h4>双层循环</h4>
+<pre class="hljs"><code>classifier = KNearestNeighbor()
+classifier.train(train_data, train_labels)
+</code></pre>
+<pre class="hljs"><code>dists = classifier.compute_distances_two_loops(test_data)
+print(dists.shape)
+</code></pre>
+<pre><code>(500, 5000)
+</code></pre>
+<p>验证一下是否正确，获得了 27.4% 的准确度。</p>
+<pre class="hljs"><code>np.sum(train_labels[np.argmin(dists, axis=<span class="hljs-number">1</span>)]==test_labels)/<span class="hljs-number">500</span>
+</code></pre>
+<pre><code>0.274
+</code></pre>
+<p>直接可视化距离矩阵:</p>
+<pre class="hljs"><code>%matplotlib inline
+plt.rcParams[<span class="hljs-string">'figure.figsize'</span>] = (<span class="hljs-number">10.0</span>, <span class="hljs-number">8.0</span>) <span class="hljs-comment"># set default size of plots</span>
+plt.rcParams[<span class="hljs-string">'image.interpolation'</span>] = <span class="hljs-string">'nearest'</span>
+plt.rcParams[<span class="hljs-string">'image.cmap'</span>] = <span class="hljs-string">'gray'</span>
+
+plt.imshow(dists, interpolation=<span class="hljs-string">'none'</span>)
+plt.show()
+</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-02-output_36_0.png" alt=""></p>
+<p><strong>Inline Question #1:</strong> Notice the structured patterns in the distance matrix, where some rows or columns are visible brighter. (Note that with the default color scheme black indicates low distances while white indicates high distances.)</p>
+<ul>
+<li>What in the data is the cause behind the distinctly bright rows?</li>
+<li>What causes the columns?</li>
+</ul>
+<p>每一行对应一个测试样本和所有训练样本的距离，亮度代表距离大小。行很亮代表该测试样本和所有训练样本的距离大，列很亮代表该训练样本和所有的测试样本距离很大。</p>
+<p>完成 <code>predict_labels</code> 函数，看一下结果是否正确:</p>
+<pre class="hljs"><code>y_test_pred = classifier.predict_labels(dists, k=<span class="hljs-number">1</span>)
+<span class="hljs-comment"># Compute and print the fraction of correctly predicted examples</span>
+num_correct = np.sum(y_test_pred == test_labels)
+accuracy = float(num_correct) / test_labels.shape[<span class="hljs-number">0</span>]
+print(<span class="hljs-string">'Got %d / %d correct =&gt; accuracy: %f'</span> % (num_correct, num_test, accuracy))
+</code></pre>
+<pre><code>Got 137 / 500 correct =&gt; accuracy: 0.274000
+</code></pre>
+<p>结果正确，再看一下 k=5:</p>
+<pre class="hljs"><code>y_test_pred = classifier.predict_labels(dists, k=<span class="hljs-number">5</span>)
+num_correct = np.sum(y_test_pred == test_labels)
+accuracy = float(num_correct) / num_test
+print(<span class="hljs-string">'Got %d / %d correct =&gt; accuracy: %f'</span> % (num_correct, num_test, accuracy))
+</code></pre>
+<pre><code>Got 139 / 500 correct =&gt; accuracy: 0.278000
+</code></pre>
+<p>只获得了一点点提升，和作业中的结果一样。<strong>You should expect to see a slightly better performance than with <code>k = 1</code>.</strong></p>
+<p><strong>Inline Question 2</strong>
+We can also other distance metrics such as L1 distance.
+The performance of a Nearest Neighbor classifier that uses L1 distance will not change if (Select all that apply.):</p>
+<ol>
+<li>The data is preprocessed by subtracting the mean.</li>
+<li>The data is preprocessed by subtracting the mean and dividing by the standard deviation.</li>
+<li>The coordinate axes for the data are rotated.</li>
+<li>None of the above.</li>
+</ol>
+<p>那种改变不会影响结果。答案是 1，2，3 都不会。因为先相减再求绝对值和或平方和，减均值会被消去，除标准差在分母，旋转坐标轴也一样不会改变计算方式。</p>
+<h4>单层循环</h4>
+<p>实现很简单，看代码就 OK。验证结果:</p>
+<pre class="hljs"><code><span class="hljs-comment"># Now lets speed up distance matrix computation by using partial vectorization</span>
+<span class="hljs-comment"># with one loop. Implement the function compute_distances_one_loop and run the</span>
+<span class="hljs-comment"># code below:</span>
+dists_one = classifier.compute_distances_one_loop(test_data)
+
+<span class="hljs-comment"># To ensure that our vectorized implementation is correct, we make sure that it</span>
+<span class="hljs-comment"># agrees with the naive implementation. There are many ways to decide whether</span>
+<span class="hljs-comment"># two matrices are similar; one of the simplest is the Frobenius norm. In case</span>
+<span class="hljs-comment"># you haven't seen it before, the Frobenius norm of two matrices is the square</span>
+<span class="hljs-comment"># root of the squared sum of differences of all elements; in other words, reshape</span>
+<span class="hljs-comment"># the matrices into vectors and compute the Euclidean distance between them.</span>
+difference = np.linalg.norm(dists - dists_one, ord=<span class="hljs-string">'fro'</span>)
+print(<span class="hljs-string">'Difference was: %f'</span> % (difference, ))
+<span class="hljs-keyword">if</span> difference &lt; <span class="hljs-number">0.001</span>:
+    print(<span class="hljs-string">'Good! The distance matrices are the same'</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">'Uh-oh! The distance matrices are different'</span>)
+</code></pre>
+<pre><code>Difference was: 0.000000
+Good! The distance matrices are the same
+</code></pre>
+<h4>无循环</h4>
+<p>使用矩阵运算计算距离，假设 $X=\{x_0,\dots,x_i\dots\}$，$Y=\{y_0,\dots,y_i\dots\}$。</p>
+<p>L2 范数为:</p>
+<p>$$\sum(X-Y)^2\\
+=\sum X^2+\sum Y^2-2XY$$</p>
+<p>所以求训练数据和测试数据的 L2 范数只需要 $X$ 的平方和加 $Y$ 的平方和再减去两倍两者乘积，乘积是矩阵运算。</p>
+<pre class="hljs"><code><span class="hljs-comment"># Now implement the fully vectorized version inside compute_distances_no_loops</span>
+<span class="hljs-comment"># and run the code</span>
+dists_two = classifier.compute_distances_no_loops(test_data)
+
+<span class="hljs-comment"># check that the distance matrix agrees with the one we computed before:</span>
+difference = np.linalg.norm(dists - dists_two, ord=<span class="hljs-string">'fro'</span>)
+print(<span class="hljs-string">'Difference was: %f'</span> % (difference, ))
+<span class="hljs-keyword">if</span> difference &lt; <span class="hljs-number">0.001</span>:
+    print(<span class="hljs-string">'Good! The distance matrices are the same'</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">'Uh-oh! The distance matrices are different'</span>)
+</code></pre>
+<pre><code>Difference was: 0.000000
+Good! The distance matrices are the same
+</code></pre>
+<p>测试一下运行时间的对比:</p>
+<pre class="hljs"><code><span class="hljs-comment"># Let's compare how fast the implementations are</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">time_function</span><span class="hljs-params">(f, *args)</span>:</span>
+    <span class="hljs-string">"""
+    Call a function f with args and return the time (in seconds) that it took to execute.
+    """</span>
+    <span class="hljs-keyword">import</span> time
+    tic = time.time()
+    f(*args)
+    toc = time.time()
+    <span class="hljs-keyword">return</span> toc - tic
+
+two_loop_time = time_function(classifier.compute_distances_two_loops, test_data)
+print(<span class="hljs-string">'Two loop version took %f seconds'</span> % two_loop_time)
+
+one_loop_time = time_function(classifier.compute_distances_one_loop, test_data)
+print(<span class="hljs-string">'One loop version took %f seconds'</span> % one_loop_time)
+
+no_loop_time = time_function(classifier.compute_distances_no_loops, test_data)
+print(<span class="hljs-string">'No loop version took %f seconds'</span> % no_loop_time)
+
+<span class="hljs-comment"># you should see significantly faster performance with the fully vectorized implementation</span>
+</code></pre>
+<pre><code>Two loop version took 39.697376 seconds
+One loop version took 56.282101 seconds
+No loop version took 0.357180 seconds
+</code></pre>
+<p>单层循环花的时间比二层循环多，但代码没错，可能是我电脑不行，我另外写代码测试结果也一样。</p>
+<p>cs231n 的 knn 实现有一个坑，数据类型必须是 <code>float64</code>，否则会超出数据可表示范围，我建议先除个 255。</p>
+<h4>Cross-validation（交叉验证）</h4>
+<p>交叉验证求得最好的 $k$:</p>
+<pre class="hljs"><code>num_folds = <span class="hljs-number">5</span>
+k_choices = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">15</span>, <span class="hljs-number">20</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>]
+
+<span class="hljs-comment"># X_train_folds = []</span>
+<span class="hljs-comment"># y_train_folds = []</span>
+<span class="hljs-comment">################################################################################</span>
+<span class="hljs-comment"># <span class="hljs-doctag">TODO:</span>                                                                        #</span>
+<span class="hljs-comment"># Split up the training data into folds. After splitting, X_train_folds and    #</span>
+<span class="hljs-comment"># y_train_folds should each be lists of length num_folds, where                #</span>
+<span class="hljs-comment"># y_train_folds[i] is the label vector for the points in X_train_folds[i].     #</span>
+<span class="hljs-comment"># Hint: Look up the numpy array_split function.                                #</span>
+<span class="hljs-comment">################################################################################</span>
+<span class="hljs-comment"># nums_per_fold = train_data.shape[0]//num_folds</span>
+<span class="hljs-comment"># for i in range(num_folds-1):</span>
+<span class="hljs-comment">#     X_train_folds.append(train_data[nums_per_fold*i:nums_per_fold*(i+1), :])</span>
+<span class="hljs-comment">#     y_train_folds.append(train_labels[nums_per_fold*i:nums_per_fold*(i+1)])</span>
+<span class="hljs-comment"># X_train_folds.append(train_data[nums_per_fold*(i+1):, :])</span>
+<span class="hljs-comment"># y_train_folds.append(train_labels[nums_per_fold*(i+1):])</span>
+  
+X_train_folds = np.split(train_data, num_folds, axis=<span class="hljs-number">0</span>)
+y_train_folds = np.split(train_labels, num_folds)
+
+<span class="hljs-comment">################################################################################</span>
+<span class="hljs-comment">#                                 END OF YOUR CODE                             #</span>
+<span class="hljs-comment">################################################################################</span>
+
+<span class="hljs-comment"># A dictionary holding the accuracies for different values of k that we find</span>
+<span class="hljs-comment"># when running cross-validation. After running cross-validation,</span>
+<span class="hljs-comment"># k_to_accuracies[k] should be a list of length num_folds giving the different</span>
+<span class="hljs-comment"># accuracy values that we found when using that value of k.</span>
+k_to_accuracies = {}
+
+
+<span class="hljs-comment">################################################################################</span>
+<span class="hljs-comment"># <span class="hljs-doctag">TODO:</span>                                                                        #</span>
+<span class="hljs-comment"># Perform k-fold cross validation to find the best value of k. For each        #</span>
+<span class="hljs-comment"># possible value of k, run the k-nearest-neighbor algorithm num_folds times,   #</span>
+<span class="hljs-comment"># where in each case you use all but one of the folds as training data and the #</span>
+<span class="hljs-comment"># last fold as a validation set. Store the accuracies for all fold and all     #</span>
+<span class="hljs-comment"># values of k in the k_to_accuracies dictionary.                               #</span>
+<span class="hljs-comment">################################################################################</span>
+
+<span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> k_choices:
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num_folds):
+        cur_train_data = np.concatenate(X_train_folds[:i]+X_train_folds[i+<span class="hljs-number">1</span>:])
+        cur_train_labels = np.concatenate(y_train_folds[:i]+y_train_folds[i+<span class="hljs-number">1</span>:])
+        cur_test_data = X_train_folds[i]
+        cur_test_labels = y_train_folds[i]
+        <span class="hljs-keyword">if</span> k <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> k_to_accuracies.keys():
+            k_to_accuracies[k] = []
+        classifier.train(cur_train_data, cur_train_labels)
+        y_test_pred = classifier.predict(cur_test_data, k=k, num_loops=<span class="hljs-number">0</span>)
+        num_correct = np.sum(y_test_pred == cur_test_labels)
+        accuracy = float(num_correct) / test_labels.shape[<span class="hljs-number">0</span>]
+        k_to_accuracies[k].append(accuracy)
+    
+
+<span class="hljs-comment">################################################################################</span>
+<span class="hljs-comment">#                                 END OF YOUR CODE                             #</span>
+<span class="hljs-comment">################################################################################</span>
+
+<span class="hljs-comment"># Print out the computed accuracies</span>
+<span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> sorted(k_to_accuracies):
+    <span class="hljs-keyword">for</span> accuracy <span class="hljs-keyword">in</span> k_to_accuracies[k]:
+        print(<span class="hljs-string">'k = %d, accuracy = %f'</span> % (k, accuracy))
+</code></pre>
+<pre><code>k = 1, accuracy = 0.526000
+k = 1, accuracy = 0.514000
+k = 1, accuracy = 0.528000
+k = 1, accuracy = 0.556000
+k = 1, accuracy = 0.532000
+k = 3, accuracy = 0.478000
+k = 3, accuracy = 0.498000
+k = 3, accuracy = 0.480000
+k = 3, accuracy = 0.532000
+k = 3, accuracy = 0.508000
+k = 5, accuracy = 0.496000
+k = 5, accuracy = 0.532000
+k = 5, accuracy = 0.560000
+k = 5, accuracy = 0.584000
+k = 5, accuracy = 0.560000
+k = 8, accuracy = 0.524000
+k = 8, accuracy = 0.564000
+k = 8, accuracy = 0.546000
+k = 8, accuracy = 0.580000
+k = 8, accuracy = 0.546000
+k = 10, accuracy = 0.530000
+k = 10, accuracy = 0.592000
+k = 10, accuracy = 0.552000
+k = 10, accuracy = 0.568000
+k = 10, accuracy = 0.560000
+k = 12, accuracy = 0.520000
+k = 12, accuracy = 0.590000
+k = 12, accuracy = 0.558000
+k = 12, accuracy = 0.566000
+k = 12, accuracy = 0.560000
+k = 15, accuracy = 0.504000
+k = 15, accuracy = 0.578000
+k = 15, accuracy = 0.556000
+k = 15, accuracy = 0.564000
+k = 15, accuracy = 0.548000
+k = 20, accuracy = 0.540000
+k = 20, accuracy = 0.558000
+k = 20, accuracy = 0.558000
+k = 20, accuracy = 0.564000
+k = 20, accuracy = 0.570000
+k = 50, accuracy = 0.542000
+k = 50, accuracy = 0.576000
+k = 50, accuracy = 0.556000
+k = 50, accuracy = 0.538000
+k = 50, accuracy = 0.532000
+k = 100, accuracy = 0.512000
+k = 100, accuracy = 0.540000
+k = 100, accuracy = 0.526000
+k = 100, accuracy = 0.512000
+k = 100, accuracy = 0.526000
+</code></pre>
+<pre class="hljs"><code><span class="hljs-comment"># plot the raw observations</span>
+<span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> k_choices:
+    accuracies = k_to_accuracies[k]
+    plt.scatter([k] * len(accuracies), accuracies)
+
+<span class="hljs-comment"># plot the trend line with error bars that correspond to standard deviation</span>
+accuracies_mean = np.array([np.mean(v) <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> sorted(k_to_accuracies.items())])
+accuracies_std = np.array([np.std(v) <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> sorted(k_to_accuracies.items())])
+plt.errorbar(k_choices, accuracies_mean, yerr=accuracies_std)
+plt.title(<span class="hljs-string">'Cross-validation on k'</span>)
+plt.xlabel(<span class="hljs-string">'k'</span>)
+plt.ylabel(<span class="hljs-string">'Cross-validation accuracy'</span>)
+plt.show()
+</code></pre>
+<p><img src="https://tuchuang-1252747889.cosgz.myqcloud.com/2018-12-02-output_62_0.png" alt=""></p>
+<pre class="hljs"><code><span class="hljs-comment"># Based on the cross-validation results above, choose the best value for k,   </span>
+<span class="hljs-comment"># retrain the classifier using all the training data, and test it on the test</span>
+<span class="hljs-comment"># data. You should be able to get above 28% accuracy on the test data.</span>
+best_k = <span class="hljs-number">10</span>
+
+classifier = KNearestNeighbor()
+classifier.train(train_data, train_labels)
+y_test_pred = classifier.predict(test_data, k=best_k)
+
+<span class="hljs-comment"># Compute and display the accuracy</span>
+num_correct = np.sum(y_test_pred == test_labels)
+accuracy = float(num_correct) / num_test
+print(<span class="hljs-string">'Got %d / %d correct =&gt; accuracy: %f'</span> % (num_correct, num_test, accuracy))
+</code></pre>
+<pre><code>Got 141 / 500 correct =&gt; accuracy: 0.282000
+</code></pre>
+<p>结果正确，获得了 28% 的准确度。<strong>You should be able to get above 28% accuracy on the test data.</strong></p>
+<p><strong>Inline Question 3</strong>
+Which of the following statements about $k$-Nearest Neighbor ($k$-NN) are true in a classification setting, and for all $k$? Select all that apply.</p>
+<ol>
+<li>The training error of a 1-NN will always be better than that of 5-NN.</li>
+<li>The test error of a 1-NN will always be better than that of a 5-NN.</li>
+<li>The decision boundary of the k-NN classifier is linear.</li>
+<li>The time needed to classify a test example with the k-NN classifier grows with the size of the training set.</li>
+<li>None of the above.</li>
+</ol>
+<p>L2 距离时 k-NN 不是线性的。只有 4 是对的，k-NN 需要和每一个训练样本进行比较。</p>
+
+
+  </div>
+    <script>
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+    </script>
+</div>
+
+                <script data-isso="https://hzzone.io/isso" data-isso-vote="false"
+                        src="https://hzzone.io/isso//js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
+</script>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+
+    </script>
+    </body>
+
+</html>
