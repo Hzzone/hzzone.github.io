@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=default"></script>
         <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <link rel="stylesheet" href="/static/css/iconfont.css">
         <script src="/static/js/iconfont.js"></script>
@@ -148,7 +148,7 @@
 <p>则上一层 $w$ 的梯度是（需要更新权重）:</p>
 <p>$$\frac{\partial{L}}{\partial{w_i}} = \frac{\partial{L}}{\partial{\sigma}}\frac{\partial{\sigma}}{\partial{z}} x_i$$</p>
 <p>这是导数的链式法则，需要了解一些反向传播的知识，权重是利用该层的梯度更新的。</p>
-<p>**当 $\frac{\partial{\sigma}}{\partial{x}}$ 接近 0 时，也就是激活函数饱和，则梯度消失，参数几乎不更新。**梯度消失的情况在具体的激活函数中会出现。</p>
+<p><strong>当 $\frac{\partial{\sigma}}{\partial{x}}$ 接近 0 时，也就是激活函数饱和，则梯度消失，参数几乎不更新。</strong>梯度消失的情况在具体的激活函数中会出现。</p>
 <h3>常用激活函数及其实现</h3>
 <pre class="hljs"><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
@@ -285,6 +285,8 @@ $$</p>
             });</script>
     <script type="text/javascript">
   window.MathJax = {
+    // config: ["MMLorHTML.js"],
+    // jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG", "output/PreviewHTML"],
     jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],

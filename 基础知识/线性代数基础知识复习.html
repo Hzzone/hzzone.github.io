@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=default"></script>
         <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <link rel="stylesheet" href="/static/css/iconfont.css">
         <script src="/static/js/iconfont.js"></script>
@@ -292,7 +292,7 @@ $$</p>
 <p>n 维行向量（$1\times n$）和 n 维列向量（$n\times 1$）。</p>
 </li>
 <li>
-<p>$A_kA_l=A_{k+l},(A_k)<em>l=A</em>{kl}$，但 $(AB)_k \ne A_kB_k$ 因为不满足交换律。</p>
+<p>$A_kA_l=A_{k+l},(A_k)_l=A_{kl}$，但 $(AB)_k \ne A_kB_k$ 因为不满足交换律。</p>
 </li>
 <li>
 <p>矩阵的多项式。</p>
@@ -362,6 +362,8 @@ $$P_kP_{k-1}\cdots P_1=A^{-1}$$</p>
             });</script>
     <script type="text/javascript">
   window.MathJax = {
+    // config: ["MMLorHTML.js"],
+    // jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG", "output/PreviewHTML"],
     jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],

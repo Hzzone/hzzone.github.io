@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=default"></script>
         <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <link rel="stylesheet" href="/static/css/iconfont.css">
         <script src="/static/js/iconfont.js"></script>
@@ -195,11 +195,11 @@ $$</p>
 <p>TrajGRU 的公式如下，首先使用一个子网络提取光流 $\mathcal{U}_t,\mathcal{V}_t$，然后使用 <code>wrap</code> 函数变换，有 $L$ 个链接。</p>
 <p>$$
 \begin{align}
-{{\mathcal{U}}<em>{t}},{{\mathcal{V}}</em>{t}} &amp;=\gamma \left( {{\mathcal{X}}<em>{t}},{{\mathcal{H}}</em>{t-1}} \right) \\
-{{\mathcal{Z}}<em>{t}} &amp;=\sigma \left( {{\mathcal{W}}</em>{xz}}<em>{{\mathcal{X}}<em>{t}}+\sum\limits</em>{l=1}^{L}{\mathcal{W}_{hz}^{l}}</em> warp \left( {{\mathcal{H}}<em>{t-1}},{{\mathcal{U}}</em>{t,l}},{{\mathcal{V}}<em>{t,l}} \right) \right) \\
-{{\mathcal{R}}</em>{t}} &amp;=\sigma \left( {{\mathcal{W}}<em>{xr}}*{{\mathcal{X}}</em>{t}}+\sum\limits_{l=1}^{L}{\mathcal{W}<em>{hr}^{l}}* warp \left( {{\mathcal{H}}</em>{t-1}},{{\mathcal{U}}<em>{t,l}},{{\mathcal{V}}</em>{t,l}} \right) \right) \\
-\mathcal{H}<em>{t}^{\prime } &amp;=f\left( {{\mathcal{W}}</em>{xh}}<em>{{\mathcal{X}}<em>{t}}+{{\mathcal{R}}</em>{t}}{}^\circ \left( \sum\limits_{l=1}^{L}{\mathcal{W}_{hh}^{l}}</em> warp \left( {{\mathcal{H}}<em>{t-1}},{{\mathcal{U}}</em>{t,l}},{{\mathcal{V}}<em>{t,l}} \right) \right) \right) \\
-{{\mathcal{H}}</em>{t}} &amp;=\left( 1-{{\mathcal{Z}}<em>{t}} \right){}^\circ \mathcal{H}</em>{t}^{\prime }+{{\mathcal{Z}}<em>{t}}{}^\circ {{\mathcal{H}}</em>{t-1}}
+{{\mathcal{U}}_{t}},{{\mathcal{V}}_{t}} &amp;=\gamma \left( {{\mathcal{X}}_{t}},{{\mathcal{H}}_{t-1}} \right) \\
+{{\mathcal{Z}}_{t}} &amp;=\sigma \left( {{\mathcal{W}}_{xz}}*{{\mathcal{X}}_{t}}+\sum\limits_{l=1}^{L}{\mathcal{W}_{hz}^{l}}* warp \left( {{\mathcal{H}}_{t-1}},{{\mathcal{U}}_{t,l}},{{\mathcal{V}}_{t,l}} \right) \right) \\
+{{\mathcal{R}}_{t}} &amp;=\sigma \left( {{\mathcal{W}}_{xr}}*{{\mathcal{X}}_{t}}+\sum\limits_{l=1}^{L}{\mathcal{W}_{hr}^{l}}* warp \left( {{\mathcal{H}}_{t-1}},{{\mathcal{U}}_{t,l}},{{\mathcal{V}}_{t,l}} \right) \right) \\
+\mathcal{H}_{t}^{\prime } &amp;=f\left( {{\mathcal{W}}_{xh}}*{{\mathcal{X}}_{t}}+{{\mathcal{R}}_{t}}{}^\circ \left( \sum\limits_{l=1}^{L}{\mathcal{W}_{hh}^{l}}* warp \left( {{\mathcal{H}}_{t-1}},{{\mathcal{U}}_{t,l}},{{\mathcal{V}}_{t,l}} \right) \right) \right) \\
+{{\mathcal{H}}_{t}} &amp;=\left( 1-{{\mathcal{Z}}_{t}} \right){}^\circ \mathcal{H}_{t}^{\prime }+{{\mathcal{Z}}_{t}}{}^\circ {{\mathcal{H}}_{t-1}}
 \end{align}
 $$</p>
 <p><code>wrap</code> 函数的 mxnet 可以参考 <a href="https://github.com/sxjscience/HKO-7/blob/b9235ca7edd4e5bd275f1abaf6f735f8059121be/nowcasting/operators/traj_rnn.py#L14">traj_rnn.py#L14</a>，pytorch 没有该函数，可以参考我的实现 <a href="https://github.com/Hzzone/Precipitation-Nowcasting/blob/b29879896f6cee372f1a16528989fe2d6042bd24/nowcasting/models/trajGRU.py#L9">trajGRU.py#L9</a>。</p>
@@ -253,6 +253,8 @@ $$</p>
             });</script>
     <script type="text/javascript">
   window.MathJax = {
+    // config: ["MMLorHTML.js"],
+    // jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG", "output/PreviewHTML"],
     jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],

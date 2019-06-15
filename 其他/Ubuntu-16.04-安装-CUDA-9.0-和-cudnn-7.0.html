@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=default"></script>
         <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <link rel="stylesheet" href="/static/css/iconfont.css">
         <script src="/static/js/iconfont.js"></script>
@@ -143,7 +143,7 @@ sudo apt-get install -y libopencv-dev
 <p>显卡驱动可以在官网下载最新版本的进行安装，老版本在 Ubuntu 上我经常遇到问题，在登录界面一直重复，就是显卡驱动的问题。</p>
 <p>然后添加环境变量，在 <code>zshrc</code> 或 <code>bashrc</code> 中添加:</p>
 <pre class="hljs"><code>export PATH=/usr/local/cuda-9.0/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:$LD_LIBRARY_PATH
+export LD\_LIBRARY\_PATH=/usr/local/cuda-9.0/lib64:$LD_LIBRARY_PATH
 </code></pre>
 <p>然后:</p>
 <pre class="hljs"><code>source ~/.zshrc
@@ -220,6 +220,8 @@ Device 0: "GeForce GTX 1060 6GB"
             });</script>
     <script type="text/javascript">
   window.MathJax = {
+    // config: ["MMLorHTML.js"],
+    // jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG", "output/PreviewHTML"],
     jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],

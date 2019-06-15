@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=default"></script>
         <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <link rel="stylesheet" href="/static/css/iconfont.css">
         <script src="/static/js/iconfont.js"></script>
@@ -190,7 +190,7 @@ $$</p>
 </blockquote>
 <p>通过缩小类间距同时保持不同类分离。后文中提及算法的核心思想，不贴出来，但简短总结如下:</p>
 <p>作者提出的 center loss function:
-$$\mathcal{L}<em>C=\frac{1}{2} \sum</em>{i=1}^{m} \| x_i-c_{y_i} \|_2^2$$</p>
+$$\mathcal{L}_C=\frac{1}{2} \sum_{i=1}^{m} \| x_i-c_{y_i} \|_2^2$$</p>
 <p>结合 Softmax Loss 做 Multi-Task Learning，结合起来的 Loss Function 就是:</p>
 <p>$$\mathcal{L}=\mathcal{L}_S+\lambda \mathcal{L}_C$$</p>
 <p>$c_{y_i}$ 代表了 $y_i$ 类数据的特征的中心，当 $x_i$ 改变时 $c_{y_i}$ 也应该改变，因为 $x_i$ 就是 CNN 提取到的特征。</p>
@@ -274,6 +274,8 @@ Second, to avoid large perturbations caused by few mislabelled samples, we use a
             });</script>
     <script type="text/javascript">
   window.MathJax = {
+    // config: ["MMLorHTML.js"],
+    // jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG", "output/PreviewHTML"],
     jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],

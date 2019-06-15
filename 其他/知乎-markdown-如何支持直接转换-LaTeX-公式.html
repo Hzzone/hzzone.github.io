@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
-        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=default"></script>
         <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <link rel="stylesheet" href="/static/css/iconfont.css">
         <script src="/static/js/iconfont.js"></script>
@@ -129,13 +129,13 @@
 <pre class="hljs"><code>### 测试公式
 <span class="hljs-comment">* 行内公式</span>
 
-哈哈哈哈哈 <span class="hljs-symbol">$</span>x_1+x_2<span class="hljs-symbol">$</span> 公式你好！
+哈哈哈哈哈 <span class="hljs-symbol">$</span>x\_1+x\_2<span class="hljs-symbol">$</span> 公式你好！
 
 <span class="hljs-comment">* 行间公式</span>
 
 哈哈哈哈哈
 
-<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span>x_1+x_2<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span>
+<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span>x\_1+x\_2<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span>
 
 公式你好！
 </code></pre>
@@ -191,6 +191,8 @@
             });</script>
     <script type="text/javascript">
   window.MathJax = {
+    // config: ["MMLorHTML.js"],
+    // jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG", "output/PreviewHTML"],
     jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
