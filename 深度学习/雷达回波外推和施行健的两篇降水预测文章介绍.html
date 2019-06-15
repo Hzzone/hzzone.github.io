@@ -114,7 +114,7 @@
     <div class="markdown-body post-content post_href">
         
         <p>雷达回波外推是一个还算处女的方向，本质上来说这就是一个视频序列预测视频序列的问题，比如这里的使用已知的 5 帧预测未来的 20 帧雷达回波序列(通常每 6 分钟采集一次)。所以这个问题是可以使用现有的一些处理视频的方法来解决的，例如 RNN 和 Conv3D 等能处理时空信息的结构。</p>
-<p>虽然我以后不再研究这个方向，总归还是做过一些相关的东西，尤其是目前这个领域中文的一些资料很少有人介绍和总结。趁着还有些记忆，写点东西记录一下。在这里我会介绍雷达回波外推这个问题、HKO-7 数据集以及施行健的两篇 NPIS 文章，分别是 ConvLSTM 和 TrajGRU。</p>
+<p>目前这个领域中文的一些资料很少有人介绍和总结。趁着还有些记忆，写点东西记录一下。在这里我会介绍雷达回波外推这个问题、HKO-7 数据集以及施行健的两篇 NPIS 文章，分别是 ConvLSTM 和 TrajGRU。</p>
 <p>我用 pytorch 实现了这两篇文章，并在 HKO-7 数据集上取得了和作者近似的结果。原始代码在 <a href="https://github.com/sxjscience/HKO-7">HKO-7</a>，使用 mxnet 实现，其中有 ConvGRU 和 TrajGRU，没有 ConvLSTM。作者的代码实现了整个数据加载、训练和测试流程，封装的也非常好，我在实现时也使用了一部分作者的代码，我认为我的实现要更容易理解一些。</p>
 <p>代码挂在了 <a href="https://github.com/Hzzone/Precipitation-Nowcasting">Github</a>。如果你觉得这篇文章或代码对你有一定帮助，欢迎点赞这篇文章或 star 这个 repo。</p>
 <p>在开始之前，可以通过 <a href="https://www.hko.gov.hk/research_forum/RF2018_dyyeung.pdf">Machine Learning for Spatiotemporal Sequence Forecasting and Its Application to Nowcasting</a> 和 <a href="https://www.leiphone.com/news/201712/GnlC56qEtbrIqmI2.html">香港科技大学施行健：深度学习用于短临降雨预报的一个基准和一个新模型 | 分享总结</a> 对雷达回波外推问题有一个比较清晰的认识。</p>
@@ -152,7 +152,7 @@ $$D _ { M } ( x ) =\sqrt { ( x - \hat { \mu } ) ^ { T } \hat { \mathbf { S } } ^
 <p>雷达回波外推的评价标准主要使用 HSS、CSI、POD 等指标，参考 <a href="https://www.cawcr.gov.au/projects/verification/?spm=5176.12281978.0.0.145e48e2vSqjde">评价标准</a>，这几个指标和机器学习中的 precision 和 recall 类似，越高越好。其他的还有 MSE、MAE，施行健采用的 B-MSE 和 B-MAE 其实就是加权的 MSE、MAE，这两个指标越低越好。</p>
 <h3>ConvLSTM</h3>
 <p>ConvLSTM 来源于 <a href="https://papers.nips.cc/paper/5955-convolutional-lstm-network-a-machine-learning-approach-for-precipitation-nowcasting">Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting</a>。</p>
-<p>传统的 FC-LSTM 将数据展开成一维进行预测，雷达回波数据存在大量冗余信息，FC-LSTM 无法处理，而且 FC-LSTM 只能提取时间序列信息，而无法提取空间信息。</p>
+<p>传统的 FC-LSTM 将数据展开成一维进行预测，雷达回波数据存在大量冗余信息，FC-LSTM 无法处理，而且 FC-LSTM 只能提取时间序列信息，无法提取空间信息。</p>
 <p>ConvLSTM 使用卷积替换 FC-LSTM，利用卷积操作提取空间信息，FC-LSTM 和 ConvLSTM 的区别主要在输入 $\mathcal { X } _ { 1 } , \ldots , \mathcal { X } _ { t }$，候选态 $\mathcal { C } _ { 1 } , \ldots , \mathcal { C } _ { t }$，隐藏态 $\mathcal { H } _ { 1 } , \ldots , \mathcal { H } _ { t }$ 和三个门 $i _ { t } , f _ { t } , o _ { t }$ 都是三维张量，其中最后两个维度是 spatial 空间维度。如下图：</p>
 <p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%9B%BE%E7%89%87%201-2.png" alt=""></p>
 <p>对比两个结构的公式，LSTM 的公式:
@@ -180,13 +180,17 @@ o _ { t } &amp;= \sigma \left( W _ { x o } * \mathrm { X } _ { t } + W _ { h o }
 \end{equation}
 $$</p>
 <p>$*$ 是卷积操作，$\circ$ 是哈达玛乘积。因此 FC-LSTM 与 ConvLSTM 的主要差别在于将矩阵乘法替换成了卷积操作，即 input-to-state 和 state-to-state 的转换中使用的是卷积而不是全连接。</p>
-<p>PyTorch 实现可以参考 <a href="https://github.com/Hzzone/Precipitation-Nowcasting/blob/master/nowcasting/models/convLSTM.py">ConvLSTM</a>，我合并了八次卷积操作，所以整个计算量和普通的卷积差不多，偏置项影响不大。</p>
+<blockquote>
+<p>If we view the states as the hidden representations of moving objects, a ConvLSTM with a larger transitional kernel should be able to capture faster motions while one with a smaller kernel can capture slower motions. Also, if we adopt a similar view as [16], the inputs, cell outputs and hidden states of the traditional FC-LSTM represented by (2) may also be seen as 3D tensors with the last two dimensions being 1. In this sense, FC-LSTM is actually a special case of ConvLSTM with all features standing on a single cell.</p>
+</blockquote>
+<p>通过使用一个大的状态转换卷积核捕捉快速的运动，而小的卷积核捕捉慢的运动；当最后两个维度为 1 时，FC-LSTM 也可以视为一个特殊的 ConvLSTM，每一个单元格代表一个特征。</p>
+<p>Pytorch 实现可以参考 <a href="https://github.com/Hzzone/Precipitation-Nowcasting/blob/master/nowcasting/models/convLSTM.py">ConvLSTM</a>，我合并了八次卷积操作，所以整个计算量和普通的卷积差不多，偏置项影响不大。</p>
 <h3>TrajGRU</h3>
 <p>TrajGRU(Trajectory GRU) 来自于施行健的第二篇文章 <a href="http://papers.nips.cc/paper/7145-deep-learning-for-precipitation-nowcasting-a-benchmark-and-a-new-model">Deep Learning for Precipitation Nowcasting: A Benchmark and A New Model
 </a>，在这篇文章中，作者提出了一个新的 Benchmark 也就是上面介绍的数据集，对比了 ConvGRU、不使用/使用加权损失函数训练、Conv2d、Conv3d 等几种方法，构建了一个 Encoder-Forecaster 模型。</p>
 <p>ConvGRU 类似于上面介绍的 ConvLSTM，只是将 LSTM 替换成了 GRU。</p>
 <p>而 TrajGRU 使用 GRU 结构，区别是首先使用了一个 $32@5k2p1s$ 的卷积层对隐藏态进行卷积提取光流，然后使用 $2L@1k1s$ 的卷积层对光流进行卷积，建立一个动态的对应关系。</p>
-<p>按照作者的说法，普通卷积网络的对应关系不变，对于 local-invariant 的操作比较合适，而 local-variant 的操作比如旋转普通卷积是不够的。相比普通卷积固定的领域集，TrajGRU 可以有 $L$ 个变化的领域集，而且参数要少于原来的普通卷积。我的想法是云层的运动与消散是动态的，一团云在某一帧的位置对应到下一帧的位置不一样，所以需要建立一个动态的链接。</p>
+<p>按照作者的说法，普通卷积网络的对应关系不变，对于 local-invariant 的操作比较合适，而 local-variant 的操作比如旋转普通卷积是不够的。相比普通卷积固定的领域集，TrajGRU 可以有 $L$ 个变化的领域集，并且参数要少于原来的普通卷积。我的想法是云层的运动与消散是动态的，一团云在某一帧的位置对应到下一帧的位置不一样，所以需要建立一个动态的链接。</p>
 <p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-15%20%E4%B8%8B%E5%8D%8810.50.09.png" alt=""></p>
 <p>TrajGRU 的公式如下，首先使用一个子网络提取光流 $\mathcal{U}_t,\mathcal{V}_t$，然后使用 <code>wrap</code> 函数变换，有 $L$ 个链接。</p>
 <p>$$
@@ -206,16 +210,16 @@ $$</p>
 <p>这是一个输入 2 帧，预测未来 2 帧的 RNN 展开后的结构图。Encoder-Forecaster 模型对应层次的 RNN 的 <strong>隐藏态</strong> 输入到下一层次之中，提取不同层次的时空信息。Downsample 和 Unsample 分别通过 Convolution 和 Deconvolution 实现。这里的 RNN 可以采用 ConvGRU、ConvLSTM 和 TrajGRU 等能提取时空信息的结构。</p>
 <p>Encoder 的初始隐藏态和 Forecaster 的初始输入为 0，因为这两个没有输入。最后的输出则通过一个 $1\times 1$ 的卷积层进行回归。</p>
 <p><a href="http://papers.nips.cc/paper/7145-deep-learning-for-precipitation-nowcasting-a-benchmark-and-a-new-model">Deep Learning for Precipitation Nowcasting: A Benchmark and A New Model
-</a> 的网络结构可以参考如下图:</p>
+</a> 的网络结构可以参考下图:</p>
 <p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-1.png" alt=""></p>
-<p>通过实验发现，TrajGRU 取得了比 ConvGRU、Conv3d、光流法等方法更好地结果；所有深度学习方法都取得了比其他方法更好地结构；文中的 Baseline 是直接使用最后一帧的作为未来所有帧的预测结果。</p>
+<p>通过实验发现，TrajGRU 取得了比 ConvGRU、Conv3d、光流法等方法更好的结果；所有深度学习方法都取得了比其他方法更好地结构；文中的 Baseline 是直接使用最后一帧的作为未来所有帧的预测结果。</p>
 <p><strong>在训练时作者采用了一个 50 的梯度阶段，防止梯度爆炸。</strong> 还有一些更具体的参数，比如网络结构，学习率等可以参考我的实现 <a href="https://github.com/Hzzone/Precipitation-Nowcasting/blob/master/experiments/net_params.py">experiments/net_params.py</a>。</p>
 <h3>总结</h3>
 <p>我实现了 ConvLTSM 和 TrajGRU，取得了和作者接近的结果，有个疑问则是 ConvLTSM 取得了要比 TrajGRU 的更好地结果，而且因为合并了八个卷积所以运行速度也快得多。更具体的说明可以参考 <a href="https://github.com/sxjscience/HKO-7/issues/11">关于 TrajGRU 的意义</a>。</p>
 <p>运行效果图如下：</p>
 <p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-demo.gif" alt=""></p>
-<p>虽然结果可能不错，在实际预测时还是发现了输出的结果越往后的输出越暗，即越往后的误差越大，参考 <a href="https://github.com/sxjscience/HKO-7/issues/3#issuecomment-385568493">回复</a>。</p>
-<p>如果更进一步改进，可以考虑对这一方面进行论述，运行速度的比较等。现在气象台采用的还是光流法，预测之后由专业人员进行判断是否有下雨天气等。</p>
+<p>虽然结果可能不错，在实际预测时还是发现了越往后的输出越暗，即越往后误差越大，参考 <a href="https://github.com/sxjscience/HKO-7/issues/3#issuecomment-385568493">回复</a>。</p>
+<p>如果更进一步改进，可以考虑对这一方面、运行速度的比较等进行论述。现在气象台采用的还是光流法，预测之后由专业人员进行判断是否有下雨天气。</p>
 
 
   </div>
@@ -249,7 +253,7 @@ $$</p>
             });</script>
     <script type="text/javascript">
   window.MathJax = {
-    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
       processEscapes: true
