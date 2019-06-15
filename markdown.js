@@ -24,7 +24,7 @@ md = new MarkdownIt({
     // return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
     return '<pre class="hljs"><code>' + hljs.highlightAuto(str).value + '</code></pre>';
   }
-});
+}).use(require('markdown-it-emphasis-alt'));
 
 // 排除有中文的公式
 function has_chinese(text) {
@@ -34,10 +34,15 @@ function has_chinese(text) {
 function replace(content, regx) {
     content = content.replace(regx,
         function(expression) {
-            var max_formula_length = 1000;
+            // console.log(expression);
+            // console.log(expression.length);
+            var max_formula_length = 5000;
             if (expression.length > max_formula_length || has_chinese(expression)) return expression;
             expression = expression.replace(/\\/gm, '\\\\')
-            expression = expression.replace(/_/g, '\_');
+            expression = expression.replace(/_/g, '\\_');
+            expression = expression.replace(/\*/g, '\\\*');
+            // console.log(expression);
+            // expression = expression.replace(/_/g, '\_');
             return expression;
         });
     return content;
