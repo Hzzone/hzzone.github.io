@@ -175,10 +175,9 @@ index_content = index_template.render(
     README=README,
     recent_posts=recent_posts,
     len=len(recent_posts))
-main_content = base_template.render(main_content=index_content, avatar=cfg.self.avatar,
-                                    short_introduction=cfg.self.short_introduction,
-                                    name=cfg.self.name,
-                                    title='主页')
+main_content = base_template.render(main_content=index_content,
+                                    title='主页',
+                                    cfg=cfg)
 
 with open(osp.join(cfg.local.generate, 'index.html'), 'w') as f:
     f.write(main_content)
@@ -190,9 +189,8 @@ for tag in tqdm(data.tags):
         post_content = post_template.render(post_content=content,
                                             post=post,
                                             cfg=cfg)
-        main_content = base_template.render(main_content=post_content, avatar=cfg.self.avatar,
-                                            short_introduction=cfg.self.short_introduction,
-                                            name=cfg.self.name,
+        main_content = base_template.render(main_content=post_content,
+                                            cfg=cfg,
                                             title=post.name)
         tag_dir = osp.join(cfg.local.generate, tag.name.replace(' ', '-'))
         if not os.path.exists(tag_dir):
