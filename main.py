@@ -136,7 +136,8 @@ def read_from_local():
                     post.formated_mtime = time.strftime("%Y-%m-%d %H:%M:%S", commits_time[0])
                 else:
                     post.formated_mtime = None
-            except:
+            except Exception as e:
+                print(e)
                 mtime = time.localtime(os.path.getmtime(post_path))
                 post.year = mtime.tm_year
                 post.formated_ctime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(post_path)))
