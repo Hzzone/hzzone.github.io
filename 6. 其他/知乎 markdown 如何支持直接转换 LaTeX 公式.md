@@ -17,7 +17,7 @@
 
 可以写 python 实现，几行代码而已，但对我来说既然追求简便，那就最简单吧。我稍微写了点界面直接转换 markdown 文件，提交文件后点击 submit，文本不会上传，全部本地完成，而且只有一个 html 文件（PS: 我不太熟悉 js）
 
-在线地址: https://hzzone.me/zhihu_markdown_latex_math_conversion.html
+在线地址: [zhihu_markdown_latex_math_conversion](https://hzzone-1252747889.cos.ap-guangzhou.myqcloud.com/zhihu_markdown_latex_math_conversion.html)
 
 测试代码:
 ```markdown
