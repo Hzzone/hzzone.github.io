@@ -47,4 +47,7 @@ cfg.self.name = 'Zhizhong Huang'
 cfg.conversion = edict()
 # 转换的后缀名，notebook 转成 md 再转 html
 cfg.conversion.postfix = ['.md', '.ipynb']
-cfg.conversion.max_recent_post = 3
+
+cfg.weisite = edict()
+cfg.weisite.max_recent_post = 3
+cfg.weisite.isso_url = 'https://hzzone.io/isso'

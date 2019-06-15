@@ -162,7 +162,7 @@ import itertools
 all_posts = sorted(list(itertools.chain.from_iterable([x.posts for x in data.tags])),
                    key=lambda x: x.formated_ctime, reverse=True)
 try:
-    recent_posts = all_posts[: cfg.conversion.max_recent_post]
+    recent_posts = all_posts[: cfg.weisite.max_recent_post]
 except:
     recent_posts = all_posts
 

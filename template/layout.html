@@ -101,8 +101,8 @@
                 <!-- Main Content -->
                 {{ main_content }}
 
-                <script data-isso="https://hzzone.me/isso" data-isso-vote="false"
-                        src="https://hzzone.me/isso/js/embed.min.js"></script>
+                <script data-isso="{{ cfg.weisite.isso_url }}" data-isso-vote="false"
+                        src="{{ '{}/{}'.format(cfg.weisite.isso_url, '/js/embed.min.js') }}"></script>
 
                 <div class="comments">
                     <section id="isso-thread"></section>
