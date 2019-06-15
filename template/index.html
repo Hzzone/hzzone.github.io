@@ -8,12 +8,24 @@
 
 <div class="markdown-body post-content">
     {{ README }}
+    {% if len>0 %}
+    <h3>最近更新</h3>
+    <ul>
+        {% for post in recent_posts %}
+        <li>
+            <span>[{{ post.formated_cdaytime }}]</span>
+            <a href="{{ post.href }}">{{ post.name }}</a>
+        </li>
+        {% endfor %}
+    {% endif %}
+    </ul>
     {% for tag in tags %}
     <h3 id="{{ tag.name }}">{{ tag.org_name }}</h3>
     <ul>
         {% for post in tag.posts %}
         <li>
-            <a href="{{ '/{}/{}.html'.format(tag.name.replace(' ', '-'), post.name.replace(' ', '-')) }}">{{ post.name }}</a>
+            <span>[{{ post.formated_cdaytime }}]</span>
+            <a href="{{ post.href }}">{{ post.name }}</a>
         </li>
         {% endfor %}
     </ul>

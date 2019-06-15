@@ -93,6 +93,7 @@ def read_from_github():
                 post.formated_mtime = None
             post.tag = tag.name
             post.org_tag = tag.org_name
+            post.href = '/{}/{}.html'.format(tag.name.replace(' ', '-'), post.name.replace(' ', '-'))
             tag.posts.append(post)
         data.tags.append(tag)
     return data
@@ -130,6 +131,7 @@ def read_from_local():
                 commits_time = [time.strptime(x, '%Y-%m-%dT%H:%M:%SZ') for x in commits_time]
                 post.year = commits_time[-1].tm_year
                 post.formated_ctime = time.strftime("%Y-%m-%d %H:%M:%S", commits_time[-1])
+                post.formated_cdaytime = time.strftime("%Y-%m-%d", commits_time[-1])
                 if len(commits) > 1:
                     post.formated_mtime = time.strftime("%Y-%m-%d %H:%M:%S", commits_time[0])
                 else:
@@ -138,9 +140,11 @@ def read_from_local():
                 mtime = time.localtime(os.path.getmtime(post_path))
                 post.year = mtime.tm_year
                 post.formated_ctime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(post_path)))
+                post.formated_cdaytime = time.strftime("%Y-%m-%d", time.localtime(os.path.getctime(post_path)))
                 post.formated_mtime = time.strftime("%Y-%m-%d %H:%M:%S", mtime)
             post.tag = tag.name
             post.org_tag = tag.org_name
+            post.href = '/{}/{}.html'.format(tag.name.replace(' ', '-'), post.name.replace(' ', '-'))
             tag.posts.append(post)
         data.tags.append(tag)
     return data
@@ -152,13 +156,24 @@ data = read_from_local()
 for tag in data.tags:
     tag.posts = sorted(tag.posts, key=lambda x: x.formated_ctime)
 
+# 最近文章列表
+import itertools
+all_posts = sorted(list(itertools.chain.from_iterable([x.posts for x in data.tags])),
+                   key=lambda x: x.formated_ctime, reverse=True)
+try:
+    recent_posts = all_posts[: cfg.conversion.max_recent_post]
+except:
+    recent_posts = all_posts
+
 # index
 with open(osp.join(cfg.local.source, 'README.md')) as f:
     content = f.read()
 README = os.popen("node markdown.js {}".format(base64.b64encode(content.encode()).decode())).read()
 index_content = index_template.render(
     tags=data.tags,
-    README=README)
+    README=README,
+    recent_posts=recent_posts,
+    len=len(recent_posts))
 main_content = base_template.render(main_content=index_content, avatar=cfg.self.avatar,
                                     short_introduction=cfg.self.short_introduction,
                                     name=cfg.self.name,
