@@ -11,9 +11,11 @@
       <span id="busuanzi_value_page_pv">1368</span></span>
   </div>
     <div class="markdown-body post-content post_href">
-        {% if post.postfix=='.ipynb' %}
         <h4>
-          <a href="{{ '{}/{}/{}.ipynb'.format(cfg.github.notebook_preview_url, post.org_tag, post.name) }}">Notebook 地址</a>
+            <a href="{{ 'https://{}/{}/{}.html'.format(cfg.weisite.host, post.tag, post.name) }}">原文地址</a>
+            {% if post.postfix=='.ipynb' %}
+            |
+            <a href="{{ '{}/{}/{}.ipynb'.format(cfg.github.notebook_preview_url, post.org_tag, post.name) }}">Notebook 地址</a>
         </h4>
         {% endif %}
         {{ post_content }}

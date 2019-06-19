@@ -27,6 +27,8 @@ cfg.github.notebook_preview_url = 'https://nbviewer.jupyter.org/github/{}/{}/blo
     cfg.github.branch_name
 )
 
+cfg.DEBUG = True
+
 # 本地读取的目录和生成目录
 cfg.local = edict()
 if 'GITHUB_TOKEN' in os.environ.keys():
@@ -37,6 +39,7 @@ else:
     # 本地
     cfg.local.source = '/Users/hzzone/Downloads/hzzone.github.io'
     cfg.local.generate = '/usr/local/Cellar/nginx/1.15.9/html'
+    cfg.DEBUG = False
 
 # 个人设置：介绍，头像，名字
 cfg.self = edict()
@@ -51,3 +54,4 @@ cfg.conversion.postfix = ['.md', '.ipynb']
 cfg.weisite = edict()
 cfg.weisite.max_recent_post = 3
 cfg.weisite.isso_url = 'https://hzzone.io/isso'
+cfg.weisite.host = 'hzzone.io'

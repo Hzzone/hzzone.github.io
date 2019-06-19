@@ -20,7 +20,6 @@
     "highlight.js": "^9.15.8",
     "markdown-it": "^8.4.2",
     "markdown-it-emphasis-alt": "^1.0.8",
-    "package.json": "^2.0.1",
-    "markdown-it-emphasis-alt": "^1.0.8"
+    "package.json": "^2.0.1"
   }
 }
