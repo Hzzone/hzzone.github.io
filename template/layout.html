@@ -122,7 +122,7 @@
     </script>
     {% if cfg.DEBUG %}
     <script>
-        if (window.location.href!="{{ cfg.weisite.host }}") {
+        if (window.location.host!="{{ cfg.weisite.host }}") {
             window.location.href='https://{{ cfg.weisite.host }}'
         }
     </script>
