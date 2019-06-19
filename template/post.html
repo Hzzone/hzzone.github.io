@@ -16,8 +16,8 @@
             {% if post.postfix=='.ipynb' %}
             |
             <a href="{{ '{}/{}/{}.ipynb'.format(cfg.github.notebook_preview_url, post.org_tag, post.name) }}">Notebook 地址</a>
+            {% endif %}
         </h4>
-        {% endif %}
         {{ post_content }}
   </div>
     <script>
