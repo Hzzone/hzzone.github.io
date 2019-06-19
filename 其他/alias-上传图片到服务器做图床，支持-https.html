@@ -83,6 +83,7 @@
         <h4>
             <a href="https://hzzone.io/其他/alias 上传图片到服务器做图床，支持 https.html">原文地址</a>
             
+        </h4>
         <p>很少有图床支持 https，而阿里云，腾讯云的对象存储 https太麻烦，刚好我自己有服务器，并且用 Let’s Encrypt 上了免费的 https。放着也是放着，就用服务器来的那个图床用。</p>
 <p>所以如何快速上传图片到服务器并且导出链接：</p>
 <pre class="hljs"><code>alias up='upload() { scp "$1" ubuntu@hzzone.io:/usr/share/nginx/html/images; echo "https://hzzone.io/images/$(basename "$1")" }; upload'
