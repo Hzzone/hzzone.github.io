@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>David Silver 强化学习课程笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/hzzoneio_favicon.ico" />
+        <!--<link rel="stylesheet" type="text/css" href="css/aircloud.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/aircloud.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/next.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+        <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css">
+        <script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=default"></script>
+        <script async src="https:////busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <link rel="stylesheet" href="/static/css/iconfont.css">
+        <script src="/static/js/iconfont.js"></script>
+    </head>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div class="site-nav-toggle" id="site-nav-toggle">
+            <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+            </button>
+        </div>
+        <div class="index-about">
+            <i>To be talented & positive.</i>
+        </div>
+        <div class="index-container">
+            <div class="index-left">
+                <div class="nav" id="nav">
+                    <div class="avatar-name">
+                        <div class="avatar">
+                            <img src="https://avatars2.githubusercontent.com/u/19267349"></div>
+                        <div class="name">
+                            <i>Zhizhong Huang</i>
+                        </div>
+                    </div>
+                    <div class="contents" id="nav-content">
+                        <ul>
+                            <li style="padding-left: 10px;">
+                                <a href="/">
+                                    <span>主页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Hzzone">
+                                    <i class="iconfont icon-github"></i>
+                                </a>
+                                <a href="https://www.zhihu.com/people/hzzone">
+                                    <i class="iconfont icon-zhihu"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="index-about-mobile">
+                    <i></i>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <!-- Main Content -->
+                <div class="post-container">
+  <div class="post-title">David Silver 强化学习课程笔记</div>
+  <div class="post-meta">
+    <span class="attr">发布于：
+      <span>2019-07-16 08:23:25</span>
+    </span>
+    <span class="attr">标签：
+      <span>强化学习</span>
+      </span>
+    <span class="attr">访问：
+      <span id="busuanzi_value_page_pv">1368</span></span>
+  </div>
+    <div class="markdown-body post-content post_href">
+        <h4>
+            <a href="https://hzzone.io/强化学习/David Silver 强化学习课程笔记.html">原文地址</a>
+            
+        </h4>
+        <h3>参考</h3>
+<ul>
+<li><a href="https://github.com/dalmia/David-Silver-Reinforcement-learning">David-Silver-Reinforcement-learning</a>: Notes for the Reinforcement Learning course by David Silver along with implementation of various algorithms.</li>
+<li>强化学习基础 David Silver 笔记
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/30315707">强化学习概述(Introduction to Reinforcement Learning)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/30317123">马尔科夫决策过程(MDPs)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/30518290">动态规划(Planning by Dynamic Programming)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/30615690">免模型预测(Model-Free Prediction)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/31401543">免模型决策(Model-Free Control)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/32617897">值函数近似(Value Function Approximation)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/32096947">策略梯度(Policy Gradient)</a></li>
+</ol>
+</li>
+</ul>
+<h3>笔记</h3>
+<h4>Lecture 1: Introduction to Reinforcement Learning</h4>
+<blockquote>
+<p>What makes reinforcement learning diﬀerent from other machine learning paradigms?</p>
+<ul>
+<li>There is no supervisor, only a reward signal</li>
+<li>Feedback is delayed, not instantaneous</li>
+<li>Time really matters (sequential, non i.i.d data)</li>
+<li>Agent’s actions aﬀect the subsequent data it receives</li>
+</ul>
+</blockquote>
+<p>强化学习和机器学习的不同之处：</p>
+<ul>
+<li>无监督，只有奖赏；</li>
+<li>反馈延时，非实时；</li>
+<li>时间很重要（序列化，非独立同分布 i.i.d 数据）；</li>
+<li>Agent 的动作影响接下来接收的序列。</li>
+</ul>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-19-82908E57-8570-494C-9419-307EA417625D-1.jpeg" alt=""></p>
+<p>$R_t$ 是一个标量的反馈信号，表明在 $t$ 时刻 agent 做的有多好，最大化累积奖赏；</p>
+<p>强化学习基于奖赏假设，强化学习的所有的目标可以被描述为最大化期望的累积奖赏。</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-19-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-19%20%E4%B8%8B%E5%8D%889.24.31.png" alt=""></p>
+<p>序列化决策的目标是选择做大话总的未来奖赏的动作，动作可能有一个长期的结果，奖赏也可能延迟；有时候可能为了获得更多的长期奖赏而牺牲即时奖赏；</p>
+<p>例如金融投资的利润延迟；直升机加油，防止未来的坠毁；禁止反抗运动；</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-19-2F243E12-1E5D-4E4D-8043-EFBD7FBBD899.jpeg" alt=""></p>
+<p>在 $t$ 时刻，Agent 收到来自 Environment 的 $O_t$ 和 $R_t$，执行 $A_t$，Environment 接收 $A_t$ 并反馈给 Agent $R_{t+1}$ 和 $O_{t+1}$，最后进入到下一时刻。</p>
+<p><strong>history</strong> 是所有 observations, actions, rewards 的序列：
+$$
+H _ { t } = O _ { 1 } , R _ { 1 } , A _ { 1 } , \ldots , A _ { t - 1 } , O _ { t } , R _ { t }
+$$</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-19-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-19%20%E4%B8%8B%E5%8D%889.33.39.png" alt=""></p>
+<p>一个 Markov state 包含了 history 中所有有用的信息，只需要 $S_t$ 就能作出决策：
+$$
+\mathbb { P } \left[ S _ { t + 1 } | S _ { t } \right] = \mathbb { P } \left[ S _ { t + 1 } | S _ { 1 } , \ldots , S _ { t } \right]
+$$</p>
+<p>未来独立于过去，只受当前的影响（一个递进关系，一旦状态已知，history 就能被丢弃）：</p>
+<p>$$
+H _ { 1 : t } \rightarrow S _ { t } \rightarrow H _ { t + 1 : \infty }
+$$</p>
+<p>Markov decision process（MDP）是一个 Full observability: agent directly observes environment state，$O _ { t } = S _ { t } ^ { a } = S _ { t } ^ { e }$，即 Agent state 等于 Env state。</p>
+<p>而 Partial observability: agent indirectly observes environment，Agent 不直接观测 Env，例如打扑克只能知道公开的牌，被称为 partially observable Markov decision process (POMDP)；这种情况下 Agent 必须构建自己的 state representation $S _ { t } ^ { a }$，可以通过以下方法解决：</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-19-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-19%20%E4%B8%8B%E5%8D%889.45.06.png" alt=""></p>
+<p>An RL agent may include one or more of these components:</p>
+<ul>
+<li>
+<p>Policy: agent’s behaviour function</p>
+<ul>
+<li>Policy(策略) 是 Agent 的行为，状态到动作的映射(map from state to action)；</li>
+<li>Deterministic(确定性) policy: 每一种状态有一种确定的决策，$a = \pi ( s )$</li>
+<li>Stochastic(随机) policy: 每一个状态下该动作(策略)的概率，$\pi ( a | s ) = \mathbb { P } \left[ A _ { t } = a | S _ { t } = s \right]$</li>
+</ul>
+</li>
+<li>
+<p>Value function: how good is each state and/or action</p>
+<ul>
+<li>Value function 用来衡量状态的好坏；预测未来总的奖赏，因此可以选出最好的动作：
+$$
+v _ { \pi } ( s ) = \mathbb { E } _ { \pi } \left[ R _ { t + 1 } + \gamma R _ { t + 2 } + \gamma ^ { 2 } R _ { t + 3 } + \ldots | S _ { t } = s \right]
+$$</li>
+</ul>
+</li>
+<li>
+<p>Model: agent’s representation of the environment</p>
+<ul>
+<li>A model predicts what the environment will do next: model 预测环境接下来会做什么。</li>
+<li>$\mathcal { P }$ predicts the next state, $\mathcal { P }$ 预测下一个状态。</li>
+<li>$\mathcal { R }$ predicts the next (immediate) reward, $\mathcal { R }$ 预测下一个即时的奖赏。</li>
+</ul>
+</li>
+</ul>
+<p>$$
+\begin{array} { l } { \mathcal { P } _ { s s ^ { \prime } } ^ { a } = \mathbb { P } \left[ S _ { t + 1 } = s ^ { \prime } | S _ { t } = s , A _ { t } = a \right] } \\ { \mathcal { R } _ { s } ^ { a } = \mathbb { E } \left[ R _ { t + 1 } | S _ { t } = s , A _ { t } = a \right] } \end{array}
+$$</p>
+<p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-19-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-19%20%E4%B8%8B%E5%8D%8811.22.07-1.png" alt=""></p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/21421729">DQN从入门到放弃5 深度解读DQN算法</a></li>
+<li>Value Based: <a href="https://arxiv.org/abs/1312.5602">Playing Atari with Deep Reinforcement Learning
+</a></li>
+<li><a href="https://www.zhihu.com/question/272223357">valued based 方法和policy based方法的异同？</a></li>
+</ul>
+<p>强化学习：</p>
+<ul>
+<li>强化学习是一个 trial-and-error 试错学习；</li>
+<li>Agent 应该从环境的经验之中，找到一个好的策略；</li>
+<li>不会丢失太多奖赏；</li>
+</ul>
+<p>探索和利用：</p>
+<ul>
+<li>Exploration 探索，找到更多的关于环境的信息；</li>
+<li>Exploitation 利用，利用已知信息最大化奖赏；</li>
+<li>通常探索和利用都很重要；</li>
+</ul>
+
+
+  </div>
+    <script>
+        var posts = document.getElementsByClassName('post_href')[0].getElementsByTagName('a');
+        for (var i=0; i<posts.length; i++)
+            posts[i].setAttribute('target', '_blank');
+    </script>
+</div>
+
+                <script data-isso="https://hzzone.io/isso" data-isso-vote="false"
+                        src="https://hzzone.io/isso/js/embed.min.js"></script>
+
+                <div class="comments">
+                    <section id="isso-thread"></section>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">const navToggle = document.getElementById('site-nav-toggle');
+            navToggle.addEventListener('click',
+            function() {
+                let aboutContent = document.getElementById('nav-content');
+                if (!aboutContent.classList.contains('show-block')) {
+                    aboutContent.classList.add('show-block');
+                    aboutContent.classList.remove('hide-block');
+                } else {
+                    aboutContent.classList.add('hide-block');
+                    aboutContent.classList.remove('show-block');
+                }
+            });</script>
+    <script type="text/javascript">
+  window.MathJax = {
+    // config: ["MMLorHTML.js"],
+    // jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG", "output/PreviewHTML"],
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+  };
+</script>
+    <script>
+        var domDiv = document.getElementById('progress-bar');
+        //domH:可视区域的高度
+        var domH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        window.addEventListener('scroll',function(){
+            var pageHeight = Math.max(
+             document.body.scrollHeight,
+             document.documentElement.scrollHeight,
+             document.body.offsetHeight,
+             document.documentElement.offsetHeight,
+             document.documentElement.clientHeight
+            );
+            domDiv.style.width = Math.round(pageYOffset/(pageHeight-domH)*100)+'%';
+        },false);
+
+    </script>
+    
+    <script>
+        if (window.location.host!="hzzone.io") {
+            window.location.href='https://hzzone.io'
+        }
+    </script>
+    
+    </body>
+
+</html>

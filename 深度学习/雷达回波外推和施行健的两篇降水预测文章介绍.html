@@ -85,7 +85,7 @@
             
         </h4>
         <p>雷达回波外推是一个还算处女的方向，本质上来说这就是一个视频序列预测视频序列的问题，比如这里的使用已知的 5 帧预测未来的 20 帧雷达回波序列(通常每 6 分钟采集一次)。所以这个问题是可以使用现有的一些处理视频的方法来解决的，例如 RNN 和 Conv3D 等能处理时空信息的结构。</p>
-<p>目前这个领域中文的一些资料很少有人介绍和总结。趁着还有些记忆，写点东西记录一下。在这里我会介绍雷达回波外推这个问题、HKO-7 数据集以及施行健的两篇 NPIS 文章，分别是 ConvLSTM 和 TrajGRU。</p>
+<p>目前这个领域中文的一些资料很少有人介绍和总结。趁着还有些记忆，写点东西记录一下。在这里我会介绍雷达回波外推这个问题、HKO-7 数据集以及施行健的两篇 nips 文章，分别是 ConvLSTM 和 TrajGRU。</p>
 <p>我用 pytorch 实现了这两篇文章，并在 HKO-7 数据集上取得了和作者近似的结果。原始代码在 <a href="https://github.com/sxjscience/HKO-7">HKO-7</a>，使用 mxnet 实现，其中有 ConvGRU 和 TrajGRU，没有 ConvLSTM。作者的代码实现了整个数据加载、训练和测试流程，封装的也非常好，我在实现时也使用了一部分作者的代码，我认为我的实现要更容易理解一些。</p>
 <p>代码挂在了 <a href="https://github.com/Hzzone/Precipitation-Nowcasting">Github</a>。如果你觉得这篇文章或代码对你有一定帮助，欢迎点赞这篇文章或 star 这个 repo。</p>
 <p>在开始之前，可以通过 <a href="https://www.hko.gov.hk/research_forum/RF2018_dyyeung.pdf">Machine Learning for Spatiotemporal Sequence Forecasting and Its Application to Nowcasting</a> 和 <a href="https://www.leiphone.com/news/201712/GnlC56qEtbrIqmI2.html">香港科技大学施行健：深度学习用于短临降雨预报的一个基准和一个新模型 | 分享总结</a> 对雷达回波外推问题有一个比较清晰的认识。</p>
@@ -98,12 +98,12 @@
 <p>雷达回波数据主要是通过天气雷达往四周发射电磁波并通过云层的反射得到，国内用的大多是多普勒雷达，下面是雷达的扫描示意图，天气雷达的覆盖区域是一个圆形区域：</p>
 <p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%9B%BE%E7%89%87%201.png" alt=""></p>
 <p>因为是通过反射得到的，所以雷达一般部署在空旷地区。如果四周出现了如建筑物、灰尘等物体，会在雷达回波中出现明显的噪声，使模型难以收敛。</p>
-<p>现在能找到的开源数据集主要有三个，其中两个来自于天池比赛，分别是 <a href="https://tianchi.aliyun.com/dataset/dataDetail?dataId=110&amp;userId=1">Tianchi CIKM AnalytiCup 2017</a> 和 <a href="https://tianchi.aliyun.com/competition/entrance/231662/information">Tianchi IEEE ICDM 2018 全球气象AI挑战赛</a>。这两个比赛最终目的不相同，但是数据集的含义是一样的，降水量可以等价于雷达反射的 dBZ。这两个比赛一些分享的经验，有一定参考意义，最主要的是 <a href="https://tianchi.aliyun.com/competition/entrance/231662/information">Tianchi IEEE ICDM 2018 全球气象AI挑战赛</a> 这个比赛的主题才是雷达回波外推，但是没有找到开源的比较好的解决方案。</p>
+<p>现在能找到的开源数据集主要有三个，其中两个来自于天池比赛，分别是 <a href="https://tianchi.aliyun.com/dataset/dataDetail?dataId=110&amp;userId=1">Tianchi CIKM AnalytiCup 2017</a> 和 <a href="https://tianchi.aliyun.com/competition/entrance/231662/information">Tianchi IEEE ICDM 2018 全球气象AI挑战赛</a>。这两个比赛最终目的不相同，但是数据集的含义是一样的，降水量等价于雷达反射的 dBZ。这两个比赛一些分享的经验，有一定参考意义，最主要的是 <a href="https://tianchi.aliyun.com/competition/entrance/231662/information">Tianchi IEEE ICDM 2018 全球气象AI挑战赛</a> 这个比赛的主题才是雷达回波外推，但是没有找到开源的比较好的解决方案。</p>
 <p>如果希望使用到私有的数据集可以向本地的气象台询问，或者在 <a href="http://data.cma.cn/">中国气象数据网</a> 下载多普勒雷达基数据。后者我尝试过实名注册，个人用户每日限额 2M，想真正用是不可能的，只能采用前面介绍的方法，或者注册企业单位（可能收费）。</p>
 <p>最后则是 <a href="https://github.com/sxjscience/HKO-7">HKO-7 Dataset</a>，这个数据集是施行健在 <a href="http://papers.nips.cc/paper/7145-deep-learning-for-precipitation-nowcasting-a-benchmark-and-a-new-model">Deep Learning for Precipitation Nowcasting: A Benchmark and A New Model
 </a> 针对雷达回波外推这个领域没有统一的 benchmark 而提出的一个数据集，来源于香港天文台。因为不开放所以需要申请，填张表就 OK，学生的话要找导师去申请，然后用工作邮箱发过去。</p>
 <p>这个数据集覆盖了香港周边的雷达回波数据，图片大小是 $480\times 480$ 的灰度图，涵盖了 2009 到 2015 的 <strong>下雨天</strong> 的数据，812 天用于训练、50 天用于验证、131 天用于测试。更详细信息可以去阅读论文。</p>
-<p>首先数据集的转换关系是这样的：dBZ 是雷达的基本反射率（雷达扫出来的结果），然后通过 $\left[ 255 \times \frac { \mathrm { dBZ } + 10 } { 70 } + 0.5 \right]$ 并裁剪到 $[0, 255]$ 之间转换成了可以普通的 png 图片。这种转换对于最后的训练和测试没有多大的影响，只是个线性转换，在深度学习中这个范围才是更常见也更容易解决问题的。</p>
+<p>首先数据集的转换关系是这样的：dBZ 是雷达的基本反射率（雷达扫出来的结果），然后通过 $\left[ 255 \times \frac { \mathrm { dBZ } + 10 } { 70 } + 0.5 \right]$ 并裁剪到 $[0, 255]$ 之间转换成普通的 png 图片。这种转换对于最后的训练和测试没有多大的影响，只是个线性转换，在深度学习中这个范围才是更常见也更容易解决问题的。</p>
 <p>最后还有一种转换关系则是通过 Z-R 关系在 dBZ 和降水值 R（单位是 mm/h）之间转换：$\mathrm { dBZ } = 10 \log a + 10 b \log R, a = 58.53,b = 1.56$，$a$，$b$ 通过线性回归计算。</p>
 <p>作者统计了全部数据集的降水值分布：</p>
 <p><img src="https://tuchuang-1252747889.cos.ap-guangzhou.myqcloud.com/2019-06-15-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-15%20%E4%B8%8B%E5%8D%886.29.23.png" alt=""></p>
