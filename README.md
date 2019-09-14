@@ -1,7 +1,7 @@
 <img src="https://travis-ci.com/Hzzone/hzzone.github.io.svg?branch=source" alt="Build Status" style="display: inline;">
 
 * 相关链接: [主页](https://hzzone.io/) | [Github](https://github.com/Hzzone) | [Zhihu](https://www.zhihu.com/people/hzzone)
-* 邮箱: zhizhonghwang[at]gmail.com | hzzone.scu[at]foxmail.com
+* 邮箱: <href>zhizhonghwang[at]gmail<span>.</span>com</href> | <href>hzzone.scu[at]foxmail<span>.</span>com</href>
 
 如果你觉得我写的东西对你有帮助，欢迎 star 或 follow 我。
 
@@ -15,4 +15,7 @@
 
 目前，实验室研究方向主要是 Deep Learning 以及 Reinforcement Learning ，包括步态识别（目前的 sota)、人群计数、视频预测、人脸年龄估计等。
 
-欢迎夏令营、九推、考研的学弟学妹们申报。
+欢迎夏令营、九推、考研的学弟学妹们申报，发送简历至 <href>jpzhang[at]fudan<span>.</span>edu<span>.</span>cn</href>。
+
+---
+
