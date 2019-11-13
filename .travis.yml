@@ -1,50 +1,15 @@
-sudo: required
-dist: xenial
-language: node_js
-node_js: 8.9.0
-cache:
-  directories:
-  - node_modules
-  - pip
-before_install:
-# source 是博客内容，dev 是开发分支，master 是生成的html
-# 判断分支，clone 开发分支
-- if [ "$TRAVIS_BRANCH" == "source" ]; then cd .. && mv hzzone.github.io source; fi
-- if [ "$TRAVIS_BRANCH" == "source" ]; then git clone --depth 1 "https://${GH_REF}" --branch=dev && cd hzzone.github.io; fi
-- if [ "$TRAVIS_BRANCH" == "source" ]; then mv ../source .; fi
-  # travis login --pro 登录，注意 pro 和 org 对应两个网站
-  # travis encrypt-file ~/.ssh/id_rsa --add --pro 加密私钥，然后添加以下一行就可以使用 ssh 连接服务器
-- openssl aes-256-cbc -K $encrypted_a6f8c23ee827_key -iv $encrypted_a6f8c23ee827_iv
-  -in id_rsa.enc -out ~/.ssh/id_rsa -d
-
-# 安装 python3
-- sudo apt-get -y install python3-pip python-dev
-- sudo pip3 install -U setuptools
-- sudo pip3 install -U virtualenvwrapper
-- python3 -V
-- pip3 -V
-install:
-- pip3 install -r requirements.txt
-- npm install
-- git clone --depth 1 "https://${GH_REF}" --branch=blog generate
-# 开发分支才 clone source
-- if [ "$TRAVIS_BRANCH" == "dev" ]; then git clone --depth 1 "https://${GH_REF}" --branch=source source; fi
-- chmod 600 ~/.ssh/id_rsa
-script:
-- python3 main.py $GITHUB_TOKEN
-after_script:
-- git config user.name "Hzzone"
-- git config user.email "Hzzone@outlook.com"
-- cd generate && git add -A && git commit -m "update" && git push --force "https://$GITHUB_TOKEN@${GH_REF}"
-  blog:blog
-# ssh 服务器
-- ssh ubuntu@hzzone.me -o StrictHostKeyChecking=no 'rm -rf hzzone.github.io && git clone --depth 1 https://github.com/Hzzone/hzzone.github.io.git --branch=blog && sudo rm -rf /usr/share/nginx/html/* && sudo mv ~/hzzone.github.io/* /usr/share/nginx/html'
-env:
-  global:
-  - GH_REF: github.com/Hzzone/hzzone.github.io.git
+language: ruby
+# only run CI-builds on master branch
 branches:
   only:
-  - source
-  - dev
-git:
-  depth: 1
+  - resume
+rvm:
+- 2.6.3
+# set execution permission on our build script
+before_script:
+ - chmod +x ./script/cibuild
+# path to our build script. 
+# Travis will run `bundle install` by default before running our script
+script: ./script/cibuild
+exclude: [vendor]
+sudo: false

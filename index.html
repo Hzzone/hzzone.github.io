@@ -1,0 +1,112 @@
+---
+title: Zhizhong Huang
+github_user: Hzzone
+real_name: Zhizhong Huang
+short: To be talented & positive.
+summary: I am a Ph.D. student at Fudan University advised by <a href="http://www.pami.fudan.edu.cn/~jpzhang/">Prof. Junping Zhang</a>. Previously, I got my bachelor's degree from Sichuan University in 2019.
+---
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <title>{{page.title}}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="css/resume.css">
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+        <div id="name-wrapper">
+            <div id="fullname">{{page.real_name}}</div>
+            <div id="jobtitle">{{page.short}}</div></div>
+        <div id="contact">
+            <div class="contact-item">Github:
+            <a href="https://github.com/Hzzone">https://github.com/Hzzone</a></div>
+            <div class="contact-item">Email:
+            <a href="mailto:zzhuang19@fudan.edu.cn">zzhuang19@fudan.edu.cn</a></div>
+            <div class="contact-item">Blog:
+            <a href="https://hzzone.io">https://hzzone.io</a></div>
+        </div>
+        </div>
+        <section id="summary">
+        <h3 class="section-title">Summary</h3>
+        <div class="section-content">
+            <div class="block">
+            <div class="block-content">{{page.summary}}</div></div>
+        </div>
+        </section>
+        <section id="education">
+        <h3 class="section-title">Education</h3>
+        <div class="section-content">
+            <ul>
+            <li>
+                <div class="block">
+                <div class="block-title">Sichuan University</div>
+                <div class="block-subtitle">2015-2019&ensp;|&ensp;Chengdu, China.</div>
+                <div class="block-content">Bachelor in Software Engineering. GPA: 3.71/4.0(4%)</div></div>
+        </li>
+        <li>
+            <div class="block">
+            <div class="block-title">Fudan University</div>
+            <div class="block-subtitle">2019-Now&ensp;|&ensp;Shanghai, China.</div>
+            <div class="block-content">Ph.D. candidate in Computer Science.</div></div>
+        </li>
+        </ul>
+        </div>
+        </section>
+        <section id="awards">
+            <h3 class="section-title">Awards</h3>
+            <div class="section-content">
+            <ul>
+                {% for award in site.data.awards %}
+                <li>
+                    <div class="block">
+                        <div class="block-subtitle">{{award}}</div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            </div>
+        </section>
+        <section id="publication">
+            <h3 class="section-title">Publications</h3>
+            <div class="section-content">
+            <ul>
+                {% for publication in site.data.publications %}
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">[{{forloop.index}}] {{publication}}</div>
+                </li>
+                {% endfor %}
+            </ul>
+            </div>
+        </section>
+        <section id="project">
+            <h3 class="section-title">Projects</h3>
+            <div class="section-content">
+            <ul>
+                {% for project in site.data.projects %}
+                <li>
+                    <div class="block">
+                    <div class="block-title">{{project.name}}</div>
+                    <div class="block-subtitle">
+                        <a href="https://github.com/{{github_user}}/{{project.name}}" target="_blank"><img src="https://img.shields.io/github/stars/{{page.github_user}}/{{project.name}}.svg?style=social&label=Star&maxAge=180"></img></a>
+                        <a href="https://github.com/{{page.github_user}}/{{project.name}}" target="_blank"><img src="https://img.shields.io/github/forks/{{page.github_user}}/{{project.name}}.svg?style=social&label=Fork&maxAge=180"></img></a>
+                    </div>
+                    <div class="block-content">{{project.description}}</div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <footer class="noprint">Made
+        <i class="fa fa-heart aria-hidden=" true></i>by
+        <a href="https://hzzone.io/">Hzzone</a>(
+        <a href="https://hzzone.io/ZhizhongHuang_resume_en-US.pdf">PDF下载</a>)
+    </footer>
+</body>
+
+</html>

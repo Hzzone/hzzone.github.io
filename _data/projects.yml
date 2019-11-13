@@ -1,0 +1,4 @@
+- name: pytorch-openpose
+  description: pytorch implementation of openpose including Hand and Body Pose Estimation.
+- name: Precipitation-Nowcasting
+  description: implemented a pytorch-based encoder-forecaster model with RNNs including (TrajGRU, ConvLSTM) to do precipitation nowcasting.
