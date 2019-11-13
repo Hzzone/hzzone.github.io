@@ -17,7 +17,8 @@ mkdir _site
 git clone https://${GH_TOKEN}@github.com/Hzzone/hzzone.github.io.git --depth 1 --branch master _site
 
 # build with Jekyll into "_site"
-bundle exec jekyll build
+# bundle exec jekyll build
+jekyll build
 
 # push
 cd _site
