@@ -75,9 +75,15 @@ summary: I am a Ph.D. student at Fudan University advised by <a href="http://www
             <div class="section-content">
             <ul>
                 {% for publication in site.data.publications %}
+                {% assign pub_size=site.data.publications | size %}
                 <li>
                 <div class="block">
-                    <div class="block-subtitle">[{{forloop.index}}] {{publication}}</div>
+                    <div class="block-subtitle">
+                        [{{ pub_size | minus: forloop.index | plus: 1}}] {{publication.author}}. "{{publication.title}}." {{publication.press}}
+                        {% for others in publication.others %}
+                        [<a href="{{others[1]}}">{{others[0]}}</a>]
+                        {% endfor %}
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
