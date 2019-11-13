@@ -24,7 +24,7 @@ addons:
 
 sudo: false # route your build to the container-based infrastructure for a faster build
 
-cache: bundler # caching bundler gem packages will speed up build
+cache: .rvm
 
 # Optional: disable email notifications about the outcome of your builds
 notifications:
