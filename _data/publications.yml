@@ -6,7 +6,7 @@
     arxiv: https://arxiv.org/abs/1910.12771
     code: https://github.com/JensonZhu14/AcGAN
 
-- author: Yuan Li, <strong>Zhizhong Huang</strong>, Xiaoai Dong, Weibo Liang, Hui Xue, Lin Zhang, Yi Zhang, and Zhenhua Deng
+- author: Yuan Li<sup>1</sup>, <strong>Zhizhong Huang<sup>1</sup></strong>, Xiaoai Dong, Weibo Liang, Hui Xue, Lin Zhang, Yi Zhang, and Zhenhua Deng
   title: Forensic age estimation for pelvic X-ray images using deep learning
   press: European radiology 29, no. 5 (2019)&colon; 2322-2329.
   others:
