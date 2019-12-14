@@ -8,3 +8,4 @@ data
 .ipynb_checkpoints/
 .DS_Store
 _site
+.jekyll-cache
