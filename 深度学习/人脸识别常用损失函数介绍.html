@@ -121,9 +121,9 @@
         loss += dist_sq_.cpu_data()[i];
     } <span class="hljs-keyword">else</span> {  <span class="hljs-comment">// dissimilar pairs</span>
         <span class="hljs-keyword">if</span> (legacy_version) {
-            loss += <span class="hljs-built_in">std</span>::max(margin - dist_sq_.cpu_data()[i], Dtype(<span class="hljs-number">0.0</span>));
+            loss += <span class="hljs-built_in">std</span>::<span class="hljs-built_in">max</span>(margin - dist_sq_.cpu_data()[i], Dtype(<span class="hljs-number">0.0</span>));
         } <span class="hljs-keyword">else</span> {
-            Dtype dist = <span class="hljs-built_in">std</span>::max&lt;Dtype&gt;(margin - <span class="hljs-built_in">sqrt</span>(dist_sq_.cpu_data()[i]),
+            Dtype dist = <span class="hljs-built_in">std</span>::<span class="hljs-built_in">max</span>&lt;Dtype&gt;(margin - <span class="hljs-built_in">sqrt</span>(dist_sq_.cpu_data()[i]),
               Dtype(<span class="hljs-number">0.0</span>));
             loss += dist*dist;
         }

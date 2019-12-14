@@ -224,8 +224,8 @@ $$</p>
   Dtype negative_slope = <span class="hljs-keyword">this</span>-&gt;layer_param_.relu_param().negative_slope();
   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; ++i) {
     <span class="hljs-comment">// 实现该激活函数</span>
-    top_data[i] = <span class="hljs-built_in">std</span>::max(bottom_data[i], Dtype(<span class="hljs-number">0</span>))
-        + negative_slope * <span class="hljs-built_in">std</span>::min(bottom_data[i], Dtype(<span class="hljs-number">0</span>));
+    top_data[i] = <span class="hljs-built_in">std</span>::<span class="hljs-built_in">max</span>(bottom_data[i], Dtype(<span class="hljs-number">0</span>))
+        + negative_slope * <span class="hljs-built_in">std</span>::<span class="hljs-built_in">min</span>(bottom_data[i], Dtype(<span class="hljs-number">0</span>));
   }
 }
 
