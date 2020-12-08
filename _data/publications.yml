@@ -1,20 +1,20 @@
 # 冒号: &colon;
 - author: <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan
-  title: PFA-GAN: Progressive Face Aging with Generative Adversarial Network
-  press: Submitted
+  title: PFA-GAN&colon; Progressive Face Aging with Generative Adversarial Network
+  press: <i>Submitted</i>.
   others:
     arxiv: https://arxiv.org/abs/2012.03459
     code: https://github.com/Hzzone/PFA-GAN
 
 - author: Haiping Zhu, <strong>Zhizhong Huang</strong>, Hongming Shan, and Junping Zhang
   title: Look globally, age locally&colon; Face aging with an attention mechanism
-  press: ICASSP (Oral), Barcelona, Spain, May 4-8, 2020
+  press: <i>ICASSP (Oral)</i>, Barcelona, Spain, May 4-8, 2020.
   others:
     arxiv: https://arxiv.org/abs/1910.12771
     code: https://github.com/JensonZhu14/AcGAN
 
 - author: Yuan Li<sup>1</sup>, <strong>Zhizhong Huang<sup>1</sup></strong>, Xiaoai Dong, Weibo Liang, Hui Xue, Lin Zhang, Yi Zhang, and Zhenhua Deng
   title: Forensic age estimation for pelvic X-ray images using deep learning
-  press: European radiology 29, no. 5 (2019)&colon; 2322-2329.
+  press: <i>European radiology</i> 29, no. 5 (2019)&colon; 2322-2329.
   others:
     DOI: https://link.springer.com/article/10.1007/s00330-018-5791-6
