@@ -1,7 +1,7 @@
 # 冒号: &colon;
 - author: <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan
   title: PFA-GAN&colon; Progressive Face Aging with Generative Adversarial Network
-  press: <i>Submitted</i>.
+  press: <i>Accpeted by IEEE Transactions on Information Forensics and Security</i>.
   others:
     arxiv: https://arxiv.org/abs/2012.03459
     code: https://github.com/Hzzone/PFA-GAN
