@@ -1,4 +1,10 @@
 # 冒号: &colon;
+- author: <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan
+  title: RoutingGAN&colon; Routing Age Progression and Regression with Disentangled Learning
+  press: <i>ICASSP, 2021</i>.
+  others:
+    arxiv: https://arxiv.org/abs/2102.00601
+
 - author: <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan
   title: PFA-GAN&colon; Progressive Face Aging with Generative Adversarial Network
   press: <i>IEEE Transactions on Information Forensics and Security, 2021</i>.
