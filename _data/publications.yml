@@ -1,5 +1,11 @@
 # 冒号: &colon;
 - author: <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan
+  title: When Age-Invariant Face Recognition Meets Face Age Synthesis&colon; A Multi-Task Learning Framework
+  press: <i>CVPR, 2021</i>.
+  others:
+    arxiv: https://arxiv.org/abs/2103.01520
+    code: https://github.com/Hzzone/MTLFace
+- author: <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan
   title: RoutingGAN&colon; Routing Age Progression and Regression with Disentangled Learning
   press: <i>ICASSP, 2021</i>.
   others:
@@ -7,7 +13,7 @@
 
 - author: <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan
   title: PFA-GAN&colon; Progressive Face Aging with Generative Adversarial Network
-  press: <i>IEEE Transactions on Information Forensics and Security, 2021</i>.
+  press: <i>IEEE Transactions on Information Forensics and Security, 2020</i>.
   others:
     DOI: https://ieeexplore.ieee.org/document/9309246
     arxiv: https://arxiv.org/abs/2012.03459
