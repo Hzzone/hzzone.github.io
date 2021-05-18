@@ -3,6 +3,8 @@
   title: AgeFlow&colon; Conditional Age Progression and Regression with Normalizing Flows
   press: <i><strong>IJCAI 2021</strong>, only 13.9% acceptance rate</i>.
   others:
+    arxiv: https://arxiv.org/abs/2105.07239
+    code: https://github.com/Hzzone/AgeFlow
 
 - author: <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan
   title: When Age-Invariant Face Recognition Meets Face Age Synthesis&colon; A Multi-Task Learning Framework
