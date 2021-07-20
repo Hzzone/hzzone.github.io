@@ -14,6 +14,7 @@ summary: I am a second year Ph.D. student at Fudan University advised by <a href
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" href="css/resume.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -84,6 +85,8 @@ summary: I am a second year Ph.D. student at Fudan University advised by <a href
                         {% for others in publication.others %}
                         [<a href="{{others[1]}}">{{others[0]}}</a>]
                         {% endfor %}
+                        <div style="display: inline;">[<a class="fakelink" onclick="$(this).siblings('.bibref').slideToggle()">bibtex</a>]<div class="bibref">{{publication.bibtex}}</div></div>
+                        <br>
                     </div>
                 </li>
                 {% endfor %}

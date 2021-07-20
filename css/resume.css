@@ -1,3 +1,13 @@
+.bibref {
+  margin-top: 10px;
+  margin-left: 10px;
+  display: none;
+  font-size: 14px;
+  font-family: monospace;
+  overflow: scroll; 
+  white-space: pre;"
+}
+}
 .noprint{visibility:hidden} 
 
 section ul {
