@@ -1,5 +1,20 @@
 # 冒号: &colon;
 - author: <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan
+  title: DU-GAN&colon; Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising
+  press: <i><strong>ArXiv Preprint</strong></i>.
+  others:
+    arxiv: https://arxiv.org/abs/2108.10772
+    code: https://github.com/Hzzone/DU-GAN
+  bibtex: "@misc{huang2021dugan,
+      title={DU-GAN: Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising},<br>
+      author={Zhizhong Huang and Junping Zhang and Yi Zhang and Hongming Shan},<br>
+      year={2021},<br>
+      eprint={2108.10772},<br>
+      archivePrefix={arXiv},<br>
+      primaryClass={eess.IV}<br>
+}"
+
+- author: <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan
   title: AgeFlow&colon; Conditional Age Progression and Regression with Normalizing Flows
   press: <i><strong>IJCAI 2021</strong>, only 13.9% acceptance rate</i>.
   others:
@@ -25,7 +40,7 @@ title={When age-invariant face recognition meets face age synthesis: A multi-tas
 author={Huang, Zhizhong and Zhang, Junping and Shan, Hongming},<br>
 booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},<br>
 pages={7282--7291},<br>
-year={2021}
+year={2021}<br>
 }"
 
 - author: <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan
