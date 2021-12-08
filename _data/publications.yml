@@ -1,17 +1,32 @@
 # 冒号: &colon;
-- author: <strong>Zhizhong Huang</strong>, Junping Zhang, Yi Zhang, and Hongming Shan
-  title: DU-GAN&colon; Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising
+- author: <strong>Zhizhong Huang</strong>, Jie Chen, Junping Zhang and Hongming Shan
+  title: Exploring Non-Contrastive Representation Learning for Deep Clustering
   press: <i><strong>ArXiv Preprint</strong></i>.
   others:
+    arxiv: https://arxiv.org/abs/2111.11821
+    code: https://github.com/Hzzone/DeepClustering.SSL
+  bibtex: "@misc{huang2021exploring,<br>
+      title={Exploring Non-Contrastive Representation Learning for Deep Clustering},<br>
+      author={Zhizhong Huang and Jie Chen and Junping Zhang and Hongming Shan},<br>
+      year={2021},<br>
+      eprint={2111.11821},<br>
+      archivePrefix={arXiv},<br>
+      primaryClass={cs.CV}<br>
+}"
+
+- author: <strong>Zhizhong Huang</strong>, Junping Zhang, Yi Zhang, and Hongming Shan
+  title: DU-GAN&colon; Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising
+  press: <i><strong>IEEE Transactions on Instrumentation & Measurement 2021</strong></i>.
+  others:
+    doi: https://ieeexplore.ieee.org/document/9617604
     arxiv: https://arxiv.org/abs/2108.10772
     code: https://github.com/Hzzone/DU-GAN
-  bibtex: "@misc{huang2021dugan,
-      title={DU-GAN: Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising},<br>
-      author={Zhizhong Huang and Junping Zhang and Yi Zhang and Hongming Shan},<br>
-      year={2021},<br>
-      eprint={2108.10772},<br>
-      archivePrefix={arXiv},<br>
-      primaryClass={eess.IV}<br>
+  bibtex: "@article{huang2020dugan,<br>
+title={{DU-GAN}&colon; Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising},<br>
+author={Huang, Zhizhong and Zhang, Junping and Zhang, Yi and Shan, Hongming},<br>
+journal={IEEE Transactions on Instrumentation & Measurement},<br>
+year={2021},<br>
+publisher={IEEE}<br>
 }"
 
 - author: <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan
@@ -65,7 +80,7 @@ organization={IEEE}<br>
     arxiv: https://arxiv.org/abs/2012.03459
     code: https://github.com/Hzzone/PFA-GAN
   bibtex: "@article{huang2020pfa,<br>
-title={PFA-GAN: Progressive face aging with generative adversarial network},<br>
+title={{PFA-GAN}: Progressive face aging with generative adversarial network},<br>
 author={Huang, Zhizhong and Chen, Shouzhen and Zhang, Junping and Shan, Hongming},<br>
 journal={IEEE Transactions on Information Forensics and Security},<br>
 volume={16},<br>
