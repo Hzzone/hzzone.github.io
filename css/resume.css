@@ -41,6 +41,7 @@ body {
   background-color: white;
   font-family: Times New Roman, Microsoft YaHei,SimHei;
   color: black;
+  background-color: #C0C0C0;
 }
 a {
   text-decoration: none;
@@ -55,6 +56,9 @@ a:hover {
   margin-right: auto;
   text-align: left;
   margin-bottom: 1rem;
+  background-color: white;
+  padding: 25px 50px;
+  margin: 20px auto;
 }
 #header {
   display: flex;

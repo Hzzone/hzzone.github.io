@@ -3,7 +3,7 @@ title: Zhizhong Huang
 github_user: Hzzone
 real_name: Zhizhong Huang
 short: To be talented & positive.
-summary: I am a second year Ph.D. student at Fudan University advised by <a href="https://scholar.google.com/citations?user=Aib_NTYAAAAJ&hl=en">Prof. Junping Zhang</a> and <a href="https://scholar.google.com/citations?user=RYfSzKwAAAAJ&hl=en">Dr. Hongming Shan</a>. Previously, I got my bachelor's degree from Sichuan University in 2019. My main research interests include generative model and biometrics, especially face-related applications.
+summary: I am a third year Ph.D. student at Fudan University advised by <a href="https://scholar.google.com/citations?user=Aib_NTYAAAAJ&hl=en">Prof. Junping Zhang</a> and <a href="https://scholar.google.com/citations?user=RYfSzKwAAAAJ&hl=en">Dr. Hongming Shan</a>. Previously, I got my bachelor's degree from Sichuan University in 2019. My main research interests include unsupervised learning, generative model and biometrics, especially face-related applications.
 ---
 <!DOCTYPE html>
 <html>
@@ -44,13 +44,13 @@ summary: I am a second year Ph.D. student at Fudan University advised by <a href
             <li>
                 <div class="block">
                 <div class="block-title">Sichuan University</div>
-                <div class="block-subtitle">2015-2019&ensp;|&ensp;Chengdu, China.</div>
-                <div class="block-content">Bachelor in Software Engineering. GPA: 3.71/4.0(4%)</div></div>
+                <div class="block-subtitle">2015-2019&ensp;<strong>|</strong>&ensp;Chengdu, China.</div>
+                <div class="block-content">Bachelor in Software Engineering. GPA: 3.71/4.0 (4%)</div></div>
         </li>
         <li>
             <div class="block">
             <div class="block-title">Fudan University</div>
-            <div class="block-subtitle">2019-Now&ensp;|&ensp;Shanghai, China.</div>
+            <div class="block-subtitle">2019-Now&ensp;<strong>|</strong>&ensp;Shanghai, China.</div>
             <div class="block-content">Ph.D. candidate in Computer Science.</div></div>
         </li>
         </ul>
@@ -83,7 +83,7 @@ summary: I am a second year Ph.D. student at Fudan University advised by <a href
                         {% for others in publication.others %}
                         [<a href="{{others[1]}}">{{others[0]}}</a>]
                         {% endfor %}
-                        <div style="display: inline;">[<a class="fakelink" onclick="$(this).siblings('.bibref').slideToggle()">bibtex</a>]<div class="bibref">{{publication.bibtex}}</div></div>
+                        [<a href="/bibtex/{{publication.bibtex}}" target="_blank">bibtex</a>]
                         <br>
                     </div>
                 </li>
