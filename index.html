@@ -1,15 +1,8 @@
----
-title: Zhizhong Huang
-github_user: Hzzone
-real_name: Zhizhong Huang
-short: To be talented & positive.
-summary: I am a third year Ph.D. student at Fudan University advised by <a href="https://scholar.google.com/citations?user=Aib_NTYAAAAJ&hl=en">Prof. Junping Zhang</a> and <a href="https://scholar.google.com/citations?user=RYfSzKwAAAAJ&hl=en">Dr. Hongming Shan</a>. Previously, I got my bachelor's degree from Sichuan University in 2019. My main research interests include unsupervised learning, generative model and biometrics, especially face-related applications.
----
 <!DOCTYPE html>
 <html>
   
 <head>
-    <title>{{page.title}}</title>
+    <title>Zhizhong Huang</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no" />
@@ -19,9 +12,9 @@ summary: I am a third year Ph.D. student at Fudan University advised by <a href=
     <div class="container">
         <div id="header">
         <div id="name-wrapper">
-            <div id="fullname">{{page.real_name}}</div>
+            <div id="fullname">Zhizhong Huang</div>
             <div>(黄智忠)</div>
-            <div id="jobtitle">{{page.short}}</div></div>
+            <div id="jobtitle">To be talented & positive.</div></div>
         <div id="contact">
             <div class="contact-item"><a href="https://hzzone.github.io/">Homepage</a> <strong>|</strong> <a href="https://scholar.google.com/citations?user=6Itl2tMAAAAJ&hl=en">Google Scholar</a> <strong>|</strong> <a href="https://github.com/Hzzone">GitHub</a></div>
 <!--             <div class="contact-item">GitHub:
@@ -34,7 +27,7 @@ summary: I am a third year Ph.D. student at Fudan University advised by <a href=
         <h3 class="section-title">Summary</h3>
         <div class="section-content">
             <div class="block">
-            <div class="block-content">{{page.summary}}</div></div>
+            <div class="block-content">I am a third year Ph.D. student at Fudan University advised by <a href="https://scholar.google.com/citations?user=Aib_NTYAAAAJ&hl=en">Prof. Junping Zhang</a> and <a href="https://scholar.google.com/citations?user=RYfSzKwAAAAJ&hl=en">Dr. Hongming Shan</a>. Previously, I got my bachelor's degree from Sichuan University in 2019. My main research interests include unsupervised learning, generative model and biometrics, especially face-related applications.</div></div>
         </div>
         </section>
         <section id="education">
@@ -60,13 +53,31 @@ summary: I am a third year Ph.D. student at Fudan University advised by <a href=
             <h3 class="section-title">Awards</h3>
             <div class="section-content">
             <ul>
-                {% for award in site.data.awards %}
+                
                 <li>
                     <div class="block">
-                        <div class="block-subtitle">{{award}}</div>
+                        <div class="block-subtitle">2016-2017, National Scholarship.</div>
                     </div>
                 </li>
-                {% endfor %}
+                
+                <li>
+                    <div class="block">
+                        <div class="block-subtitle">2017-2018, National Scholarship.</div>
+                    </div>
+                </li>
+                
+                <li>
+                    <div class="block">
+                        <div class="block-subtitle">2021 second prize of CCF University Student Acaemic Show (PhD Group) [<a href='https://mp.weixin.qq.com/s/0KUdXqIgjwv7DMZytBrNNg' target="_blank">link</a>].</div>
+                    </div>
+                </li>
+                
+                <li>
+                    <div class="block">
+                        <div class="block-subtitle">2020-2021, National Scholarship.</div>
+                    </div>
+                </li>
+                
             </ul>
             </div>
         </section>
@@ -74,20 +85,174 @@ summary: I am a third year Ph.D. student at Fudan University advised by <a href=
             <h3 class="section-title">Publications</h3>
             <div class="section-content">
             <ul>
-                {% for publication in site.data.publications %}
-                {% assign pub_size=site.data.publications | size %}
+                
+                
                 <li>
                 <div class="block">
                     <div class="block-subtitle">
-                        [{{ pub_size | minus: forloop.index | plus: 1}}] {{publication.author}}. "{{publication.title}}." {{publication.press}}
-                        {% for others in publication.others %}
-                        [<a href="{{others[1]}}">{{others[0]}}</a>]
-                        {% endfor %}
-                        [<a href="/bibtex/{{publication.bibtex}}" target="_blank">bibtex</a>]
+                        [11] <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan. "When Age-Invariant Face Recognition Meets Face Age Synthesis&colon; A Multi-Task Learning Framework and A New Benchmark." <i><strong>ArXiv Preprint 2210.09835</strong></i>.
+                        
+                        [<a href="https://arxiv.org/abs/2210.09835">arxiv</a>]
+                        
+                        [<a href="https://hzzone.github.io/MTLFace/">code</a>]
+                        
+                        [<a href="/bibtex/" target="_blank">bibtex</a>]
                         <br>
                     </div>
                 </li>
-                {% endfor %}
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [10] Weiyi Yu, <strong>Zhizhong Huang</strong>, Junping Zhang, Hongming Shan. "Site Generalization&colon; Stroke Lesion Segmentation on Magnetic Resonance Images from Unseen Sites." <i><strong>ArXiv Preprint 2205.04329</strong></i>.
+                        
+                        [<a href="https://arxiv.org/abs/2205.04329">arxiv</a>]
+                        
+                        [<a href="/bibtex/sgnet.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;9] Jiaqi Gao, <strong>Zhizhong Huang</strong>, Yiming Lei, James Z. Wang, Fei-Yue Wang, Junping Zhang. "S2FPR&colon; Crowd Counting via Self-Supervised Coarse to Fine Feature Pyramid Ranking." <i><strong>ArXiv Preprint 2201.04819</strong></i>.
+                        
+                        [<a href="https://arxiv.org/abs/2201.04819">arxiv</a>]
+                        
+                        [<a href="https://github.com/bridgeqiqi/S2FPR">code</a>]
+                        
+                        [<a href="/bibtex/S2FPR.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;8] <strong>Zhizhong Huang</strong>, Jie Chen, Junping Zhang and Hongming Shan. "Learning Representation for Clustering via Prototype Scattering and Positive Sampling." <i><strong>IEEE Transactions on Pattern Analysis and Machine Intelligence 2022</strong></i>.
+                        
+                        [<a href="https://arxiv.org/abs/2111.11821">arxiv</a>]
+                        
+                        [<a href="https://github.com/Hzzone/ProPos">code</a>]
+                        
+                        [<a href="/bibtex/propos.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;7] <strong>Zhizhong Huang</strong>, Junping Zhang, Yi Zhang, and Hongming Shan. "DU-GAN&colon; Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising." <i><strong>IEEE Transactions on Instrumentation & Measurement 2021</strong></i>.
+                        
+                        [<a href="https://ieeexplore.ieee.org/document/9617604">doi</a>]
+                        
+                        [<a href="https://arxiv.org/abs/2108.10772">arxiv</a>]
+                        
+                        [<a href="https://github.com/Hzzone/DU-GAN">code</a>]
+                        
+                        [<a href="/bibtex/dugan.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;6] <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan. "AgeFlow&colon; Conditional Age Progression and Regression with Normalizing Flows." <i><strong>IJCAI 2021</strong>, only 13.9% acceptance rate</i>.
+                        
+                        [<a href="https://arxiv.org/abs/2105.07239">arxiv</a>]
+                        
+                        [<a href="https://github.com/Hzzone/AgeFlow">code</a>]
+                        
+                        [<a href="/bibtex/ageflow.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;5] <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan. "When Age-Invariant Face Recognition Meets Face Age Synthesis&colon; A Multi-Task Learning Framework." <i><strong>CVPR 2021 (Oral)</strong>, about 5% acceptance rate</i>.
+                        
+                        [<a href="https://arxiv.org/abs/2103.01520">arxiv</a>]
+                        
+                        [<a href="https://openaccess.thecvf.com/content/CVPR2021/html/Huang_When_Age-Invariant_Face_Recognition_Meets_Face_Age_Synthesis_A_Multi-Task_CVPR_2021_paper.html">cvf</a>]
+                        
+                        [<a href="https://openaccess.thecvf.com/content/CVPR2021/supplemental/Huang_When_Age-Invariant_Face_CVPR_2021_supplemental.pdf">supplementary</a>]
+                        
+                        [<a href="https://github.com/Hzzone/MTLFace">code</a>]
+                        
+                        [<a href="/bibtex/mtlface.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;4] <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan. "RoutingGAN&colon; Routing Age Progression and Regression with Disentangled Learning." <i><strong>ICASSP 2021</strong></i>.
+                        
+                        [<a href="https://arxiv.org/abs/2102.00601">arxiv</a>]
+                        
+                        [<a href="/bibtex/routinggan.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;3] <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan. "PFA-GAN&colon; Progressive Face Aging with Generative Adversarial Network." <i><strong>IEEE Transactions on Information Forensics and Security 2021</strong></i>.
+                        
+                        [<a href="https://ieeexplore.ieee.org/document/9309246">DOI</a>]
+                        
+                        [<a href="https://arxiv.org/abs/2012.03459">arxiv</a>]
+                        
+                        [<a href="https://github.com/Hzzone/PFA-GAN">code</a>]
+                        
+                        [<a href="/bibtex/pfagan.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;2] Haiping Zhu, <strong>Zhizhong Huang</strong>, Hongming Shan, and Junping Zhang. "Look globally, age locally&colon; Face aging with an attention mechanism." <i><strong>ICASSP (Oral)</strong></i>, Barcelona, Spain, May 4-8, 2020.
+                        
+                        [<a href="https://arxiv.org/abs/1910.12771">arxiv</a>]
+                        
+                        [<a href="https://github.com/JensonZhu14/AcGAN">code</a>]
+                        
+                        [<a href="/bibtex/acgan.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
+                
+                <li>
+                <div class="block">
+                    <div class="block-subtitle">
+                        [&ensp;1] Yuan Li<sup>1</sup>, <strong>Zhizhong Huang<sup>1</sup></strong>, Xiaoai Dong, Weibo Liang, Hui Xue, Lin Zhang, Yi Zhang, and Zhenhua Deng. "Forensic age estimation for pelvic X-ray images using deep learning." <i><strong>European radiology</strong></i> 29, no. 5 (2019)&colon; 2322-2329.
+                        
+                        [<a href="https://link.springer.com/article/10.1007/s00330-018-5791-6">DOI</a>]
+                        
+                        [<a href="/bibtex/yuanli.html" target="_blank">bibtex</a>]
+                        <br>
+                    </div>
+                </li>
+                
             </ul>
             </div>
         </section>
@@ -95,17 +260,37 @@ summary: I am a third year Ph.D. student at Fudan University advised by <a href=
             <h3 class="section-title">Projects</h3>
             <div class="section-content">
             <ul>
-                {% for project in site.data.projects %}
+                
                 <li>
                     <div class="block">
-                    <div class="block-title">{{project.name}}</div>
+                    <div class="block-title">pytorch-openpose</div>
                     <div class="block-subtitle">
-                        <a href="https://github.com/{{page.github_user}}/{{project.name}}" target="_blank"><img src="https://img.shields.io/github/stars/{{page.github_user}}/{{project.name}}.svg?style=social&label=Star&maxAge=180"></img></a>
-                        <a href="https://github.com/{{page.github_user}}/{{project.name}}" target="_blank"><img src="https://img.shields.io/github/forks/{{page.github_user}}/{{project.name}}.svg?style=social&label=Fork&maxAge=180"></img></a>
+                        <a href="https://github.com/Hzzone/pytorch-openpose" target="_blank"><img src="https://img.shields.io/github/stars/Hzzone/pytorch-openpose.svg?style=social&label=Star&maxAge=180"></img></a>
+                        <a href="https://github.com/Hzzone/pytorch-openpose" target="_blank"><img src="https://img.shields.io/github/forks/Hzzone/pytorch-openpose.svg?style=social&label=Fork&maxAge=180"></img></a>
                     </div>
-                    <div class="block-content">{{project.description}}</div>
+                    <div class="block-content">pytorch implementation of openpose including Hand and Body Pose Estimation.</div>
                 </li>
-                {% endfor %}
+                
+                <li>
+                    <div class="block">
+                    <div class="block-title">Precipitation-Nowcasting</div>
+                    <div class="block-subtitle">
+                        <a href="https://github.com/Hzzone/Precipitation-Nowcasting" target="_blank"><img src="https://img.shields.io/github/stars/Hzzone/Precipitation-Nowcasting.svg?style=social&label=Star&maxAge=180"></img></a>
+                        <a href="https://github.com/Hzzone/Precipitation-Nowcasting" target="_blank"><img src="https://img.shields.io/github/forks/Hzzone/Precipitation-Nowcasting.svg?style=social&label=Fork&maxAge=180"></img></a>
+                    </div>
+                    <div class="block-content">implemented a pytorch-based encoder-forecaster model with RNNs including (TrajGRU, ConvLSTM) to do precipitation nowcasting.</div>
+                </li>
+                
+                <li>
+                    <div class="block">
+                    <div class="block-title">torch_clustering</div>
+                    <div class="block-subtitle">
+                        <a href="https://github.com/Hzzone/torch_clustering" target="_blank"><img src="https://img.shields.io/github/stars/Hzzone/torch_clustering.svg?style=social&label=Star&maxAge=180"></img></a>
+                        <a href="https://github.com/Hzzone/torch_clustering" target="_blank"><img src="https://img.shields.io/github/forks/Hzzone/torch_clustering.svg?style=social&label=Fork&maxAge=180"></img></a>
+                    </div>
+                    <div class="block-content">A pure PyTorch implementation of kmeans and GMM with distributed clustering.</div>
+                </li>
+                
             </ul>
         </div>
     </section>
