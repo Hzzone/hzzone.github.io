@@ -14,12 +14,12 @@ section ul {
   padding-inline-start: 1em;
   margin-block-end: 0.5em;
 }
-#publication > div > ul {
+.publication > div > ul {
   list-style: none;
   padding-inline-start: 0em!important;;
 }
 
-#publication > div > ul > li {
+.publication > div > ul > li {
   list-style: none;
 }
 h3 {
