@@ -1,490 +1,723 @@
-<!DOCTYPE html>
-<html>
-  
+<!DOCTYPE HTML>
+<html lang="en">
+
 <head>
-    <title>Zhizhong Huang</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="css/resume.css">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above meta tags must come first -->
+
+  <meta name="author" content="Zhizhong Huang" />
+  <title>Zhizhong Huang</title>
+
+  <!-- Bootstrap CSS 4.6.0, never versions fail to load -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="canonical" href="http://localhost:4000/">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
 </head>
-<body>
-    <div class="container">
-        <div id="header">
-        <div id="name-wrapper">
-            <div id="fullname">Zhizhong Huang</div>
-            <div>(黄智忠)</div>
-            <div id="jobtitle">To be talented & positive.</div></div>
-        <div id="contact">
-            <div class="contact-item">
-                <a href="https://hzzone.github.io/">Homepage</a>
-                <strong>|</strong> 
-                <a href="https://scholar.google.com/citations?user=6Itl2tMAAAAJ&hl=en">Google Scholar</a> 
-                <strong>|</strong>
-                <a href="https://github.com/Hzzone">GitHub</a>
-            </div>
-            <div class="contact-item">
-                Email:
-                <a href="mailto:zzhuang19@fudan.edu.cn">zzhuang19@fudan.edu.cn</a>
-            </div>
-            <div class="contact-item">
-                CV: <a href="/cv/cv.pdf">English</a>
-            </div>
-            <div class="contact-item">
-                Shanghai, China
-            </div>
-        </div>
-        </div>
-        <section id="summary">
-        <h3 class="section-title">Summary</h3>
-        <div class="section-content">
-            <div class="block">
-            <div class="block-content">I am a last-year Ph.D. student at Fudan University advised by <a href="https://scholar.google.com/citations?user=Aib_NTYAAAAJ&hl=en">Prof. Junping Zhang</a> and <a href="https://scholar.google.com/citations?user=RYfSzKwAAAAJ&hl=en">Dr. Hongming Shan</a>. Previously, I got my bachelor's degree from Sichuan University in 2019. My main research interests include representation learning, unsupervised/semi-supervised learning, and generative models. I am highly self-motivated, of great passion/coding skills, and able to work independently.</div></div>
-        </div>
-        </section>
-        <section id="education">
-        <h3 class="section-title">Education</h3>
-        <div class="section-content">
-            <ul>
-            <li>
-                <div class="block">
-                <div class="block-title">Sichuan University</div>
-                <div class="block-subtitle">2015-2019&ensp;<strong>|</strong>&ensp;Chengdu, China.</div>
-                <div class="block-content">Bachelor in Software Engineering. GPA: 3.71/4.0 (4%)</div></div>
-        </li>
-        <li>
-            <div class="block">
-            <div class="block-title">Fudan University</div>
-            <div class="block-subtitle">2019-Now&ensp;<strong>|</strong>&ensp;Shanghai, China.</div>
-            <div class="block-content">Ph.D. candidate in Computer Science.</div></div>
-        </li>
+
+<body class="d-flex flex-column">
+  <nav class="navbar sticky-top navbar-expand-md navbar-light bg-light" style="z-index:3;">
+    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <!-- TODO: Use scroll-spy -->
+            
+            <li class='nav-item  active '>
+                <a class="nav-link" href='/#'>
+                    About <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            
+            <li class='nav-item '>
+                <a class="nav-link" href='/#publications'>
+                    Publications 
+                </a>
+            </li>
+            
+            <li class='nav-item '>
+                <a class="nav-link" href='/#experiences'>
+                    Experiences 
+                </a>
+            </li>
+            
+            <li class='nav-item '>
+                <a class="nav-link" href='/#projects'>
+                    Open-source projects 
+                </a>
+            </li>
+            
         </ul>
+    </div>
+</nav>
+
+  <div class="container-fluid flex-fill">
+    <div class="row flex-column-reverse flex-md-row py-2">
+    <div class="col-md-8" id="bio">
+        <h1>Zhizhong Huang<div style="font-size: 16px;">(黄智忠)</div></h1>
+        
+        <p class="text-justify">
+            I am Postdoc at Michigan State University, East Lansing, MSU working with <a href="https://scholar.google.com/citations?user=Bii0w1oAAAAJ&hl=en">Prof. Xiaoming Liu</a>.
+            Previously, I got my PhD's degree from Fudan University advised by <a href="https://scholar.google.com/citations?user=Aib_NTYAAAAJ&hl=en">Prof. Junping Zhang</a> and <a href="https://scholar.google.com/citations?user=RYfSzKwAAAAJ&hl=en">Dr. Hongming Shan</a> in 2024.6, and bachelor's degree from Sichuan University in 2019.6. My main research interests include representation learning, unsupervised/semi-supervised learning, and generative models.
+        </p>
+        <p style="text-align:center">
+            <a target="_blank" href="mailto:zhizhonghwang@gmail.com" target="_blank">Email</a> &nbsp;/&nbsp;
+            <a href="https://github.com/Hzzone" target="_blank">GitHub</a> &nbsp;/&nbsp;
+            <a href="https://scholar.google.com/citations?user=6Itl2tMAAAAJ&hl=en" target="_blank">Google Scholar</a> &nbsp;/&nbsp;
+            <a href="https://hzzone.github.io/cv/cv.pdf" target="_blank">CV</a>
+        </p>
+    </div>
+    <div class="col-md-4" style="z-index:4;">
+        <img alt="profile photo" id="portrait" src="images/portrait.jpg">
+    </div>
+</div>
+
+
+<div class="row py-2">
+    <div class="col-md-12" id="experiences">
+        <h2>Experiences</h2>
+    </div>
+</div>
+
+<div class="row py-2 experiences">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/experiences/images/msu.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Michigan State University</h3>
+        <br>
+        <div class="time">
+            2024.8-Present | East Lansing, US.
         </div>
-        </section>
-        <section id="awards">
-            <h3 class="section-title">Awards</h3>
-            <div class="section-content">
-            <ul>
-                
-                <li>
-                    <div class="block">
-                        <div class="block-subtitle">2016-2017, National Scholarship.</div>
-                    </div>
-                </li>
-                
-                <li>
-                    <div class="block">
-                        <div class="block-subtitle">2017-2018, National Scholarship.</div>
-                    </div>
-                </li>
-                
-                <li>
-                    <div class="block">
-                        <div class="block-subtitle">2021 second prize of CCF University Student Acaemic Show (PhD Group) [<a href='https://mp.weixin.qq.com/s/0KUdXqIgjwv7DMZytBrNNg' target="_blank">link</a>].</div>
-                    </div>
-                </li>
-                
-                <li>
-                    <div class="block">
-                        <div class="block-subtitle">2020-2021, National Scholarship.</div>
-                    </div>
-                </li>
-                
-                <li>
-                    <div class="block">
-                        <div class="block-subtitle">2022-2023, National Scholarship.</div>
-                    </div>
-                </li>
-                
-            </ul>
-            </div>
-        </section>
-        <section class="publication">
-            <h3 class="section-title">Journal</h3>
-            <div class="section-content">
-            <ul>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [8] <strong>Zhizhong Huang</strong>, Junping Zhang and Hongming Shan. "When Age-Invariant Face Recognition Meets Face Age Synthesis&colon; A Multi-Task Learning Framework and A New Benchmark." <i><strong>IEEE Transactions on Pattern Analysis and Machine Intelligence 2022</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2210.09835">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://hzzone.github.io/MTLFace">code&ensp;<img src="https://img.shields.io/github/stars/Hzzone/MTLFace.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/mtlface_journal.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [7] <strong>Zhizhong Huang</strong>, Jie Chen, Junping Zhang and Hongming Shan. "Learning Representation for Clustering via Prototype Scattering and Positive Sampling." <i><strong>IEEE Transactions on Pattern Analysis and Machine Intelligence 2022</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2111.11821">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/Hzzone/ProPos">code&ensp;<img src="https://img.shields.io/github/stars/Hzzone/ProPos.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/propos.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [6] <strong>Zhizhong Huang</strong>, Junping Zhang, Yi Zhang, and Hongming Shan. "DU-GAN&colon; Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising." <i><strong>IEEE Transactions on Instrumentation & Measurement 2021</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://ieeexplore.ieee.org/document/9617604">doi</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2108.10772">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/Hzzone/DU-GAN">code&ensp;<img src="https://img.shields.io/github/stars/Hzzone/DU-GAN.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/dugan.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [5] <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan. "PFA-GAN&colon; Progressive Face Aging with Generative Adversarial Network." <i><strong>IEEE Transactions on Information Forensics and Security 2021</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://ieeexplore.ieee.org/document/9309246">DOI</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2012.03459">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/Hzzone/PFA-GAN">code&ensp;<img src="https://img.shields.io/github/stars/Hzzone/PFA-GAN.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/pfagan.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [4] Chenhui Wang, Sirong Piao, <strong>Zhizhong Huang</strong>, Qi Gao, Junping Zhang, Yuxin Li and Hongming Shan. "Joint learning framework of cross-modal synthesis and diagnosis for Alzheimer’s disease by mining underlying shared modality information." <i><strong>Medical Image Analysis 2024</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://www.sciencedirect.com/science/article/pii/S136184152300292X">DOI</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/thibault-wch/Joint-Learning-for-Alzheimer-disease">code</a>]
-                        
-                        <!-- [<a href="/bibtex/" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [3] Jiaqi Gao, <strong>Zhizhong Huang</strong>, Yiming Lei, Hongming Shan, James Z. Wang, Fei-Yue Wang and Junping Zhang. "Deep Rank-Consistent Pyramid Model for Enhanced Crowd Counting." <i><strong>IEEE Transactions on Neural Networks and Learning Systems 2023</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2201.04819">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/bridgeqiqi/DREAM">code</a>]
-                        
-                        <!-- [<a href="/bibtex/DREAM.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [2] Weiyi Yu, <strong>Zhizhong Huang</strong>, Junping Zhang and Hongming Shan. "SAN-Net&colon; Learning Generalization to Unseen Sites for Stroke Lesion Segmentation with Self-Adaptive Normalization." <i><strong>Computers in Biology and Medicine 2023</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2205.04329">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://www.sciencedirect.com/science/article/pii/S0010482523001828">DOI</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/wyyu0831/SAN">code</a>]
-                        
-                        <!-- [<a href="/bibtex/sgnet.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [1] Yuan Li<sup>1</sup>, <strong>Zhizhong Huang<sup>1</sup></strong>, Xiaoai Dong, Weibo Liang, Hui Xue, Lin Zhang, Yi Zhang, and Zhenhua Deng. "Forensic age estimation for pelvic X-ray images using deep learning." <i><strong>European Radiology</strong></i> 29, no. 5 (2019)&colon; 2322-2329.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://link.springer.com/article/10.1007/s00330-018-5791-6">DOI</a>]
-                        
-                        <!-- [<a href="/bibtex/yuanli.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-            </ul>
-            </div>
-        </section>
-        <section class="publication">
-            <h3 class="section-title">Conference</h3>
-            <div class="section-content">
-            <ul>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [9] <strong>Zhizhong Huang</strong>, Mingliang Dai, Yi Zhang, Junping Zhang and Hongming Shan. "Point, Segment and Count&colon; A Generalized Framework for Object Counting." <i><strong>CVPR 2024</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2311.12386">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/Hzzone/PseCo">code</a>]
-                        
-                        <!-- [<a href="/bibtex/" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [8] <strong>Zhizhong Huang</strong>, Siteng Ma, Junping Zhang, and Hongming Shan. "Adaptive Nonlinear Latent Transformation for Conditional Face Editing." <i><strong>ICCV 2023</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2307.07790">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://hzzone.github.io/AdaTrans">code&ensp;<img src="https://img.shields.io/github/stars/Hzzone/AdaTrans.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/adatrans.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [7] <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan. "Twin Contrastive Learning with Noisy Labels." <i><strong>CVPR 2023</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2303.06930">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://hzzone.github.io/TCL">code&ensp;<img src="https://img.shields.io/github/stars/Hzzone/TCL.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/tcl.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [6] <strong>Zhizhong Huang</strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan. "AgeFlow&colon; Conditional Age Progression and Regression with Normalizing Flows." <i><strong>IJCAI 2021</strong>, only 13.9% acceptance rate</i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2105.07239">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://hzzone.github.io/AgeFlow">code&ensp;<img src="https://img.shields.io/github/stars/Hzzone/AgeFlow.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/ageflow.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [5] <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan. "When Age-Invariant Face Recognition Meets Face Age Synthesis&colon; A Multi-Task Learning Framework." <i><strong>CVPR 2021 (Oral)</strong>, about 5% acceptance rate</i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2103.01520">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://openaccess.thecvf.com/content/CVPR2021/html/Huang_When_Age-Invariant_Face_Recognition_Meets_Face_Age_Synthesis_A_Multi-Task_CVPR_2021_paper.html">cvf</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://hzzone.github.io/MTLFace">code&ensp;<img src="https://img.shields.io/github/stars/Hzzone/MTLFace.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/mtlface.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [4] <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan. "RoutingGAN&colon; Routing Age Progression and Regression with Disentangled Learning." <i><strong>ICASSP 2021</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2102.00601">arxiv</a>]
-                        
-                        <!-- [<a href="/bibtex/routinggan.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [3] Yujie Wei, Jiaxin Ye, <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan. "Online Prototype Learning for Online Continual Learning." <i><strong>ICCV 2023</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2308.00301">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/weilllllls/OnPro">code&ensp;<img src="https://img.shields.io/github/stars/weilllllls/OnPro.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/OnPro.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [2] Mingliang Dai, <strong>Zhizhong Huang</strong>, Jiaqi Gao, Hongming Shan, Junping Zhang. "Cross-head Supervision for Crowd Counting with Noisy Annotations." <i><strong>ICASSP 2023</strong></i>.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/2303.09245">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/RaccoonDML/CHSNet">code&ensp;<img src="https://img.shields.io/github/stars/RaccoonDML/CHSNet.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/chsnet.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-                
-                <li>
-                <div class="block">
-                    <div class="block-subtitle">
-                        [1] Haiping Zhu, <strong>Zhizhong Huang</strong>, Hongming Shan, and Junping Zhang. "Look globally, age locally&colon; Face aging with an attention mechanism." <i><strong>ICASSP (Oral)</strong></i>, Barcelona, Spain, May 4-8, 2020.
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://arxiv.org/abs/1910.12771">arxiv</a>]
-                        
-                        <!-- [<a href=""></a>] -->
-                        [<a href="https://github.com/JensonZhu14/AcGAN">code&ensp;<img src="https://img.shields.io/github/stars/JensonZhu14/AcGAN.svg?style=social&label=Star&maxAge=180" style="height&colon; 1em"></img></a>]
-                        
-                        <!-- [<a href="/bibtex/acgan.html" target="_blank">bibtex</a>] -->
-                        <br>
-                    </div>
-                </li>
-                
-            </ul>
-            </div>
-        </section>
-        <!-- <section class="publication">
-            <h3 class="section-title">Preprint</h3>
-            <div class="section-content">
-            <ul>
-                
-            </ul>
-            </div>
-        </section> -->
-        <section id="project">
-            <h3 class="section-title">Projects</h3>
-            <div class="section-content">
-            <ul>
-                
-                <li>
-                    <div class="block">
-                    <div class="block-title">pytorch-openpose</div>
-                    <div class="block-subtitle">
-                        <a href="https://github.com/Hzzone/pytorch-openpose" target="_blank"><img src="https://img.shields.io/github/stars/Hzzone/pytorch-openpose.svg?style=social&label=Star&maxAge=180"></img></a>
-                        <a href="https://github.com/Hzzone/pytorch-openpose" target="_blank"><img src="https://img.shields.io/github/forks/Hzzone/pytorch-openpose.svg?style=social&label=Fork&maxAge=180"></img></a>
-                    </div>
-                    <div class="block-content">pytorch implementation of openpose including Hand and Body Pose Estimation.</div>
-                </li>
-                
-                <li>
-                    <div class="block">
-                    <div class="block-title">Precipitation-Nowcasting</div>
-                    <div class="block-subtitle">
-                        <a href="https://github.com/Hzzone/Precipitation-Nowcasting" target="_blank"><img src="https://img.shields.io/github/stars/Hzzone/Precipitation-Nowcasting.svg?style=social&label=Star&maxAge=180"></img></a>
-                        <a href="https://github.com/Hzzone/Precipitation-Nowcasting" target="_blank"><img src="https://img.shields.io/github/forks/Hzzone/Precipitation-Nowcasting.svg?style=social&label=Fork&maxAge=180"></img></a>
-                    </div>
-                    <div class="block-content">implemented a pytorch-based encoder-forecaster model with RNNs including (TrajGRU, ConvLSTM) to do precipitation nowcasting.</div>
-                </li>
-                
-                <li>
-                    <div class="block">
-                    <div class="block-title">torch_clustering</div>
-                    <div class="block-subtitle">
-                        <a href="https://github.com/Hzzone/torch_clustering" target="_blank"><img src="https://img.shields.io/github/stars/Hzzone/torch_clustering.svg?style=social&label=Star&maxAge=180"></img></a>
-                        <a href="https://github.com/Hzzone/torch_clustering" target="_blank"><img src="https://img.shields.io/github/forks/Hzzone/torch_clustering.svg?style=social&label=Fork&maxAge=180"></img></a>
-                    </div>
-                    <div class="block-content">A pure PyTorch implementation of kmeans and GMM with distributed clustering.</div>
-                </li>
-                
-            </ul>
-            </div>
-        </section>
+        <p></p>
+        <p class="text-justify">Postdoc in <a href="https://engineering.msu.edu/about/departments/cse">CSE</a>; working on generative models and self-supervised learning with <a href="https://scholar.google.com/citations?user=Bii0w1oAAAAJ&amp;hl=en">Xiaoming Liu</a>.</p>
 
-        <section id="project">
-            <h3 class="section-title">Activities</h3>
-            <div class="section-content">
-            <ul>
-                
-                <li>
-                    <div class="block-content">From 10/1 to 10/7, 2023, I have attended ICCV 2023, Paris.</div>
-                    
-                    <img class="display_img" tabindex="1" src="images/iccv2023_1.jpg">
-                    
-                    <img class="display_img" tabindex="2" src="images/iccv2023_2.jpg">
-                    
-                    <img class="display_img" tabindex="3" src="images/iccv2023_3.jpg">
-                    
-                    <img class="display_img" tabindex="4" src="images/iccv2023_4.jpg">
-                    
-                </li>
-                
-            </ul>
-            </div>
-        </section>
+    </div>
+</div>
 
-    <center>
-        <p><strong>Visitor distribution</strong></p>
-    </center>
-    <!-- <a href='https://clustrmaps.com/site/1btx5' title='Visit tracker'><img src='//clustrmaps.com/map_v2.png?cl=080808&w=1200&t=tt&d=4UjHBHO7JFWujhwD9Yvl9SiS-qwUIIx-Wlds-yFgfM4&co=ffffff&ct=808080' width="100%" /></a> -->
-    <a href='https://clustrmaps.com/site/1btx5'  title='Visit tracker'><img src='//clustrmaps.com/map_v2.png?cl=ffffff&w=800&t=tt&d=4UjHBHO7JFWujhwD9Yvl9SiS-qwUIIx-Wlds-yFgfM4' width="100%"/></a>
+<div class="row py-2 experiences">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/experiences/images/damo_logo.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Alibaba DAMO Academy</h3>
+        <br>
+        <div class="time">
+            2024.1-2024.8 | Hangzhou, China.
+        </div>
+        <p></p>
+        <p class="text-justify">Research intern; working on vision LLMs and AIGC with <a href="https://scholar.google.com/citations?user=oRhJHmIAAAAJ&amp;hl=en">Yibing Song</a>.</p>
+
+    </div>
+</div>
+
+<div class="row py-2 experiences">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/experiences/images/Fudan_University_Logo.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Fudan University</h3>
+        <br>
+        <div class="time">
+            2019.9-2024.6 | Shanghai, China.
+        </div>
+        <p></p>
+        <p class="text-justify">PhD in Computer Science; Outstanding graduated student in Shanghai City (Rank 1 in PhDs) <a href="https://cs.fudan.edu.cn/2f/32/c24257a667442/page.htm" target="_blank">Chinese link</a>; two national scholarships and 2021 second prize of CCF University Student Acaemic Show (PhD Group), <a href="https://mp.weixin.qq.com/s/0KUdXqIgjwv7DMZytBrNNg" target="_blank">link</a>; first-author publications when graduated: 8 <a href="https://www.ccf.org.cn/Academic_Evaluation/By_category/2023-03-08/787209.shtml" target="_blank">CCF-A</a> or 2 TPAMI/3 CVPR/1 ICCV; working on face and self-supervised learning with <a href="https://scholar.google.com/citations?user=Aib_NTYAAAAJ&amp;hl=en" target="_blank">Junping Zhang</a> and <a href="https://scholar.google.com/citations?user=RYfSzKwAAAAJ&amp;hl=en" target="_blank">Hongming Shan</a>.</p>
+
+    </div>
+</div>
+
+<div class="row py-2 experiences">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/experiences/images/Sichuan_University_logo.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Sichuan University</h3>
+        <br>
+        <div class="time">
+            2015.9-2019.6 | Chengdu, China.
+        </div>
+        <p></p>
+        <p class="text-justify">Bachelor in Software Engineering; GPA: 3.71/4.0 (4%); two national scholarships; working with <a href="https://scholar.google.com/citations?user=kCtQkrkAAAAJ&amp;hl=en">Yi Zhang</a>.</p>
+
+    </div>
+</div>
+
+
+<!--  -->
+
+<!--  -->
+<div class="row py-2">
+    <div class="col-md-12" id="publications">
+        <h2>Selected Publications</h2>
+        <br>
+        Please see my <a href="/cv/cv.pdf">CV</a> or <a href="https://scholar.google.com/citations?user=6Itl2tMAAAAJ&hl=en">Google Scholar</a> for full list of publications.
+    </div>
+</div>
+
+<div class="row py-2 publication">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/publications/images/propos.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Learning Representation for Clustering via Prototype Scattering and Positive Sampling</h3>
+        <br>
+        <div class="authors">
+            <strong><a href='https://github.com/Hzzone/ProPos'>Zhizhong Huang</a></strong>, Jie Chen, Junping Zhang and Hongming Shan
+        </div>
+
+        <!-- <em><strong>TPAMI</strong> 2023</em>, 2021 -->
+        <em><strong>TPAMI</strong> 2023</em>
+        <br>
+        
+        
+        
+        
+        
+        <a href="" data-toggle="modal" data-target="#publicationBibModal1">bib</a>
+        <div class="modal fade" id="publicationBibModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-md-table" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Learning Representation for Clustering via Prototype Scattering and Positive Sampling</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body code text-monospace bib-text">
+                    @misc{Huang2022Cluster,<br />
+  author = {Huang, Zhizhong and Chen, Jie and Zhang, Junping and Shan, Hongming},<br />
+  title = {Learning Representation for Clustering via Prototype Scattering and Positive Sampling},<br />
+  year = {2022},<br />
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence}<br />
+}<br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary copy-btn">Copy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        
+            
+                 / 
+                
+                <a href="https://arxiv.org/abs/2111.11821" target="_blank">arxiv</a>
+            
+                 / 
+                
+                <a href="https://github.com/Hzzone/ProPos" target="_blank">code <img src="https://img.shields.io/github/stars/Hzzone/ProPos.svg?style=social&label=Star&maxAge=180"></img></a>
+            
+        
+        <p></p>
+        <!-- Brief description of another project. -->
+
+    </div>
+</div>
+
+<div class="row py-2 publication">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/publications/images/mtlface.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>When Age-Invariant Face Recognition Meets Face Age Synthesis: A Multi-Task Learning Framework and A New Benchmark</h3>
+        <br>
+        <div class="authors">
+            <strong><a href='https://hzzone.github.io/MTLFace'>Zhizhong Huang</a></strong>, Junping Zhang and Hongming Shan
+        </div>
+
+        <!-- <em>Journal version <strong>TPAMI</strong> 2023</strong></i> and <strong>CVPR</strong> 2021 Oral</em>, 2021 -->
+        <em>Journal version <strong>TPAMI</strong> 2023</strong></i> and <strong>CVPR</strong> 2021 Oral</em>
+        <br>
+        
+        
+        
+        
+        
+        <a href="" data-toggle="modal" data-target="#publicationBibModal2">bib</a>
+        <div class="modal fade" id="publicationBibModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-md-table" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">When Age-Invariant Face Recognition Meets Face Age Synthesis: A Multi-Task Learning Framework and A New Benchmark</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body code text-monospace bib-text">
+                    @misc{Huang2022,<br />
+  author = {Huang, Zhizhong and Zhang, Junping and Shan, Hongming},<br />
+  title = {When Age-Invariant Face Recognition Meets Face Age Synthesis: A Multi-Task Learning Framework and A New Benchmark},<br />
+  year = {2022},<br />
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence}<br />
+}<br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary copy-btn">Copy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        
+            
+                 / 
+                
+                <a href="https://arxiv.org/abs/2210.09835" target="_blank">journal</a>
+            
+                 / 
+                
+                <a href="https://arxiv.org/abs/2103.01520" target="_blank">conference</a>
+            
+                 / 
+                
+                <a href="https://hzzone.github.io/MTLFace" target="_blank">code</a>
+            
+                 / 
+                
+                <a href="https://hzzone.github.io/MTLFace" target="_blank">code <img src="https://img.shields.io/github/stars/Hzzone/MTLFace.svg?style=social&label=Star&maxAge=180"></img></a>
+            
+        
+        <p></p>
+        <!-- Brief description of another project. -->
+
+    </div>
+</div>
+
+<div class="row py-2 publication">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/publications/images/dugan.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>DU-GAN: Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising</h3>
+        <br>
+        <div class="authors">
+            <strong><a href='https://github.com/Hzzone/DU-GAN'>Zhizhong Huang</a></strong>, Junping Zhang, Yi Zhang, and Hongming Shan
+        </div>
+
+        <!-- <em><strong>TIM</strong> 2021</em>, 2021 -->
+        <em><strong>TIM</strong> 2021</em>
+        <br>
+        
+        
+        
+        
+        
+        <a href="" data-toggle="modal" data-target="#publicationBibModal3">bib</a>
+        <div class="modal fade" id="publicationBibModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-md-table" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">DU-GAN: Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body code text-monospace bib-text">
+                    @misc{Huang2021DUGAN,<br />
+  author = {Huang, Zhizhong and Zhang, Junping and Zhang, Yi and Shan, Hongming},<br />
+  title = {DU-GAN: Generative Adversarial Networks with Dual-Domain U-Net Based Discriminators for Low-Dose CT Denoising},<br />
+  year = {2021},<br />
+  journal = {IEEE Transactions on Instrumentation & Measurement}<br />
+}<br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary copy-btn">Copy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        
+            
+                 / 
+                
+                <a href="https://arxiv.org/abs/2108.10772" target="_blank">arxiv</a>
+            
+                 / 
+                
+                <a href="https://github.com/Hzzone/DU-GAN" target="_blank">code <img src="https://img.shields.io/github/stars/Hzzone/DU-GAN.svg?style=social&label=Star&maxAge=180"></img></a>
+            
+        
+        <p></p>
+        <!-- Brief description of another project. -->
+
+    </div>
+</div>
+
+<div class="row py-2 publication">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/publications/images/pfagan.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>PFA-GAN: Progressive Face Aging with Generative Adversarial Network</h3>
+        <br>
+        <div class="authors">
+            <strong><a href='https://github.com/Hzzone/PFA-GAN'>Zhizhong Huang</a></strong>, Shouzhen Chen, Junping Zhang, and Hongming Shan
+        </div>
+
+        <!-- <em><strong>TIFS</strong> 2021</em>, 2021 -->
+        <em><strong>TIFS</strong> 2021</em>
+        <br>
+        
+        
+        
+        
+        
+        <a href="" data-toggle="modal" data-target="#publicationBibModal4">bib</a>
+        <div class="modal fade" id="publicationBibModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-md-table" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">PFA-GAN: Progressive Face Aging with Generative Adversarial Network</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body code text-monospace bib-text">
+                    @misc{Huang2021PFAGAN,<br />
+  author = {Huang, Zhizhong and Chen, Shouzhen and Zhang, Junping and Shan, Hongming},<br />
+  title = {PFA-GAN: Progressive Face Aging with Generative Adversarial Network},<br />
+  year = {2021},<br />
+  journal = {IEEE Transactions on Information Forensics and Security}<br />
+}<br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary copy-btn">Copy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        
+            
+                 / 
+                
+                <a href="https://arxiv.org/abs/2012.03459" target="_blank">arxiv</a>
+            
+                 / 
+                
+                <a href="https://github.com/Hzzone/PFA-GAN" target="_blank">code <img src="https://img.shields.io/github/stars/Hzzone/PFA-GAN.svg?style=social&label=Star&maxAge=180"></img></a>
+            
+        
+        <p></p>
+        <!-- Brief description of another project. -->
+
+    </div>
+</div>
+
+<div class="row py-2 publication">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/publications/images/tcl.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Twin Contrastive Learning with Noisy Labels</h3>
+        <br>
+        <div class="authors">
+            <strong>Zhizhong Huang</strong>, Junping Zhang, and Hongming Shan
+        </div>
+
+        <!-- <em><strong>CVPR</strong> 2023</em>, 2021 -->
+        <em><strong>CVPR</strong> 2023</em>
+        <br>
+        
+        
+        
+        
+        
+        <a href="" data-toggle="modal" data-target="#publicationBibModal5">bib</a>
+        <div class="modal fade" id="publicationBibModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-md-table" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Twin Contrastive Learning with Noisy Labels</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body code text-monospace bib-text">
+                    @inproceedings{huang2023twin,<br />
+  title={Twin Contrastive Learning with Noisy Labels},<br />
+  author={Huang, Zhizhong and Zhang, Junping and Shan, Hongming},<br />
+  booktitle={CVPR},<br />
+  year={2023}<br />
+}<br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary copy-btn">Copy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        
+            
+                 / 
+                
+                <a href="https://arxiv.org/abs/2303.06930" target="_blank">arxiv</a>
+            
+                 / 
+                
+                <a href="https://github.com/Hzzone/TCL" target="_blank">code <img src="https://img.shields.io/github/stars/Hzzone/TCL.svg?style=social&label=Star&maxAge=180"></img></a>
+            
+        
+        <p></p>
+        <!-- Brief description of another project. -->
+
+    </div>
+</div>
+
+<div class="row py-2 publication">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/publications/images/adatrans.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Adaptive Nonlinear Latent Transformation for Conditional Face Editing</h3>
+        <br>
+        <div class="authors">
+            <strong>Zhizhong Huang</strong>, Siteng Ma, Junping Zhang, and Hongming Shan
+        </div>
+
+        <!-- <em><strong>ICCV</strong> 2023</em>, 2021 -->
+        <em><strong>ICCV</strong> 2023</em>
+        <br>
+        
+        
+        
+        
+        
+        <a href="" data-toggle="modal" data-target="#publicationBibModal6">bib</a>
+        <div class="modal fade" id="publicationBibModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-md-table" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Adaptive Nonlinear Latent Transformation for Conditional Face Editing</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body code text-monospace bib-text">
+                    @inproceedings{huang2023adaptive,<br />
+  title={Adaptive Nonlinear Latent Transformation for Conditional Face Editing},<br />
+  author={Huang, Zhizhong and Ma, Siteng and Zhang, Junping and Shan, Hongming},<br />
+  booktitle={ICCV},<br />
+  year={2023}<br />
+}<br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary copy-btn">Copy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        
+            
+                 / 
+                
+                <a href="https://arxiv.org/abs/2307.07790" target="_blank">arxiv</a>
+            
+                 / 
+                
+                <a href="https://github.com/Hzzone/AdaTrans" target="_blank">code <img src="https://img.shields.io/github/stars/Hzzone/AdaTrans.svg?style=social&label=Star&maxAge=180"></img></a>
+            
+        
+        <p></p>
+        <!-- Brief description of another project. -->
+
+    </div>
+</div>
+
+<div class="row py-2 publication">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/publications/images/pseco.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Point, Segment and Count: A Generalized Framework for Object Counting</h3>
+        <br>
+        <div class="authors">
+            <strong>Zhizhong Huang</strong>, Mingliang Dai, Yi Zhang, Junping Zhang and Hongming Shan
+        </div>
+
+        <!-- <em><strong>CVPR</strong> 2024</em>, 2021 -->
+        <em><strong>CVPR</strong> 2024</em>
+        <br>
+        
+        
+        
+        
+        
+        <a href="" data-toggle="modal" data-target="#publicationBibModal7">bib</a>
+        <div class="modal fade" id="publicationBibModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-md-table" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Point, Segment and Count: A Generalized Framework for Object Counting</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body code text-monospace bib-text">
+                    @inproceedings{huang2024point,<br />
+  title={Point, Segment and Count: A Generalized Framework for Object Counting},<br />
+  author={Huang, Zhizhong and Dai, Mingliang and Zhang, Yi and Zhang, Junping and Shan, Hongming},<br />
+  booktitle={CVPR},<br />
+  year={2024}<br />
+}<br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary copy-btn">Copy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        
+            
+                 / 
+                
+                <a href="https://arxiv.org/abs/2311.12386" target="_blank">arxiv</a>
+            
+                 / 
+                
+                <a href="https://github.com/Hzzone/PseCo" target="_blank">code <img src="https://img.shields.io/github/stars/Hzzone/PseCo.svg?style=social&label=Star&maxAge=180"></img></a>
+            
+        
+        <p></p>
+        <!-- Brief description of another project. -->
+
+    </div>
+</div>
+
+<!--  -->
+
+
+<div class="row py-2">
+    <div class="col-md-12" id="projects">
+        <h2>Open-source projects</h2>
+    </div>
+</div>
+
+<div class="row py-2 experiences">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/projects/images/openpose.gif" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>pytorch-openpose</h3>
+        <br>
+        <a href="https://github.com/Hzzone/pytorch-openpose" target="_blank">code</a> /
+        <img src="https://img.shields.io/github/stars/Hzzone/pytorch-openpose.svg?style=social&label=Star&maxAge=180"></img> /
+        <img src="https://img.shields.io/github/forks/Hzzone/pytorch-openpose.svg?style=social&label=Fork&maxAge=180"></img>
+        <p></p>
+        <p class="text-justify">pytorch implementation of openpose including Hand and Body Pose Estimation.</p>
+
+    </div>
+</div>
+
+<div class="row py-2 experiences">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/projects/images/Precipitation-Nowcasting.gif" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>Precipitation-Nowcasting</h3>
+        <br>
+        <a href="https://github.com/Hzzone/Precipitation-Nowcasting" target="_blank">code</a> /
+        <img src="https://img.shields.io/github/stars/Hzzone/Precipitation-Nowcasting.svg?style=social&label=Star&maxAge=180"></img> /
+        <img src="https://img.shields.io/github/forks/Hzzone/Precipitation-Nowcasting.svg?style=social&label=Fork&maxAge=180"></img>
+        <p></p>
+        <p class="text-justify">implemented a pytorch-based encoder-forecaster model with RNNs including (TrajGRU, ConvLSTM) to do precipitation nowcasting.</p>
+
+    </div>
+</div>
+
+<div class="row py-2 experiences">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/projects/images/gligen.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>GLIGEN Training</h3>
+        <br>
+        <a href="https://github.com/huggingface/diffusers" target="_blank">code</a> /
+        <img src="https://img.shields.io/github/stars/huggingface/diffusers.svg?style=social&label=Star&maxAge=180"></img> /
+        <img src="https://img.shields.io/github/forks/huggingface/diffusers.svg?style=social&label=Fork&maxAge=180"></img>
+        <p></p>
+        <p class="text-justify">A diffusers implementation of training <a href="https://arxiv.org/abs/2301.07093" target="_blank">GLIGEN: Open-Set Grounded Text-to-Image Generation</a> like ControlNet. Merged to diffusers official repo. <a href="https://github.com/huggingface/diffusers/pull/7906" target="_blank">Link</a> and <a href="https://github.com/huggingface/diffusers/tree/main/examples/research_projects/gligen" target="_blank">code</a>.</p>
+
+    </div>
+</div>
+
+<div class="row py-2 experiences">
+    <div class="col-md-2 col-sm-12 project-thumbnail-parent" align="center">
+        <img class="project-thumbnail " src="/tn/projects/images/kmeans.png" alt="project image" />
+        
+    </div>
+    <div class="col-md-10 col-sm-12 project-description">
+        <h3>torch_clustering</h3>
+        <br>
+        <a href="https://github.com/Hzzone/torch_clustering" target="_blank">code</a> /
+        <img src="https://img.shields.io/github/stars/Hzzone/torch_clustering.svg?style=social&label=Star&maxAge=180"></img> /
+        <img src="https://img.shields.io/github/forks/Hzzone/torch_clustering.svg?style=social&label=Fork&maxAge=180"></img>
+        <p></p>
+        <p class="text-justify">A pure PyTorch implementation of kmeans and GMM with distributed clustering.</p>
+
+    </div>
+</div>
+
+
+<center>
+    <p><strong>Visitor distribution</strong></p>
+</center>
+<!-- <a href='https://clustrmaps.com/site/1btx5' title='Visit tracker'><img src='//clustrmaps.com/map_v2.png?cl=080808&w=1200&t=tt&d=4UjHBHO7JFWujhwD9Yvl9SiS-qwUIIx-Wlds-yFgfM4&co=ffffff&ct=808080' width="100%" /></a> -->
+<a href='https://clustrmaps.com/site/1btx5'  title='Visit tracker'><img src='//clustrmaps.com/map_v2.png?cl=ffffff&w=800&t=tt&d=4UjHBHO7JFWujhwD9Yvl9SiS-qwUIIx-Wlds-yFgfM4' width="100%"/></a>
+  </div>
+
+  <footer class="page-footer navbar-fixed-bottom font-small">
+    <div class="footer-copyright text-center py-3">
+        A <a href="https://github.com/vsimkus/academic-jekyll" target="_blank">Jekyll template</a> inspired by <a href="https://jonbarron.info">Jon Barron's website</a>.
+    </div>
+</footer>
+
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+  <script src="/publication_effects.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
+
